@@ -12,6 +12,10 @@ services:
     ports:
       - '3306:3306'
 
+  node:
+    ports:
+      - '9000:9000'
+
   # .env.local > MAILER_DSN=smtp://mail:1025
   mail:
     image: schickling/mailcatcher
