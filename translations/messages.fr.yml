@@ -1,0 +1,12 @@
+front:
+  home:
+    header:
+      title: Krav Maga
+      subtitle: Impact System
+
+  menu:
+    item:
+      club: Le club
+      sporting: Disciplines
+      registration: Inscription
+      contact: Contact

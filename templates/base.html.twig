@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="UTF-8">
         <title>{% block title %}Krav Mga Impact System{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {# @todo : add favicon #}
+        {% block meta %}
+            <meta name="keywords" content="krav-maga, self-defense, combat, cardio, training" />
+        {% endblock %}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}

@@ -1,0 +1,26 @@
+$large-screen-down: 1216px !default;
+$medium-screen-down: 769px !default;
+$medium-screen-up: 1215px !default;
+$small-screen-up: 768px !default;
+
+$media-large: "only screen and (min-width : #{$large-screen-down})" !default;
+$media-medium: "only screen and (min-width : #{$medium-screen-down}) and (max-width : #{$medium-screen-up})" !default;
+$media-small: "only screen and (max-width : #{$small-screen-up})" !default;
+
+@mixin large_screen() {
+  @media #{$media-large} {
+    @content;
+  }
+}
+
+@mixin medium_screen() {
+  @media #{$media-medium} {
+    @content;
+  }
+}
+
+@mixin small_screen() {
+  @media #{$media-small} {
+    @content;
+  }
+}

@@ -1,0 +1,43 @@
+@use '../common/color';
+@use '../common/fonts';
+
+header {
+  height: 100vh;
+  position: relative;
+  width: 100vw;
+
+  > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  > .title-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-family: fonts.$text-title-font;
+    justify-content: center;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    > h1 {
+      color: color.$white;
+      display: block;
+      font-size: 8rem;
+      line-height: 8rem;
+      text-transform: uppercase;
+    }
+
+    > h2 {
+      color: color.$white;
+      display: block;
+      font-size: 6rem;
+      line-height: 5rem;
+    }
+  }
+}
