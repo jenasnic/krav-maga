@@ -1,0 +1,20 @@
+@use '../common/color';
+@use '../common/fonts';
+
+$default-margin: 50px;
+
+.section {
+  font-size: 1.8em;
+  line-height: 1.5em;
+  margin: $default-margin auto 2 * $default-margin auto;
+  max-width: 976px;
+
+  h2 {
+    color: color.$scorpion;
+    font-family: fonts.$text-title-font;
+    font-size: 6rem;
+    line-height: 6rem;
+    margin-bottom: $default-margin;
+    text-align: center;
+  }
+}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% include 'front/components/_header.html.twig' with {
+        'picture': 'build/images/home.jpg',
+        'title': ('front.home.header.title'|trans),
+        'subtitle': ('front.home.header.subtitle'|trans),
+    } only %}
+
+    <div class="section">
+        <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.menu.item.club'|trans }}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci dicta distinctio dolore fuga
+            fugiat id illo iusto, libero necessitatibus optio quae sint temporibus. Dignissimos facilis fuga magni modi
+            sit!
+        </p>
+        <p>
+            Fugiat perspiciatis voluptas voluptatum? Ab aliquid amet consequatur, cupiditate dolor est fuga incidunt
+            ipsum itaque iure magni molestiae nobis perspiciatis possimus quaerat qui quidem ratione rem, repellat saepe
+            tempore voluptatem.
+        </p>
+        <p>
+            Aliquam corporis delectus deserunt dolor et illum laboriosam quibusdam sequi sint unde! Alias aliquam,
+            aperiam at, blanditiis impedit iste itaque laboriosam neque nihil qui quisquam quod rem tenetur ut vel.
+            Aliquam animi beatae dicta dignissimos error, expedita fugiat minima numquam odit quibusdam repudiandae sed
+            sequi temporibus, veritatis, voluptate. Atque consectetur corporis, cupiditate quaerat quisquam saepe sint
+            veritatis! Iure, laboriosam quod?
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.menu.item.sporting'|trans }}</h2>
+        <p>
+            Adipisci animi culpa exercitationem harum incidunt laboriosam porro praesentium repellendus. Adipisci, iste
+            neque. Assumenda atque deleniti ex facere facilis fugit, harum id maiores mollitia nisi obcaecati quae sunt
+            voluptatem! Commodi.
+        </p>
+        <p>
+            Commodi ex explicabo perspiciatis repellendus vitae. Esse est exercitationem hic magni molestiae? Debitis ea
+            fugiat iure officiis repellat, sed. At doloribus id, in ipsam odio officia porro quae quod rerum?
+        </p>
+        <p>
+            Alias aut esse iste libero nisi non, quam ratione similique veniam voluptates. Hic neque nobis rem! Aliquam
+            aut cumque illum! Id in iure iusto laboriosam modi natus quod totam voluptate. Aliquid, autem consequatur
+            cumque deleniti fugiat, fugit inventore ipsum, neque nobis odio omnis provident quod repudiandae sint
+            voluptates! Atque hic illo magni neque nesciunt nobis obcaecati optio quia temporibus voluptate. Consectetur
+            corporis eaque iusto laudantium, odit qui quos. Animi, at exercitationem in odit quod saepe vel voluptates?
+            Aperiam error, ipsam labore maiores maxime minus nisi pariatur perferendis quas repellendus similique!
+        </p>
+        <p>
+            Illo modi ratione reprehenderit vero voluptatem? Amet architecto blanditiis cupiditate distinctio eius error
+            expedita facere, fuga laboriosam magni, maiores nam obcaecati praesentium provident qui quia repellendus sed
+            temporibus ullam velit.
+        </p>
+    </div>
+
+{% endblock %}

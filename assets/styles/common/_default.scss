@@ -1,0 +1,43 @@
+@use './color';
+@use './media';
+@use './fonts';
+
+body {
+  background-color: color.$background-default-color;
+  font-family: fonts.$text-default-font;
+  font-size: 10px;
+  line-height: 1.3rem;
+  text-align: justify;
+}
+
+* {
+  color: color.$text-default-color;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: color.$text-primary-color;
+  outline: 0;
+  text-decoration: none;
+}
+
+img {
+  border: none;
+}
+
+/**************/
+/* Responsive */
+/**************/
+
+@include media.large_screen
+{
+}
+
+@include media.medium_screen
+{
+}
+
+@include media.small_screen
+{
+}
