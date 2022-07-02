@@ -3,12 +3,14 @@ USER_ID=$(shell id -u)
 USER_GROUP=$(shell id -g)
 DOCKER_ROOT=docker-compose run --rm
 DOCKER_USER=docker-compose run --rm -u $(USER_ID):$(USER_GROUP)
+PHP_CS_FIXER_CONFIGURATION_FILE=.php-cs-fixer.php
 
 SYMFONY_BIN=php ./bin/console
 COMPOSER_BIN=php composer
-PHPSTAN_BIN=php php -d memory_limit=-1 /usr/local/bin/phpstan
-PHP_CS_FIXER_BIN=php /usr/local/bin/php-cs-fixer
-YARN_BIN=node yarn
+NPM_BIN=node npm
+
+PHP_QA=docker run --init -it --rm -v `pwd`:/project --workdir="/project" jakzal/phpqa:latest
+PHPSTAN_BIN=php php -d memory_limit=-1 vendor/bin/phpstan
 
 ifndef APP_ENV
 	export APP_ENV:=dev
@@ -62,8 +64,8 @@ fixtures:
 
 .PHONY: assets
 assets:
-	$(DOCKER_USER) $(YARN_BIN) install
-	$(DOCKER_USER) $(YARN_BIN) build
+	$(DOCKER_USER) $(NPM_BIN) install
+	$(DOCKER_USER) $(NPM_BIN) run build
 
 
 
@@ -74,8 +76,8 @@ assets:
 .PHONY: prod
 prod:
 	$(DOCKER_USER) $(COMPOSER_BIN) install --no-dev --optimize-autoloader --no-interaction
-	$(DOCKER_USER) $(YARN_BIN) install
-	$(DOCKER_USER) $(YARN_BIN) build --prod
+	$(DOCKER_USER) $(NPM_BIN) install
+	$(DOCKER_USER) $(NPM_BIN) run build --prod
 
 
 
@@ -104,12 +106,12 @@ ltwig:
 
 .PHONY: phpcs
 phpcs:
-	$(DOCKER_USER) $(PHP_CS_FIXER_BIN) --dry-run --diff-format=udiff fix --format=txt --verbose --show-progress=estimating
+	$(PHP_QA) php-cs-fixer fix --dry-run --format=txt --verbose --show-progress=dots --config=$(PHP_CS_FIXER_CONFIGURATION_FILE)
 
 .PHONY: phpcsfix
 phpcsfix:
-	$(DOCKER_USER) $(PHP_CS_FIXER_BIN) fix --format=txt --verbose --show-progress=estimating
+	$(PHP_QA) php-cs-fixer fix --format=txt --verbose --show-progress=dots --config=$(PHP_CS_FIXER_CONFIGURATION_FILE)
 
 .PHONY: phpstan
 phpstan:
-	$(DOCKER_USER) $(PHPSTAN_BIN) analyse --level=6 src
+	$(DOCKER_USER) $(PHPSTAN_BIN) analyse src
