@@ -30,3 +30,8 @@ yarn.lock
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+
+###> project ###
+/upload
+###< upload ###
