@@ -19,6 +19,8 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "aos": "^2.3.4"
+        "aos": "^2.3.4",
+        "imask": "^6.4.2",
+        "tarteaucitronjs": "^1.9.6"
     }
 }

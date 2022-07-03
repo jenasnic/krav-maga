@@ -10,3 +10,9 @@ front:
       sporting: Disciplines
       registration: Inscription
       contact: Contact
+
+  footer:
+    link:
+      legalNotices: Mentions légales
+      privacy: Protection des données
+      cookie: Gestion des cookies
