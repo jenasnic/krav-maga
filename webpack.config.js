@@ -22,6 +22,9 @@ Encore
      */
     .addEntry('app', './assets/scripts/app.js')
     .copyFiles({
+        from: './node_modules/tarteaucitronjs',
+    })
+    .copyFiles({
         from: './assets/images',
         to: 'images/[path][name].[hash:8].[ext]'
     })
