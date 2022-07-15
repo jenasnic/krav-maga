@@ -1,8 +1,10 @@
 $white: #FFFFFF;
 $mine-shaft: #222222;
-$bright-sun: #FFDE42;
+$supernova: #FCCB00;
 $scorpion: #575757;
 $gallery: #EDEDED;
+$medium-carmin: #BA3B3C;
+$apple: #3D8C36;
 
 //BACKGROUND
 $background-default-color: $white;
@@ -11,4 +13,7 @@ $background-dark-color: $mine-shaft;
 
 //TEXT
 $text-default-color: $mine-shaft;
-$text-primary-color: $bright-sun;
+$text-primary-color: $supernova;
+
+$success-color: $apple;
+$error-color: $medium-carmin;

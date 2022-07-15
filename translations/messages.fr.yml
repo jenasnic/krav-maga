@@ -1,8 +1,34 @@
+global:
+  no: Non
+  validate: Valider
+  yes: Oui
+
+enum:
+  gender:
+    FEMALE: Femme
+    MALE: Homme
+
 front:
   home:
     header:
       title: Krav Maga
       subtitle: Impact System
+
+  registration:
+    header:
+      title: Inscription
+    page:
+      title: Formulaire d'inscription
+    form:
+      firstName: Prénom
+      lastName: Nom
+      gender: Sexe
+      birthDate: Date de naissance
+      phone: Téléphone
+      email: E-Mail
+      medicalCertificateFile: Certificat médical
+      purpose: Objectif
+      copyrightAuthorization: Droit à l'image
 
   menu:
     item:

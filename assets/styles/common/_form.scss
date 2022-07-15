@@ -1,0 +1,128 @@
+@use './color';
+@use './icons';
+
+@mixin outline-style {
+  border: 1px solid color.$scorpion;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px -2px color.$scorpion;
+}
+
+@mixin box-style {
+  @include outline-style;
+  background: color.$white;
+  content: '';
+  height: 23px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 23px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  &--checkbox {
+    flex-direction: row;
+  }
+}
+
+input, textarea, select, button {
+  @include outline-style;
+  padding: 10px 15px;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+textarea {
+  min-height: 5rem;
+  resize: vertical;
+}
+
+input[type="checkbox"]:not(:checked),
+input[type="checkbox"]:checked,
+input[type="radio"]:not(:checked),
+input[type="radio"]:checked {
+  display: none;
+
+  + label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+
+    &:before {
+      @include box-style;
+    }
+
+    &:after {
+      @include box-style;
+      opacity: 0;
+    }
+  }
+}
+
+input[type="checkbox"]:checked + label {
+  &:after {
+    @include icons.icon(icons.$icon-checkmark);
+    border: none;
+    background: none;
+    color: color.$apple;
+    font-size: 1.5rem;
+    opacity: 1;
+  }
+}
+
+input[type="radio"]:not(:checked) + label,
+input[type="radio"]:checked + label {
+  margin-right: 25px;
+
+  &:before {
+    border-radius: 100%;
+  }
+}
+
+input[type="radio"]:checked + label {
+  &:after {
+    background-color: color.$apple;
+    border-color: color.$apple;
+    border-radius: 100%;
+    opacity: 1;
+    transform: scale(0.5);
+  }
+}
+
+select {
+  background-color: color.$white;
+
+  &[multiple="multiple"] {
+    padding: 0;
+  }
+
+  option {
+    padding: 10px 15px;
+  }
+}
+
+button {
+  background-color: color.$background-dark-color;
+  color: color.$text-primary-color;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    border-color: color.$supernova;
+
+    &:after {
+      box-shadow: inset 0 0 8px 1px color.$supernova;
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
