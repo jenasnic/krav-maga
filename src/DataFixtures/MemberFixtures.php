@@ -20,6 +20,7 @@ class MemberFixtures extends Fixture implements DependentFixtureInterface
             'birthDate' => new DateTime('-18 years'),
             'phone' => '01 11 11 11 11',
             'email' => 'rei.ichido@yopmail.com',
+            'verified' => true,
         ]);
         MemberFactory::createOne([
             'firstName' => 'Kawa',
@@ -28,6 +29,7 @@ class MemberFixtures extends Fixture implements DependentFixtureInterface
             'birthDate' => new DateTime('-18 years'),
             'phone' => '02 22 22 22 22',
             'email' => 'kawa.yui@yopmail.com',
+            'verified' => true,
         ]);
 
         MemberFactory::createMany(15);

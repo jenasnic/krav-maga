@@ -36,6 +36,9 @@ class Member
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?RegistrationInfo $registrationInfo = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $verified = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +124,18 @@ class Member
     public function setRegistrationInfo(?RegistrationInfo $registrationInfo): self
     {
         $this->registrationInfo = $registrationInfo;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
 
         return $this;
     }

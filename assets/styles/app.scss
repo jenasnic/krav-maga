@@ -4,8 +4,10 @@
 
 @use '~aos/dist/aos';
 
-@use 'front/menu';
-@use 'front/header';
-@use 'front/footer';
-@use 'front/section';
+@use 'front/components/menu';
+@use 'front/components/header';
+@use 'front/components/footer';
+@use 'front/components/section';
+
 @use 'front/home';
+@use 'front/login';

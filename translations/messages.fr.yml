@@ -8,6 +8,12 @@ enum:
     FEMALE: Femme
     MALE: Homme
 
+login:
+  title: Connexion
+  username: Login
+  password: Mot de passe
+  button: Se connecter
+
 front:
   home:
     header:

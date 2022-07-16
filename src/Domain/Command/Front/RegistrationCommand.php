@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Command;
+namespace App\Domain\Command\Front;
 
 use App\Entity\Member;
 
