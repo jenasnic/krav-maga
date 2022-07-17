@@ -2,25 +2,27 @@
 
 namespace App\DataFixtures\Factory;
 
-use App\Entity\Member;
-use App\Enum\GenderEnum;
+use App\Entity\User;
 use Faker\Factory;
 use Faker\Generator;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
- * @extends ModelFactory<Member>
+ * @extends ModelFactory<User>
  */
-final class MemberFactory extends ModelFactory
+final class UserFactory extends ModelFactory
 {
-    private int $counter = 0;
+    public const DEFAULT_PASSWORD = 'pwd';
 
     private Generator $faker;
 
     private AsciiSlugger $slugger;
 
-    public function __construct()
+    private int $counter = 0;
+
+    public function __construct(protected UserPasswordHasherInterface $passwordHasher)
     {
         parent::__construct();
 
@@ -43,20 +45,24 @@ final class MemberFactory extends ModelFactory
             ++$this->counter
         );
 
+        $enabled = self::faker()->boolean(80);
+
         return [
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'gender' => $this->faker->randomElement(GenderEnum::getAll()),
-            'birthDate' => $this->faker->dateTimeBetween('-55 years', '-16 years'),
-            'phone' => $this->faker->phoneNumber(),
-            'email' => $email,
-            'registrationInfo' => RegistrationInfoFactory::new(),
-            'verified' => $this->faker->boolean(80),
+            'email' => strtolower($email),
+            'password' => self::DEFAULT_PASSWORD,
+            'enabled' => $enabled,
         ];
+    }
+
+    protected function initialize(): self
+    {
+        return $this->afterInstantiate(function (User $user, array $attributes) {
+            $user->setPassword($this->passwordHasher->hashPassword($user, $attributes['password']));
+        });
     }
 
     protected static function getClass(): string
     {
-        return Member::class;
+        return User::class;
     }
 }

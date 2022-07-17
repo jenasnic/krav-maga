@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div id="login-page">
+        <form method="post">
+            <div class="form-group">
+                <label for="username">{{ 'login.username'|trans }}</label>
+                <input id="username" name="_username" type="email" required autofocus/>
+            </div>
+            <div class="form-group">
+                <label for="password">{{ 'login.password'|trans }}</label>
+                <input id="password" name="_password" type="password" required/>
+            </div>
+            <button type="submit">{{ 'login.button'|trans }}</button>
+        </form>
+    </div>
+
+{% endblock %}
