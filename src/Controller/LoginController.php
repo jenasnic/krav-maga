@@ -17,7 +17,7 @@ class LoginController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted(RoleEnum::ROLE_ADMIN)) {
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('bo_dashboard');
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -35,7 +35,7 @@ class LoginController extends AbstractController
     public function loginRedirect(): Response
     {
         if (null !== $this->getUser() && in_array(RoleEnum::ROLE_ADMIN, $this->getUser()->getRoles())) {
-            return $this->redirectToRoute('app_admin');
+            return $this->redirectToRoute('bo_dashboard');
         }
 
         return $this->redirectToRoute('app_home');
