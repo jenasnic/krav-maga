@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>{% block title %}BO - KMIS{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="/favicon.svg" />
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('admin') }}
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('admin') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="page">
+            {% include 'back/components/_header.html.twig' %}
+            <div id="page-content">
+                <div class="container">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+            {% include 'back/components/_footer.html.twig' %}
+        </div>
+    </body>
+</html>

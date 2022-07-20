@@ -1,0 +1,18 @@
+@use '../common/color';
+
+#page {
+  background-color: color.$scorpion;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+
+  .container {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  #page-content {
+    flex-grow: 1;
+  }
+}

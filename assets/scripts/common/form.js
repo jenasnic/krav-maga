@@ -1,9 +1,7 @@
 import { bindInputMask } from './components/input-mask';
-import { bindCaptcha } from './components/captcha';
 
 const mapping = {
   '[data-mask-input]': bindInputMask,
-  '.g-recaptcha': bindCaptcha,
 };
 
 export const bindForm = (element) => {

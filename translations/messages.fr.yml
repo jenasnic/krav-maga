@@ -1,4 +1,6 @@
 global:
+  login: Se connecter
+  logout: Se déconnecter
   no: Non
   validate: Valider
   yes: Oui
@@ -12,7 +14,11 @@ login:
   title: Connexion
   username: Login
   password: Mot de passe
-  button: Se connecter
+
+back:
+  menu:
+    dashboard: Dashboard
+    registration: Inscriptions
 
 front:
   home:

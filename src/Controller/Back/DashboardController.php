@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/', name: 'bo_dashboard')]
     public function index(): Response
     {
         return $this->render('back/dashboard.html.twig');
