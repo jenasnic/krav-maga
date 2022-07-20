@@ -1,0 +1,11 @@
+{% block subject %}Avertissement securité : connexion forcée{% endblock %}
+
+{% block html %}
+    Attention,<br/>
+    <p>Tentative de connexion forcée depuis l'IP {{ ip }}.</p>
+{% endblock %}
+
+{% block text %}
+    Attention,
+    Tentative de connexion forcée depuis l'IP {{ ip }}.
+{% endblock %}
