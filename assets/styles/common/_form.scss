@@ -30,6 +30,7 @@
 
 input, textarea, select, button {
   @include outline-style;
+  box-sizing: border-box;
   padding: 10px 15px;
 
   &:focus-visible {

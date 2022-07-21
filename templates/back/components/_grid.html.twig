@@ -1,0 +1,22 @@
+<div data-grid="data-grid" class="grid">
+    <div class="top">
+        <div class="filter">
+            <label for="input-search-id">{{ 'global.search'|trans }}</label>
+            <input id="input-search-id" class="search" type="text" autofocus="autofocus" />
+        </div>
+        {# WARNING : using ':empty' selector on action class => no whitespace before/after block action #}
+        <div class="action">{% block action %}{% endblock %}</div>
+    </div>
+    {% block beforeTable %}{% endblock %}
+    <table class="table">
+        <thead>
+            <tr>
+                {% block thead %}{% endblock %}
+            </tr>
+        </thead>
+        <tbody class="list">
+            {% block tbody %}{% endblock %}
+        </tbody>
+    </table>
+    {% block afterTable %}{% endblock %}
+</div>

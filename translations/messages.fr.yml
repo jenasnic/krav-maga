@@ -2,6 +2,7 @@ global:
   login: Se connecter
   logout: Se déconnecter
   no: Non
+  search: Rechercher
   validate: Valider
   yes: Oui
 
@@ -19,6 +20,17 @@ back:
   menu:
     dashboard: Dashboard
     registration: Inscriptions
+
+  registration:
+    grid:
+      action:
+        add: Ajouter une inscription
+      header:
+        firstName: Prénom
+        lastName: Nom
+        phone: Téléphone
+        email: E-Mail
+        registeredAt: Date insc.
 
 front:
   home:

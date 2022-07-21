@@ -2,9 +2,9 @@
 
 namespace App\Domain\Command\Front;
 
-use App\Entity\Member;
+use App\Entity\Adherent;
 use App\Entity\RegistrationInfo;
-use App\Repository\MemberRepository;
+use App\Repository\AdherentRepository;
 use App\Service\Email\EmailSender;
 use LogicException;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
@@ -13,7 +13,7 @@ final class RegistrationHandler
 {
     public function __construct(
         private readonly VerifyEmailHelperInterface $verifyEmailHelper,
-        private readonly MemberRepository $memberRepository,
+        private readonly AdherentRepository $adherentRepository,
         private readonly EmailSender $emailSender,
         private readonly string $uploadPath,
     ) {
@@ -21,17 +21,17 @@ final class RegistrationHandler
 
     public function handle(RegistrationCommand $command): void
     {
-        $member = $command->member;
+        $adherent = $command->adherent;
 
-        if (null !== $member->getId()) {
-            throw new LogicException('member already persisted');
+        if (null !== $adherent->getId()) {
+            throw new LogicException('adherent already persisted');
         }
 
-        $this->processUpload($member->getRegistrationInfo());
+        $this->processUpload($adherent->getRegistrationInfo());
 
-        $this->memberRepository->add($member, true);
+        $this->adherentRepository->add($adherent, true);
 
-        $this->sendConfirmationEmail($member);
+        $this->sendConfirmationEmail($adherent);
     }
 
     private function processUpload(RegistrationInfo $registrationInfo): void
@@ -48,28 +48,28 @@ final class RegistrationHandler
         }
     }
 
-    private function sendConfirmationEmail(Member $member): void
+    private function sendConfirmationEmail(Adherent $adherent): void
     {
-        if (null === $member->getId() || null === $member->getEmail()) {
-            throw new LogicException('invalid member');
+        if (null === $adherent->getId() || null === $adherent->getEmail()) {
+            throw new LogicException('invalid adherent');
         }
 
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             'app_confirm_registration',
-            (string) $member->getId(),
-            $member->getEmail(),
+            (string) $adherent->getId(),
+            $adherent->getEmail(),
             [
-                'member' => $member->getId(),
+                'adherent' => $adherent->getId(),
             ]
         );
 
         $this->emailSender->send(
             'email/registration.html.twig',
             [
-                $member->getEmail(),
+                $adherent->getEmail(),
             ],
             [
-                'member' => $member,
+                'adherent' => $adherent,
                 'confirmLink' => $signatureComponents->getSignedUrl(),
             ],
         );

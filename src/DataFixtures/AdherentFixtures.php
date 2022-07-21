@@ -2,18 +2,18 @@
 
 namespace App\DataFixtures;
 
-use App\DataFixtures\Factory\MemberFactory;
+use App\DataFixtures\Factory\AdherentFactory;
 use App\Enum\GenderEnum;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class MemberFixtures extends Fixture implements DependentFixtureInterface
+class AdherentFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        MemberFactory::createOne([
+        AdherentFactory::createOne([
             'firstName' => 'Rei',
             'lastName' => 'ICHIDO',
             'gender' => GenderEnum::MALE,
@@ -22,7 +22,7 @@ class MemberFixtures extends Fixture implements DependentFixtureInterface
             'email' => 'rei.ichido@yopmail.com',
             'verified' => true,
         ]);
-        MemberFactory::createOne([
+        AdherentFactory::createOne([
             'firstName' => 'Kawa',
             'lastName' => 'YUI',
             'gender' => GenderEnum::FEMALE,
@@ -32,7 +32,7 @@ class MemberFixtures extends Fixture implements DependentFixtureInterface
             'verified' => true,
         ]);
 
-        MemberFactory::createMany(15);
+        AdherentFactory::createMany(15);
     }
 
     /**

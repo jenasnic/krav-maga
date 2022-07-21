@@ -1,0 +1,40 @@
+@use '../../common/color';
+@use '../../common/icons';
+
+.icon-button {
+  background-color: color.$silver;
+  border-bottom: 1px solid color.$scorpion;
+  border-right: 1px solid color.$scorpion;
+  box-shadow: 2px 2px 5px -2px color.$scorpion;
+  box-sizing: border-box;
+  color: color.$text-default-color;
+  cursor: pointer;
+  padding: 10px 15px 10px 50px;
+  position: relative;
+
+  &:before {
+    align-items: center;
+    background-color: color.$mine-shaft;
+    color: color.$text-primary-color;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 37px;
+    transition: font-size 0.4s;
+  }
+
+  &--add {
+    &:before {
+      @include icons.icon(icons.$icon-more);
+    }
+  }
+
+  &:hover {
+    &:before {
+      font-size: 1.1rem;
+    }
+  }
+}

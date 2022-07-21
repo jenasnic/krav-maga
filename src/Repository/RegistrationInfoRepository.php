@@ -33,4 +33,25 @@ class RegistrationInfoRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function search(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('registration_info');
+
+        $queryBuilder
+            ->innerJoin('registration_info.adherent', 'adherent')
+            ->select(
+                'adherent.id AS adherentId',
+                'registration_info.id AS registrationInfoId',
+                'adherent.firstName',
+                'adherent.lastName',
+                'adherent.phone',
+                'adherent.email',
+                'registration_info.registeredAt',
+            )
+            ->addOrderBy('registration_info.registeredAt', 'DESC')
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

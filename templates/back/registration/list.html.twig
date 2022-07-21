@@ -1,0 +1,50 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    {% embed 'back/components/_grid.html.twig' %}
+
+        {% block action %}
+            <a href="#" class="icon-button icon-button--add">{{ 'back.registration.grid.action.add'|trans }}</a>
+        {% endblock %}
+
+        {% block beforeTable %}
+        <div class="grid-note grid-note--right">{{ registrations|length }} inscriptions</div>
+        {% endblock %}
+
+        {% block thead %}
+            <th>
+                {{ 'back.registration.grid.header.lastName'|trans }}
+                <div class="sort" data-sort="lastName"></div>
+            </th>
+            <th>
+                {{ 'back.registration.grid.header.firstName'|trans }}
+                <div class="sort" data-sort="firstName"></div>
+            </th>
+            <th>{{ 'back.registration.grid.header.phone'|trans }}</th>
+            <th>{{ 'back.registration.grid.header.email'|trans }}</th>
+            <th>
+                {{ 'back.registration.grid.header.registeredAt'|trans }}
+                <div class="sort" data-sort="registeredAt"></div>
+            </th>
+            <th></th>
+        {% endblock %}
+
+        {% block tbody %}
+            {% for registration in registrations %}
+                <tr>
+                    <td class="lastName">{{ registration['lastName'] }}</td>
+                    <td class="firstName">{{ registration['firstName'] }}</td>
+                    <td class="phone">{{ registration['phone'] }}</td>
+                    <td class="email">{{ registration['email'] }}</td>
+                    <td class="registeredAt">{{ registration['registeredAt']|date('d/m/Y') }}</td>
+                    <td>
+                        {# @todo : add action (edit/delete) #}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}
