@@ -1,0 +1,46 @@
+@use '../../common/color';
+
+.grid {
+  margin: 20px 0;
+
+  .top {
+    background-color: color.$gallery;
+    border: 1px solid color.$silver;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    .filter {
+      align-items: center;
+      display: flex;
+      flex-grow: 1;
+
+      > label {
+        margin-right: 10px;
+      }
+
+      > input {
+        flex-grow: 1;
+      }
+    }
+
+    .action {
+      display: flex;
+
+      &:not(:empty) {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .grid-note {
+    color: color.$white;
+    padding: 3px 0;
+
+    &--right {
+      text-align: right;
+    }
+  }
+}

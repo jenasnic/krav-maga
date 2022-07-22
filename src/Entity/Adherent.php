@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\MemberRepository;
+use App\Repository\AdherentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MemberRepository::class)]
-class Member
+#[ORM\Entity(repositoryClass: AdherentRepository::class)]
+class Adherent
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

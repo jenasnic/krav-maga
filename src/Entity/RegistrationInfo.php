@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RegistrationInfoRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -24,7 +25,18 @@ class RegistrationInfo
     #[ORM\Column(type: 'boolean')]
     private ?bool $copyrightAuthorization = null;
 
+    #[ORM\OneToOne(mappedBy: 'registrationInfo', targetEntity: Adherent::class)]
+    private ?Adherent $adherent = null;
+
+    #[ORM\Column(type: 'datetime')]
+    private DateTime $registeredAt;
+
     private ?UploadedFile $medicalCertificateFile = null;
+
+    public function __construct()
+    {
+        $this->registeredAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -65,6 +77,23 @@ class RegistrationInfo
         $this->copyrightAuthorization = $copyrightAuthorization;
 
         return $this;
+    }
+
+    public function getAdherent(): ?Adherent
+    {
+        return $this->adherent;
+    }
+
+    public function setAdherent(?Adherent $adherent): self
+    {
+        $this->adherent = $adherent;
+
+        return $this;
+    }
+
+    public function getRegisteredAt(): DateTime
+    {
+        return $this->registeredAt;
     }
 
     public function getMedicalCertificateFile(): ?UploadedFile

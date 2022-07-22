@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures\Factory;
 
-use App\Entity\Member;
+use App\Entity\Adherent;
 use App\Enum\GenderEnum;
 use Faker\Factory;
 use Faker\Generator;
@@ -10,9 +10,9 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
- * @extends ModelFactory<Member>
+ * @extends ModelFactory<Adherent>
  */
-final class MemberFactory extends ModelFactory
+final class AdherentFactory extends ModelFactory
 {
     private int $counter = 0;
 
@@ -57,6 +57,6 @@ final class MemberFactory extends ModelFactory
 
     protected static function getClass(): string
     {
-        return Member::class;
+        return Adherent::class;
     }
 }

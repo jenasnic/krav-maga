@@ -43,19 +43,28 @@
 .icon-box-add:before {
   content: "\e95e";
 }
+.icon-pencil:before {
+  content: "\e905";
+}
 .icon-location:before {
   content: "\e947";
 }
 .icon-mobile:before {
   content: "\e958";
 }
+.icon-user:before {
+  content: "\e971";
+}
 .icon-bin:before {
   content: "\e9ac";
 }
-.icon-mail2:before {
+.icon-more:before {
+  content: "\ea0a";
+}
+.icon-mail:before {
   content: "\ea84";
 }
-.icon-facebook2:before {
+.icon-facebook:before {
   content: "\ea91";
 }
 .icon-sort-asc:before {
@@ -68,7 +77,11 @@
   content: "\e90e";
 }
 
+$icon-more: "\ea0a";
 $icon-checkmark: "\ea10";
+$icon-sort: "\e90e";
+$icon-sort-asc: "\e90c";
+$icon-sort-desc: "\e90d";
 
 @mixin icon($icon) {
   font-family: 'icomoon' !important;

@@ -2,11 +2,11 @@
 
 namespace App\Domain\Command\Front;
 
-use App\Entity\Member;
+use App\Entity\Adherent;
 
 class RegistrationCommand
 {
-    public function __construct(public Member $member)
+    public function __construct(public Adherent $adherent)
     {
     }
 }

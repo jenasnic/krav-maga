@@ -16,15 +16,15 @@ class ConfirmRegistrationHandler
 
     public function handle(ConfirmRegistrationCommand $command): void
     {
-        $member = $command->member;
+        $adherent = $command->adherent;
 
-        if (null === $member->getId() || null === $member->getEmail()) {
-            throw new LogicException('invalid member');
+        if (null === $adherent->getId() || null === $adherent->getEmail()) {
+            throw new LogicException('invalid adherent');
         }
 
-        $this->verifyEmailHelper->validateEmailConfirmation($command->request->getUri(), (string) $member->getId(), $member->getEmail());
+        $this->verifyEmailHelper->validateEmailConfirmation($command->request->getUri(), (string) $adherent->getId(), $adherent->getEmail());
 
-        $member->setVerified(true);
+        $adherent->setVerified(true);
 
         $this->entityManager->flush();
     }
