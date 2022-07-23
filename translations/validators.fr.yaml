@@ -1,1 +1,4 @@
+form.errors.invalid_captcha: Captcha invalide
 user.error.unique_email: Cette adresse e-mail est déjà utilisée
+This value should not be null.: Ce champ est obligatoire
+This value should not be blank.: Ce champ est obligatoire

@@ -1,6 +1,6 @@
-@use './color';
-@use './media';
-@use './fonts';
+@use '../color';
+@use '../media';
+@use '../fonts';
 
 body {
   background-color: color.$background-default-color;
@@ -23,6 +23,17 @@ a {
 
 img {
   border: none;
+}
+
+.row {
+  > * {
+    &:not(:first-child) {
+      margin-left: 5px;
+    }
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
 }
 
 /**************/
