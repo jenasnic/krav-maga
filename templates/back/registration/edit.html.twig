@@ -1,0 +1,28 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    <div class="flex flex--space-between flex--items-center">
+        <h2>{{ 'back.registration.edit.title'|trans }}</h2>
+        <div class="">
+            <a href="{{ path('bo_registration_list') }}" class="button-icon button-icon--trash">{{ 'global.delete'|trans }}</a>
+            <a href="{{ path('bo_registration_list') }}" class="button-icon button-icon--back">{{ 'global.back'|trans }}</a>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.gender) }}
+        {{ form_row(form.birthDate) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.registrationInfo) }}
+        <div class="right">
+            <button type="submit">{{ 'global.validate'|trans }}</button>
+        </div>
+    {{ form_end(form) }}
+
+    <div class="separator--4"></div>
+
+{% endblock %}

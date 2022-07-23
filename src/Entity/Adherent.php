@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Helper\StringHelper;
 use App\Repository\AdherentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -52,6 +53,9 @@ class Adherent
     public function setFirstName(string $firstName): self
     {
         $this->firstName = $firstName;
+        if (!empty($firstName)) {
+            $this->firstName = StringHelper::capitalizeFirstname($firstName);
+        }
 
         return $this;
     }
@@ -64,6 +68,9 @@ class Adherent
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+        if (!empty($lastName)) {
+            $this->lastName = mb_strtoupper($lastName);
+        }
 
         return $this;
     }

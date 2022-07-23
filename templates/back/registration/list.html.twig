@@ -5,7 +5,7 @@
     {% embed 'back/components/_grid.html.twig' %}
 
         {% block action %}
-            <a href="#" class="icon-button icon-button--add">{{ 'back.registration.grid.action.add'|trans }}</a>
+            <a href="{{ path('bo_registration_add') }}" class="button-icon button-icon--add">{{ 'back.registration.grid.action.add'|trans }}</a>
         {% endblock %}
 
         {% block beforeTable %}
@@ -38,8 +38,8 @@
                     <td class="phone">{{ registration['phone'] }}</td>
                     <td class="email">{{ registration['email'] }}</td>
                     <td class="registeredAt">{{ registration['registeredAt']|date('d/m/Y') }}</td>
-                    <td>
-                        {# @todo : add action (edit/delete) #}
+                    <td class="center">
+                        <a href="{{ path('bo_registration_edit', {'adherent': registration['adherentId']}) }}"><i class="icon-pencil"></i></a>
                     </td>
                 </tr>
             {% endfor %}

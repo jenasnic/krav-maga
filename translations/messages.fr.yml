@@ -1,4 +1,6 @@
 global:
+  back: Retour
+  delete: Supprimer
   login: Se connecter
   logout: Se déconnecter
   no: Non
@@ -22,6 +24,8 @@ back:
     registration: Inscriptions
 
   registration:
+    edit:
+      title: Fiche adhérent
     grid:
       action:
         add: Ajouter une inscription
