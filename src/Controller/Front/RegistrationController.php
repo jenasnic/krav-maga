@@ -27,7 +27,9 @@ class RegistrationController extends AbstractController
     public function registration(Request $request, RegistrationHandler $registrationHandler): Response
     {
         $adherent = new Adherent();
-        $form = $this->createForm(AdherentType::class, $adherent);
+        $form = $this->createForm(AdherentType::class, $adherent, [
+            'withCaptcha' => true,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

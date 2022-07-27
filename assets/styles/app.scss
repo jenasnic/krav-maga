@@ -1,4 +1,5 @@
 @use 'common/default';
+@use 'common/flex';
 @use 'common/icons';
 @use 'common/form';
 
@@ -8,6 +9,7 @@
 @use 'front/components/header';
 @use 'front/components/footer';
 @use 'front/components/section';
+@use 'front/components/tac';
 
 @use 'front/home';
 @use 'front/login';

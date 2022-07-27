@@ -1,0 +1,10 @@
+@use '../../color';
+
+.tac_activate {
+  border-radius: 5px;
+  padding: 5px;
+
+  .tac_float {
+    color: color.$white;
+  }
+}

@@ -1,4 +1,4 @@
-@use '../common/color';
+@use '../color';
 
 #page {
   background-color: color.$scorpion;
@@ -18,5 +18,31 @@
 
   &--inside {
     max-width: 1400px;
+  }
+}
+
+h2 {
+  color: color.$white;
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.form-wrapper {
+  background-color: color.$white;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+@for $i from 1 through 5 {
+  .separator--#{$i} {
+    height: #{$i * 10}px;
   }
 }

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Adherent;
 use App\Enum\GenderEnum;
+use App\Form\Type\GoogleCaptchaType;
 use App\Form\Type\MaskedType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -38,13 +39,21 @@ class AdherentType extends AbstractType
                 'label' => false,
             ])
         ;
+
+        if ($options['withCaptcha']) {
+            $builder->add('captcha', GoogleCaptchaType::class);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $resolver->setDefined('withCaptcha');
+        $resolver->setAllowedTypes('withCaptcha', 'bool');
+
         $resolver->setDefaults([
             'data_class' => Adherent::class,
             'label_format' => 'front.registration.form.%name%',
+            'withCaptcha' => false,
         ]);
     }
 }

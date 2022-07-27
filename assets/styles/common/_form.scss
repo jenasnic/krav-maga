@@ -1,4 +1,4 @@
-@use './color';
+@use '../color';
 @use './icons';
 
 @mixin outline-style {
@@ -26,9 +26,57 @@
   &--checkbox {
     flex-direction: row;
   }
+
+  > label {
+    align-self: flex-start;
+    padding: 0 12px 5px 0;
+    position: relative;
+
+    &.required {
+      &:after {
+        content: '*';
+        color: color.$error-color;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
 }
 
-input, textarea, select, button {
+.radio-wrapper {
+  display: flex;
+  padding-bottom: 5px;
+
+  > label {
+    display: block;
+    padding-top: 4px;
+  }
+}
+
+.input-file-wrapper {
+  i {
+    font-size: 2.2rem;
+    padding-left: 10px;
+  }
+}
+
+.captcha-wrapper {
+  .g-recaptcha {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.form-errors {
+  > li {
+    list-style: none;
+    color: color.$error-color;
+    padding: 5px 0;
+  }
+}
+
+input, textarea, select, .button {
   @include outline-style;
   box-sizing: border-box;
   padding: 10px 15px;
@@ -107,10 +155,12 @@ select {
   }
 }
 
-button {
+.button {
   background-color: color.$background-dark-color;
   color: color.$text-primary-color;
   cursor: pointer;
+  font-size: 1rem;
+  padding: 10px 30px;
   position: relative;
 
   &:hover {

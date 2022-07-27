@@ -13,6 +13,21 @@
   </div>
 {%- endblock -%}
 
+{%- block form_errors -%}
+  {%- if errors|length > 0 -%}
+    <ul class="form-errors">
+      {%- for error in errors -%}
+        <li>{{ error.message }}</li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+{%- endblock form_errors -%}
+
+{%- block choice_widget_expanded -%}
+  {%- set attr = attr|merge({'class': 'radio-wrapper'}) -%}
+  {{ parent() }}
+{%- endblock choice_widget_expanded -%}
+
 {%- block checkbox_row -%}
   {%- set widget_attr = {} -%}
   {%- if help is not empty -%}
@@ -30,8 +45,18 @@
   {{ form_widget(form, {'attr' : attr|merge({ 'data-mask-input': mask})}) }}
 {% endblock %}
 
+{%- block file_widget -%}
+  {%- set attr = attr|merge({'class': 'flex--grow'}) -%}
+  <div class="input-file-wrapper flex flex--items-center">
+    <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% if download_uri is defined %}
+      <a href="{{ download_uri }}" target="_blank"><i class="icon-box-add"></i></a>
+    {% endif %}
+  </div>
+{%- endblock file_widget -%}
+
 {% block google_captcha_row %}
-  <div class="container-captcha">
+  <div class="form-group captcha-wrapper">
     <div class="g-recaptcha" data-sitekey="{{ site_key }}"></div>
     <div class="captcha-error">{{ form_errors(form) }}</div>
   </div>

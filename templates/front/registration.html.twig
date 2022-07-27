@@ -21,7 +21,10 @@
             {{ form_row(form.phone) }}
             {{ form_row(form.email) }}
             {{ form_row(form.registrationInfo) }}
-            <button type="submit">{{ 'global.validate'|trans }}</button>
+            {{ form_row(form.captcha) }}
+            <div class="flex flex--content-end">
+                <button type="submit" class="button">{{ 'global.validate'|trans }}</button>
+            </div>
         {{ form_end(form) }}
     </div>
 

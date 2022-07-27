@@ -1,7 +1,9 @@
 import { bindInputMask } from './components/input-mask';
+import { bindConfirmForm } from './components/confirm';
 
 const mapping = {
   '[data-mask-input]': bindInputMask,
+  'form[data-confirm]': bindConfirmForm,
 };
 
 export const bindForm = (element) => {

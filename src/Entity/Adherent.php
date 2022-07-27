@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use App\Helper\StringHelper;
 use App\Repository\AdherentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AdherentRepository::class)]
 class Adherent
@@ -15,25 +17,34 @@ class Adherent
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\NotBlank]
     private ?string $firstName = null;
 
     #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\NotBlank]
     private ?string $lastName = null;
 
     #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\NotNull]
     private ?string $gender = null;
 
     #[ORM\Column(type: 'datetime')]
+    #[Assert\NotNull]
     private ?DateTime $birthDate = null;
 
     #[ORM\Column(type: 'string', length: 55, nullable: true)]
+    #[Assert\NotBlank]
+    #[Assert\Regex('/^[\d\s]{14}$/')]
     private ?string $phone = null;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\OneToOne(targetEntity: RegistrationInfo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[Assert\Valid]
     private ?RegistrationInfo $registrationInfo = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -49,9 +60,12 @@ class Adherent
         return $this->firstName;
     }
 
-    public function setFirstName(string $firstName): self
+    public function setFirstName(?string $firstName): self
     {
         $this->firstName = $firstName;
+        if (!empty($firstName)) {
+            $this->firstName = StringHelper::capitalizeFirstname($firstName);
+        }
 
         return $this;
     }
@@ -61,9 +75,12 @@ class Adherent
         return $this->lastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+        if (!empty($lastName)) {
+            $this->lastName = mb_strtoupper($lastName);
+        }
 
         return $this;
     }
@@ -73,7 +90,7 @@ class Adherent
         return $this->gender;
     }
 
-    public function setGender(string $gender): self
+    public function setGender(?string $gender): self
     {
         $this->gender = $gender;
 
@@ -85,7 +102,7 @@ class Adherent
         return $this->birthDate;
     }
 
-    public function setBirthDate(DateTime $birthDate): self
+    public function setBirthDate(?DateTime $birthDate): self
     {
         $this->birthDate = $birthDate;
 
@@ -109,7 +126,7 @@ class Adherent
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 

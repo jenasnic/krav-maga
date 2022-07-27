@@ -1,10 +1,10 @@
-@use '../../common/color';
+@use '../../color';
 @use '../../common/icons';
 
-.icon-button {
+.button-icon {
   background-color: color.$silver;
-  border-bottom: 1px solid color.$scorpion;
-  border-right: 1px solid color.$scorpion;
+  border: 1px solid color.$mine-shaft;
+  border-radius: 0;
   box-shadow: 2px 2px 5px -2px color.$scorpion;
   box-sizing: border-box;
   color: color.$text-default-color;
@@ -29,6 +29,18 @@
   &--add {
     &:before {
       @include icons.icon(icons.$icon-more);
+    }
+  }
+
+  &--back {
+    &:before {
+      @include icons.icon(icons.$icon-back);
+    }
+  }
+
+  &--trash {
+    &:before {
+      @include icons.icon(icons.$icon-bin);
     }
   }
 

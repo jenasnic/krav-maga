@@ -16,6 +16,8 @@ services:
             $uploadPath: '%kernel.project_dir%/upload'
             $mailerSender: '%env(string:MAILER_SENDER)%'
             $mailerContact: '%env(string:MAILER_CONTACT)%'
+            $googleCaptchaSiteKey: '%env(string:GOOGLE_CAPTCHA_SITE_KEY)%'
+            $googleCaptchaPrivateKey: '%env(string:GOOGLE_CAPTCHA_PRIVATE_KEY)%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name

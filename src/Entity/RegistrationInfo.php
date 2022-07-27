@@ -6,6 +6,7 @@ use App\Repository\RegistrationInfoRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RegistrationInfoRepository::class)]
 class RegistrationInfo
@@ -17,12 +18,14 @@ class RegistrationInfo
 
     #[ORM\ManyToOne(targetEntity: Purpose::class)]
     #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotNull]
     private ?Purpose $purpose = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $medicalCertificateUrl = null;
 
     #[ORM\Column(type: 'boolean')]
+    #[Assert\NotNull]
     private ?bool $copyrightAuthorization = null;
 
     #[ORM\OneToOne(mappedBy: 'registrationInfo', targetEntity: Adherent::class)]
