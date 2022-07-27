@@ -15,7 +15,7 @@ abstract class AbstractCsvExport
     abstract protected function getHeaders(): array;
 
     /**
-     * @param array<string, string> $data
+     * @param array<string, mixed> $data
      *
      * @return array<string>
      */

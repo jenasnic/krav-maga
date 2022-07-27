@@ -4,6 +4,7 @@ namespace App\Domain\Command\Back;
 
 use App\Entity\RegistrationInfo;
 use App\Repository\AdherentRepository;
+use LogicException;
 
 final class SaveAdherentHandler
 {
@@ -15,6 +16,10 @@ final class SaveAdherentHandler
 
     public function handle(SaveAdherentCommand $command): void
     {
+        if (null === $command->adherent->getRegistrationInfo()) {
+            throw new LogicException('invalid registration info');
+        }
+
         $this->processFile($command->adherent->getRegistrationInfo());
 
         $this->adherentRepository->add($command->adherent, true);

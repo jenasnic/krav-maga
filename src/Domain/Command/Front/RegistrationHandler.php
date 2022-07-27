@@ -27,6 +27,10 @@ final class RegistrationHandler
             throw new LogicException('adherent already persisted');
         }
 
+        if (null === $adherent->getRegistrationInfo()) {
+            throw new LogicException('invalid registration info');
+        }
+
         $this->processUpload($adherent->getRegistrationInfo());
 
         $this->adherentRepository->add($adherent, true);

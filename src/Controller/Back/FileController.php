@@ -28,10 +28,15 @@ class FileController extends AbstractController
             throw new LogicException('invalid file');
         }
 
+        /** @var string $firstName */
+        $firstName = $registrationInfo->getAdherent()?->getFirstName();
+        /** @var string $lastName */
+        $lastName = $registrationInfo->getAdherent()?->getLastName();
+
         $fileName = strtolower(sprintf(
             'attestation_%s_%s',
-            $this->slugger->slug($registrationInfo->getAdherent()?->getFirstName()),
-            $this->slugger->slug($registrationInfo->getAdherent()?->getLastName()),
+            $this->slugger->slug($firstName),
+            $this->slugger->slug($lastName),
         ));
 
         $pathInfo = pathinfo($filePath);
@@ -40,7 +45,7 @@ class FileController extends AbstractController
             $fileName = sprintf('%s.%s', $fileName, $pathInfo['extension']);
         }
 
-        $response = new BinaryFileResponse($registrationInfo->getMedicalCertificateUrl());
+        $response = new BinaryFileResponse($filePath);
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, $fileName);
 
         return $response;

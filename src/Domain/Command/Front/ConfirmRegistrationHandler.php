@@ -6,11 +6,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use LogicException;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
-class ConfirmRegistrationHandler
+final class ConfirmRegistrationHandler
 {
     public function __construct(
-        protected VerifyEmailHelperInterface $verifyEmailHelper,
-        protected EntityManagerInterface $entityManager,
+        private readonly VerifyEmailHelperInterface $verifyEmailHelper,
+        private readonly EntityManagerInterface $entityManager,
     ) {
     }
 

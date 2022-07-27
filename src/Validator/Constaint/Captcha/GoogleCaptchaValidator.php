@@ -16,7 +16,7 @@ class GoogleCaptchaValidator extends ConstraintValidator
     /**
      * {@inheritdoc}
      */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof GoogleCaptcha) {
             throw new LogicException(sprintf('Constraint must be of type "%s".', GoogleCaptcha::class));

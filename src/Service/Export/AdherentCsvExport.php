@@ -41,11 +41,12 @@ class AdherentCsvExport extends AbstractCsvExport
     /**
      * @param array<string, mixed> $data
      *
-     * @return array<string>
+     * @return array<int, string>
      */
     protected function buildLine(array $data): array
     {
-        return [
+        /** @var array<int, string> $line */
+        $line = [
             $data['firstName'],
             $data['lastName'],
             $this->translator->trans('enum.gender.'.$data['gender']),
@@ -55,6 +56,8 @@ class AdherentCsvExport extends AbstractCsvExport
             $data['purposeLabel'],
             $data['copyrightAuthorization'] ? 'Oui' : 'Non',
         ];
+
+        return $line;
     }
 
     protected function getFilename(): string
