@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Adherent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Generator;
 
 /**
  * @extends ServiceEntityRepository<Adherent>
@@ -31,6 +32,35 @@ class AdherentRepository extends ServiceEntityRepository
 
         if ($flush) {
             $this->getEntityManager()->flush();
+        }
+    }
+
+    /**
+     * @return Generator<array<string, mixed>>
+     */
+    public function findForExport(): Generator
+    {
+        $queryBuilder = $this->createQueryBuilder('adherent');
+
+        $queryBuilder
+            ->innerJoin('adherent.registrationInfo', 'registration_info')
+            ->innerJoin('registration_info.purpose', 'purpose')
+            ->select(
+                'adherent.id',
+                'adherent.firstName',
+                'adherent.lastName',
+                'adherent.gender',
+                'DATE_FORMAT(adherent.birthDate, \'%d/%m/%Y\') AS birthDate',
+                'adherent.phone',
+                'adherent.email',
+                'purpose.label AS purposeLabel',
+                'registration_info.copyrightAuthorization',
+                'DATE_FORMAT(registration_info.registeredAt, \'%d/%m/%Y\') AS registeredAt',
+            )
+        ;
+
+        foreach ($queryBuilder->getQuery()->toIterable() as $item) {
+            yield $item;
         }
     }
 }
