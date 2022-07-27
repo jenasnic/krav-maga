@@ -5,7 +5,10 @@
     {% embed 'back/components/_grid.html.twig' %}
 
         {% block action %}
-            <a href="{{ path('bo_registration_add') }}" class="button-icon button-icon--add">{{ 'back.registration.grid.action.add'|trans }}</a>
+            <div class="flex row">
+                <a href="{{ path('bo_export_adherent') }}" target="_blank" class="button-icon button-icon--add">{{ 'global.export'|trans }}</a>
+                <a href="{{ path('bo_registration_add') }}" class="button-icon button-icon--add">{{ 'back.registration.grid.action.add'|trans }}</a>
+            </div>
         {% endblock %}
 
         {% block beforeTable %}

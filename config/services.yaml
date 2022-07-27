@@ -25,7 +25,13 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
+            - '../src/Domain/Command/**/*Command.php'
+            - '../src/Domain/Export/'
             - '../src/Entity/'
+            - '../src/Enum/'
+            - '../src/Exception/'
+            - '../src/Form/DataTransformer/'
+            - '../src/Helper/'
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
