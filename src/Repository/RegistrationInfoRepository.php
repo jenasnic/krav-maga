@@ -34,6 +34,9 @@ class RegistrationInfoRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function search(): array
     {
         $queryBuilder = $this->createQueryBuilder('registration_info');
@@ -52,6 +55,7 @@ class RegistrationInfoRepository extends ServiceEntityRepository
             ->addOrderBy('registration_info.registeredAt', 'DESC')
         ;
 
+        /** @var array<string, mixed> */
         return $queryBuilder->getQuery()->getResult();
     }
 }

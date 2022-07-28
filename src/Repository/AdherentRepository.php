@@ -59,6 +59,7 @@ class AdherentRepository extends ServiceEntityRepository
             )
         ;
 
+        /** @var array<string, mixed> $item */
         foreach ($queryBuilder->getQuery()->toIterable() as $item) {
             yield $item;
         }

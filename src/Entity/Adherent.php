@@ -85,7 +85,7 @@ class Adherent
         return $this;
     }
 
-    public function getGender(): string
+    public function getGender(): ?string
     {
         return $this->gender;
     }

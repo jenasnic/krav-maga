@@ -3,6 +3,7 @@
 namespace App\Service\Security;
 
 use App\Service\Email\EmailSender;
+use LogicException;
 use Symfony\Component\HttpFoundation\RateLimiter\AbstractRequestRateLimiter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\RateLimiter\RateLimit;
@@ -42,6 +43,10 @@ class LoginRateLimiter extends AbstractRequestRateLimiter
     protected function getLimiters(Request $request): array
     {
         $username = $request->attributes->get(Security::LAST_USERNAME, '');
+        if (!is_string($username)) {
+            throw new LogicException('invalid username');
+        }
+
         $username = preg_match('//u', $username) ? mb_strtolower($username, 'UTF-8') : strtolower($username);
 
         return [

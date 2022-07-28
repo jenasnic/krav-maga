@@ -7,7 +7,9 @@ use App\Enum\RoleEnum;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailSender;
 use Exception;
+use LogicException;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -42,7 +44,11 @@ final class CreateUserCommand extends Command
 
         try {
             $email = $input->getArgument('email');
+            if (!is_string($email)) {
+                throw new LogicException('invalid email');
+            }
 
+            /** @var QuestionHelper $helper */
             $helper = $this->getHelper('question');
 
             $question = new Question('Enter password');
@@ -50,6 +56,9 @@ final class CreateUserCommand extends Command
             $question->setHiddenFallback(false);
 
             $password = $helper->ask($input, $output, $question);
+            if (!is_string($password)) {
+                throw new LogicException('invalid password');
+            }
 
             $user = new User();
             $user

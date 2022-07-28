@@ -29,6 +29,7 @@ class GoogleCaptchaValidation
             ],
         ]);
 
+        /** @var array{success: bool} $content */
         $content = json_decode($response->getContent(), true);
 
         return $content['success'];

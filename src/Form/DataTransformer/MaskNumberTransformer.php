@@ -4,6 +4,9 @@ namespace App\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
+/**
+ * @implements DataTransformerInterface<string|float|int, string>
+ */
 class MaskNumberTransformer implements DataTransformerInterface
 {
     public function __construct(protected int $floatPrecision)
@@ -15,7 +18,7 @@ class MaskNumberTransformer implements DataTransformerInterface
      */
     public function transform($data)
     {
-        return $data;
+        return (string) $data;
     }
 
     /**
@@ -28,6 +31,10 @@ class MaskNumberTransformer implements DataTransformerInterface
         }
 
         $number = preg_replace('/[^0-9,\.]/', '', $data);
+        if (null === $number) {
+            return 0;
+        }
+
         $number = str_replace(',', '.', $number);
         if (is_numeric($number)) {
             return round((float) $number, $this->floatPrecision);

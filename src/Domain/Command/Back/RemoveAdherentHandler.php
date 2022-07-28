@@ -13,11 +13,11 @@ final class RemoveAdherentHandler
 
     public function handle(RemoveAdherentCommand $command): void
     {
-        $fileToRemove = $command->adherent->getRegistrationInfo()->getMedicalCertificateUrl();
+        $fileToRemove = $command->adherent->getRegistrationInfo()?->getMedicalCertificateUrl();
 
         $this->adherentRepository->remove($command->adherent, true);
 
-        if (file_exists($fileToRemove)) {
+        if (!empty($fileToRemove) && file_exists($fileToRemove)) {
             unlink($fileToRemove);
         }
     }
