@@ -29,6 +29,10 @@ back:
     edit:
       title: Fiche adhérent
     grid:
+      filter:
+        young: Ado
+        male: Homme
+        female: Femme
       action:
         add: Ajouter une inscription
       header:

@@ -1,4 +1,5 @@
 @use '../../color';
+@use '../../common/form';
 
 .grid {
   margin: 20px 0;
@@ -8,29 +9,56 @@
     border: 1px solid color.$silver;
     border-radius: 5px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     margin-bottom: 20px;
     padding: 20px;
 
     .filter {
       align-items: center;
       display: flex;
-      flex-grow: 1;
 
-      > label {
-        margin-right: 10px;
+      &__default {
+        align-items: center;
+        display: flex;
+        flex-grow: 1;
+
+        > label {
+          margin-right: 10px;
+        }
+
+        > input {
+          flex-grow: 1;
+        }
       }
 
-      > input {
-        flex-grow: 1;
+      &__other {
+        align-items: center;
+        display: flex;
+
+        &:not(:empty) {
+          margin-left: 20px;
+        }
+
+        .button-filter {
+          @include form.outline-style;
+          padding: 8px 20px;
+          color: color.$mine-shaft;
+
+          &:hover {
+            background-color: color.$scorpion;
+            color: color.$white;
+          }
+        }
       }
     }
 
     .action {
+      align-items: center;
       display: flex;
+      justify-content: flex-end;
 
       &:not(:empty) {
-        margin-left: 20px;
+        margin-top: 20px;
       }
     }
   }

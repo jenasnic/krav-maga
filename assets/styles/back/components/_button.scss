@@ -38,6 +38,12 @@
     }
   }
 
+  &--export {
+    &:before {
+      @include icons.icon(icons.$icon-export);
+    }
+  }
+
   &--trash {
     &:before {
       @include icons.icon(icons.$icon-bin);

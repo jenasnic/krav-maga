@@ -4,9 +4,17 @@
 
     {% embed 'back/components/_grid.html.twig' %}
 
+        {% block filter %}
+            <div class="flex row">
+                <a href="{{ path('bo_registration_list', {'filter': 'ado'}) }}" class="button-filter">{{ 'back.registration.grid.filter.young'|trans }}</a>
+                <a href="{{ path('bo_registration_list', {'filter': 'homme'}) }}" class="button-filter">{{ 'back.registration.grid.filter.male'|trans }}</a>
+                <a href="{{ path('bo_registration_list', {'filter': 'femme'}) }}" class="button-filter">{{ 'back.registration.grid.filter.female'|trans }}</a>
+            </div>
+        {% endblock %}
+
         {% block action %}
             <div class="flex row">
-                <a href="{{ path('bo_export_adherent') }}" target="_blank" class="button-icon button-icon--add">{{ 'global.export'|trans }}</a>
+                <a href="{{ path('bo_export_adherent') }}" target="_blank" class="button-icon button-icon--export">{{ 'global.export'|trans }}</a>
                 <a href="{{ path('bo_registration_add') }}" class="button-icon button-icon--add">{{ 'back.registration.grid.action.add'|trans }}</a>
             </div>
         {% endblock %}
