@@ -1,8 +1,12 @@
 <div data-grid="data-grid" class="grid">
     <div class="top">
         <div class="filter">
-            <label for="input-search-id">{{ 'global.search'|trans }}</label>
-            <input id="input-search-id" class="search" type="text" autofocus="autofocus" />
+            <div class="filter__default">
+                <label for="input-search-id">{{ 'global.search'|trans }}</label>
+                <input id="input-search-id" class="search" type="text" autofocus="autofocus" />
+            </div>
+            {# WARNING : using ':empty' selector on action class => no whitespace before/after block action #}
+            <div class="filter__other">{% block filter %}{% endblock %}</div>
         </div>
         {# WARNING : using ':empty' selector on action class => no whitespace before/after block action #}
         <div class="action">{% block action %}{% endblock %}</div>

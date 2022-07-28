@@ -16,11 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/inscription/liste', name: 'bo_registration_list')]
-    public function list(RegistrationInfoRepository $registrationInfoRepository): Response
+    #[Route('/inscription/liste/{filter}', name: 'bo_registration_list')]
+    public function list(RegistrationInfoRepository $registrationInfoRepository, ?string $filter = null): Response
     {
         return $this->render('back/registration/list.html.twig', [
-             'registrations' => $registrationInfoRepository->search(),
+             'registrations' => $registrationInfoRepository->search($filter),
          ]);
     }
 

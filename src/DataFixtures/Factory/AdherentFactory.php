@@ -33,7 +33,9 @@ final class AdherentFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $firstName = $this->faker->firstName();
+        /** @var string $gender */
+        $gender = $this->faker->randomElement(GenderEnum::getAll());
+        $firstName = $this->faker->firstName(strtolower($gender));
         $lastName = $this->faker->lastName();
 
         $email = sprintf(
@@ -46,7 +48,7 @@ final class AdherentFactory extends ModelFactory
         return [
             'firstName' => $firstName,
             'lastName' => $lastName,
-            'gender' => $this->faker->randomElement(GenderEnum::getAll()),
+            'gender' => $gender,
             'birthDate' => $this->faker->dateTimeBetween('-55 years', '-16 years'),
             'phone' => $this->faker->phoneNumber(),
             'email' => $email,
