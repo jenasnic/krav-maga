@@ -9,6 +9,7 @@ use App\Domain\Command\Back\SaveAdherentHandler;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Repository\RegistrationInfoRepository;
+use App\Service\Grid\RegistrationInfoFilter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +18,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription/liste/{filter}', name: 'bo_registration_list')]
-    public function list(RegistrationInfoRepository $registrationInfoRepository, ?string $filter = null): Response
-    {
+    public function list(
+        RegistrationInfoRepository $registrationInfoRepository,
+        RegistrationInfoFilter $registrationInfoFilter,
+        ?string $filter = null
+    ): Response {
+        $queryBuilder = $registrationInfoRepository->createSearchQueryBuilder();
+
+        $queryBuilder = $registrationInfoFilter->apply($queryBuilder, $filter);
+
         return $this->render('back/registration/list.html.twig', [
-             'registrations' => $registrationInfoRepository->search($filter),
+             'registrations' => $queryBuilder->getQuery()->getResult(),
+             'filters' => $registrationInfoFilter->getFilters(),
          ]);
     }
 

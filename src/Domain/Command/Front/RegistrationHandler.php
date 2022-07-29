@@ -3,9 +3,9 @@
 namespace App\Domain\Command\Front;
 
 use App\Entity\Adherent;
-use App\Entity\RegistrationInfo;
 use App\Repository\AdherentRepository;
 use App\Service\Email\EmailSender;
+use App\Service\FileUploader;
 use LogicException;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
@@ -15,7 +15,7 @@ final class RegistrationHandler
         private readonly VerifyEmailHelperInterface $verifyEmailHelper,
         private readonly AdherentRepository $adherentRepository,
         private readonly EmailSender $emailSender,
-        private readonly string $uploadPath,
+        private readonly FileUploader $fileUploader,
     ) {
     }
 
@@ -27,28 +27,26 @@ final class RegistrationHandler
             throw new LogicException('adherent already persisted');
         }
 
-        if (null === $adherent->getRegistrationInfo()) {
-            throw new LogicException('invalid registration info');
-        }
-
-        $this->processUpload($adherent->getRegistrationInfo());
+        $this->processUpload($adherent);
 
         $this->adherentRepository->add($adherent, true);
 
         $this->sendConfirmationEmail($adherent);
     }
 
-    private function processUpload(RegistrationInfo $registrationInfo): void
+    private function processUpload(Adherent $adherent): void
     {
-        if (null !== $registrationInfo->getMedicalCertificateFile()) {
-            $fileName = sprintf(
-                '%s.%s',
-                str_replace('.', '', uniqid('', true)),
-                $registrationInfo->getMedicalCertificateFile()->getClientOriginalExtension()
-            );
+        if (null !== $adherent->getPictureFile()) {
+            $adherent->setPictureUrl($this->fileUploader->upload($adherent->getPictureFile()));
+        }
 
-            $registrationInfo->getMedicalCertificateFile()->move($this->uploadPath, $fileName);
-            $registrationInfo->setMedicalCertificateUrl($this->uploadPath.DIRECTORY_SEPARATOR.$fileName);
+        if (null === $adherent->getRegistrationInfo()) {
+            throw new LogicException('invalid registration info');
+        }
+
+        $medicalCertificateFile = $adherent->getRegistrationInfo()->getMedicalCertificateFile();
+        if (null !== $medicalCertificateFile) {
+            $adherent->getRegistrationInfo()->setMedicalCertificateUrl($this->fileUploader->upload($medicalCertificateFile));
         }
     }
 

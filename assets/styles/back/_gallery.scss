@@ -1,0 +1,40 @@
+@use '../color';
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+
+  .gallery__adherent {
+    background-color: color.$white;
+    border: 5px solid;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+
+    &--male {
+      border-color: color.$cornflower;
+    }
+
+    &--female {
+      border-color: color.$orchid;
+    }
+
+    > .picture {
+      height: 150px;
+      margin-bottom: 10px;
+      width: 120px;
+
+      > img {
+        border: 1px solid color.$mine-shaft;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+      }
+    }
+
+    > .firstName, .lastName {
+      text-align: center;
+    }
+  }
+}

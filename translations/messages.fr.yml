@@ -24,15 +24,16 @@ back:
   menu:
     dashboard: Dashboard
     registration: Inscriptions
+    gallery: Trombinoscope
 
   registration:
     edit:
       title: Fiche adhérent
     grid:
       filter:
-        young: Ado
-        male: Homme
-        female: Femme
+        YOUNG: Ados
+        MALE: Hommes
+        FEMALE: Femmes
       action:
         add: Ajouter une inscription
       header:
@@ -41,6 +42,9 @@ back:
         phone: Téléphone
         email: E-Mail
         registeredAt: Date insc.
+
+  gallery:
+    title: Trombinoscope
 
 front:
   home:
@@ -57,6 +61,7 @@ front:
       firstName: Prénom
       lastName: Nom
       gender: Sexe
+      pictureFile: Photo
       birthDate: Date de naissance
       phone: Téléphone
       email: E-Mail
