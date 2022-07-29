@@ -6,9 +6,9 @@
 
         {% block filter %}
             <div class="flex row">
-                <a href="{{ path('bo_registration_list', {'filter': 'ado'}) }}" class="button-filter">{{ 'back.registration.grid.filter.young'|trans }}</a>
-                <a href="{{ path('bo_registration_list', {'filter': 'homme'}) }}" class="button-filter">{{ 'back.registration.grid.filter.male'|trans }}</a>
-                <a href="{{ path('bo_registration_list', {'filter': 'femme'}) }}" class="button-filter">{{ 'back.registration.grid.filter.female'|trans }}</a>
+                {% for filter in filters %}
+                    <a href="{{ path('bo_registration_list', {'filter': filter}) }}" class="button-filter">{{ ('back.registration.grid.filter.'~filter)|trans }}</a>
+                {% endfor %}
             </div>
         {% endblock %}
 

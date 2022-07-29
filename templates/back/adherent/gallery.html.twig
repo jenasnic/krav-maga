@@ -1,0 +1,25 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    <h2 class="center">{{ 'back.gallery.title'|trans }}</h2>
+
+    <div class="gallery">
+    {% for adherent in adherents %}
+        <div class="gallery__adherent gallery__adherent--{{ adherent['gender']|lower }}">
+            <div class="picture">
+            {% if adherent['pictureUrl'] is not null %}
+                <img src="{{ path('bo_download_picture', {'adherent': adherent['id']}) }}" alt="{{ adherent['firstName'] ~ ' ' ~ adherent['lastName'] }}"/>
+            {% else %}
+                <img src="{{ asset('build/images/picture_' ~ (adherent['gender']|lower) ~ '.png') }}" alt="{{ adherent['firstName'] ~ ' ' ~ adherent['lastName'] }}"/>
+            {% endif %}
+            </div>
+            <div class="firstName">{{ adherent['firstName'] }}</div>
+            <div class="lastName">{{ adherent['lastName'] }}</div>
+        </div>
+    {% endfor %}
+    </div>
+
+    <div class="separator--3"></div>
+
+{% endblock %}

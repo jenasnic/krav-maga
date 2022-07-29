@@ -6,6 +6,7 @@ use App\Helper\StringHelper;
 use App\Repository\AdherentRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AdherentRepository::class)]
@@ -46,6 +47,11 @@ class Adherent
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     #[Assert\Valid]
     private ?RegistrationInfo $registrationInfo = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $pictureUrl = null;
+
+    private ?UploadedFile $pictureFile = null;
 
     #[ORM\Column(type: 'boolean')]
     private bool $verified = false;
@@ -153,6 +159,30 @@ class Adherent
     public function setVerified(bool $verified): self
     {
         $this->verified = $verified;
+
+        return $this;
+    }
+
+    public function getPictureUrl(): ?string
+    {
+        return $this->pictureUrl;
+    }
+
+    public function setPictureUrl(?string $pictureUrl): self
+    {
+        $this->pictureUrl = $pictureUrl;
+
+        return $this;
+    }
+
+    public function getPictureFile(): ?UploadedFile
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile(?UploadedFile $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
 
         return $this;
     }

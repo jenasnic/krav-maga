@@ -2,44 +2,50 @@
 
 namespace App\Domain\Command\Back;
 
-use App\Entity\RegistrationInfo;
+use App\Entity\Adherent;
 use App\Repository\AdherentRepository;
+use App\Service\FileUploader;
 use LogicException;
 
 final class SaveAdherentHandler
 {
     public function __construct(
         private readonly AdherentRepository $adherentRepository,
-        private readonly string $uploadPath,
+        private readonly FileUploader $fileUploader,
     ) {
     }
 
     public function handle(SaveAdherentCommand $command): void
     {
-        if (null === $command->adherent->getRegistrationInfo()) {
-            throw new LogicException('invalid registration info');
-        }
-
-        $this->processFile($command->adherent->getRegistrationInfo());
+        $this->processFile($command->adherent);
 
         $this->adherentRepository->add($command->adherent, true);
     }
 
-    private function processFile(RegistrationInfo $registrationInfo): void
+    private function processFile(Adherent $adherent): void
     {
-        if (null !== $registrationInfo->getMedicalCertificateFile()) {
-            if (null !== $registrationInfo->getMedicalCertificateUrl() && file_exists($registrationInfo->getMedicalCertificateUrl())) {
-                unlink($registrationInfo->getMedicalCertificateUrl());
+        if (null !== $adherent->getPictureFile()) {
+            if (null !== $adherent->getPictureUrl() && file_exists($adherent->getPictureUrl())) {
+                unlink($adherent->getPictureUrl());
             }
 
-            $fileName = sprintf(
-                '%s.%s',
-                str_replace('.', '', uniqid('', true)),
-                $registrationInfo->getMedicalCertificateFile()->getClientOriginalExtension()
-            );
+            $adherent->setPictureUrl($this->fileUploader->upload($adherent->getPictureFile()));
+        }
 
-            $registrationInfo->getMedicalCertificateFile()->move($this->uploadPath, $fileName);
-            $registrationInfo->setMedicalCertificateUrl($this->uploadPath.DIRECTORY_SEPARATOR.$fileName);
+        if (null === $adherent->getRegistrationInfo()) {
+            throw new LogicException('invalid registration info');
+        }
+
+        $medicalCertificateFile = $adherent->getRegistrationInfo()->getMedicalCertificateFile();
+        if (null !== $medicalCertificateFile) {
+            if (
+                null !== $adherent->getRegistrationInfo()->getMedicalCertificateUrl()
+                && file_exists($adherent->getRegistrationInfo()->getMedicalCertificateUrl())
+            ) {
+                unlink($adherent->getRegistrationInfo()->getMedicalCertificateUrl());
+            }
+
+            $adherent->getRegistrationInfo()->setMedicalCertificateUrl($this->fileUploader->upload($medicalCertificateFile));
         }
     }
 }

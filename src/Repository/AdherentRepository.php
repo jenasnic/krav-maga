@@ -64,4 +64,27 @@ class AdherentRepository extends ServiceEntityRepository
             yield $item;
         }
     }
+
+    /**
+     * @return array<array<string>>
+     */
+    public function findForGallery(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('adherent');
+
+        $queryBuilder
+            ->select(
+                'adherent.id',
+                'adherent.firstName',
+                'adherent.lastName',
+                'adherent.gender',
+                'adherent.pictureUrl',
+            )
+            ->addOrderBy('adherent.lastName', 'ASC')
+            ->addOrderBy('adherent.firstName', 'ASC')
+        ;
+
+        /** @var array<array<string>> */
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

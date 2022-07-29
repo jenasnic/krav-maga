@@ -3,9 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\RegistrationInfo;
-use App\Enum\GenderEnum;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -36,10 +35,7 @@ class RegistrationInfoRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function search(?string $filter = null): array
+    public function createSearchQueryBuilder(string $alias = 'registration_info'): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('registration_info');
 
@@ -57,28 +53,6 @@ class RegistrationInfoRepository extends ServiceEntityRepository
             ->addOrderBy('registration_info.registeredAt', 'DESC')
         ;
 
-        switch ($filter) {
-            case 'ado':
-                $queryBuilder
-                    ->andWhere('adherent.birthDate > :minorDate')
-                    ->setParameter('minorDate', new DateTime('-18 years'))
-                ;
-                break;
-            case 'homme':
-                $queryBuilder
-                    ->andWhere('adherent.gender = :gender')
-                    ->setParameter('gender', GenderEnum::MALE)
-                ;
-                break;
-            case 'femme':
-                $queryBuilder
-                    ->andWhere('adherent.gender = :gender')
-                    ->setParameter('gender', GenderEnum::FEMALE)
-                ;
-                break;
-        }
-
-        /** @var array<string, mixed> */
-        return $queryBuilder->getQuery()->getResult();
+        return $queryBuilder;
     }
 }
