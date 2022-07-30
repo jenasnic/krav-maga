@@ -24,6 +24,18 @@ class RegistrationInfo
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $medicalCertificateUrl = null;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $comment = null;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $privateNote = null;
+
+    #[ORM\Column(type: 'text', length: 55, nullable: true)]
+    private ?string $licenceNumber = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?DateTime $licenceDate = null;
+
     #[ORM\Column(type: 'boolean')]
     #[Assert\NotNull]
     private ?bool $copyrightAuthorization = null;
@@ -66,6 +78,54 @@ class RegistrationInfo
     public function setMedicalCertificateUrl(?string $medicalCertificateUrl): self
     {
         $this->medicalCertificateUrl = $medicalCertificateUrl;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): self
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getPrivateNote(): ?string
+    {
+        return $this->privateNote;
+    }
+
+    public function setPrivateNote(?string $privateNote): self
+    {
+        $this->privateNote = $privateNote;
+
+        return $this;
+    }
+
+    public function getLicenceNumber(): ?string
+    {
+        return $this->licenceNumber;
+    }
+
+    public function setLicenceNumber(?string $licenceNumber): self
+    {
+        $this->licenceNumber = $licenceNumber;
+
+        return $this;
+    }
+
+    public function getLicenceDate(): ?DateTime
+    {
+        return $this->licenceDate;
+    }
+
+    public function setLicenceDate(?DateTime $licenceDate): self
+    {
+        $this->licenceDate = $licenceDate;
 
         return $this;
     }

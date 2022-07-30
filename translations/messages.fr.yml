@@ -58,6 +58,10 @@ front:
     page:
       title: Formulaire d'inscription
     form:
+      address: Adresse
+      street: Rue
+      zipCode: Code postal
+      city: Ville
       firstName: Prénom
       lastName: Nom
       gender: Sexe

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Adherent;
 use App\Enum\GenderEnum;
+use App\Form\Type\AddressType;
 use App\Form\Type\FileType;
 use App\Form\Type\GoogleCaptchaType;
 use App\Form\Type\MaskedType;
@@ -44,6 +45,9 @@ class AdherentType extends AbstractType
                 'mask' => MaskedType::PHONE_MASK,
             ])
             ->add('email', EmailType::class)
+            ->add('address', AddressType::class, [
+                'label' => false,
+            ])
             ->add('registrationInfo', RegistrationInfoType::class, [
                 'label' => false,
             ])

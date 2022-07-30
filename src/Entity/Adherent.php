@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Helper\StringHelper;
 use App\Repository\AdherentRepository;
+use App\ValueObject\Address;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -42,6 +43,10 @@ class Adherent
     #[Assert\NotBlank]
     #[Assert\Email]
     private ?string $email = null;
+
+    #[ORM\Embedded(class: Address::class)]
+    #[Assert\NotNull]
+    private ?Address $address = null;
 
     #[ORM\OneToOne(targetEntity: RegistrationInfo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -135,6 +140,18 @@ class Adherent
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
