@@ -7,8 +7,6 @@ services:
     build: docker/php
     volumes:
       - .:/www
-    environment:
-      APP_ENV: dev
 
   nginx:
     image: nginx:1.19

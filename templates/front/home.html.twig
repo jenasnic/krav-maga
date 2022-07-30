@@ -1,15 +1,13 @@
 {% extends 'front.html.twig' %}
 
+{% block header %}
+    {% include 'front/components/_banner-home.html.twig' %}
+{% endblock %}
+
 {% block body %}
 
-    {% include 'front/components/_header.html.twig' with {
-        'picture': 'build/images/home.jpg',
-        'title': ('front.home.header.title'|trans),
-        'subtitle': ('front.home.header.subtitle'|trans),
-    } only %}
-
-    <div class="section">
-        <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.menu.item.club'|trans }}</h2>
+    <div id="club" class="section">
+        <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.section.club'|trans }}</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci dicta distinctio dolore fuga
             fugiat id illo iusto, libero necessitatibus optio quae sint temporibus. Dignissimos facilis fuga magni modi
             sit!
@@ -28,32 +26,103 @@
         </p>
     </div>
 
-    <div class="section">
-        <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.menu.item.sporting'|trans }}</h2>
-        <p>
-            Adipisci animi culpa exercitationem harum incidunt laboriosam porro praesentium repellendus. Adipisci, iste
-            neque. Assumenda atque deleniti ex facere facilis fugit, harum id maiores mollitia nisi obcaecati quae sunt
-            voluptatem! Commodi.
-        </p>
-        <p>
-            Commodi ex explicabo perspiciatis repellendus vitae. Esse est exercitationem hic magni molestiae? Debitis ea
-            fugiat iure officiis repellat, sed. At doloribus id, in ipsam odio officia porro quae quod rerum?
-        </p>
-        <p>
-            Alias aut esse iste libero nisi non, quam ratione similique veniam voluptates. Hic neque nobis rem! Aliquam
-            aut cumque illum! Id in iure iusto laboriosam modi natus quod totam voluptate. Aliquid, autem consequatur
-            cumque deleniti fugiat, fugit inventore ipsum, neque nobis odio omnis provident quod repudiandae sint
-            voluptates! Atque hic illo magni neque nesciunt nobis obcaecati optio quia temporibus voluptate. Consectetur
-            corporis eaque iusto laudantium, odit qui quos. Animi, at exercitationem in odit quod saepe vel voluptates?
-            Aperiam error, ipsam labore maiores maxime minus nisi pariatur perferendis quas repellendus similique!
-        </p>
-        <p>
-            Illo modi ratione reprehenderit vero voluptatem? Amet architecto blanditiis cupiditate distinctio eius error
-            expedita facere, fuga laboriosam magni, maiores nam obcaecati praesentium provident qui quia repellendus sed
-            temporibus ullam velit.
-        </p>
+    <div id="sporting" class="section">
+        <h2 data-aos="zoom-out">{{ 'front.home.section.sporting'|trans }}</h2>
+        <div class="sporting-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    {% include 'front/components/_home_slide.html.twig' with {
+                        'title': 'front.home.sporting.kmDefense.title'|trans,
+                        'image': asset('build/images/km_defense.jpg'),
+                        'content': 'front.home.sporting.kmDefense.content'|trans,
+                        'link': '#'
+                    } %}
+                </div>
+                <div class="swiper-slide">
+                    {% include 'front/components/_home_slide.html.twig' with {
+                        'title': 'front.home.sporting.kmTraining.title'|trans,
+                        'image': asset('build/images/km_training.jpg'),
+                        'content': 'front.home.sporting.kmTraining.content'|trans,
+                        'link': '#'
+                    } %}
+                </div>
+                <div class="swiper-slide">
+                    {% include 'front/components/_home_slide.html.twig' with {
+                        'title': 'front.home.sporting.mmaDefense.title'|trans,
+                        'image': asset('build/images/mma_defense.jpg'),
+                        'content': 'front.home.sporting.mmaDefense.content'|trans,
+                        'link': '#'
+                    } %}
+                </div>
+                <div class="swiper-slide">
+                    {% include 'front/components/_home_slide.html.twig' with {
+                        'title': 'front.home.sporting.cardioTraining.title'|trans,
+                        'image': asset('build/images/cardio_training.jpg'),
+                        'content': 'front.home.sporting.cardioTraining.content'|trans,
+                        'link': '#'
+                    } %}
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
     </div>
 
-    {% include 'front/components/_footer.html.twig' %}
+    <div id="practical-info" class="section">
+        <h2 data-aos="zoom-out">{{ 'front.home.section.practicalInfo'|trans }}</h2>
+        <div class="sessions">
+            <div class="session">
+                <div class="session__city">
+                    Mogneville
+                    <a href="https://www.google.com/maps?client=firefox-b-d&q=Mogneville&um=1&ie=UTF-8&sa=X&ved=2ahUKEwiwjZSsgab5AhUL3RoKHQq5ARUQ_AUoAXoECAIQAw" target="_blank"><i class="icon-location"></i></a>
+                </div>
+                <ul class="session__time">
+                    <li>
+                        Lundi de 19h30 à 22h30
+                        <ul>
+                            <li>Krav Maga Self Défense</li>
+                            <li>KMix-MMA</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Mercredi de 19h30 à 22h30
+                        <ul>
+                            <li>Krav Defense Training</li>
+                            <li>Cardio Fit Krav</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="session">
+                <div class="session__city">
+                    Villers-Sous-Saint-Leu
+                    <a href="https://www.google.com/maps?q=villers+sous+saint+leu&client=firefox-b-d&gs_lcp=Cgdnd3Mtd2l6EAMYADIFCC4QgAQyBQguEIAEMgUILhCABDIFCC4QgAQyBQguEIAEMgUILhCABDIFCAAQgAQyBQguEIAEMgsILhCABBDHARCvATIFCC4QgAQ6EQguEIAEELEDEIMBEMcBENEDOggIABCABBCxAzoLCAAQgAQQsQMQgwE6CwguEIAEELEDEIMBOggILhCxAxCDAToOCC4QgAQQsQMQxwEQ0QM6CAguEIAEENQCOggILhCABBCxA0oECEEYAEoECEYYAFAAWL4PYOMYaABwAXgAgAFxiAGACJIBBDEyLjGYAQCgAQHAAQE&um=1&ie=UTF-8&sa=X&ved=2ahUKEwis75u8gab5AhXJ_4UKHSDsCSIQ_AUoAXoECAIQAw" target="_blank"><i class="icon-location"></i></a>
+                </div>
+                <ul class="session__time">
+                    <li>
+                        Vendredi de 19h30 à 22h30
+                        <ul>
+                            <li>Krav Maga Self Défense</li>
+                            <li>KMix-MMA</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Samedi de 13h00 à 17h00
+                        <ul>
+                            <li>Krav Defense Training</li>
+                            <li>Cardio Fit Krav</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="pricing">
+            Tarif : 100 <i class="icon-euro"></i>
+        </div>
+        <div class="advice">
+            Matériel conseillé : coquille, gants, protège-tibia...
+        </div>
+    </div>
 
 {% endblock %}

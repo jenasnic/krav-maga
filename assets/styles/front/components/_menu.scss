@@ -1,16 +1,16 @@
-@use '../../color';
+@use '../color';
 
 #menu-wrapper {
   align-items: center;
   box-sizing: border-box;
   display: flex;
   height: 70px;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px 25px;
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 9;
 
   > .logo {
     max-height: 100%;

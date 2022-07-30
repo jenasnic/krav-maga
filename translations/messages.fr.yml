@@ -5,6 +5,7 @@ global:
   export: Exporter
   login: Se connecter
   logout: Se déconnecter
+  more: En savoir plus
   no: Non
   search: Rechercher
   validate: Valider
@@ -21,6 +22,7 @@ login:
   password: Mot de passe
 
 back:
+
   menu:
     dashboard: Dashboard
     registration: Inscriptions
@@ -47,10 +49,25 @@ back:
     title: Trombinoscope
 
 front:
+
   home:
-    header:
-      title: Krav Maga
-      subtitle: Impact System
+    section:
+      club: Présentation
+      sporting: Disciplines
+      practicalInfo: Infos pratiques
+    sporting:
+      kmDefense:
+        title: Krav Maga Self Défense
+        content: 'Focus sur une des disciplines enseignées au KMIS : le Krav Maga Self Défense.'
+      kmTraining:
+        title: Krav Defense Training
+        content: 'Place à une nouvelle activité que nous vous proposons au KMIS à partir de septembre 2022: le Krav Defense Training.'
+      mmaDefense:
+        title: KMix-MMA
+        content: Au KMIS, vous pourrez aussi pratiquer le KMix-MMA dans le but de parfaire votre système de défense.
+      cardioTraining:
+        title: Cardio Fit Krav
+        content: En complément des disciplines déjà présentées, le KMIS vous propose aussi le Cardio Fit Krav.
 
   registration:
     header:

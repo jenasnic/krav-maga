@@ -1,0 +1,17 @@
+@use '../color';
+
+$overlay-transparency: 0.40;
+
+.with-overlay {
+    position: relative;;
+
+    &:before {
+        background-color: color.$background-dark-color;
+        content: '';
+        height: 100%;
+        opacity: $overlay-transparency;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+}
