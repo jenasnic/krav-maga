@@ -33,6 +33,7 @@ services:
             - '../src/Form/DataTransformer/'
             - '../src/Helper/'
             - '../src/Kernel.php'
+            - '../src/ValueObject/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
