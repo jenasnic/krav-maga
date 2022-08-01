@@ -8,6 +8,7 @@
 @use 'front/components/banner';
 @use 'front/components/footer';
 @use 'front/components/form';
+@use 'front/components/grid';
 @use 'front/components/menu';
 @use 'front/components/section';
 @use 'front/components/tac';
@@ -16,3 +17,4 @@
 
 @use 'front/pages/home';
 @use 'front/pages/login';
+@use 'front/pages/registration';

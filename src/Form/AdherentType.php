@@ -69,7 +69,6 @@ class AdherentType extends AbstractType
             ]);
 
             $options = [
-                'required' => false,
                 'constraints' => $constraints,
             ];
 

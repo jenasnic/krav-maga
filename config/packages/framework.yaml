@@ -20,7 +20,7 @@ framework:
     http_client:
         scoped_clients:
             google_captcha.client:
-                base_uri: 'https://google.com/recaptcha/api/'
+                base_uri: 'https://www.google.com/recaptcha/api/'
 
 when@test:
     framework:

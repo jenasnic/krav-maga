@@ -1,0 +1,23 @@
+@use '../media';
+
+.row {
+  display: flex;
+  justify-content: space-between;
+
+  > * {
+    &:not(:first-child) {
+      margin-left: 5px;
+    }
+    &:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+
+  @for $i from 1 through 6 {
+    &.col-x#{$i} {
+      > * {
+        width: calc(100% / #{$i});
+      }
+    }
+  }
+}

@@ -8,7 +8,9 @@ use App\Form\Type\FileType;
 use App\Repository\PurposeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -26,6 +28,13 @@ class RegistrationInfoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('comment', TextareaType::class, [
+                'required' => false,
+            ])
+            ->add('contact', ContactType::class)
+            ->add('ffkPassport', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('purpose', EntityType::class, [
                 'class' => Purpose::class,
                 'choice_label' => 'label',
@@ -68,6 +77,8 @@ class RegistrationInfoType extends AbstractType
             $options = [
                 'required' => $isRequired,
                 'constraints' => $constraints,
+                'help' => 'front.registration.form.medicalCertificateFileHelp',
+                'help_html' => true,
             ];
 
             if (null !== $registrationInfo?->getMedicalCertificateUrl()) {
