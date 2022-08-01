@@ -1,15 +1,18 @@
-@use 'common/default';
-@use 'common/flex';
-@use 'common/icons';
-@use 'common/form';
+@use 'front/default';
 
 @use '~aos/dist/aos';
 
-@use 'front/components/menu';
-@use 'front/components/header';
+@use 'front/flex';
+@use 'front/icons';
+
+@use 'front/components/banner';
 @use 'front/components/footer';
+@use 'front/components/form';
+@use 'front/components/menu';
 @use 'front/components/section';
 @use 'front/components/tac';
+@use 'front/components/with-background';
+@use 'front/components/with-overlay';
 
-@use 'front/home';
-@use 'front/login';
+@use 'front/pages/home';
+@use 'front/pages/login';

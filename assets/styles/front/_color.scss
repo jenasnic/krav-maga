@@ -1,4 +1,5 @@
 $apple: #3D8C36;
+$black: #000000;
 $cornflower: #82C9E3;
 $gallery: #EDEDED;
 $medium-carmin: #BA3B3C;
@@ -6,7 +7,7 @@ $mine-shaft: #222222;
 $orchid: #E382DA;
 $scorpion: #575757;
 $silver: #CDCDCD;
-$supernova: #FCCB00;
+$geebung: #CA971D;
 $white: #FFFFFF;
 
 //BACKGROUND
@@ -14,9 +15,11 @@ $background-default-color: $white;
 $background-light-color: $gallery;
 $background-dark-color: $mine-shaft;
 
+$primary-color: $geebung;
+
 //TEXT
 $text-default-color: $mine-shaft;
-$text-primary-color: $supernova;
+$text-primary-color: $primary-color;
 
 $success-color: $apple;
 $error-color: $medium-carmin;

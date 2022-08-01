@@ -13,7 +13,7 @@ PHP_QA=docker run --init -it --rm -v `pwd`:/project --workdir="/project" jakzal/
 PHPSTAN_BIN=php php -d memory_limit=-1 vendor/bin/phpstan
 
 ifndef APP_ENV
-	export APP_ENV:=dev
+	export APP_ENV:=prod
 endif
 
 
@@ -31,8 +31,8 @@ vendor:
 
 .PHONY: cache
 cache:
-	$(DOCKER_ROOT) $(SYMFONY_BIN) cache:clear
-	$(DOCKER_ROOT) rm -f ./var/log/$(APP_ENV).log
+	$(DOCKER_USER) $(SYMFONY_BIN) cache:clear
+	$(DOCKER_USER) rm -f ./var/log/$(APP_ENV).log
 
 
 

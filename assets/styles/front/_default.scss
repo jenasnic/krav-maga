@@ -1,6 +1,6 @@
-@use '../color';
-@use '../media';
-@use '../fonts';
+@use './color';
+@use './media';
+@use './fonts';
 
 body {
   background-color: color.$background-default-color;
@@ -25,6 +25,14 @@ img {
   border: none;
 }
 
+h1, h2 {
+  font-family: fonts.$text-title-font;
+}
+
+ul, li {
+  list-style: none;
+}
+
 .row {
   > * {
     &:not(:first-child) {
@@ -33,6 +41,17 @@ img {
     &:not(:last-child) {
       margin-right: 5px;
     }
+  }
+}
+
+.f-upper {
+  text-transform: uppercase;
+}
+
+@for $i from 1 through 10 {
+  .f-#{$i} {
+    font-size: #{$i}rem;
+    line-height: #{$i}rem;
   }
 }
 

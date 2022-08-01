@@ -1,5 +1,5 @@
-@use '../../color';
-@use '../../common/icons';
+@use '../color';
+@use '../../front/icons';
 
 $grid-row-alternate: color.$gallery;
 
@@ -50,17 +50,6 @@ $grid-row-alternate: color.$gallery;
           content: icons.$icon-sort-desc;
         }
       }
-
-
-
-
-
-
-
-
-
-
-
     }
   }
 

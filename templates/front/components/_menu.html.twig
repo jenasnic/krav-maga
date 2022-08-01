@@ -1,7 +1,6 @@
 <nav id="menu-wrapper">
-    <img class="logo" src="{{ asset('build/images/logo.svg') }}" alt="Krav Maga Impact System"/>
     <div class="menu">
-        <a href="#">{{ 'front.menu.item.club'|trans }}</a>
+        <a href="{{ path('app_home') }}">{{ 'front.menu.item.club'|trans }}</a>
         <a href="#">{{ 'front.menu.item.sporting'|trans }}</a>
         <a href="{{ path('app_registration') }}">{{ 'front.menu.item.registration'|trans }}</a>
         <a href="#">{{ 'front.menu.item.contact'|trans }}</a>

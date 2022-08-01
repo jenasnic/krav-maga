@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-euro:before {
+  content: "\e907";
+}
 .icon-cog:before {
   content: "\e994";
 }
@@ -67,6 +70,9 @@
 .icon-more:before {
   content: "\ea0a";
 }
+.icon-play:before {
+  content: "\ea1c";
+}
 .icon-mail:before {
   content: "\ea84";
 }
@@ -88,6 +94,7 @@ $icon-bin: "\e9ac";
 $icon-checkmark: "\ea10";
 $icon-export: "\e961";
 $icon-more: "\ea0a";
+$icon-play: "\ea1c";
 $icon-sort: "\e90e";
 $icon-sort-asc: "\e90c";
 $icon-sort-desc: "\e90d";

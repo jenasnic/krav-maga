@@ -1,0 +1,11 @@
+<section class="banner with-overlay with-background">
+    <img src="{{ image }}" alt=""/>
+    <div class="title-wrapper">
+        <h1 data-aos="fade-up" data-aos-duration="2000">{{ title }}</h1>
+        {% if subtitle %}
+            <div data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="1200" class="subtitle">
+                {{ subtitle }}
+            </div>
+        {% endif %}
+    </div>
+</section>

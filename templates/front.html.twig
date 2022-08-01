@@ -16,7 +16,16 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="page" class="{% block page_classes %}{% endblock %}">
+            <header id="header">
+                {% include 'front/components/_menu.html.twig' %}
+                {% block header %}{% endblock %}
+            </header>
+            <div id="page-content">
+                {% block body %}{% endblock %}
+            </div>
+            {% include 'front/components/_footer.html.twig' %}
+        </div>
         <script type="text/javascript" src="{{ asset("build/tarteaucitron.js") }}"></script>
         <script type="text/javascript" src="{{ asset("build/tarteaucitron.services.js") }}"></script>
         <script type="text/javascript" src="{{ asset("build/lang/tarteaucitron.fr.js") }}"></script>
