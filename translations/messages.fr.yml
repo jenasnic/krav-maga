@@ -76,19 +76,23 @@ front:
       title: Formulaire d'inscription
     form:
       address: Adresse
+      birthDate: Date de naissance
+      city: Ville
+      contact: Personne à contacter en cas d'urgence
+      comment: Commentaire (problème de santé ou autre)
+      copyrightAuthorization: Droit à l'image
+      email: E-Mail
+      ffkPassport: Vous possedez déjà un passport FFK
+      firstName: Prénom
+      gender: Sexe
+      lastName: Nom
+      medicalCertificateFile: Certificat médical
+      medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
+      phone: Téléphone
+      pictureFile: Photo
+      purpose: Objectif
       street: Rue
       zipCode: Code postal
-      city: Ville
-      firstName: Prénom
-      lastName: Nom
-      gender: Sexe
-      pictureFile: Photo
-      birthDate: Date de naissance
-      phone: Téléphone
-      email: E-Mail
-      medicalCertificateFile: Certificat médical
-      purpose: Objectif
-      copyrightAuthorization: Droit à l'image
 
   menu:
     item:

@@ -40,6 +40,14 @@ class RegistrationInfo
     #[Assert\NotNull]
     private ?bool $copyrightAuthorization = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $ffkPassport = false;
+
+    #[ORM\OneToOne(targetEntity: Contact::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[Assert\Valid]
+    private ?Contact $contact = null;
+
     #[ORM\OneToOne(mappedBy: 'registrationInfo', targetEntity: Adherent::class)]
     private ?Adherent $adherent = null;
 
@@ -138,6 +146,30 @@ class RegistrationInfo
     public function setCopyrightAuthorization(?bool $copyrightAuthorization): self
     {
         $this->copyrightAuthorization = $copyrightAuthorization;
+
+        return $this;
+    }
+
+    public function isFfkPassport(): bool
+    {
+        return $this->ffkPassport;
+    }
+
+    public function setFfkPassport(bool $ffkPassport): self
+    {
+        $this->ffkPassport = $ffkPassport;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): self
+    {
+        $this->contact = $contact;
 
         return $this;
     }

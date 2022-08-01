@@ -33,17 +33,6 @@ ul, li {
   list-style: none;
 }
 
-.row {
-  > * {
-    &:not(:first-child) {
-      margin-left: 5px;
-    }
-    &:not(:last-child) {
-      margin-right: 5px;
-    }
-  }
-}
-
 .f-upper {
   text-transform: uppercase;
 }
@@ -52,6 +41,24 @@ ul, li {
   .f-#{$i} {
     font-size: #{$i}rem;
     line-height: #{$i}rem;
+  }
+}
+
+@for $i from 1 through 5 {
+  .m-top-#{$i} {
+    margin-top: #{$i * 10}px;
+  }
+
+  .m-right-#{$i} {
+    margin-right: #{$i * 10}px;
+  }
+
+  .m-bottom-#{$i} {
+    margin-bottom: #{$i * 10}px;
+  }
+
+  .m-left-#{$i} {
+    margin-left: #{$i * 10}px;
   }
 }
 

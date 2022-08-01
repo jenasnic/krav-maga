@@ -1,35 +1,56 @@
 {% extends 'front.html.twig' %}
 
-{% block body %}
-
-    {% include 'front/components/_header.html.twig' with {
-        'picture': 'build/images/registration.jpg',
+{% block header %}
+    {% include 'front/components/_banner.html.twig' with {
+        'image': asset('build/images/registration.jpg'),
         'title': ('front.registration.header.title'|trans),
     } only %}
+{% endblock %}
+
+{% block body %}
 
     <div class="section">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.registration.page.title'|trans }}</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci dicta distinctio dolore fuga
-            fugiat id illo iusto, libero necessitatibus optio quae sint temporibus. Dignissimos facilis fuga magni modi
-            sit!
-        </p>
-        {{ form_start(form) }}
-            {{ form_row(form.firstName) }}
-            {{ form_row(form.lastName) }}
-            {{ form_row(form.gender) }}
+        {{ form_start(form, {'attr': {'class': 'registration-form'}}) }}
+            <div class="row col-x2">
+                {{ form_row(form.lastName) }}
+                {{ form_row(form.firstName) }}
+            </div>
+            <div class="row col-x2">
+                {{ form_row(form.birthDate) }}
+                {{ form_row(form.gender) }}
+            </div>
             {{ form_row(form.pictureFile) }}
-            {{ form_row(form.birthDate) }}
-            {{ form_row(form.phone) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.address) }}
-            {{ form_row(form.registrationInfo) }}
+            <div class="row col-x2">
+                {{ form_row(form.email) }}
+                {{ form_row(form.phone) }}
+            </div>
+            {{ form_row(form.address.street) }}
+            <div class="row col-x2">
+                {{ form_row(form.address.zipCode) }}
+                {{ form_row(form.address.city) }}
+            </div>
+            {{ form_row(form.registrationInfo.medicalCertificateFile) }}
+            <div class="m-bottom-3">
+                {{ form_row(form.registrationInfo.comment) }}
+            </div>
+            <div class="fieldset">
+                {{ form_label(form.registrationInfo.contact) }}
+                <div class="row col-x3">
+                    {{ form_row(form.registrationInfo.contact.lastName) }}
+                    {{ form_row(form.registrationInfo.contact.firstName) }}
+                    {{ form_row(form.registrationInfo.contact.phone) }}
+                </div>
+            </div>
+
+            {{ form_row(form.registrationInfo.purpose) }}
+            {{ form_row(form.registrationInfo.ffkPassport) }}
+            {{ form_row(form.registrationInfo.copyrightAuthorization) }}
             {{ form_row(form.captcha) }}
             <div class="flex flex--content-end">
                 <button type="submit" class="button">{{ 'global.validate'|trans }}</button>
             </div>
         {{ form_end(form) }}
     </div>
-
-    {% include 'front/components/_footer.html.twig' %}
 
 {% endblock %}

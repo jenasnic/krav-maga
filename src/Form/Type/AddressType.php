@@ -23,7 +23,9 @@ class AddressType extends AbstractType implements DataMapperInterface
     {
         $builder
             ->add('street', TextType::class)
-            ->add('zipCode', TextType::class)
+            ->add('zipCode', MaskedType::class, [
+                'mask' => MaskedType::ZIP_CODE_MASK,
+            ])
             ->add('city', TextType::class)
             ->setDataMapper($this)
         ;

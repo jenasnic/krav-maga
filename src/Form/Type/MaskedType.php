@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class MaskedType extends AbstractType
 {
     public const PHONE_MASK = '00 00 00 00 00';
+    public const ZIP_CODE_MASK = '00 000';
 
     /**
      * @param array<string, mixed> $options

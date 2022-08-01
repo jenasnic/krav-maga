@@ -22,7 +22,7 @@ class GoogleCaptchaValidation
             throw new LogicException('Current request can\'t be empty.');
         }
 
-        $response = $this->googleCaptchaClient->request('POST', '/siteverify', [
+        $response = $this->googleCaptchaClient->request('POST', 'siteverify', [
             'body' => [
                 'secret' => $this->googleCaptchaPrivateKey,
                 'response' => $currentRequest->request->get('g-recaptcha-response'),
