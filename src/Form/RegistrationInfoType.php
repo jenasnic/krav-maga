@@ -31,7 +31,7 @@ class RegistrationInfoType extends AbstractType
             ->add('comment', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('contact', ContactType::class)
+            ->add('emergency', EmergencyType::class)
             ->add('ffkPassport', CheckboxType::class, [
                 'required' => false,
             ])
