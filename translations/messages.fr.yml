@@ -94,6 +94,10 @@ front:
       street: Rue
       zipCode: Code postal
 
+  sporting:
+    header:
+      title: Disciplines
+
   menu:
     item:
       club: Le club
