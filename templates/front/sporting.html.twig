@@ -1,0 +1,81 @@
+{% extends 'front.html.twig' %}
+
+{% block header %}
+    {% include 'front/components/_banner.html.twig' with {
+        'image': asset('build/images/registration.jpg'),
+        'title': ('front.sporting.header.title'|trans),
+    } only %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="sporting-wrapper">
+
+        <div id="km-defense" class="section">
+            <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.kmDefense.title'|trans }}</h2>
+            <div class="sporting">
+                <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
+                    <img src="{{ asset('build/images/km_defense.jpg') }}" alt=""/>
+                </div>
+                <div class="sporting__content">
+                    <p>Aujourd’hui focus sur une des disciplines enseignées au KMIS : le Krav Maga Self Défense.</p>
+                    <p>Cette discipline se destine à tous ceux qui veulent apprendre à se défendre sans compromis. Le travail sur la détermination, l’agressivité instantanée, le dépassement de soi, la condition physique et la technique sont mis au profit de la défense personnelle.</p>
+                    <p>Une part importante du travail sera faite sur la mise en situation, la gestion et la résistance au stress ainsi que sur les principes clés à connaître et à mettre en œuvre.</p>
+                    <p>Tout ceci pourrait être résumé en une phrase « marche des kilomètres pour éviter tout problème, mais si tu n’as pas d’autres choix que d’y faire face, alors ne recule pas d’un pouce »</p>
+                    <p>Oubliez ce que vous connaissez en matière de self défense et venez essayer une méthode ultra simple mais aussi exigeante.</p>
+                    <p>Toutes les gouttes de sueur versées à l’entraînement seront autant de larmes en moins dans la rue.</p>
+                    <p>Entraînez-vous comme vous voulez vous défendre.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="km-training" class="section">
+            <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.kmTraining.title'|trans }}</h2>
+            <div class="sporting">
+                <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
+                    <img src="{{ asset('build/images/km_training.jpg') }}" alt=""/>
+                </div>
+                <div class="sporting__content">
+                    <p>Place à une nouvelle activité que nous vous proposons au KMIS à partir de septembre 2022: le Krav Défense Training</p>
+                    <p>Cette discipline s’adresse à ceux qui sont en manque ou en recherche de confiance en soi, qui veulent une porte d’entrée avant de tenter le krav maga self défense, systèmes de défense plus extrêmes, et/ou qui souhaitent enrichir leurs connaissances avec un bagage technique important.</p>
+                    <p>Elle présente aussi une bonne préparation ou un bon complément à la self défense.</p>
+                    <p>On y travaille tous les types de frappes, différentes situations avec des solutions proposées (avec ou sans armes), debout ou au sol, dans le but de prendre conscience et confiance sur ses capacités et leur impact sur une situation difficile.</p>
+                    <p>On vous dit à bientôt pour une rentrée sportive avec énormément de surprises à venir dans ce nouveau club.</p>
+                    <p>N’oubliez pas, entraînez-vous comme vous voulez vous défendre</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mma-defense" class="section">
+            <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.mmaDefense.title'|trans }}</h2>
+            <div class="sporting">
+                <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
+                    <img src="{{ asset('build/images/mma_defense.jpg') }}" alt=""/>
+                </div>
+                <div class="sporting__content">
+                    <p>Au KMIS, vous pourrez aussi pratiquer le KMix-MMA dans le but de parfaire votre système de défense.</p>
+                    <p>Le but ici n’est pas de former des combattants à entrer dans une cage, mais de préparer et donner des armes complémentaires si lors d’une agression, les premières actions ne donnent pas l’effet escompté; on doit alors passer en mode combat, c’est-à-dire avoir une boxe pieds-poings efficace pour décourager ou mettre KO au plus vite, une lutte performante pour être capable d’amener au sol un individu qui serait meilleur « boxeur », ou éviter de se faire emmener au sol dans une situation délicate, et enfin un grappling complet pour être en mesure soit de contrôler soit de mettre un terme au problème si on se retrouve au sol.</p>
+                    <p>Le panel des techniques est extrêmement riche, varié et complémentaire aux disciplines de défenses.</p>
+                    <p>Cette activité sera également ouverte aux adolescents.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="cardio-training" class="section">
+            <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.cardioTraining.title'|trans }}</h2>
+            <div class="sporting">
+                <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
+                    <img src="{{ asset('build/images/cardio_training.jpg') }}" alt=""/>
+                </div>
+                <div class="sporting__content">
+                    <p>En complément des disciplines déjà présentées, le KMIS vous propose aussi le Cardio Fit Krav.</p>
+                    <p>Un cours dédié à l’amélioration de la condition physique et au dépassement de soi qui s’adapte à tous pour réaliser la répétition de plus, la seconde d’exercice de plus, celle qui peut vous sauver. Dans la rue, la condition physique et la volonté de ne pas lâcher  sont primordiales : pour courir plus vite, frapper plus fort, combattre ou contrôler plus longtemps, elle est une véritable alliée. Renforcement musculaire, cardiovasculaire et mental, la formule est complète.</p>
+                    <p>Sous forme d’ateliers ou de circuits, cette activité promet sueur, dépassement et bonne humeur sur une playlist musicale conçue pour vous motiver.</p>
+                    <p>Entraînez-vous comme vous voulez vous défendre</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
