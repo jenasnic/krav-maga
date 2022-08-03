@@ -89,6 +89,10 @@ input, textarea, select, .button {
 textarea {
   min-height: 5rem;
   resize: vertical;
+
+  &.large {
+    min-height: 20rem;
+  }
 }
 
 input[type="checkbox"]:not(:checked),

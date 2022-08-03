@@ -1,0 +1,12 @@
+{% block subject %}Demande de contact{% endblock %}
+
+{% block html %}
+<p>Demande de contact de la part de "{{ email }}"</p>
+<div>{{ message|nl2br }}</div>
+{% endblock %}
+
+{% block text %}
+Demande de contact de la part de "{{ email }}"
+
+{{ message }}
+{% endblock %}

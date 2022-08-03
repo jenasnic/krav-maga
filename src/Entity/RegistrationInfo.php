@@ -43,10 +43,10 @@ class RegistrationInfo
     #[ORM\Column(type: 'boolean')]
     private bool $ffkPassport = false;
 
-    #[ORM\OneToOne(targetEntity: Contact::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToOne(targetEntity: Emergency::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     #[Assert\Valid]
-    private ?Contact $contact = null;
+    private ?Emergency $emergency = null;
 
     #[ORM\OneToOne(mappedBy: 'registrationInfo', targetEntity: Adherent::class)]
     private ?Adherent $adherent = null;
@@ -162,14 +162,14 @@ class RegistrationInfo
         return $this;
     }
 
-    public function getContact(): ?Contact
+    public function getEmergency(): ?Emergency
     {
-        return $this->contact;
+        return $this->emergency;
     }
 
-    public function setContact(?Contact $contact): self
+    public function setEmergency(?Emergency $emergency): self
     {
-        $this->contact = $contact;
+        $this->emergency = $emergency;
 
         return $this;
     }

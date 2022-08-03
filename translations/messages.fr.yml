@@ -78,10 +78,10 @@ front:
       address: Adresse
       birthDate: Date de naissance
       city: Ville
-      contact: Personne à contacter en cas d'urgence
       comment: Commentaire (problème de santé ou autre)
       copyrightAuthorization: Droit à l'image
       email: E-Mail
+      emergency: Personne à contacter en cas d'urgence
       ffkPassport: Vous possedez déjà un passport FFK
       firstName: Prénom
       gender: Sexe
@@ -97,6 +97,15 @@ front:
   sporting:
     header:
       title: Disciplines
+
+  contact:
+    header:
+      title: Contact
+    page:
+      title: Contactez-nous
+    form:
+      email: Votre email
+      message: Message
 
   menu:
     item:
