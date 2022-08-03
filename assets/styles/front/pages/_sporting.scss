@@ -1,15 +1,38 @@
+@use '../color';
+@use '../icons';
+@use '../media';
+
 .sporting-wrapper {
   .section {
     .sporting {
       display: flex;
 
+      @include media.below(sm) {
+        flex-direction: column;
+      }
+
       &__image {
         flex-grow: 1;
+
+        @include media.below(sm) {
+          height: 200px;
+          max-height: 30vh;
+          margin-bottom: 20px;
+        }
       }
 
       &__content {
         padding-left: 30px;
         width: 500px;
+
+        @include media.below(md) {
+          width: 50%;
+        }
+
+        @include media.below(sm) {
+          padding: 0;
+          width: 100%;
+        }
 
         > p {
           margin-bottom: 10px;
@@ -17,13 +40,39 @@
       }
     }
 
-    &:nth-child(2n) {
-      .sporting {
-        flex-direction: row-reverse;
 
-        &__content {
-          padding-left: 0;
-          padding-right: 30px;
+    @include media.above(sm) {
+      &:nth-child(2n) {
+        .sporting {
+          flex-direction: row-reverse;
+
+          &__content {
+            padding-left: 0;
+            padding-right: 30px;
+          }
+        }
+      }
+    }
+
+    .sporting-reminder {
+      background-color: color.$background-light-color;
+      border: 1px solid color.$primary-color;
+      border-radius: 10px;
+      font-size: 1.1em;
+      padding: 20px;
+      margin: 20px 0;
+
+      @include media.below(sm) {
+        padding: 20px 10px;
+      }
+
+      > div {
+        padding: 5px 0;
+
+        &:before {
+          @include icons.icon(icons.$icon-play);
+          color: color.$primary-color;
+          padding: 0 7px 0 5px;
         }
       }
     }

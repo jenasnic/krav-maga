@@ -1,26 +1,29 @@
-$large-screen-down: 1216px !default;
-$medium-screen-down: 769px !default;
-$medium-screen-up: 1215px !default;
-$small-screen-up: 768px !default;
+$breakpoints: (
+  sm: 768px,
+  md: 992px,
+  lg: 1200px,
+);
 
-$media-large: "only screen and (min-width : #{$large-screen-down})" !default;
-$media-medium: "only screen and (min-width : #{$medium-screen-down}) and (max-width : #{$medium-screen-up})" !default;
-$media-small: "only screen and (max-width : #{$small-screen-up})" !default;
+@mixin below($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
 
-@mixin large_screen() {
-  @media #{$media-large} {
-    @content;
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }
 
-@mixin medium_screen() {
-  @media #{$media-medium} {
-    @content;
-  }
-}
+@mixin above($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
 
-@mixin small_screen() {
-  @media #{$media-small} {
-    @content;
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
   }
 }

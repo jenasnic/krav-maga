@@ -9,4 +9,5 @@ AOS.init({
     once: true,
 });
 
+import './front/menu';
 import './front/home';

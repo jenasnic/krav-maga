@@ -12,21 +12,21 @@
     <div class="section">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.registration.page.title'|trans }}</h2>
         {{ form_start(form, {'attr': {'class': 'registration-form'}}) }}
-            <div class="row col-x2">
+            <div class="row col-x2 col-sm-x1">
                 {{ form_row(form.lastName) }}
                 {{ form_row(form.firstName) }}
             </div>
-            <div class="row col-x2">
+            <div class="row col-x2 col-sm-x1">
                 {{ form_row(form.birthDate) }}
                 {{ form_row(form.gender) }}
             </div>
             {{ form_row(form.pictureFile) }}
-            <div class="row col-x2">
+            <div class="row col-x2 col-sm-x1">
                 {{ form_row(form.email) }}
                 {{ form_row(form.phone) }}
             </div>
             {{ form_row(form.address.street) }}
-            <div class="row col-x2">
+            <div class="row col-x2 col-sm-x1">
                 {{ form_row(form.address.zipCode) }}
                 {{ form_row(form.address.city) }}
             </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="fieldset">
                 {{ form_label(form.registrationInfo.emergency) }}
-                <div class="row col-x3">
+                <div class="row col-x3 col-md-x2 col-sm-x1">
                     {{ form_row(form.registrationInfo.emergency.lastName) }}
                     {{ form_row(form.registrationInfo.emergency.firstName) }}
                     {{ form_row(form.registrationInfo.emergency.phone) }}

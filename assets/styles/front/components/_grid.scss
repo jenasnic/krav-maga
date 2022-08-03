@@ -1,22 +1,39 @@
 @use '../media';
 
+$gap: 5px;
+
 .row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-
-  > * {
-    &:not(:first-child) {
-      margin-left: 5px;
-    }
-    &:not(:last-child) {
-      margin-right: 5px;
-    }
-  }
 
   @for $i from 1 through 6 {
     &.col-x#{$i} {
       > * {
-        width: calc(100% / #{$i});
+        min-width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
+        width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
+      }
+    }
+  }
+
+  @include media.below(md) {
+    @for $i from 1 through 6 {
+      &.col-md-x#{$i} {
+        > * {
+          min-width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
+          width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
+        }
+      }
+    }
+  }
+
+  @include media.below(sm) {
+    @for $i from 1 through 6 {
+      &.col-sm-x#{$i} {
+        > * {
+          min-width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
+          width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
+        }
       }
     }
   }

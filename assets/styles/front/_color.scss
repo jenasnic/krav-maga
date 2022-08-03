@@ -6,6 +6,7 @@ $medium-carmin: #BA3B3C;
 $mine-shaft: #222222;
 $orchid: #E382DA;
 $scorpion: #575757;
+$silverChalice: #A3A3A3;
 $silver: #CDCDCD;
 $geebung: #CA971D;
 $white: #FFFFFF;
@@ -19,7 +20,8 @@ $primary-color: $geebung;
 
 //TEXT
 $text-default-color: $mine-shaft;
-$text-primary-color: $primary-color;
+$text-dark-color: $scorpion;
+$text-light-color: $silverChalice;
 
 $success-color: $apple;
 $error-color: $medium-carmin;
