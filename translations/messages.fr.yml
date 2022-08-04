@@ -57,13 +57,13 @@ front:
       practicalInfo: Infos pratiques
     sporting:
       kmDefense:
-        title: Krav Maga Self Défense
-        content: 'Focus sur une des disciplines enseignées au KMIS : le Krav Maga Self Défense.'
+        title: Krav Maga Self Defense
+        content: 'Focus sur une des disciplines enseignées au KMIS : le Krav Maga Self Defense.'
       kmTraining:
         title: Krav Defense Training
         content: 'Place à une nouvelle activité que nous vous proposons au KMIS à partir de septembre 2022: le Krav Defense Training.'
       mmaDefense:
-        title: KMix-MMA
+        title: KMix-MMA Defense
         content: Au KMIS, vous pourrez aussi pratiquer le KMix-MMA dans le but de parfaire votre système de défense.
       cardioTraining:
         title: Cardio Fit Krav
@@ -109,7 +109,7 @@ front:
 
   menu:
     item:
-      club: Le club
+      home: Accueil
       sporting: Disciplines
       registration: Inscription
       contact: Contact

@@ -1,5 +1,6 @@
 @use '../color';
 @use '../fonts';
+@use '../media';
 
 $default-margin: 50px;
 
@@ -8,12 +9,21 @@ $default-margin: 50px;
   margin: $default-margin auto 2 * $default-margin auto;
   max-width: 976px;
 
+  @include media.below(md) {
+    padding: 0 $default-margin;
+  }
+
   h2 {
-    color: color.$scorpion;
+    color: color.$text-dark-color;
     font-family: fonts.$text-title-font;
     font-size: 6rem;
     line-height: 6rem;
     margin-bottom: $default-margin;
     text-align: center;
+
+    @include media.below(sm) {
+      font-size: 5rem;
+      line-height: 5rem;
+    }
   }
 }

@@ -1,25 +1,33 @@
 @use '../color';
 @use '../icons';
+@use '../media';
 
 .sporting-slider {
   box-sizing: border-box;
-  width: 100%;
+  font-size: 1rem;
   height: 580px;
   overflow: hidden;
   padding-bottom: 50px;
   position: relative;
+  width: 100%;
 
   .swiper-button-prev, .swiper-button-next {
     color: color.$primary-color;
+
+    @include media.below(sm) {
+      display: none;
+    }
   }
 
-  .swiper-pagination-bullet {
-    height: 20px;
-    margin: 0 10px;
-    width: 20px;
+  .swiper-pagination {
+    .swiper-pagination-bullet {
+      height: 20px;
+      margin: 0 10px;
+      width: 20px;
 
-    &-active {
-      background-color: color.$primary-color;
+      &-active {
+        background-color: color.$primary-color;
+      }
     }
   }
 
@@ -31,13 +39,23 @@
     margin: 0 auto;
     width: calc(100% - 100px);
 
+    @include media.below(sm) {
+      width: 100%;
+    }
+
     .title {
-      color: color.$scorpion;
-      font-size: 3rem;
+      color: color.$text-dark-color;
+      font-size: 3em;
       font-weight: 700;
-      line-height: 3rem;
-      padding: 10px 0;
+      line-height: 1.5em;
       text-transform: uppercase;
+
+      @include media.below(sm) {
+        font-size: 1.5em;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-align: center;
+      }
     }
 
     .content-wrapper {
@@ -49,8 +67,16 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        max-width: 33%;
+        width: 33%;
         z-index: 9;
+
+        @include media.below(md) {
+          width: 50%;
+        }
+
+        @include media.below(sm) {
+          width: 100%;
+        }
 
         > div {
           align-items: center;
@@ -58,8 +84,8 @@
           display: flex;
           justify-content: center;
           flex-grow: 1;
-          font-size: 1.6rem;
-          line-height: 2rem;
+          font-size: 1.6em;
+          line-height: 1.6em;
           padding: 20px;
           text-align: center;
           z-index: 9;
@@ -69,7 +95,7 @@
           align-self: flex-end;
           background-color: color.$primary-color;
           color: color.$white;
-          font-size: 2rem;
+          font-size: 2em;
           padding: 10px 30px;
           text-transform: uppercase;
           z-index: 9;
@@ -81,18 +107,38 @@
 
 .sessions {
   display: flex;
+  font-size: 1rem;
   justify-content: space-between;
   padding: 20px 0;
   width: 100%;
+
+  @include media.below(md) {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .session {
     background-color: color.$background-light-color;
     border-radius: 25px;
     box-shadow: 2px 2px 5px -2px color.$scorpion;
     box-sizing: border-box;
-    font-size: 1.5rem;
+    font-size: 1.5em;
     padding: 30px;
     width: 47%;
+
+    @include media.below(md) {
+      max-width: 600px;
+      width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: 40px;
+      }
+    }
+
+    @include media.below(sm) {
+      padding: 10px;
+    }
 
     &__city {
       font-weight: 700;
@@ -102,6 +148,13 @@
       > a i {
         color: color.$primary-color;
         font-size: 1.5em;
+      }
+
+      > .address {
+        color: color.$text-light-color;
+        font-size: 0.7em;
+        font-style: italic;
+        padding: 20px 0 10px 0;
       }
     }
 
@@ -119,8 +172,12 @@
         > ul {
           padding: 10px 10px 10px 30px;
 
+          @include media.below(sm) {
+            padding: 10px;
+          }
+
           > li {
-            font-size: 0.8em;
+            font-size: 0.7em;
             padding: 5px 0;
 
             &:before {
@@ -137,7 +194,7 @@
 }
 
 .pricing {
-  font-size: 3rem;
+  font-size: 3em;
   font-weight: 700;
   padding: 20px 0;
   text-align: center;
@@ -148,8 +205,8 @@
 }
 
 .advice {
-  color: color.$scorpion;
-  font-size: 1.5rem;
+  color: color.$text-dark-color;
+  font-size: 1.3em;
   font-style: italic;
   padding: 20px 0;
 }

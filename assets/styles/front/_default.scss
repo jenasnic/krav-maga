@@ -16,7 +16,7 @@ body {
 }
 
 a {
-  color: color.$text-primary-color;
+  color: color.$primary-color;
   outline: 0;
   text-decoration: none;
 }
@@ -31,17 +31,6 @@ h1, h2 {
 
 ul, li {
   list-style: none;
-}
-
-.f-upper {
-  text-transform: uppercase;
-}
-
-@for $i from 1 through 10 {
-  .f-#{$i} {
-    font-size: #{$i}rem;
-    line-height: #{$i}rem;
-  }
 }
 
 @for $i from 1 through 5 {
@@ -60,20 +49,4 @@ ul, li {
   .m-left-#{$i} {
     margin-left: #{$i * 10}px;
   }
-}
-
-/**************/
-/* Responsive */
-/**************/
-
-@include media.large_screen
-{
-}
-
-@include media.medium_screen
-{
-}
-
-@include media.small_screen
-{
 }

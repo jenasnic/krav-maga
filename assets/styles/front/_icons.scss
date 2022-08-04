@@ -67,6 +67,9 @@
 .icon-bin:before {
   content: "\e9ac";
 }
+.icon-menu:before {
+  content: "\e9bd";
+}
 .icon-more:before {
   content: "\ea0a";
 }
@@ -92,7 +95,9 @@
 $icon-back: "\e967";
 $icon-bin: "\e9ac";
 $icon-checkmark: "\ea10";
+$icon-cross: "\ea0f";
 $icon-export: "\e961";
+$icon-menu: "\e9bd";
 $icon-more: "\ea0a";
 $icon-play: "\ea1c";
 $icon-sort: "\e90e";
