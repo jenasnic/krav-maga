@@ -31,6 +31,11 @@ back:
   registration:
     edit:
       title: Fiche adhérent
+      tab:
+        adherent: Adherent
+        registration: Inscirption
+        licence: License
+        payments: Paiements
     grid:
       filter:
         YOUNG: Ados

@@ -1,0 +1,9 @@
+@use '~toastr/toastr.scss';
+
+#toast-container {
+  top: 10px;
+
+  > div {
+    opacity: 1;
+  }
+}

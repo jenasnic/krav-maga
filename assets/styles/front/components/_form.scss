@@ -159,6 +159,10 @@ select {
   }
 }
 
+.select > select {
+  width: 100%;
+}
+
 .button {
   background-color: color.$background-dark-color;
   color: color.$primary-color;

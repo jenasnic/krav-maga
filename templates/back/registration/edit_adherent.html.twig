@@ -1,0 +1,28 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/registration/_edit_header.html.twig' with {'current': 'adherent'} %}
+
+    <h2>{{ 'back.registration.edit.title'|trans }}</h2>
+
+    <div class="form-wrapper">
+        {{ form_start(form) }}
+            {{ form_row(form.firstName) }}
+            {{ form_row(form.lastName) }}
+            {{ form_row(form.gender) }}
+            {{ form_row(form.pictureFile) }}
+            {{ form_row(form.birthDate) }}
+            {{ form_row(form.phone) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.address) }}
+            <button type="submit" class="button is-success">
+                <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span>{{ 'global.validate'|trans }}</span>
+            </button>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

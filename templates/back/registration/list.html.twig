@@ -2,26 +2,49 @@
 
 {% block body %}
 
-    {% embed 'back/components/_grid.html.twig' %}
+    <div data-grid="data-grid">
 
-        {% block filter %}
-            <div class="flex row">
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <div class="field has-addons">
+                        <p class="control has-icons-left">
+                            <input id="input-search-id" class="search input" type="text" autofocus="autofocus" placeholder="{{ 'global.search'|trans }}" />
+                            <span class="icon is-small is-left">
+                                <i class="icon-search"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
                 {% for filter in filters %}
-                    <a href="{{ path('bo_registration_list', {'filter': filter}) }}" class="button-filter">{{ ('back.registration.grid.filter.'~filter)|trans }}</a>
+                    <p class="level-item">
+                        <a href="{{ path('bo_registration_list', {'filter': filter}) }}" class="button is-outlined is-info">{{ ('back.registration.grid.filter.'~filter)|trans }}</a>
+                    </p>
                 {% endfor %}
             </div>
-        {% endblock %}
-
-        {% block action %}
-            <div class="flex row">
-                <a href="{{ path('bo_export_adherent') }}" target="_blank" class="button-icon button-icon--export">{{ 'global.export'|trans }}</a>
-                <a href="{{ path('bo_registration_add') }}" class="button-icon button-icon--add">{{ 'back.registration.grid.action.add'|trans }}</a>
+            <div class="level-right">
+                <p class="level-item">
+                    <a href="{{ path('bo_export_adherent') }}" target="_blank" class="button is-primary">
+                        <span>{{ 'global.export'|trans }}</span>
+                        <span class="icon is-small">
+                            <i class="icon-export"></i>
+                        </span>
+                    </a>
+                </p>
+                <p class="level-item">
+                    <a href="{{ path('bo_registration_add') }}" target="_blank" class="button is-primary">
+                        <span>{{ 'back.registration.grid.action.add'|trans }}</span>
+                        <span class="icon is-small">
+                            <i class="icon-more"></i>
+                        </span>
+                    </a>
+                </p>
             </div>
-        {% endblock %}
+        </nav>
 
-        {% block beforeTable %}
-        <div class="grid-note grid-note--right">{{ registrations|length }} inscriptions</div>
-        {% endblock %}
+        <p>{{ registrations|length }} inscriptions</p>
+
+        {% embed 'back/components/_table.html.twig' %}
 
         {% block thead %}
             <th>
@@ -50,12 +73,16 @@
                     <td class="email">{{ registration['email'] }}</td>
                     <td class="registeredAt">{{ registration['registeredAt']|date('d/m/Y') }}</td>
                     <td class="center">
-                        <a href="{{ path('bo_registration_edit', {'adherent': registration['adherentId']}) }}"><i class="icon-pencil"></i></a>
+                        <a href="{{ path('bo_registration_edit', {'adherent': registration['adherentId']}) }}" class="button is-warning">
+                            <span class="icon"><i class="icon-pencil"></i></span>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
         {% endblock %}
 
     {% endembed %}
+
+    </div>
 
 {% endblock %}
