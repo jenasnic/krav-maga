@@ -45,6 +45,10 @@ class AdherentType extends AbstractType
                 'mask' => MaskedType::PHONE_MASK,
             ])
             ->add('email', EmailType::class)
+            ->add('pseudonym', TextType::class, [
+                'required' => false,
+                'help' => 'front.registration.form.pseudonymHelp',
+            ])
             ->add('address', AddressType::class, [
                 'label' => false,
             ])

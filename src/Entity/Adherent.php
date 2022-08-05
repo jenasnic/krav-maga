@@ -44,6 +44,9 @@ class Adherent
     #[Assert\Email]
     private ?string $email = null;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $pseudonym = null;
+
     #[ORM\Embedded(class: Address::class)]
     #[Assert\NotNull]
     private ?Address $address = null;
@@ -140,6 +143,18 @@ class Adherent
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPseudonym(): ?string
+    {
+        return $this->pseudonym;
+    }
+
+    public function setPseudonym(?string $pseudonym): self
+    {
+        $this->pseudonym = $pseudonym;
 
         return $this;
     }

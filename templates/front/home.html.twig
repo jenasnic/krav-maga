@@ -8,22 +8,8 @@
 
     <div id="club" class="section">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.section.club'|trans }}</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus adipisci dicta distinctio dolore fuga
-            fugiat id illo iusto, libero necessitatibus optio quae sint temporibus. Dignissimos facilis fuga magni modi
-            sit!
-        </p>
-        <p>
-            Fugiat perspiciatis voluptas voluptatum? Ab aliquid amet consequatur, cupiditate dolor est fuga incidunt
-            ipsum itaque iure magni molestiae nobis perspiciatis possimus quaerat qui quidem ratione rem, repellat saepe
-            tempore voluptatem.
-        </p>
-        <p>
-            Aliquam corporis delectus deserunt dolor et illum laboriosam quibusdam sequi sint unde! Alias aliquam,
-            aperiam at, blanditiis impedit iste itaque laboriosam neque nihil qui quisquam quod rem tenetur ut vel.
-            Aliquam animi beatae dicta dignissimos error, expedita fugiat minima numquam odit quibusdam repudiandae sed
-            sequi temporibus, veritatis, voluptate. Atque consectetur corporis, cupiditate quaerat quisquam saepe sint
-            veritatis! Iure, laboriosam quod?
-        </p>
+        <p>Le KMIS offre tout un panel de disciplines complémentaires toutes axées autour de la défense. Que ce soit l'amélioration de la condition physique qui permettra par exemple une meilleure gestion des effets du stress, de l'apprentissage de technique de combat ou de défense ou bien plus spécifiquement LA Self Defense, vous trouverez la ou les disciplines qui vous permettront de vous épanouir avec une équipe à votre écoute et mobilisée pour la réussite de chacun.</p>
+        <p>Chacun trouvera une ou plusieurs activités lui permettant de sortir de sa zone de confort et progresser efficacement.</p>
     </div>
 
     <div id="sporting" class="section">
@@ -33,32 +19,32 @@
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
                         'title': 'front.home.sporting.kmDefense.title'|trans,
-                        'image': asset('build/images/km_defense.jpg'),
-                        'content': 'front.home.sporting.kmDefense.content'|trans,
+                        'image': asset('build/images/km_defense.webp'),
+                        'content': 'Pour travailler toutes les composantes de la self-defense.',
                         'link': path('app_sporting')~'#km-defense',
                     } %}
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
                         'title': 'front.home.sporting.kmTraining.title'|trans,
-                        'image': asset('build/images/km_training.jpg'),
-                        'content': 'front.home.sporting.kmTraining.content'|trans,
+                        'image': asset('build/images/km_training.webp'),
+                        'content': 'Pour augmenter sa confiance en soi et parfaire son bagage technique.',
                         'link': path('app_sporting')~'#km-training',
                     } %}
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
                         'title': 'front.home.sporting.mmaDefense.title'|trans,
-                        'image': asset('build/images/mma_defense.jpg'),
-                        'content': 'front.home.sporting.mmaDefense.content'|trans,
+                        'image': asset('build/images/mma_defense.webp'),
+                        'content': 'Pour augmenter ses aptitudes de défense.',
                         'link': path('app_sporting')~'#mma-defense',
                     } %}
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
                         'title': 'front.home.sporting.cardioTraining.title'|trans,
-                        'image': asset('build/images/cardio_training.jpg'),
-                        'content': 'front.home.sporting.cardioTraining.content'|trans,
+                        'image': asset('build/images/cardio_training.webp'),
+                        'content': 'Pour se doter de la condition physique souhaitée.',
                         'link': path('app_sporting')~'#cardio-training',
                     } %}
                 </div>
@@ -122,10 +108,22 @@
             </div>
         </div>
         <div class="pricing">
-            Tarif : 100 <i class="icon-euro"></i>
+            Tarif : 240 <i class="icon-euro"></i>
         </div>
         <div class="advice">
-            Matériel conseillé : coquille, gants, protège-tibia...
+            <ul>
+                <span>Obligatoire</span>
+                <li>Mitaines MMA</li>
+                <li>Coquille pelvienne</li>
+                <li>Protège dents</li>
+                <li>Protège tibias</li>
+                <li>Baskets propres dédiées à la salle</li>
+            </ul>
+            <ul>
+                <span>Facultatif</span>
+                <li>Casque idéalement type Kudo</li>
+                <li>Protège avant-bras</li>
+            </ul>
         </div>
     </div>
 

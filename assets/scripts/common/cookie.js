@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     showIcon: false, /* Show cookie icon to manage cookies */
     iconPosition: 'BottomRight', /* BottomRight, BottomLeft, TopRight and TopLeft */
     moreInfoLink: false, /* Show more info link */
+    useExternalCss: false, /* If false, the tarteaucitron.css file will be loaded */
+    useExternalJs: false, /* If false, the tarteaucitron.js file will be loaded */
     readmoreLink: '', /* Change the default readmore link */
   });
 
