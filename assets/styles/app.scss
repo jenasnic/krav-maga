@@ -6,6 +6,7 @@
 @use 'front/icons';
 
 @use 'front/components/banner';
+@use 'front/components/button';
 @use 'front/components/footer';
 @use 'front/components/form';
 @use 'front/components/grid';
@@ -18,3 +19,4 @@
 @use 'front/pages/home';
 @use 'front/pages/login';
 @use 'front/pages/sporting';
+@use 'front/pages/contact';

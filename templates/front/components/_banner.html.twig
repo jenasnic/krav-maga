@@ -1,4 +1,4 @@
-<section class="banner with-overlay with-background">
+<section class="banner with-overlay with-background{% if darkOverlay is defined and darkOverlay %} with-overlay--dark{% endif %}">
     <img src="{{ image }}" alt=""/>
     <div class="title-wrapper">
         <h1 data-aos="fade-up" data-aos-duration="2000">{{ title }}</h1>

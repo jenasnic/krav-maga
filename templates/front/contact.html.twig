@@ -4,6 +4,7 @@
     {% include 'front/components/_banner.html.twig' with {
         'image': asset('build/images/contact.webp'),
         'title': ('front.contact.header.title'|trans),
+        'darkOverlay': true,
     } only %}
 {% endblock %}
 
@@ -11,15 +12,34 @@
 
     <div class="section">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.contact.page.title'|trans }}</h2>
-        <p class="m-bottom-3">Pour tout renseignement, vous pouvez nous contacter au <a href="tel:0783237428">07.83.23.74.28</a> ou nous laisser un message à l'aide du formulaire ci-dessous.</p>
-        {{ form_start(form) }}
+        <p>Pour tout renseignement, vous pouvez nous contacter au <a href="tel:0783237428">07.83.23.74.28</a> ou nous laisser un message à l'aide du formulaire ci-dessous.</p>
+        <p>
+            Vous pouvez aussi nous retrouver :
+            <ul class="contact-locations">
+                <li>
+                    à Mogneville le lundi et le mercredi de 19h30 à 22h30
+                    <a href="https://www.google.com/maps/search/4+place+jean+jaures+60140+mogneville/@49.3177976,2.4699965,17z/data=!3m1!4b1" target="_blank">
+                        <i class="icon-location"></i>
+                    </a>
+                </li>
+                <li>
+                    à Villers-Sous-Saint-Leu le vendredi de 19h30 à 22h30 et le samedi de 13h00 à 17h00
+                    <a href="https://www.google.com/maps/place/23+Rue+du+Castel,+60340+Villers-Sous-Saint-Leu/@49.2142549,2.396175,17z/data=!3m1!4b1!4m5!3m4!1s0x47e648d4a31f8c93:0x7abe632340c2a373!8m2!3d49.2142549!4d2.3983637" target="_blank">
+                        <i class="icon-location"></i>
+                    </a>
+                </li>
+            </ul>
+        </p>
+        <div class="contact-form-wrapper">
+            {{ form_start(form) }}
             {{ form_row(form.email) }}
             {{ form_row(form.message, {'attr': {'class': 'large'}}) }}
             {{ form_row(form.captcha) }}
             <div class="flex flex--content-end">
-                <button type="submit" class="button">{{ 'global.validate'|trans }}</button>
+                <button type="submit" class="button">{{ 'global.validate'|trans }} <i class="icon-checkmark"></i></button>
             </div>
-        {{ form_end(form) }}
+            {{ form_end(form) }}
+        </div>
     </div>
 
 {% endblock %}
