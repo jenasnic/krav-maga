@@ -58,16 +58,12 @@ front:
     sporting:
       kmDefense:
         title: Krav Maga Self Defense
-        content: 'Focus sur une des disciplines enseignées au KMIS : le Krav Maga Self Defense.'
       kmTraining:
         title: Krav Defense Training
-        content: 'Place à une nouvelle activité que nous vous proposons au KMIS à partir de septembre 2022: le Krav Defense Training.'
       mmaDefense:
         title: KMix-MMA Defense
-        content: Au KMIS, vous pourrez aussi pratiquer le KMix-MMA dans le but de parfaire votre système de défense.
       cardioTraining:
         title: Cardio Fit Krav
-        content: En complément des disciplines déjà présentées, le KMIS vous propose aussi le Cardio Fit Krav.
 
   registration:
     header:
@@ -90,6 +86,8 @@ front:
       medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
       phone: Téléphone
       pictureFile: Photo
+      pseudonym: Pseudo
+      pseudonymHelp: Vous pouvez renseigner ici votre pseudonyme Facebook pour faciliter les échanges sur Facebook
       purpose: Objectif
       street: Rue
       zipCode: Code postal

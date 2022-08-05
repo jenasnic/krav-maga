@@ -2,7 +2,7 @@
 
 {% block header %}
     {% include 'front/components/_banner.html.twig' with {
-        'image': asset('build/images/registration.jpg'),
+        'image': asset('build/images/registration.webp'),
         'title': ('front.registration.header.title'|trans),
     } only %}
 {% endblock %}
@@ -16,7 +16,8 @@
                 {{ form_row(form.lastName) }}
                 {{ form_row(form.firstName) }}
             </div>
-            <div class="row col-x2 col-sm-x1">
+            <div class="row col-x3 col-md-x2 col-sm-x1">
+                {{ form_row(form.pseudonym) }}
                 {{ form_row(form.birthDate) }}
                 {{ form_row(form.gender) }}
             </div>

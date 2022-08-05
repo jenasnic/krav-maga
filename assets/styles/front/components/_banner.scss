@@ -12,6 +12,10 @@
   position: relative;
   width: 100%;
 
+  > img {
+    filter: grayscale(100%);
+  }
+
   .title-wrapper {
     color: color.$white;
     font-size: 1rem;
