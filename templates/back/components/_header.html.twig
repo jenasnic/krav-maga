@@ -1,16 +1,28 @@
-<header>
-    <div class="header-content container">
-        <a href="{{ path('bo_dashboard') }}" class="header-content__logo">
-            <img src="{{ asset('build/images/logo.svg') }}" alt="{{ 'back.menu.dashboard'|trans }}">
+<nav class="navbar" role="navigation" aria-label="main navigation">
+
+    <div class="navbar-brand">
+        <a href="{{ path('app_home') }}" class="navbar-item">
+            <i class="icon-home is-size-3"></i>
         </a>
-        <nav class="header-content__menu">
-            <a href="{{ path('bo_dashboard') }}">{{ 'back.menu.dashboard'|trans }}</a>
-            <a href="{{ path('bo_registration_list') }}">{{ 'back.menu.registration'|trans }}</a>
-            <a href="{{ path('bo_adherent_gallery') }}">{{ 'back.menu.gallery'|trans }}</a>
-        </nav>
-        <div class="header-content__user">
-            <div class="username">{{ app.user.email }}</div>
-            <a class="logout" href="{{ path('app_logout') }}">{{ 'global.logout'|trans }}</a>
+    </div>
+
+    <div class="navbar-menu">
+        <div class="navbar-start">
+            <a href="{{ path('bo_dashboard') }}" class="navbar-item">{{ 'back.menu.dashboard'|trans }}</a>
+            <a href="{{ path('bo_registration_list') }}" class="navbar-item">{{ 'back.menu.registration'|trans }}</a>
+            <a href="{{ path('bo_adherent_gallery') }}" class="navbar-item">{{ 'back.menu.gallery'|trans }}</a>
         </div>
     </div>
-</header>
+
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="username">{{ app.user.email }}</div>
+        </div>
+        <div class="navbar-item">
+            <div class="buttons">
+                <a class="button is-warning" href="{{ path('app_logout') }}">{{ 'global.logout'|trans }}</a>
+            </div>
+        </div>
+    </div>
+
+</nav>

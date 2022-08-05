@@ -23,10 +23,31 @@
   {%- endif -%}
 {%- endblock form_errors -%}
 
+{%- block form_widget_simple -%}
+  {%- set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) -%}
+  {{ parent() }}
+{%- endblock form_widget_simple -%}
+
+{%- block textarea_widget -%}
+  {%- set attr = attr|merge({'class': (attr.class|default('') ~ ' textarea')|trim}) -%}
+  {{ parent() }}
+{%- endblock textarea_widget -%}
+
+{%- block button_widget -%}
+  {%- set attr = attr|merge({'class': (attr.class|default('') ~ ' button')|trim}) -%}
+  {{ parent() }}
+{%- endblock button_widget -%}
+
 {%- block choice_widget_expanded -%}
   {%- set attr = attr|merge({'class': 'radio-wrapper'}) -%}
   {{ parent() }}
 {%- endblock choice_widget_expanded -%}
+
+{%- block choice_widget_collapsed -%}
+  <div class="select">
+    {{ parent() }}
+  </div>
+{%- endblock choice_widget_collapsed -%}
 
 {%- block checkbox_row -%}
   {%- set widget_attr = {} -%}

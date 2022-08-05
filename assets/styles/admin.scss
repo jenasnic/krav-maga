@@ -1,14 +1,6 @@
-@use 'front/default';
-@use 'front/flex';
-@use 'front/icons';
-@use 'front/components/form';
+@use './front/icons';
+@use './back/bulma/bulmaswatch';
 
-@use 'back/components/button';
-@use 'back/components/footer';
-@use 'back/components/grid';
-@use 'back/components/header';
-@use 'back/components/menu';
-@use 'back/components/table';
+@use './back/global';
 
-@use 'back/global';
-@use 'back/gallery';
+@use './back/pages/gallery';
