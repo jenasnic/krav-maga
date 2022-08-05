@@ -3,10 +3,14 @@
 {% block html %}
 <p>Demande de contact de la part de "{{ email }}"</p>
 <div>{{ message|nl2br }}</div>
+<p>L'équipe KMIS</p>
+<img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
 {% endblock %}
 
 {% block text %}
 Demande de contact de la part de "{{ email }}"
 
 {{ message }}
+
+L'équipe KMIS
 {% endblock %}
