@@ -1,26 +1,26 @@
 .with-background {
-    overflow: hidden;
-    position: relative;
+  overflow: hidden;
+  position: relative;
 
-    > img {
-        height: 100%;
-        left: 0;
-        object-fit: cover;
-        object-position: center;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 0;
-        animation-name: background-scaling;
-        animation-duration: 2s;
-    }
+  > img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+    animation-name: background-scaling;
+    animation-duration: 2s;
+  }
 
-    @keyframes background-scaling {
-        from {
-            transform: scale(1.1);
-        }
-        to {
-            transform: scale(1);
-        }
+  @keyframes background-scaling {
+    from {
+      transform: scale(1.1);
     }
+    to {
+      transform: scale(1);
+    }
+  }
 }

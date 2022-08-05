@@ -51,6 +51,10 @@
       justify-content: center;
       width: 100%;
 
+      @include media.above(md) {
+        margin-left: -50px;
+      }
+
       @include media.below(sm) {
         flex-direction: column;
       }

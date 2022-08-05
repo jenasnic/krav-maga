@@ -91,14 +91,19 @@
           z-index: 9;
         }
 
-        > a {
+        > a.link-icon-button {
           align-self: flex-end;
-          background-color: color.$primary-color;
-          color: color.$white;
-          font-size: 2em;
-          padding: 10px 30px;
+          display: flex;
+          font-size: 1.6em;
+          padding: 10px 25px;
           text-transform: uppercase;
           z-index: 9;
+
+          i {
+            transform: translateY(-3px) rotate(90deg);
+            display: block;
+            margin-left: 15px;
+          }
         }
       }
     }
@@ -141,13 +146,15 @@
     }
 
     &__city {
-      font-weight: 700;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       margin-bottom: 20px;
-      text-align: center;
 
-      > a i {
-        color: color.$primary-color;
-        font-size: 1.5em;
+      > .name {
+        font-weight: 700;
+        margin-bottom: 20px;
       }
 
       > .address {
@@ -155,6 +162,7 @@
         font-size: 0.7em;
         font-style: italic;
         padding: 20px 0 10px 0;
+        text-align: center;
       }
     }
 
@@ -196,7 +204,7 @@
 .pricing {
   font-size: 3em;
   font-weight: 700;
-  padding: 20px 0;
+  padding: 20px 0 40px 0;
   text-align: center;
 
   i {
@@ -204,9 +212,49 @@
   }
 }
 
-.advice {
+.equipment {
+  background-color: color.$background-light-color;
+  border-radius: 25px;
+  box-shadow: 2px 2px 5px -2px color.$scorpion;
+  box-sizing: border-box;
   color: color.$text-dark-color;
-  font-size: 1.3em;
-  font-style: italic;
-  padding: 20px 0;
+  font-size: 1.5em;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 30px 10px;
+
+  &__title {
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &__detail {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+
+    > ul {
+      padding: 0 20px;
+
+      &:first-child {
+        border-right: 1px solid color.$primary-color;
+      }
+
+      > div {
+        margin-bottom: 10px;
+      }
+
+      > li {
+        font-size: 0.7em;
+        padding: 5px 0;
+
+        &:before {
+          @include icons.icon(icons.$icon-checkmark);
+          color: color.$primary-color;
+          font-size: 0.8em;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
 }
