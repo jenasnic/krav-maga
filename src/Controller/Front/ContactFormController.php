@@ -9,12 +9,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContactFormController extends AbstractController
 {
     #[Route('/contact', name: 'app_contact')]
-    public function contact(Request $request, ContactFormHandler $contactFormHandler): Response
-    {
+    public function contact(
+        Request $request,
+        TranslatorInterface $translator,
+        ContactFormHandler $contactFormHandler
+    ): Response {
         $contactForm = new ContactFormCommand();
         $form = $this->createForm(ContactFormType::class, $contactForm);
         $form->handleRequest($request);
@@ -22,7 +26,7 @@ class ContactFormController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contactFormHandler->handle($contactForm);
 
-            // @todo : add flash message to inform user email has been sent
+            $this->addFlash('info', $translator->trans('front.contact.form.success'));
 
             return $this->redirectToRoute('app_contact');
         }

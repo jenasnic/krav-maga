@@ -95,7 +95,10 @@ front:
       pseudonymHelp: Vous pouvez renseigner ici votre pseudonyme Facebook pour faciliter les échanges sur Facebook
       purpose: Objectif
       street: Rue
+      success: Merci pour votre inscription.<br/>Vous allez recevoir un email de confirmation pour valider votre inscription.
       zipCode: Code postal
+    validation:
+      success: Votre inscription a bien été validée.
 
   sporting:
     header:
@@ -109,6 +112,7 @@ front:
     form:
       email: Votre email
       message: Message
+      success: Votre demande a bien été envoyée.
 
   menu:
     item:

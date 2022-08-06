@@ -7,7 +7,7 @@ use App\Domain\Command\Front\ConfirmRegistrationHandler;
 use App\Domain\Command\Front\RegistrationCommand;
 use App\Domain\Command\Front\RegistrationHandler;
 use App\Entity\Adherent;
-use App\Form\AdherentType;
+use App\Form\NewRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
     public function registration(Request $request, RegistrationHandler $registrationHandler): Response
     {
         $adherent = new Adherent();
-        $form = $this->createForm(AdherentType::class, $adherent, [
+        $form = $this->createForm(NewRegistrationType::class, $adherent, [
             'withCaptcha' => true,
         ]);
         $form->handleRequest($request);
@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $registrationHandler->handle(new RegistrationCommand($adherent));
 
-            // @todo : add flash message to inform user email has been sent (for validation...)
+            $this->addFlash('info', $this->translator->trans('front.registration.form.success'));
 
             return $this->redirectToRoute('app_home');
         }
@@ -57,6 +57,8 @@ class RegistrationController extends AbstractController
 
         try {
             $confirmRegistrationHandler->handle(new ConfirmRegistrationCommand($adherent, $request));
+
+            $this->addFlash('info', $this->translator->trans('front.registration.validation.success'));
         } catch (HandlerFailedException $exception) {
             $previous = $exception->getPrevious();
             if ($previous instanceof VerifyEmailExceptionInterface) {
