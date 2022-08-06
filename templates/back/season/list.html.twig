@@ -1,0 +1,47 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    <nav class="level">
+        <div class="level-left"></div>
+        <div class="level-right">
+            <p class="level-item">
+                <a href="{{ path('bo_season_new') }}" class="button is-primary">
+                    <span>{{ 'back.season.grid.action.add'|trans }}</span>
+                    <span class="icon is-small">
+                        <i class="icon-more"></i>
+                    </span>
+                </a>
+            </p>
+        </div>
+    </nav>
+
+    {% embed 'back/components/_table.html.twig' %}
+
+        {% block thead %}
+            <th>{{ 'back.season.grid.header.label'|trans }}</th>
+            <th>{{ 'back.season.grid.header.startDate'|trans }}</th>
+            <th>{{ 'back.season.grid.header.endDate'|trans }}</th>
+            <th>{{ 'back.season.grid.header.active'|trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block tbody %}
+            {% for season in seasons %}
+                <tr>
+                    <td>{{ season.label }}</td>
+                    <td>{{ season.startDate|date('d/m/Y') }}</td>
+                    <td>{{ season.endDate|date('d/m/Y') }}</td>
+                    <td>{% if season.active %}<span class="icon has-text-info"><i class="icon-checkmark"></i></span>{% endif %}</td>
+                    <td class="center">
+                        <a href="{{ path('bo_season_edit', {'season': season.id}) }}" class="button is-warning">
+                            <span class="icon"><i class="icon-pencil"></i></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

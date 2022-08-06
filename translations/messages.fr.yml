@@ -1,5 +1,8 @@
 global:
+  activate: Activer
   back: Retour
+  cancel: Annuler
+  confirmActivate: Confirmer l'activation ?
   confirmDelete: Confirmer la suppression ?
   delete: Supprimer
   export: Exporter
@@ -25,6 +28,7 @@ back:
 
   menu:
     dashboard: Dashboard
+    season: Saisons
     registration: Inscriptions
     gallery: Trombinoscope
 
@@ -49,6 +53,26 @@ back:
         phone: Téléphone
         email: E-Mail
         registeredAt: Date insc.
+
+  season:
+    new:
+      alreadyExist: La saison sportive existe déjà pour cette année.
+    activate:
+      success: Saison sportive activée
+    edit:
+      title: Saison sportive
+      success: Saison sportive mise à jour
+    form:
+      startDate: Début
+      endDate: Fin
+    grid:
+      action:
+        add: Nouvelle saison
+      header:
+        label: Saison
+        startDate: Début
+        endDate: Fin
+        active: Active
 
   gallery:
     title: Trombinoscope
