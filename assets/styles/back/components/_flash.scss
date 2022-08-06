@@ -1,0 +1,27 @@
+.flash-wrapper {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+
+  .flash {
+    margin: 20px auto;
+    transition: transform 0.5s;
+    transform: translateX(-200vw);
+    width: 600px;
+
+    &.show {
+      transform: translateX(0);
+    }
+
+    &.remove {
+      transform: translateX(200vw);
+    }
+  }
+}
