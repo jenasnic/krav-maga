@@ -1,0 +1,72 @@
+@use '../color';
+@use '../media';
+
+.flash-wrapper {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  left: 0;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+
+  .flash {
+    background-color: color.$white;
+    border-radius: 5px;
+    border: 1px solid;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+    margin-bottom: 20px;
+    padding: 20px 40px;
+    position: relative;
+    text-align: center;
+    transition: transform 0.5s;
+    transform: translateX(-200vw);
+    width: 600px;
+
+    &.show {
+      display: block;
+      transform: translateX(0);
+    }
+
+    &.remove {
+      transform: translateX(200vw);
+    }
+
+    @include media.below(sm) {
+      width: 90vw;
+    }
+
+    &:before {
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    &--info {
+      border-color: color.$success-color;
+      color: color.$success-color;
+
+      &:before {
+        background-color: transparentize(color.$success-color, 0.8);
+      }
+    }
+
+    &--error {
+      border-color: color.$error-color;
+      color: color.$error-color;
+
+      &:before {
+        background-color: transparentize(color.$error-color, 0.8);
+      }
+    }
+  }
+}
