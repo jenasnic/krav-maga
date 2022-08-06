@@ -1,6 +1,7 @@
 global:
   activate: Activer
   back: Retour
+  browse: Parcourir
   cancel: Annuler
   confirmActivate: Confirmer l'activation ?
   confirmDelete: Confirmer la suppression ?
@@ -20,43 +21,51 @@ enum:
     MALE: Homme
 
 login:
+  password: Mot de passe
   title: Connexion
   username: Login
-  password: Mot de passe
 
 back:
 
-  menu:
-    dashboard: Dashboard
-    season: Saisons
-    registration: Inscriptions
-    gallery: Trombinoscope
-
-  registration:
+  adherent:
     edit:
+      success: Adhérent mis à jour
       title: Fiche adhérent
-      tab:
-        adherent: Adherent
-        registration: Inscirption
-        licence: License
-        payments: Paiements
-    grid:
+    delete:
+      success: Adhérent supprimé
+    list:
       filter:
-        YOUNG: Ados
-        MALE: Hommes
         FEMALE: Femmes
+        MALE: Hommes
+        YOUNG: Ados
       action:
-        add: Ajouter une inscription
+        add: Nouvelle inscription
       header:
+        email: E-Mail
         firstName: Prénom
         lastName: Nom
         phone: Téléphone
-        email: E-Mail
         registeredAt: Date insc.
+    tab:
+      adherent: Adherent
+      payments: Paiements
+      registration: Fiche inscription
+
+  menu:
+    dashboard: Dashboard
+    gallery: Trombinoscope
+    adherent: Adhérents
+    season: Saisons
+
+  registration:
+    edit:
+      success: Fiche inscription mise à jour
+      title: Fiche inscription
+    new:
+      success: Nouvelle inscription créée
+      title: Nouvelle inscription
 
   season:
-    new:
-      alreadyExist: La saison sportive existe déjà pour cette année.
     activate:
       success: Saison sportive activée
     edit:
@@ -69,84 +78,109 @@ back:
       action:
         add: Nouvelle saison
       header:
+        active: Active
+        endDate: Fin
         label: Saison
         startDate: Début
-        endDate: Fin
-        active: Active
+    new:
+      alreadyExist: La saison sportive existe déjà pour cette année.
 
   gallery:
     title: Trombinoscope
 
-front:
+form:
 
-  home:
-    section:
-      club: Présentation
-      sporting: Disciplines
-      practicalInfo: Infos pratiques
-    sporting:
-      kmDefense:
-        title: Krav Maga Self Defense
-      kmTraining:
-        title: Krav Defense Training
-      mmaDefense:
-        title: KMix-MMA Defense
-      cardioTraining:
-        title: Cardio Fit Krav
+  adherent:
+    address: Adresse
+    birthDate: Date de naissance
+    city: Ville
+    email: E-Mail
+    firstName: Prénom
+    gender: Sexe
+    lastName: Nom
+    phone: Téléphone
+    pictureFile: Photo
+    pseudonym: Pseudo
+    pseudonymHelp: Vous pouvez renseigner ici votre pseudonyme Facebook pour faciliter les échanges sur Facebook
+    street: Rue
+    zipCode: Code postal
+
+  contact:
+    email: Votre email
+    message: Message
+    success: Votre demande a bien été envoyée.
+
+  emergency:
+    emergency: Personne à contacter en cas d'urgence
+    firstName: Prénom
+    lastName: Nom
+    phone: Téléphone
+
+  newRegistration:
+    comment: Commentaire (problème de santé ou autre)
+    copyrightAuthorization: Droit à l'image
+    ffkPassport: Vous possedez déjà un passport FFK
+    medicalCertificateFile: Certificat médical
+    medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
+    purpose: Objectif
 
   registration:
-    header:
-      title: Inscription
-    page:
-      title: Formulaire d'inscription
-    form:
-      address: Adresse
-      birthDate: Date de naissance
-      city: Ville
-      comment: Commentaire (problème de santé ou autre)
-      copyrightAuthorization: Droit à l'image
-      email: E-Mail
-      emergency: Personne à contacter en cas d'urgence
-      ffkPassport: Vous possedez déjà un passport FFK
-      firstName: Prénom
-      gender: Sexe
-      lastName: Nom
-      medicalCertificateFile: Certificat médical
-      medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
-      phone: Téléphone
-      pictureFile: Photo
-      pseudonym: Pseudo
-      pseudonymHelp: Vous pouvez renseigner ici votre pseudonyme Facebook pour faciliter les échanges sur Facebook
-      purpose: Objectif
-      street: Rue
-      success: Merci pour votre inscription.<br/>Vous allez recevoir un email de confirmation pour valider votre inscription.
-      zipCode: Code postal
-    validation:
-      success: Votre inscription a bien été validée.
+    comment: Commentaire de l'adhérent
+    copyrightAuthorization: Droit à l'image
+    ffkPassport: Passport FFK
+    licenceDate: Date de la license
+    licenceNumber: N° de license
+    medicalCertificateFile: Certificat médical
+    privateNote: Notes privée KMIS
+    purpose: Objectif
+    registeredAt: Date d'inscription
 
-  sporting:
-    header:
-      title: Disciplines
+front:
 
   contact:
     header:
       title: Contact
     page:
       title: Contactez-nous
-    form:
-      email: Votre email
-      message: Message
-      success: Votre demande a bien été envoyée.
 
-  menu:
-    item:
-      home: Accueil
+  home:
+    section:
+      club: Présentation
+      practicalInfo: Infos pratiques
       sporting: Disciplines
-      registration: Inscription
-      contact: Contact
+    sporting:
+      cardioTraining:
+        title: Cardio Fit Krav
+      kmDefense:
+        title: Krav Maga Self Defense
+      kmTraining:
+        title: Krav Defense Training
+      mmaDefense:
+        title: KMix-MMA Defense
 
   footer:
     link:
+      cookie: Gestion des cookies
       legalNotices: Mentions légales
       privacy: Protection des données
-      cookie: Gestion des cookies
+
+  menu:
+    item:
+      contact: Contact
+      home: Accueil
+      registration: Inscription
+      sporting: Disciplines
+
+  registration:
+    header:
+      title: Inscription
+    page:
+      title: Formulaire d'inscription
+    new:
+      success: Merci pour votre inscription.<br/>Vous allez recevoir un email de confirmation pour valider votre inscription.
+    validation:
+      success: Votre inscription a bien été validée.
+
+  sporting:
+    header:
+      title: Disciplines

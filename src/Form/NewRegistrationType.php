@@ -2,17 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\Adherent;
-use App\Enum\GenderEnum;
-use App\Form\Type\AddressType;
-use App\Form\Type\FileType;
+use App\Entity\Purpose;
+use App\Entity\Registration;
+use App\Form\Type\BulmaFileType;
 use App\Form\Type\GoogleCaptchaType;
-use App\Form\Type\MaskedType;
+use App\Repository\PurposeRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
@@ -27,16 +26,13 @@ class NewRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('gender', ChoiceType::class, [
-                'expanded' => true,
-                'choices' => [
-                    'enum.gender.MALE' => GenderEnum::MALE,
-                    'enum.gender.FEMALE' => GenderEnum::FEMALE,
-                ],
+            ->add('comment', TextareaType::class, [
+                'required' => false,
             ])
-            ->add('pictureFile', FileType::class, [
+            ->add('ffkPassport', CheckboxType::class, [
+                'required' => false,
+            ])
+            ->add('medicalCertificateFile', BulmaFileType::class, [
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -44,27 +40,30 @@ class NewRegistrationType extends AbstractType
                             'image/jpg',
                             'image/jpeg',
                             'image/png',
+                            'application/pdf',
                         ],
                     ]),
                 ],
+                'help' => 'form.newRegistration.medicalCertificateFileHelp',
+                'help_html' => true,
             ])
-            ->add('birthDate', DateType::class, [
-                'widget' => 'single_text',
+            ->add('copyrightAuthorization', ChoiceType::class, [
+                'choices' => [
+                    'global.yes' => true,
+                    'global.no' => false,
+                ],
+                'expanded' => true,
+                'required' => true,
             ])
-            ->add('phone', MaskedType::class, [
-                'mask' => MaskedType::PHONE_MASK,
+            ->add('purpose', EntityType::class, [
+                'class' => Purpose::class,
+                'choice_label' => 'label',
+                'query_builder' => function (PurposeRepository $purposeRepository) {
+                    return $purposeRepository->createQueryBuilder('purpose')->orderBy('purpose.rank');
+                },
             ])
-            ->add('email', EmailType::class)
-            ->add('pseudonym', TextType::class, [
-                'required' => false,
-                'help' => 'front.registration.form.pseudonymHelp',
-            ])
-            ->add('address', AddressType::class, [
-                'label' => false,
-            ])
-            ->add('registrationInfo', RegistrationInfoType::class, [
-                'label' => false,
-            ])
+            ->add('emergency', EmergencyType::class)
+            ->add('adherent', AdherentType::class)
             ->add('captcha', GoogleCaptchaType::class)
         ;
     }
@@ -72,8 +71,8 @@ class NewRegistrationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Adherent::class,
-            'label_format' => 'front.registration.form.%name%',
+            'data_class' => Registration::class,
+            'label_format' => 'form.newRegistration.%name%',
         ]);
     }
 }

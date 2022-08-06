@@ -2,15 +2,15 @@
 
 namespace App\DataFixtures\Factory;
 
-use App\Entity\RegistrationInfo;
+use App\Entity\Emergency;
 use Faker\Factory;
 use Faker\Generator;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
- * @extends ModelFactory<RegistrationInfo>
+ * @extends ModelFactory<Emergency>
  */
-final class RegistrationInfoFactory extends ModelFactory
+final class EmergencyFactory extends ModelFactory
 {
     private Generator $faker;
 
@@ -27,14 +27,14 @@ final class RegistrationInfoFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'purpose' => PurposeFactory::random()->object(),
-            'medicalCertificateUrl' => $this->faker->filePath(),
-            'copyrightAuthorization' => $this->faker->boolean(80),
+            'firstName' => $this->faker->firstName(),
+            'lastName' => $this->faker->lastName(),
+            'phone' => $this->faker->phoneNumber(),
         ];
     }
 
     protected static function getClass(): string
     {
-        return RegistrationInfo::class;
+        return Emergency::class;
     }
 }

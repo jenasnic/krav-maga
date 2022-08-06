@@ -7,7 +7,14 @@ $gap: 5px;
   flex-wrap: wrap;
   justify-content: space-between;
 
-  @for $i from 1 through 6 {
+  &.col-x1, &.col-md-1, &.col-sm-1 {
+    > * {
+      min-width: 100%;
+      width: 100%;
+    }
+  }
+
+  @for $i from 2 through 6 {
     &.col-x#{$i} {
       > * {
         min-width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
@@ -17,7 +24,7 @@ $gap: 5px;
   }
 
   @include media.below(md) {
-    @for $i from 1 through 6 {
+    @for $i from 2 through 6 {
       &.col-md-x#{$i} {
         > * {
           min-width: calc((100% / #{$i}) - (#{$gap} * #{$i}));
@@ -28,7 +35,7 @@ $gap: 5px;
   }
 
   @include media.below(sm) {
-    @for $i from 1 through 6 {
+    @for $i from 2 through 6 {
       &.col-sm-x#{$i} {
         > * {
           min-width: calc((100% / #{$i}) - (#{$gap} * #{$i}));

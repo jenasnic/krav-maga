@@ -25,7 +25,7 @@ class ContactFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => ContactFormCommand::class,
-            'label_format' => 'front.contact.form.%name%',
+            'label_format' => 'form.contact.%name%',
         ]);
     }
 }

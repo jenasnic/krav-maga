@@ -2,44 +2,57 @@
 
 {% block body %}
 
-    <div class="flex flex--space-between flex--items-center">
-        <h2>{{ 'back.registration.edit.title'|trans }}</h2>
-       <div class="row flex flex--content-end flex--items-center">
-            {% if adherent.id is not null %}
-                <form
-                    data-confirm
-                    data-confirm-message="{{ 'global.confirmDelete'|trans }}"
-                    action="{{ path('bo_registration_delete', { adherent: adherent.id}) }}"
-                    method="POST"
-                    class="delete-form"
-                >
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete-'~adherent.id) }}" />
-                    <button type="submit" class="button-icon button-icon--trash">{{ 'global.delete'|trans }}</button>
-                </form>
-            {% endif %}
-            <a href="{{ path('bo_registration_list') }}" class="button-icon button-icon--back">{{ 'global.back'|trans }}</a>
-        </div>
-    </div>
+    {% include 'back/adherent/_header.html.twig' with {
+        'current': 'registration',
+        'adherent': registration.adherent,
+        'registration': registration,
+    } %}
+
+    <h1 class="title">{{ 'back.registration.edit.title'|trans }}</h1>
 
     <div class="form-wrapper">
         {{ form_start(form) }}
-            {{ form_row(form.firstName) }}
-            {{ form_row(form.lastName) }}
-            {{ form_row(form.gender) }}
-            {{ form_row(form.pictureFile) }}
-            {{ form_row(form.birthDate) }}
-            {{ form_row(form.phone) }}
-            {{ form_row(form.email) }}
-            {{ form_row(form.address) }}
-            {{ form_row(form.registrationInfo.purpose) }}
-            {{ form_row(form.registrationInfo.medicalCertificateFile) }}
-            {{ form_row(form.registrationInfo.copyrightAuthorization) }}
-            <div class="flex flex--content-end">
-                <button type="submit" class="button">{{ 'global.validate'|trans }}</button>
+        <div class="columns">
+            <div class="column">{{ form_row(form.comment) }}</div>
+        </div>
+        <div class="columns">
+            <div class="column">{{ form_row(form.privateNote) }}</div>
+        </div>
+        <div class="columns">
+            <div class="column">{{ form_row(form.licenceNumber) }}</div>
+            <div class="column">{{ form_row(form.licenceDate) }}</div>
+        </div>
+        <div class="columns">
+            <div class="column">{{ form_row(form.medicalCertificateFile) }}</div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <div class="fieldset">
+                    {{ form_label(form.emergency) }}
+                    <div class="columns">
+                        <div class="column">{{ form_row(form.emergency.lastName) }}</div>
+                        <div class="column">{{ form_row(form.emergency.firstName) }}</div>
+                        <div class="column">{{ form_row(form.emergency.phone) }}</div>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="columns">
+            <div class="column">{{ form_row(form.purpose) }}</div>
+            <div class="column">{{ form_row(form.registeredAt) }}</div>
+        </div>
+        <div class="columns">
+            <div class="column">{{ form_row(form.copyrightAuthorization) }}</div>
+        </div>
+        <div class="columns">
+            <div class="column">{{ form_row(form.ffkPassport) }}</div>
+        </div>
+        <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
+            <div class="block">
+                <button type="submit" class="button is-success">{{ 'global.validate'|trans }}</button>
+            </div>
+        </div>
         {{ form_end(form) }}
     </div>
-
-    <div class="separator--4"></div>
 
 {% endblock %}

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Command\Front;
+namespace App\Domain\Command\Back;
 
 use App\Entity\Registration;
 
-class RegistrationCommand
+class SaveRegistrationCommand
 {
     public function __construct(public Registration $registration)
     {

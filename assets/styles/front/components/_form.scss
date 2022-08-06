@@ -54,10 +54,59 @@
   }
 }
 
-.input-file-wrapper {
-  i {
-    font-size: 2.2rem;
-    padding-left: 10px;
+.file {
+  display: flex;
+  width: 100%;
+
+  label.file-label {
+    flex-grow: 1;
+    max-width: 100%;
+    position: relative;
+
+    input[type="file"] {
+      border: none;
+      box-shadow: none;
+      padding-left: 60px;
+      max-width: 100%;
+      text-overflow: ellipsis;
+    }
+
+    .file-cta {
+      @include outline-style;
+      align-items: center;
+      box-sizing: border-box;
+      display: flex;
+      height: 100%;
+      left: 0;
+      padding: 010px;
+      position: absolute;
+      top: 0;
+      width: 100%;
+
+      .file-icon {
+        font-size: 2.1rem;
+        opacity: 0.7;
+      }
+
+      .file-label {
+        background-color: color.$white;
+        padding: 5px 20px;
+      }
+    }
+
+    .file-name {
+      display: none;
+    }
+  }
+
+  .download {
+    font-size: 1.5rem;
+    margin-left: 20px;
+    padding: 10px;
+
+    i {
+      padding: 0
+    }
   }
 }
 

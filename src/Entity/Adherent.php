@@ -51,18 +51,10 @@ class Adherent
     #[Assert\NotNull]
     private ?Address $address = null;
 
-    #[ORM\OneToOne(targetEntity: RegistrationInfo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    #[Assert\Valid]
-    private ?RegistrationInfo $registrationInfo = null;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $pictureUrl = null;
 
     private ?UploadedFile $pictureFile = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private bool $verified = false;
 
     public function getId(): ?int
     {
@@ -167,30 +159,6 @@ class Adherent
     public function setAddress(?Address $address): self
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    public function getRegistrationInfo(): ?RegistrationInfo
-    {
-        return $this->registrationInfo;
-    }
-
-    public function setRegistrationInfo(?RegistrationInfo $registrationInfo): self
-    {
-        $this->registrationInfo = $registrationInfo;
-
-        return $this;
-    }
-
-    public function isVerified(): bool
-    {
-        return $this->verified;
-    }
-
-    public function setVerified(bool $verified): self
-    {
-        $this->verified = $verified;
 
         return $this;
     }

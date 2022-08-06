@@ -2,27 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\RegistrationInfoRepository;
+use App\Repository\RegistrationRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: RegistrationInfoRepository::class)]
-class RegistrationInfo
+#[ORM\Entity(repositoryClass: RegistrationRepository::class)]
+class Registration
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
-
-    #[ORM\ManyToOne(targetEntity: Purpose::class)]
-    #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotNull]
-    private ?Purpose $purpose = null;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $medicalCertificateUrl = null;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $comment = null;
@@ -37,57 +29,46 @@ class RegistrationInfo
     private ?DateTime $licenceDate = null;
 
     #[ORM\Column(type: 'boolean')]
-    #[Assert\NotNull]
-    private ?bool $copyrightAuthorization = null;
-
-    #[ORM\Column(type: 'boolean')]
     private bool $ffkPassport = false;
 
-    #[ORM\OneToOne(targetEntity: Emergency::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    #[Assert\Valid]
-    private ?Emergency $emergency = null;
-
-    #[ORM\OneToOne(mappedBy: 'registrationInfo', targetEntity: Adherent::class)]
-    private ?Adherent $adherent = null;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $medicalCertificateUrl = null;
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $registeredAt;
 
+    #[ORM\Column(type: 'boolean')]
+    #[Assert\NotNull]
+    private ?bool $copyrightAuthorization = null;
+
+    #[ORM\ManyToOne(targetEntity: Purpose::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotNull]
+    private ?Purpose $purpose = null;
+
+    #[ORM\OneToOne(targetEntity: Emergency::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[Assert\Valid]
+    private ?Emergency $emergency = null;
+
+    #[ORM\OneToOne(targetEntity: Adherent::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[Assert\Valid]
+    private Adherent $adherent;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $verified = false;
+
     private ?UploadedFile $medicalCertificateFile = null;
 
-    public function __construct()
+    public function __construct(Adherent $adherent)
     {
+        $this->adherent = $adherent;
         $this->registeredAt = new DateTime();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPurpose(): ?Purpose
-    {
-        return $this->purpose;
-    }
-
-    public function setPurpose(?Purpose $purpose): self
-    {
-        $this->purpose = $purpose;
-
-        return $this;
-    }
-
-    public function getMedicalCertificateUrl(): ?string
-    {
-        return $this->medicalCertificateUrl;
-    }
-
-    public function setMedicalCertificateUrl(?string $medicalCertificateUrl): self
-    {
-        $this->medicalCertificateUrl = $medicalCertificateUrl;
-
-        return $this;
     }
 
     public function getComment(): ?string
@@ -138,6 +119,42 @@ class RegistrationInfo
         return $this;
     }
 
+    public function isFfkPassport(): bool
+    {
+        return $this->ffkPassport;
+    }
+
+    public function setFfkPassport(bool $ffkPassport): self
+    {
+        $this->ffkPassport = $ffkPassport;
+
+        return $this;
+    }
+
+    public function getMedicalCertificateUrl(): ?string
+    {
+        return $this->medicalCertificateUrl;
+    }
+
+    public function setMedicalCertificateUrl(?string $medicalCertificateUrl): self
+    {
+        $this->medicalCertificateUrl = $medicalCertificateUrl;
+
+        return $this;
+    }
+
+    public function getRegisteredAt(): DateTime
+    {
+        return $this->registeredAt;
+    }
+
+    public function setRegisteredAt(DateTime $registeredAt): Registration
+    {
+        $this->registeredAt = $registeredAt;
+
+        return $this;
+    }
+
     public function getCopyrightAuthorization(): ?bool
     {
         return $this->copyrightAuthorization;
@@ -150,14 +167,14 @@ class RegistrationInfo
         return $this;
     }
 
-    public function isFfkPassport(): bool
+    public function getPurpose(): ?Purpose
     {
-        return $this->ffkPassport;
+        return $this->purpose;
     }
 
-    public function setFfkPassport(bool $ffkPassport): self
+    public function setPurpose(?Purpose $purpose): self
     {
-        $this->ffkPassport = $ffkPassport;
+        $this->purpose = $purpose;
 
         return $this;
     }
@@ -174,21 +191,28 @@ class RegistrationInfo
         return $this;
     }
 
-    public function getAdherent(): ?Adherent
+    public function getAdherent(): Adherent
     {
         return $this->adherent;
     }
 
-    public function setAdherent(?Adherent $adherent): self
+    public function setAdherent(Adherent $adherent): self
     {
         $this->adherent = $adherent;
 
         return $this;
     }
 
-    public function getRegisteredAt(): DateTime
+    public function isVerified(): bool
     {
-        return $this->registeredAt;
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): self
+    {
+        $this->verified = $verified;
+
+        return $this;
     }
 
     public function getMedicalCertificateFile(): ?UploadedFile

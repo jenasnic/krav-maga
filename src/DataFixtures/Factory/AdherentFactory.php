@@ -6,6 +6,7 @@ use App\Entity\Adherent;
 use App\Enum\GenderEnum;
 use Faker\Factory;
 use Faker\Generator;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Zenstruck\Foundry\ModelFactory;
 
@@ -14,14 +15,19 @@ use Zenstruck\Foundry\ModelFactory;
  */
 final class AdherentFactory extends ModelFactory
 {
+    private string $malePicture = __DIR__.'/data/male.jpg';
+    private string $femalePicture = __DIR__.'/data/female.jpg';
+
     private int $counter = 0;
 
     private Generator $faker;
 
     private AsciiSlugger $slugger;
 
-    public function __construct()
-    {
+    public function __construct(
+        protected Filesystem $filesystem,
+        protected string $uploadPath,
+    ) {
         parent::__construct();
 
         $this->faker = Factory::create('fr_FR');
@@ -45,6 +51,11 @@ final class AdherentFactory extends ModelFactory
             ++$this->counter
         );
 
+        $pictureFixture = (GenderEnum::MALE === $gender) ? $this->malePicture : $this->femalePicture;
+        $fileName = str_replace('.', '', uniqid('', true)).'.jpg';
+        $filePath = $this->uploadPath.$fileName;
+        $this->filesystem->copy($pictureFixture, $filePath);
+
         return [
             'firstName' => $firstName,
             'lastName' => $lastName,
@@ -52,8 +63,8 @@ final class AdherentFactory extends ModelFactory
             'birthDate' => $this->faker->dateTimeBetween('-55 years', '-16 years'),
             'phone' => $this->faker->phoneNumber(),
             'email' => $email,
-            'registrationInfo' => RegistrationInfoFactory::new(),
-            'verified' => $this->faker->boolean(80),
+            'pseudonym' => $firstName.substr($lastName, 0, 1),
+            'pictureUrl' => $filePath,
         ];
     }
 

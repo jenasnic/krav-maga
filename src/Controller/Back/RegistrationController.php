@@ -2,70 +2,66 @@
 
 namespace App\Controller\Back;
 
-use App\Domain\Command\Back\RemoveAdherentCommand;
-use App\Domain\Command\Back\RemoveAdherentHandler;
-use App\Domain\Command\Back\SaveAdherentCommand;
-use App\Domain\Command\Back\SaveAdherentHandler;
+use App\Domain\Command\Back\NewRegistrationCommand;
+use App\Domain\Command\Back\NewRegistrationHandler;
+use App\Domain\Command\Back\SaveRegistrationCommand;
+use App\Domain\Command\Back\SaveRegistrationHandler;
 use App\Entity\Adherent;
-use App\Form\AdherentType;
-use App\Repository\RegistrationInfoRepository;
-use App\Service\Grid\RegistrationInfoFilter;
+use App\Entity\Registration;
+use App\Form\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/inscription/liste/{filter}', name: 'bo_registration_list')]
-    public function list(
-        RegistrationInfoRepository $registrationInfoRepository,
-        RegistrationInfoFilter $registrationInfoFilter,
-        ?string $filter = null
-    ): Response {
-        $queryBuilder = $registrationInfoRepository->createSearchQueryBuilder();
-
-        $queryBuilder = $registrationInfoFilter->apply($queryBuilder, $filter);
-
-        return $this->render('back/registration/list.html.twig', [
-             'registrations' => $queryBuilder->getQuery()->getResult(),
-             'filters' => $registrationInfoFilter->getFilters(),
-         ]);
+    public function __construct(protected TranslatorInterface $translator)
+    {
     }
 
-    #[Route('/inscription/ajouter', name: 'bo_registration_add')]
-    public function add(Request $request, SaveAdherentHandler $saveAdherentHandler): Response
+    #[Route('/adherent/nouvelle-inscription', name: 'bo_registration_new')]
+    public function add(Request $request, NewRegistrationHandler $newRegistrationHandler): Response
     {
-        return $this->edit($request, $saveAdherentHandler, new Adherent());
-    }
+        $registration = new Registration(new Adherent());
 
-    #[Route('/inscription/consulter/{adherent}', name: 'bo_registration_edit')]
-    public function edit(Request $request, SaveAdherentHandler $saveAdherentHandler, Adherent $adherent): Response
-    {
-        $form = $this->createForm(AdherentType::class, $adherent);
+        $form = $this->createForm(RegistrationType::class, $registration, [
+            'full_form' => true,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $saveAdherentHandler->handle(new SaveAdherentCommand($adherent));
+            $newRegistrationHandler->handle(new NewRegistrationCommand($registration));
 
-            // @todo : add flash message to inform user email has been sent (for validation...)
+            $this->addFlash('info', $this->translator->trans('back.registration.new.success'));
 
-            return $this->redirectToRoute('bo_registration_list');
+            return $this->redirectToRoute('bo_adherent_list');
+        }
+
+        return $this->render('back/registration/new.html.twig', [
+            'form' => $form->createView(),
+            'registration' => $registration,
+        ]);
+    }
+
+    #[Route('/adherent/fiche-inscription/{registration}', name: 'bo_registration_edit')]
+    public function edit(Request $request, SaveRegistrationHandler $saveRegistrationHandler, Registration $registration): Response
+    {
+        $form = $this->createForm(RegistrationType::class, $registration);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $saveRegistrationHandler->handle(new SaveRegistrationCommand($registration));
+
+            $this->addFlash('info', $this->translator->trans('back.registration.edit.success'));
+
+            return $this->redirectToRoute('bo_adherent_list');
         }
 
         return $this->render('back/registration/edit.html.twig', [
              'form' => $form->createView(),
-             'adherent' => $adherent,
+             'registration' => $registration,
          ]);
-    }
-
-    #[Route('/inscription/supprimer/{adherent}', name: 'bo_registration_delete', methods: ['POST'])]
-    public function delete(Request $request, RemoveAdherentHandler $removeAdherentHandler, Adherent $adherent): Response
-    {
-        if ($this->isCsrfTokenValid('delete-'.$adherent->getId(), (string) $request->request->get('_token'))) {
-            $removeAdherentHandler->handle(new RemoveAdherentCommand($adherent));
-        }
-
-        return $this->redirectToRoute('bo_registration_list', [], Response::HTTP_SEE_OTHER);
     }
 }

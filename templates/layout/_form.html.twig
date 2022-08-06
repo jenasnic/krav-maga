@@ -66,15 +66,34 @@
   {{ form_widget(form, {'attr' : attr|merge({ 'data-mask-input': mask})}) }}
 {% endblock %}
 
-{%- block file_widget -%}
-  {%- set attr = attr|merge({'class': 'flex--grow'}) -%}
-  <div class="input-file-wrapper flex flex--items-center">
-    <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-    {% if download_uri is defined %}
-      <a href="{{ download_uri }}" target="_blank"><i class="icon-box-add"></i></a>
-    {% endif %}
+{%- block bulma_file_row -%}
+  {%- set widget_attr = {} -%}
+  {%- if help is not empty -%}
+    {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+  {%- endif -%}
+  <div{% with {attr: row_attr|merge({'class': 'form-group'})} %}{{ block('attributes') }}{% endwith %}>
+    {%- set attr = attr|merge({'class': 'file-input'}) -%}
+    {{- form_label(form) -}}
+    <div class="file">
+      <label class="file-label" data-input-file="data-input-file">
+        <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        <span class="file-cta">
+          <span class="file-icon"><i class="icon-upload"></i></span>
+          <span class="file-label">{{ 'global.browse'|trans }}</span>
+        </span>
+        <span class="file-name">
+          {% if value is not empty %}{{ value }}{% endif %}
+        </span>
+      </label>
+      {% if download_uri is defined %}
+        <a href="{{ download_uri }}" target="_blank" class="button download">
+          <span class="icon"><i class="icon-download"></i></span>
+        </a>
+      {% endif %}
+    </div>
+    {{- form_help(form) -}}
   </div>
-{%- endblock file_widget -%}
+{%- endblock bulma_file_row -%}
 
 {% block google_captcha_row %}
   <div class="form-group captcha-wrapper">

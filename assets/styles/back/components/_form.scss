@@ -1,0 +1,64 @@
+@use '../bulma/variables' as bulma;
+
+.form-group--checkbox {
+  > label {
+    padding-left: 10px;
+  }
+}
+
+.select {
+  display: block;
+
+  select {
+    width: 100%;
+  }
+}
+
+.file {
+  display: flex;
+  width: 100%;
+
+  label.file-label {
+    display: flex;
+    flex-grow: 1;
+
+    .file-name {
+      background-color: bulma.$input-background-color;
+      flex-grow: 1;
+      max-width: none;
+    }
+  }
+
+  .download {
+    margin-left: 20px;
+  }
+}
+
+.radio-wrapper {
+  padding-top: 5px;
+
+  > label {
+    margin: 0 20px 0 10px;
+  }
+}
+
+.help-text {
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.fieldset {
+  border: 1px solid bulma.$grey;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 20px;
+  position: relative;
+
+  > label {
+    position: absolute;
+    background-color: bulma.$body-background-color;
+    left: 20px;
+    padding: 0 10px;
+    top: -11px;
+  }
+}
