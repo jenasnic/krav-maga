@@ -2,13 +2,13 @@
 
 namespace App\Domain\Command\Front;
 
-use App\Entity\Adherent;
+use App\Entity\Registration;
 use Symfony\Component\HttpFoundation\Request;
 
 class ConfirmRegistrationCommand
 {
     public function __construct(
-        public Adherent $adherent,
+        public Registration $registration,
         public Request $request,
     ) {
     }

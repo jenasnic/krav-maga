@@ -2,8 +2,8 @@
 
 namespace App\Domain\Command\Front;
 
-use App\Entity\Adherent;
-use App\Repository\AdherentRepository;
+use App\Entity\Registration;
+use App\Repository\RegistrationRepository;
 use App\Service\Email\EmailSender;
 use App\Service\FileUploader;
 use LogicException;
@@ -12,8 +12,8 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 final class RegistrationHandler
 {
     public function __construct(
+        private readonly RegistrationRepository $registrationRepository,
         private readonly VerifyEmailHelperInterface $verifyEmailHelper,
-        private readonly AdherentRepository $adherentRepository,
         private readonly EmailSender $emailSender,
         private readonly FileUploader $fileUploader,
     ) {
@@ -21,57 +21,52 @@ final class RegistrationHandler
 
     public function handle(RegistrationCommand $command): void
     {
-        $adherent = $command->adherent;
+        $registration = $command->registration;
 
-        if (null !== $adherent->getId()) {
-            throw new LogicException('adherent already persisted');
+        if (null !== $registration->getId()) {
+            throw new LogicException('registration already persisted');
         }
 
-        $this->processUpload($adherent);
+        $this->processUpload($registration);
 
-        $this->adherentRepository->add($adherent, true);
+        $this->registrationRepository->add($registration, true);
 
-        $this->sendConfirmationEmail($adherent);
+        $this->sendConfirmationEmail($registration);
     }
 
-    private function processUpload(Adherent $adherent): void
+    private function processUpload(Registration $registration): void
     {
-        if (null !== $adherent->getPictureFile()) {
-            $adherent->setPictureUrl($this->fileUploader->upload($adherent->getPictureFile()));
+        if (null !== $registration->getAdherent()->getPictureFile()) {
+            $registration->getAdherent()->setPictureUrl($this->fileUploader->upload($registration->getAdherent()->getPictureFile()));
         }
 
-        if (null === $adherent->getRegistrationInfo()) {
-            throw new LogicException('invalid registration info');
-        }
-
-        $medicalCertificateFile = $adherent->getRegistrationInfo()->getMedicalCertificateFile();
-        if (null !== $medicalCertificateFile) {
-            $adherent->getRegistrationInfo()->setMedicalCertificateUrl($this->fileUploader->upload($medicalCertificateFile));
+        if (null !== $registration->getMedicalCertificateFile()) {
+            $registration->setMedicalCertificateUrl($this->fileUploader->upload($registration->getMedicalCertificateFile()));
         }
     }
 
-    private function sendConfirmationEmail(Adherent $adherent): void
+    private function sendConfirmationEmail(Registration $registration): void
     {
-        if (null === $adherent->getId() || null === $adherent->getEmail()) {
+        if (null === $registration->getId() || null === $registration->getAdherent()->getEmail()) {
             throw new LogicException('invalid adherent');
         }
 
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             'app_confirm_registration',
-            (string) $adherent->getId(),
-            $adherent->getEmail(),
+            (string) $registration->getId(),
+            $registration->getAdherent()->getEmail(),
             [
-                'adherent' => $adherent->getId(),
+                'registration' => $registration->getId(),
             ]
         );
 
         $this->emailSender->send(
             'email/registration.html.twig',
             [
-                $adherent->getEmail(),
+                $registration->getAdherent()->getEmail(),
             ],
             [
-                'adherent' => $adherent,
+                'registration' => $registration,
                 'confirmLink' => $signatureComponents->getSignedUrl(),
             ],
         );

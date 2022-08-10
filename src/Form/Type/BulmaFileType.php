@@ -2,17 +2,13 @@
 
 namespace App\Form\Type;
 
-use Symfony\Component\Form\Extension\Core\Type\FileType as BaseFileType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Allows to define a field with pattern mask input.
- *
- * @see https://imask.js.org/guide.html#masked-pattern
- */
-class FileType extends BaseFileType
+class BulmaFileType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -32,5 +28,10 @@ class FileType extends BaseFileType
 
         $resolver->setDefined('download_uri');
         $resolver->setAllowedTypes('download_uri', 'string');
+    }
+
+    public function getParent()
+    {
+        return FileType::class;
     }
 }

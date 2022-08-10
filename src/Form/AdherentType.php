@@ -5,7 +5,7 @@ namespace App\Form;
 use App\Entity\Adherent;
 use App\Enum\GenderEnum;
 use App\Form\Type\AddressType;
-use App\Form\Type\FileType;
+use App\Form\Type\BulmaFileType;
 use App\Form\Type\MaskedType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -46,12 +46,9 @@ class AdherentType extends AbstractType
             ->add('email', EmailType::class)
             ->add('pseudonym', TextType::class, [
                 'required' => false,
-                'help' => 'front.registration.form.pseudonymHelp',
+                'help' => 'form.adherent.pseudonymHelp',
             ])
             ->add('address', AddressType::class, [
-                'label' => false,
-            ])
-            ->add('registrationInfo', RegistrationInfoType::class, [
                 'label' => false,
             ])
         ;
@@ -79,7 +76,7 @@ class AdherentType extends AbstractType
                 $options['download_uri'] = $this->router->generate('bo_download_picture', ['adherent' => $adherent->getId()]);
             }
 
-            $form->add('pictureFile', FileType::class, $options);
+            $form->add('pictureFile', BulmaFileType::class, $options);
         });
     }
 
@@ -87,7 +84,7 @@ class AdherentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Adherent::class,
-            'label_format' => 'front.registration.form.%name%',
+            'label_format' => 'form.adherent.%name%',
         ]);
     }
 }

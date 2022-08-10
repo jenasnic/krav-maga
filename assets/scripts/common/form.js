@@ -1,8 +1,10 @@
 import { bindInputMask } from './components/input-mask';
 import { bindConfirmForm } from './components/confirm';
+import { bindBulmaFile } from './components/bulma-file';
 
 const mapping = {
   '[data-mask-input]': bindInputMask,
+  '[data-input-file]': bindBulmaFile,
   'form[data-confirm]': bindConfirmForm,
 };
 

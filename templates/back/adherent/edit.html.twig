@@ -1,0 +1,44 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/adherent/_header.html.twig' with {
+        'current': 'adherent',
+        'adherent': adherent,
+        'registration': registration,
+    } %}
+
+    <h1 class="title">{{ 'back.adherent.edit.title'|trans }}</h1>
+
+    {{ form_start(form) }}
+    <div class="columns">
+        <div class="column">{{ form_row(form.firstName) }}</div>
+        <div class="column">{{ form_row(form.lastName) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.pictureFile) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.pseudonym) }}</div>
+        <div class="column">{{ form_row(form.birthDate) }}</div>
+        <div class="column">{{ form_row(form.gender) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.email) }}</div>
+        <div class="column">{{ form_row(form.phone) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.address.street) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.address.zipCode) }}</div>
+        <div class="column">{{ form_row(form.address.city) }}</div>
+    </div>
+    <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
+        <div class="block">
+            <button type="submit" class="button is-success">{{ 'global.validate'|trans }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

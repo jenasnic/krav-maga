@@ -13,7 +13,7 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
         bind:
-            $uploadPath: '%kernel.project_dir%/upload'
+            $uploadPath: '%kernel.project_dir%/upload/'
             $mailerSender: '%env(string:MAILER_SENDER)%'
             $mailerContact: '%env(string:MAILER_CONTACT)%'
             $googleCaptchaSiteKey: '%env(string:GOOGLE_CAPTCHA_SITE_KEY)%'

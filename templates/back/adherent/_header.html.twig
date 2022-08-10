@@ -1,7 +1,8 @@
 <nav class="level">
+    <div class="level-left"></div>
     <div class="level-right">
         <p class="level-item">
-            <a href="{{ path('bo_registration_list') }}" target="_blank" class="button is-outlined">
+            <a href="{{ path('bo_adherent_list') }}" target="_blank" class="button is-outlined">
                 <span>{{ 'global.back'|trans }}</span>
                 <span class="icon is-small">
                         <i class="fas fa-export"></i>
@@ -12,15 +13,13 @@
             <form
                 data-confirm
                 data-confirm-message="{{ 'global.confirmDelete'|trans }}"
-                action="{{ path('bo_registration_delete', { adherent: adherent.id}) }}"
+                action="{{ path('bo_adherent_delete', { adherent: adherent.id}) }}"
                 method="POST"
             >
                 <input type="hidden" name="_token" value="{{ csrf_token('delete-'~adherent.id) }}" />
                 <button type="submit" class="button is-danger">
                     <span>{{ 'global.delete'|trans }}</span>
-                    <span class="icon is-small">
-                                    <i class="fas fa-times"></i>
-                        </span>
+                    <span class="icon is-small"><i class="fas fa-times"></i></span>
                 </button>
             </form>
         </p>
@@ -30,16 +29,13 @@
 <div class="tabs is-centered is-boxed">
     <ul>
         <li{% if current == 'adherent' %} class="is-active"{% endif %}>
-            <a href="#">{{ 'back.registration.edit.tab.adherent'|trans }}</a>
+            <a href="{{ path('bo_adherent_edit', {'adherent': adherent.id}) }}">{{ 'back.adherent.tab.adherent'|trans }}</a>
         </li>
         <li{% if current == 'registration' %} class="is-active"{% endif %}>
-            <a href="#">{{ 'back.registration.edit.tab.registration'|trans }}</a>
-        </li>
-        <li{% if current == 'licence' %} class="is-active"{% endif %}>
-            <a href="#">{{ 'back.registration.edit.tab.licence'|trans }}</a>
+            <a href="{{ path('bo_registration_edit', {'registration': registration.id}) }}">{{ 'back.adherent.tab.registration'|trans }}</a>
         </li>
         <li{% if current == 'payments' %} class="is-active"{% endif %}>
-            <a href="#">{{ 'back.registration.edit.tab.payments'|trans }}</a>
+            <a href="#">{{ 'back.adherent.tab.payments'|trans }}</a>
         </li>
     </ul>
 </div>

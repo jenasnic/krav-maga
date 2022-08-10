@@ -6,7 +6,7 @@ use App\Enum\GenderEnum;
 use DateTime;
 use Doctrine\ORM\QueryBuilder;
 
-class RegistrationInfoFilter implements FilterInterface
+class AdherentFilter implements FilterInterface
 {
     public const YOUNG = 'YOUNG';
     public const MALE = 'MALE';

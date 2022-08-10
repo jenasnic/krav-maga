@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Adherent;
+use App\Entity\Registration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Generator;
 
@@ -35,6 +38,27 @@ class AdherentRepository extends ServiceEntityRepository
         }
     }
 
+    public function createSearchQueryBuilder(string $alias = 'registration'): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('adherent');
+
+        $queryBuilder
+            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
+            ->select(
+                'adherent.id AS adherentId',
+                'registration.id AS registrationId',
+                'adherent.firstName',
+                'adherent.lastName',
+                'adherent.phone',
+                'adherent.email',
+                'registration.registeredAt',
+            )
+            ->addOrderBy('registration.registeredAt', 'DESC')
+        ;
+
+        return $queryBuilder;
+    }
+
     /**
      * @return Generator<array<string, mixed>>
      */
@@ -43,8 +67,8 @@ class AdherentRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('adherent');
 
         $queryBuilder
-            ->innerJoin('adherent.registrationInfo', 'registration_info')
-            ->innerJoin('registration_info.purpose', 'purpose')
+            ->innerJoin('adherent.registration', 'registration')
+            ->innerJoin('registration.purpose', 'purpose')
             ->select(
                 'adherent.id',
                 'adherent.firstName',
@@ -54,8 +78,8 @@ class AdherentRepository extends ServiceEntityRepository
                 'adherent.phone',
                 'adherent.email',
                 'purpose.label AS purposeLabel',
-                'registration_info.copyrightAuthorization',
-                'DATE_FORMAT(registration_info.registeredAt, \'%d/%m/%Y\') AS registeredAt',
+                'registration.copyrightAuthorization',
+                'DATE_FORMAT(registration.registeredAt, \'%d/%m/%Y\') AS registeredAt',
             )
         ;
 

@@ -18,7 +18,7 @@
                 </div>
                 {% for filter in filters %}
                     <p class="level-item">
-                        <a href="{{ path('bo_registration_list', {'filter': filter}) }}" class="button is-outlined is-info">{{ ('back.registration.grid.filter.'~filter)|trans }}</a>
+                        <a href="{{ path('bo_adherent_list', {'filter': filter}) }}" class="button is-outlined is-info">{{ ('back.adherent.list.filter.'~filter)|trans }}</a>
                     </p>
                 {% endfor %}
             </div>
@@ -32,8 +32,8 @@
                     </a>
                 </p>
                 <p class="level-item">
-                    <a href="{{ path('bo_registration_add') }}" target="_blank" class="button is-primary">
-                        <span>{{ 'back.registration.grid.action.add'|trans }}</span>
+                    <a href="{{ path('bo_registration_new') }}" target="_blank" class="button is-primary">
+                        <span>{{ 'back.adherent.list.action.add'|trans }}</span>
                         <span class="icon is-small">
                             <i class="icon-more"></i>
                         </span>
@@ -48,17 +48,17 @@
 
         {% block thead %}
             <th>
-                {{ 'back.registration.grid.header.lastName'|trans }}
+                {{ 'back.adherent.list.header.lastName'|trans }}
                 <div class="sort" data-sort="lastName"></div>
             </th>
             <th>
-                {{ 'back.registration.grid.header.firstName'|trans }}
+                {{ 'back.adherent.list.header.firstName'|trans }}
                 <div class="sort" data-sort="firstName"></div>
             </th>
-            <th>{{ 'back.registration.grid.header.phone'|trans }}</th>
-            <th>{{ 'back.registration.grid.header.email'|trans }}</th>
+            <th>{{ 'back.adherent.list.header.phone'|trans }}</th>
+            <th>{{ 'back.adherent.list.header.email'|trans }}</th>
             <th>
-                {{ 'back.registration.grid.header.registeredAt'|trans }}
+                {{ 'back.adherent.list.header.registeredAt'|trans }}
                 <div class="sort" data-sort="registeredAt"></div>
             </th>
             <th></th>
@@ -73,7 +73,7 @@
                     <td class="email">{{ registration['email'] }}</td>
                     <td class="registeredAt">{{ registration['registeredAt']|date('d/m/Y') }}</td>
                     <td class="center">
-                        <a href="{{ path('bo_registration_edit', {'adherent': registration['adherentId']}) }}" class="button is-warning">
+                        <a href="{{ path('bo_adherent_edit', {'adherent': registration['adherentId']}) }}" class="button is-warning">
                             <span class="icon"><i class="icon-pencil"></i></span>
                         </a>
                     </td>

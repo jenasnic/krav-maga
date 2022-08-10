@@ -3,7 +3,7 @@
 namespace App\Controller\Back;
 
 use App\Entity\Adherent;
-use App\Entity\RegistrationInfo;
+use App\Entity\Registration;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -21,16 +21,16 @@ class FileController extends AbstractController
         $this->slugger = new AsciiSlugger('fr_FR');
     }
 
-    #[Route('/telecharger-attestation/{registrationInfo}', name: 'bo_download_attestation', methods: ['GET'])]
-    public function medicalCertificate(RegistrationInfo $registrationInfo): Response
+    #[Route('/telecharger-attestation/{registration}', name: 'bo_download_attestation', methods: ['GET'])]
+    public function medicalCertificate(Registration $registration): Response
     {
-        $filePath = $registrationInfo->getMedicalCertificateUrl();
+        $filePath = $registration->getMedicalCertificateUrl();
         if (null === $filePath) {
             throw new LogicException('invalid file');
         }
 
         /** @var Adherent $adherent */
-        $adherent = $registrationInfo->getAdherent();
+        $adherent = $registration->getAdherent();
         $fileName = $this->buildFileName($adherent, $filePath, 'attestation');
 
         return $this->getFileContent($filePath, $fileName);
