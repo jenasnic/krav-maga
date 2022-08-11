@@ -1,0 +1,62 @@
+{% block ancv_payment_row %}
+  <div class="columns">
+    <div class="column">{{ form_row(form.amount) }}</div>
+    <div class="column">{{ form_row(form.date) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.number) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.comment) }}</div>
+  </div>
+{% endblock %}
+
+{% block cash_payment_row %}
+  <div class="columns">
+    <div class="column">{{ form_row(form.amount) }}</div>
+    <div class="column">{{ form_row(form.date) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.comment) }}</div>
+  </div>
+{% endblock %}
+
+{% block check_payment_row %}
+  <div class="columns">
+    <div class="column">{{ form_row(form.amount) }}</div>
+    <div class="column">{{ form_row(form.date) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.number) }}</div>
+    <div class="column">{{ form_row(form.cashingDate) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.comment) }}</div>
+  </div>
+{% endblock %}
+
+{% block pass_payment_row %}
+  <div class="columns">
+    <div class="column">{{ form_row(form.amount) }}</div>
+    <div class="column">{{ form_row(form.date) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.number) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.comment) }}</div>
+  </div>
+{% endblock %}
+
+{% block transfer_payment_row %}
+  <div class="columns">
+    <div class="column">{{ form_row(form.amount) }}</div>
+    <div class="column">{{ form_row(form.date) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.label) }}</div>
+  </div>
+  <div class="columns">
+    <div class="column">{{ form_row(form.comment) }}</div>
+  </div>
+{% endblock %}

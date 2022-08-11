@@ -6,10 +6,11 @@
 
     <div class="form-wrapper">
         {{ form_start(form) }}
-            {{ form_rest(form) }}
-            <div class="flex flex--content-end">
-                <button type="submit" class="button">{{ 'global.validate'|trans }}</button>
-            </div>
+        {# @todo display full form with bulma #}
+        {{ form_rest(form) }}
+        <div class="flex flex--content-end">
+            <button type="submit" class="button">{{ 'global.validate'|trans }}</button>
+        </div>
         {{ form_end(form) }}
     </div>
 

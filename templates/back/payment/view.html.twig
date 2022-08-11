@@ -1,0 +1,37 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    {% form_theme form 'back/payment/_form.html.twig' %}
+
+    <nav class="level">
+        <div class="level-left"></div>
+        <div class="level-right">
+            <p class="level-item">
+                <a href="{{ path('bo_payment_list', { adherent: payment.adherent.id}) }}" target="_blank" class="button is-outlined">
+                    <span>{{ 'global.back'|trans }}</span>
+                    <span class="icon"><i class="icon-back"></i></span>
+                </a>
+            </p>
+            <p class="level-item">
+                <form
+                    data-confirm
+                    data-confirm-message="{{ 'global.confirmDelete'|trans }}"
+                    action="{{ path('bo_payment_delete', { payment: payment.id}) }}"
+                    method="POST"
+                >
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-'~payment.id) }}" />
+                    <button type="submit" class="button is-danger">
+                        <span>{{ 'global.delete'|trans }}</span>
+                        <span class="icon"><i class="icon-cross"></i></span>
+                    </button>
+                </form>
+            </p>
+        </div>
+    </nav>
+
+    <h1 class="title">{{ 'back.payment.view.title'|trans }} - {{ ('enum.paymentType.'~payment.paymentType)|trans }}</h1>
+
+    {{ form(form) }}
+
+{% endblock %}

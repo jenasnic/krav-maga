@@ -66,6 +66,17 @@
   {{ form_widget(form, {'attr' : attr|merge({ 'data-mask-input': mask})}) }}
 {% endblock %}
 
+{% block number_widget %}
+  {{ form_widget(form, {'attr' : attr|merge({
+    'data-number-input': true,
+    'data-number-min': min,
+    'data-number-max': max,
+    'data-number-radix': radix,
+    'data-number-scale': scale,
+    'data-number-separator': separator,
+  })}) }}
+{% endblock %}
+
 {%- block bulma_file_row -%}
   {%- set widget_attr = {} -%}
   {%- if help is not empty -%}

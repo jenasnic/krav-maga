@@ -16,9 +16,18 @@ global:
   yes: Oui
 
 enum:
+
   gender:
     FEMALE: Femme
     MALE: Homme
+
+  paymentType:
+    ANCV: Chèque ANCV
+    CASH: Espèce
+    CHECK: Chèque
+    TRANSFER: Virement
+    PASS: Pass Oise
+
 
 login:
   password: Mot de passe
@@ -56,6 +65,24 @@ back:
     gallery: Trombinoscope
     adherent: Adhérents
     season: Saisons
+
+  payment:
+    grid:
+      action:
+        new: Ajouter un paiement
+      header:
+        date: Date
+        amount: Montant
+        type: Type
+      title: Liste des paiements
+    new:
+      title: Nouveau paiement
+      missingSeason: Vous devez définir la saison sportive active
+      success: Paiement ajouté
+    view:
+      title: Paiement
+    delete:
+      success: Paiement supprimé
 
   registration:
     edit:
@@ -116,6 +143,10 @@ form:
     lastName: Nom
     phone: Téléphone
 
+  newPayment:
+    mode: Mode de paiement
+    modePlaceholder: Sélectionnez un moyen de paiement
+
   newRegistration:
     comment: Commentaire (problème de santé ou autre)
     copyrightAuthorization: Droit à l'image
@@ -123,6 +154,33 @@ form:
     medicalCertificateFile: Certificat médical
     medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
     purpose: Objectif
+
+  payment:
+    ancv:
+      date: Date
+      amount: Montant
+      comment: Commentaire
+      number: N° ANCV
+    cash:
+      date: Date
+      amount: Montant
+      comment: Commentaire
+    check:
+      date: Date
+      amount: Montant
+      comment: Commentaire
+      number: N° chèque
+      cashingDate: Date d'encaissement
+    pass:
+      date: Date
+      amount: Montant
+      comment: Commentaire
+      number: N° pass Oise
+    transfer:
+      date: Date
+      amount: Montant
+      comment: Commentaire
+      label: Libellé
 
   registration:
     comment: Commentaire de l'adhérent

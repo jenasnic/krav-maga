@@ -1,0 +1,30 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    {% form_theme form 'back/payment/_form.html.twig' %}
+
+    <h1 class="title">{{ 'back.payment.new.title'|trans }}</h1>
+
+    <div class="form-wrapper">
+        {{ form_start(form) }}
+        <div class="columns">
+            <div class="column">{{ form_row(form.mode, {'attr': {'data-field-update': 'new-payment'}}) }}</div>
+        </div>
+        <div data-field-update-target="new-payment">
+            {% if form.payment is defined %}
+            <div class="fieldset">
+                {{ form_row(form.payment) }}
+            </div>
+            {% endif %}
+        </div>
+        <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
+            <div class="block">
+                <a href="{{ path('bo_payment_list', {'adherent': adherent.id}) }}" class="button is-outlined">{{ 'global.cancel'|trans }}</a>
+                <button type="submit" class="button is-success">{{ 'global.validate'|trans }}</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
