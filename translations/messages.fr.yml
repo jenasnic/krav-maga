@@ -128,8 +128,8 @@ form:
     comment: Commentaire de l'adhérent
     copyrightAuthorization: Droit à l'image
     ffkPassport: Passport FFK
-    licenceDate: Date de la license
-    licenceNumber: N° de license
+    licenseDate: Date de la licence
+    licenseNumber: N° de licence
     medicalCertificateFile: Certificat médical
     privateNote: Notes privée KMIS
     purpose: Objectif

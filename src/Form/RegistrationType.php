@@ -36,8 +36,8 @@ class RegistrationType extends AbstractType
             ->add('privateNote', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('licenceNumber', TextType::class)
-            ->add('licenceDate', DateType::class, [
+            ->add('licenseNumber', TextType::class)
+            ->add('licenseDate', DateType::class, [
                 'widget' => 'single_text',
             ])
             ->add('ffkPassport', CheckboxType::class, [

@@ -23,10 +23,10 @@ class Registration
     private ?string $privateNote = null;
 
     #[ORM\Column(type: 'text', length: 55, nullable: true)]
-    private ?string $licenceNumber = null;
+    private ?string $licenseNumber = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?DateTime $licenceDate = null;
+    private ?DateTime $licenseDate = null;
 
     #[ORM\Column(type: 'boolean')]
     private bool $ffkPassport = false;
@@ -95,26 +95,26 @@ class Registration
         return $this;
     }
 
-    public function getLicenceNumber(): ?string
+    public function getLicenseNumber(): ?string
     {
-        return $this->licenceNumber;
+        return $this->licenseNumber;
     }
 
-    public function setLicenceNumber(?string $licenceNumber): self
+    public function setLicenseNumber(?string $licenseNumber): self
     {
-        $this->licenceNumber = $licenceNumber;
+        $this->licenseNumber = $licenseNumber;
 
         return $this;
     }
 
-    public function getLicenceDate(): ?DateTime
+    public function getLicenseDate(): ?DateTime
     {
-        return $this->licenceDate;
+        return $this->licenseDate;
     }
 
-    public function setLicenceDate(?DateTime $licenceDate): self
+    public function setLicenseDate(?DateTime $licenseDate): self
     {
-        $this->licenceDate = $licenceDate;
+        $this->licenseDate = $licenseDate;
 
         return $this;
     }
