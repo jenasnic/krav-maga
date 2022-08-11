@@ -40,8 +40,8 @@ final class RegistrationFactory extends ModelFactory
         return [
             'comment' => $this->faker->text(),
             'privateNote' => $this->faker->text(),
-            'licenceNumber' => $this->faker->numberBetween(100000, 999999),
-            'licenceDate' => $registredAt,
+            'licenseNumber' => $this->faker->numberBetween(100000, 999999),
+            'licenseDate' => $registredAt,
             'ffkPassport' => $this->faker->boolean(20),
             'medicalCertificateUrl' => $filePath,
             'registeredAt' => $registredAt,
