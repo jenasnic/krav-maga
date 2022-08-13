@@ -1,0 +1,53 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    {% include 'back/adherent/_header.html.twig' with {
+        'current': 'payments',
+        'adherent': adherent,
+        'registration': registration,
+    } %}
+
+    <h1 class="title">{{ 'back.payment.grid.title'|trans }}</h1>
+
+    <nav class="level">
+        <div class="level-left"></div>
+        <div class="level-right">
+            <p class="level-item">
+                <a href="{{ path('bo_payment_new', {'adherent': adherent.id}) }}" class="button is-primary">
+                    <span>{{ 'back.payment.grid.action.new'|trans }}</span>
+                    <span class="icon is-small">
+                        <i class="icon-more"></i>
+                    </span>
+                </a>
+            </p>
+        </div>
+    </nav>
+
+    {% embed 'back/components/_table.html.twig' %}
+
+        {% block thead %}
+            <th>{{ 'back.payment.grid.header.date'|trans }}</th>
+            <th>{{ 'back.payment.grid.header.amount'|trans }}</th>
+            <th>{{ 'back.payment.grid.header.type'|trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block tbody %}
+            {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.date|date('d/m/Y') }}</td>
+                    <td>{{ payment.amount|number_format(2, ',' , ' ') }}</td>
+                    <td>{{ ('enum.paymentType.'~payment.paymentType)|trans }}</td>
+                    <td class="center">
+                        <a href="{{ path('bo_payment_view', {'payment': payment.id}) }}" class="button is-info">
+                            <span class="icon"><i class="icon-eye"></i></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+
+    {% endembed %}
+
+{% endblock %}

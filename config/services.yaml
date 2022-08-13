@@ -30,6 +30,7 @@ services:
             - '../src/Entity/'
             - '../src/Enum/'
             - '../src/Exception/'
+            - '../src/Form/DataMapper/'
             - '../src/Form/DataTransformer/'
             - '../src/Helper/'
             - '../src/Kernel.php'

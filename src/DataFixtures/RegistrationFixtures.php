@@ -21,6 +21,7 @@ class RegistrationFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             PurposeFixtures::class,
+            SeasonFixtures::class,
         ];
     }
 }

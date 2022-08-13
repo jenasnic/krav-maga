@@ -21,7 +21,7 @@ class SeasonController extends AbstractController
     ) {
     }
 
-    #[Route('/saison-sportive/liste', name: 'bo_season_list')]
+    #[Route('/saison-sportive/liste', name: 'bo_season_list', methods: ['GET'])]
     public function list(): Response
     {
         return $this->render('back/season/list.html.twig', [
@@ -63,7 +63,7 @@ class SeasonController extends AbstractController
         ]);
     }
 
-    #[Route('/saison-sportive/activer/{season}', name: 'bo_season_activate', methods: ['GET', 'POST'])]
+    #[Route('/saison-sportive/activer/{season}', name: 'bo_season_activate', methods: ['POST'])]
     public function activate(Season $season): Response
     {
         $activeSeason = $this->seasonRepository->getActiveSeason();

@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
     {
     }
 
-    #[Route('/adherent/nouvelle-inscription', name: 'bo_registration_new')]
+    #[Route('/adherent/nouvelle-inscription', name: 'bo_registration_new', methods: ['GET', 'POST'])]
     public function add(Request $request, NewRegistrationHandler $newRegistrationHandler): Response
     {
         $registration = new Registration(new Adherent());
@@ -45,7 +45,7 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/adherent/fiche-inscription/{registration}', name: 'bo_registration_edit')]
+    #[Route('/adherent/fiche-inscription/{registration}', name: 'bo_registration_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SaveRegistrationHandler $saveRegistrationHandler, Registration $registration): Response
     {
         $form = $this->createForm(RegistrationType::class, $registration);

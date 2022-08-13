@@ -24,7 +24,7 @@ class AdherentController extends AbstractController
     ) {
     }
 
-    #[Route('/adherent/liste/{filter}', name: 'bo_adherent_list')]
+    #[Route('/adherent/liste/{filter}', name: 'bo_adherent_list', methods: ['GET'])]
     public function list(AdherentFilter $adherentFiler, ?string $filter = null): Response
     {
         $queryBuilder = $this->adherentRepository->createSearchQueryBuilder();
@@ -37,7 +37,7 @@ class AdherentController extends AbstractController
          ]);
     }
 
-    #[Route('/adherent/modifier/{adherent}', name: 'bo_adherent_edit')]
+    #[Route('/adherent/modifier/{adherent}', name: 'bo_adherent_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SaveAdherentHandler $saveAdherentHandler, Adherent $adherent): Response
     {
         $form = $this->createForm(AdherentType::class, $adherent);
@@ -73,7 +73,7 @@ class AdherentController extends AbstractController
         return $this->redirectToRoute('bo_adherent_list', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/adherent/trombinoscope', name: 'bo_adherent_gallery')]
+    #[Route('/adherent/trombinoscope', name: 'bo_adherent_gallery', methods: ['GET'])]
     public function gallery(): Response
     {
         return $this->render('back/adherent/gallery.html.twig', [
