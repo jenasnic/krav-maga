@@ -57,6 +57,7 @@
             </th>
             <th>{{ 'back.adherent.list.header.phone'|trans }}</th>
             <th>{{ 'back.adherent.list.header.email'|trans }}</th>
+            <th>{{ 'back.adherent.list.header.season'|trans }}</th>
             <th>
                 {{ 'back.adherent.list.header.registeredAt'|trans }}
                 <div class="sort" data-sort="registeredAt"></div>
@@ -71,6 +72,7 @@
                     <td class="firstName">{{ registration['firstName'] }}</td>
                     <td class="phone">{{ registration['phone'] }}</td>
                     <td class="email">{{ registration['email'] }}</td>
+                    <td class="season">{{ registration['seasonLabel'] }}</td>
                     <td class="registeredAt">{{ registration['registeredAt']|date('d/m/Y') }}</td>
                     <td class="center">
                         <a href="{{ path('bo_adherent_edit', {'adherent': registration['adherentId']}) }}" class="button is-warning">

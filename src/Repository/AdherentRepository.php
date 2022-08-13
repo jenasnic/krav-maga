@@ -44,6 +44,7 @@ class AdherentRepository extends ServiceEntityRepository
 
         $queryBuilder
             ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
+            ->innerJoin('registration.season', 'season')
             ->select(
                 'adherent.id AS adherentId',
                 'registration.id AS registrationId',
@@ -52,6 +53,7 @@ class AdherentRepository extends ServiceEntityRepository
                 'adherent.phone',
                 'adherent.email',
                 'registration.registeredAt',
+                'season.label AS seasonLabel'
             )
             ->addOrderBy('registration.registeredAt', 'DESC')
         ;

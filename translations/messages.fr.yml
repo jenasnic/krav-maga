@@ -55,6 +55,7 @@ back:
         lastName: Nom
         phone: Téléphone
         registeredAt: Date insc.
+        season: Saison
     tab:
       adherent: Adherent
       payments: Paiements
@@ -71,8 +72,9 @@ back:
       action:
         new: Ajouter un paiement
       header:
-        date: Date
         amount: Montant
+        date: Date
+        season: Saison
         type: Type
       title: Liste des paiements
     new:
@@ -88,9 +90,11 @@ back:
     edit:
       success: Fiche inscription mise à jour
       title: Fiche inscription
+      season: Saison
     new:
       success: Nouvelle inscription créée
       title: Nouvelle inscription
+      season: Saison
 
   season:
     activate:
@@ -235,6 +239,7 @@ front:
     page:
       title: Formulaire d'inscription
     new:
+      noActiveSeason: La période d'inscription n'est pas encore ouverte.
       success: Merci pour votre inscription.<br/>Vous allez recevoir un email de confirmation pour valider votre inscription.
     validation:
       success: Votre inscription a bien été validée.

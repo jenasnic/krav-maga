@@ -6,9 +6,10 @@ use App\Domain\Command\Front\ConfirmRegistrationCommand;
 use App\Domain\Command\Front\ConfirmRegistrationHandler;
 use App\Domain\Command\Front\RegistrationCommand;
 use App\Domain\Command\Front\RegistrationHandler;
-use App\Entity\Adherent;
 use App\Entity\Registration;
+use App\Exception\NoActiveSeasonException;
 use App\Form\NewRegistrationType;
+use App\Service\Factory\RegistrationFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,9 +26,18 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/inscription', name: 'app_registration')]
-    public function registration(Request $request, RegistrationHandler $registrationHandler): Response
-    {
-        $registration = new Registration(new Adherent());
+    public function registration(
+        Request $request,
+        RegistrationFactory $registrationFactory,
+        RegistrationHandler $registrationHandler,
+    ): Response {
+        try {
+            $registration = $registrationFactory->createNew();
+        } catch (NoActiveSeasonException $exception) {
+            $this->addFlash('warning', $this->translator->trans('front.registration.new.noActiveSeason'));
+
+            return $this->redirectToRoute('app_home');
+        }
 
         $form = $this->createForm(NewRegistrationType::class, $registration);
         $form->handleRequest($request);
