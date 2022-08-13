@@ -45,6 +45,7 @@ class PaymentRepository extends ServiceEntityRepository
             ->innerJoin('payment.adherent', 'adherent')
             ->andWhere('adherent.id = :adherentId')
             ->setParameter('adherentId', $adherentId)
+            ->addOrderBy('payment.date', 'DESC')
             ->getQuery()
             ->getResult()
         ;

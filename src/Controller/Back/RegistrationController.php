@@ -6,9 +6,10 @@ use App\Domain\Command\Back\NewRegistrationCommand;
 use App\Domain\Command\Back\NewRegistrationHandler;
 use App\Domain\Command\Back\SaveRegistrationCommand;
 use App\Domain\Command\Back\SaveRegistrationHandler;
-use App\Entity\Adherent;
 use App\Entity\Registration;
+use App\Exception\NoActiveSeasonException;
 use App\Form\RegistrationType;
+use App\Service\Factory\RegistrationFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,9 +23,18 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/adherent/nouvelle-inscription', name: 'bo_registration_new', methods: ['GET', 'POST'])]
-    public function add(Request $request, NewRegistrationHandler $newRegistrationHandler): Response
-    {
-        $registration = new Registration(new Adherent());
+    public function add(
+        Request $request,
+        RegistrationFactory $registrationFactory,
+        NewRegistrationHandler $newRegistrationHandler,
+    ): Response {
+        try {
+            $registration = $registrationFactory->createNew();
+        } catch (NoActiveSeasonException $exception) {
+            $this->addFlash('warning', $this->translator->trans('back.payment.new.missingSeason'));
+
+            return $this->redirectToRoute('bo_adherent_list');
+        }
 
         $form = $this->createForm(RegistrationType::class, $registration, [
             'full_form' => true,

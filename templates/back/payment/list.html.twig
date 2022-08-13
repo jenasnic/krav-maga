@@ -30,6 +30,7 @@
             <th>{{ 'back.payment.grid.header.date'|trans }}</th>
             <th>{{ 'back.payment.grid.header.amount'|trans }}</th>
             <th>{{ 'back.payment.grid.header.type'|trans }}</th>
+            <th>{{ 'back.payment.grid.header.season'|trans }}</th>
             <th></th>
         {% endblock %}
 
@@ -39,6 +40,7 @@
                     <td>{{ payment.date|date('d/m/Y') }}</td>
                     <td>{{ payment.amount|number_format(2, ',' , ' ') }}</td>
                     <td>{{ ('enum.paymentType.'~payment.paymentType)|trans }}</td>
+                    <td>{{ payment.season.label }}</td>
                     <td class="center">
                         <a href="{{ path('bo_payment_view', {'payment': payment.id}) }}" class="button is-info">
                             <span class="icon"><i class="icon-eye"></i></span>

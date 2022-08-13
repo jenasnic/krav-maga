@@ -55,14 +55,18 @@ class Registration
     #[Assert\Valid]
     private Adherent $adherent;
 
+    #[ORM\ManyToOne(targetEntity: Season::class)]
+    protected Season $season;
+
     #[ORM\Column(type: 'boolean')]
     private bool $verified = false;
 
     private ?UploadedFile $medicalCertificateFile = null;
 
-    public function __construct(Adherent $adherent)
+    public function __construct(Adherent $adherent, Season $season)
     {
         $this->adherent = $adherent;
+        $this->season = $season;
         $this->registeredAt = new DateTime();
     }
 
@@ -199,6 +203,18 @@ class Registration
     public function setAdherent(Adherent $adherent): self
     {
         $this->adherent = $adherent;
+
+        return $this;
+    }
+
+    public function getSeason(): Season
+    {
+        return $this->season;
+    }
+
+    public function setSeason(Season $season): self
+    {
+        $this->season = $season;
 
         return $this;
     }

@@ -8,7 +8,7 @@
         'registration': registration,
     } %}
 
-    <h1 class="title">{{ 'back.registration.edit.title'|trans }}</h1>
+    <h1 class="title">{{ 'back.registration.edit.title'|trans }} - {{ 'back.registration.edit.season'|trans }} {{ registration.season.label }}</h1>
 
     <div class="form-wrapper">
         {{ form_start(form) }}
