@@ -3,6 +3,7 @@
 namespace App\Service\Export;
 
 use App\Repository\AdherentRepository;
+use LogicException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -39,12 +40,14 @@ class AdherentCsvExport extends AbstractCsvExport
     }
 
     /**
-     * @param array<string, mixed> $data
-     *
      * @return array<int, string>
      */
-    protected function buildLine(array $data): array
+    protected function buildLine(mixed $data): array
     {
+        if (!is_array($data)) {
+            throw new LogicException('invalid data');
+        }
+
         /** @var array<int, string> $line */
         $line = [
             $data['firstName'],

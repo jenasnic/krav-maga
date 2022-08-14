@@ -6,6 +6,7 @@ use App\Domain\Command\Back\NewPaymentCommand;
 use App\Domain\Command\Back\NewPaymentHandler;
 use App\Entity\Adherent;
 use App\Entity\Payment\AbstractPayment;
+use App\Entity\Season;
 use App\Enum\PaymentTypeEnum;
 use App\Form\Payment\AncvPaymentType;
 use App\Form\Payment\CashPaymentType;
@@ -32,13 +33,34 @@ class PaymentController extends AbstractController
     ) {
     }
 
-    #[Route('/adherent/{adherent}/paiements', name: 'bo_payment_list', methods: ['GET'])]
-    public function list(Adherent $adherent): Response
+    #[Route('/paiements/{season}', name: 'bo_payment_list_for_season', methods: ['GET'])]
+    public function listForSeason(?Season $season = null): Response
+    {
+        $season ??= $this->seasonRepository->getActiveSeason();
+
+        if (null === $season) {
+            $this->addFlash('warning', $this->translator->trans('back.season.activate.missingSeason'));
+
+            return $this->redirectToRoute('bo_season_list');
+        }
+
+        /** @var int $seasonId */
+        $seasonId = $season->getId();
+
+        return $this->render('back/payment/list_for_season.html.twig', [
+            'payments' => $this->paymentRepository->findForSeason($seasonId),
+            'seasons' => $this->seasonRepository->search(),
+            'currentSeason' => $season,
+        ]);
+    }
+
+    #[Route('/adherent/{adherent}/paiements', name: 'bo_payment_list_for_adherent', methods: ['GET'])]
+    public function listForAdherent(Adherent $adherent): Response
     {
         /** @var int $adherentId */
         $adherentId = $adherent->getId();
 
-        return $this->render('back/payment/list.html.twig', [
+        return $this->render('back/payment/list_for_adherent.html.twig', [
             'payments' => $this->paymentRepository->findForAdherent($adherentId),
             'adherent' => $adherent,
             'registration' => $this->registrationRepository->getForAdherent($adherentId),
@@ -50,9 +72,9 @@ class PaymentController extends AbstractController
     {
         $season = $this->seasonRepository->getActiveSeason();
         if (null === $season) {
-            $this->addFlash('warning', $this->translator->trans('back.payment.new.missingSeason'));
+            $this->addFlash('warning', $this->translator->trans('back.season.activate.missingSeason'));
 
-            return $this->redirectToRoute('bo_payment_list', ['adherent' => $adherent->getId()]);
+            return $this->redirectToRoute('bo_payment_list_for_adherent', ['adherent' => $adherent->getId()]);
         }
 
         $newPayment = new NewPaymentCommand();
@@ -77,7 +99,7 @@ class PaymentController extends AbstractController
 
             $this->addFlash('info', $this->translator->trans('back.payment.new.success'));
 
-            return $this->redirectToRoute('bo_payment_list', ['adherent' => $adherent->getId()]);
+            return $this->redirectToRoute('bo_payment_list_for_adherent', ['adherent' => $adherent->getId()]);
         }
 
         return $this->render('back/payment/new.html.twig', [
@@ -87,7 +109,38 @@ class PaymentController extends AbstractController
     }
 
     #[Route('/adherent/consulter-paiement/{payment}', name: 'bo_payment_view', methods: ['GET'])]
-    public function view(AbstractPayment $payment): Response
+    public function viewForAdherent(AbstractPayment $payment): Response
+    {
+        return $this->view(
+            $payment,
+            $this->generateUrl('bo_payment_list_for_adherent', ['adherent' => $payment->getAdherent()->getId()]),
+            $this->generateUrl('bo_payment_delete_for_adherent', ['payment' => $payment->getId()]),
+        );
+    }
+
+    #[Route('/paiement/consulter/{payment}', name: 'bo_payment_view_for_season', methods: ['GET'])]
+    public function viewForSeason(AbstractPayment $payment): Response
+    {
+        return $this->view(
+            $payment,
+            $this->generateUrl('bo_payment_list_for_season', ['season' => $payment->getSeason()->getId()]),
+            $this->generateUrl('bo_payment_delete_for_season', ['payment' => $payment->getId()]),
+        );
+    }
+
+    #[Route('/adherent/supprimer-paiement/{payment}', name: 'bo_payment_delete_for_adherent', methods: ['POST'])]
+    public function deleteForAdherent(Request $request, AbstractPayment $payment): Response
+    {
+        return $this->delete($request, $payment, $this->generateUrl('bo_payment_list_for_adherent', ['adherent' => $payment->getAdherent()->getId()]));
+    }
+
+    #[Route('/paiement/supprimer/{payment}', name: 'bo_payment_delete_for_season', methods: ['POST'])]
+    public function deleteForSeason(Request $request, AbstractPayment $payment): Response
+    {
+        return $this->delete($request, $payment, $this->generateUrl('bo_payment_list_for_season', ['season' => $payment->getSeason()->getId()]));
+    }
+
+    protected function view(AbstractPayment $payment, string $backLink, string $deleteLink): Response
     {
         $options = [
             'disabled' => true,
@@ -107,20 +160,19 @@ class PaymentController extends AbstractController
         return $this->render('back/payment/view.html.twig', [
             'form' => $form->createView(),
             'payment' => $payment,
+            'backLink' => $backLink,
+            'deleteLink' => $deleteLink,
         ]);
     }
 
-    #[Route('/adherent/supprimer-paiement/{payment}', name: 'bo_payment_delete', methods: ['POST'])]
-    public function delete(Request $request, AbstractPayment $payment): Response
+    protected function delete(Request $request, AbstractPayment $payment, string $backLink): Response
     {
-        $adherentId = $payment->getAdherent()->getId();
-
         if ($this->isCsrfTokenValid('delete-'.$payment->getId(), (string) $request->request->get('_token'))) {
             $this->paymentRepository->remove($payment, true);
 
             $this->addFlash('info', $this->translator->trans('back.payment.delete.success'));
         }
 
-        return $this->redirectToRoute('bo_payment_list', ['adherent' => $adherentId], Response::HTTP_SEE_OTHER);
+        return $this->redirect($backLink, Response::HTTP_SEE_OTHER);
     }
 }

@@ -15,4 +15,19 @@ class CheckPaymentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, CheckPayment::class);
     }
+
+    /**
+     * @return array<CheckPayment>
+     */
+    public function findCheckToCash(): array
+    {
+        /** @var array<CheckPayment> */
+        return $this
+            ->createQueryBuilder('check')
+            ->andWhere('check.cashingDate IS NOT NULL')
+            ->andWhere('DATE(check.cashingDate) = DATE(NOW())')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

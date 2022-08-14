@@ -20,6 +20,7 @@ class CheckPaymentType extends AbstractPaymentType
 
         $builder->add('number', TextType::class);
         $builder->add('cashingDate', DateType::class, [
+            'required' => false,
             'widget' => 'single_text',
         ]);
     }

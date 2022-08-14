@@ -33,7 +33,7 @@
             <a href="{{ path('bo_registration_edit', {'registration': registration.id}) }}">{{ 'back.adherent.tab.registration'|trans }}</a>
         </li>
         <li{% if current == 'payments' %} class="is-active"{% endif %}>
-            <a href="{{ path('bo_payment_list', {'adherent': adherent.id}) }}">{{ 'back.adherent.tab.payments'|trans }}</a>
+            <a href="{{ path('bo_payment_list_for_adherent', {'adherent': adherent.id}) }}">{{ 'back.adherent.tab.payments'|trans }}</a>
         </li>
     </ul>
 </div>

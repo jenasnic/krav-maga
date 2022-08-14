@@ -56,6 +56,7 @@ class AdherentRepository extends ServiceEntityRepository
                 'season.label AS seasonLabel'
             )
             ->addOrderBy('registration.registeredAt', 'DESC')
+            ->andWhere('registration.verified = TRUE')
         ;
 
         return $queryBuilder;

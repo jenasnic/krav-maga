@@ -9,7 +9,14 @@
                 <div class="level-item">
                     <div class="field has-addons">
                         <p class="control has-icons-left">
-                            <input id="input-search-id" class="search input" type="text" autofocus="autofocus" placeholder="{{ 'global.search'|trans }}" />
+                            <input
+                                id="input-search-id"
+                                class="search input"
+                                type="text"
+                                autofocus="autofocus"
+                                placeholder="{{ 'global.search'|trans }}"
+                                data-search='["firstName", "lastName", "phone"]'
+                            />
                             <span class="icon is-small is-left">
                                 <i class="icon-search"></i>
                             </span>

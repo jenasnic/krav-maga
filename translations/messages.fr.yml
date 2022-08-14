@@ -62,9 +62,10 @@ back:
       registration: Fiche inscription
 
   menu:
+    adherent: Adhérents
     dashboard: Dashboard
     gallery: Trombinoscope
-    adherent: Adhérents
+    payment: Paiements
     season: Saisons
 
   payment:
@@ -72,6 +73,7 @@ back:
       action:
         new: Ajouter un paiement
       header:
+        adherent: Adherent
         amount: Montant
         date: Date
         season: Saison
@@ -79,8 +81,9 @@ back:
       title: Liste des paiements
     new:
       title: Nouveau paiement
-      missingSeason: Vous devez définir la saison sportive active
       success: Paiement ajouté
+    tab:
+      season: Saison
     view:
       title: Paiement
     delete:
@@ -99,6 +102,7 @@ back:
   season:
     activate:
       success: Saison sportive activée
+      missingSeason: Vous devez définir la saison sportive active
     edit:
       title: Saison sportive
       success: Saison sportive mise à jour

@@ -5,6 +5,7 @@ namespace App\Repository\Payment;
 use App\Entity\Payment\AbstractPayment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Generator;
 
 /**
  * @extends ServiceEntityRepository<AbstractPayment>
@@ -49,5 +50,35 @@ class PaymentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @return array<AbstractPayment>
+     */
+    public function findForSeason(int $seasonId): array
+    {
+        /** @var array<AbstractPayment> */
+        return $this
+            ->createQueryBuilder('payment')
+            ->innerJoin('payment.season', 'season')
+            ->andWhere('season.id = :seasonId')
+            ->setParameter('seasonId', $seasonId)
+            ->addOrderBy('payment.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Generator<AbstractPayment>>
+     */
+    public function findForExport(int $seasonId): Generator
+    {
+        $result = $this->findForSeason($seasonId);
+
+        /** @var AbstractPayment $item */
+        foreach ($result as $item) {
+            yield $item;
+        }
     }
 }

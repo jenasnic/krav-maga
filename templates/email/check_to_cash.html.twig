@@ -1,0 +1,22 @@
+{% block subject %}Rappel : encaissement chèque{% endblock %}
+
+{% block html %}
+<p>Rappel sur les chèques à encaisser :</p>
+<ul>
+{% for check in checks %}
+    <li>{{ check.number }} ({{ check.adherent.fullName }})</li>
+{% endfor %}
+</ul>
+<p>L'équipe KMIS</p>
+<img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
+{% endblock %}
+
+{% block text %}
+Rappel sur les chèques à encaisser :
+
+{% for check in checks %}
+   - {{ check.number }} ({{ check.adherent.fullName }})
+{% endfor %}
+
+L'équipe KMIS
+{% endblock %}

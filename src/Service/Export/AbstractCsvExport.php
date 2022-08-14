@@ -15,20 +15,17 @@ abstract class AbstractCsvExport
     abstract protected function getHeaders(): array;
 
     /**
-     * @param array<string, mixed> $data
-     *
      * @return array<string>
      */
-    abstract protected function buildLine(array $data): array;
+    abstract protected function buildLine(mixed $data): array;
 
     abstract protected function getFilename(): string;
 
     /**
-     * @param Generator<array<string, mixed>> $generator
+     * @param Generator<mixed> $generator
      */
     protected function getStreamedResponse(Generator $generator): StreamedResponse
     {
-        /** @var array<string,mixed>|null $current */
         $current = $generator->current();
         if (null === $current) {
             throw new EmptyExportException('No result found!');
@@ -42,7 +39,6 @@ abstract class AbstractCsvExport
                 $result = $generator->current();
                 $export->add($this->buildLine($result));
                 $generator->next();
-                /** @var array<string,mixed>|null $next */
                 $next = $generator->current();
             } while (null !== $next);
 

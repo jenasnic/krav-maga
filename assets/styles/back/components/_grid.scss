@@ -1,0 +1,40 @@
+@use '../../front/icons';
+
+[data-grid] {
+  .table {
+    thead {
+      th {
+        //padding: 20px 30px 20px 10px;
+        position: relative;
+
+        .sort {
+          cursor: pointer;
+          height: 20px;
+          float: right;
+          position: absolute;
+          text-align: center;
+          top: calc(50% - 10px);
+          right: 0;
+          width: 20px;
+
+          &:after {
+            @include icons.icon(icons.$icon-sort);
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+
+          &.asc:after {
+            content: icons.$icon-sort-asc;
+          }
+
+          &.desc:after {
+            content: icons.$icon-sort-desc;
+          }
+        }
+      }
+    }
+  }
+}

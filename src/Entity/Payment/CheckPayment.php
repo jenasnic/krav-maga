@@ -16,8 +16,7 @@ class CheckPayment extends AbstractPayment
     #[Assert\NotBlank]
     private ?string $number = null;
 
-    #[ORM\Column(type: 'datetime')]
-    #[Assert\NotNull]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected ?DateTime $cashingDate = null;
 
     public function getNumber(): ?string
