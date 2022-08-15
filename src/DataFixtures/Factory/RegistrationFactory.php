@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures\Factory;
 
+use App\DataFixtures\Factory\Payment\PriceOptionFactory;
 use App\Entity\Registration;
 use Faker\Factory;
 use Faker\Generator;
@@ -47,6 +48,7 @@ final class RegistrationFactory extends ModelFactory
             'registeredAt' => $registredAt,
             'copyrightAuthorization' => $this->faker->boolean(80),
             'purpose' => PurposeFactory::random()->object(),
+            'priceOption' => PriceOptionFactory::random()->object(),
             'emergency' => EmergencyFactory::new(),
             'adherent' => AdherentFactory::new(),
             'verified' => $this->faker->boolean(80),

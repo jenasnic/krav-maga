@@ -41,7 +41,7 @@
                     <td>{{ payment.amount|number_format(2, ',' , ' ') }}</td>
                     <td>{{ ('enum.paymentType.'~payment.paymentType)|trans }}</td>
                     <td>{{ payment.season.label }}</td>
-                    <td class="center">
+                    <td class="action">
                         <a href="{{ path('bo_payment_view', {'payment': payment.id}) }}" class="button is-info">
                             <span class="icon"><i class="icon-eye"></i></span>
                         </a>

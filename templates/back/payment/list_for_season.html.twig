@@ -71,7 +71,7 @@
                         <td class="type">{{ ('enum.paymentType.'~payment.paymentType)|trans }}</td>
                         <td>{{ payment.amount|number_format(2, ',' , ' ') }}</td>
                         <td class="adherent">{{ payment.adherent.fullName }}</td>
-                        <td class="center">
+                        <td class="action">
                             <a href="{{ path('bo_payment_view_for_season', {'payment': payment.id}) }}" class="button is-info">
                                 <span class="icon"><i class="icon-eye"></i></span>
                             </a>

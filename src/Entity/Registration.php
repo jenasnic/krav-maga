@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Payment\PriceOption;
 use App\Repository\RegistrationRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,6 +46,11 @@ class Registration
     #[ORM\JoinColumn(nullable: true)]
     #[Assert\NotNull]
     private ?Purpose $purpose = null;
+
+    #[ORM\ManyToOne(targetEntity: PriceOption::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotNull]
+    private ?PriceOption $priceOption = null;
 
     #[ORM\OneToOne(targetEntity: Emergency::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[Assert\Valid]
@@ -179,6 +185,18 @@ class Registration
     public function setPurpose(?Purpose $purpose): self
     {
         $this->purpose = $purpose;
+
+        return $this;
+    }
+
+    public function getPriceOption(): ?PriceOption
+    {
+        return $this->priceOption;
+    }
+
+    public function setPriceOption(?PriceOption $priceOption): self
+    {
+        $this->priceOption = $priceOption;
 
         return $this;
     }

@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <div data-grid="data-grid">
+    <div data-grid="data-grid" class="grid-adherent">
 
         <nav class="level">
             <div class="level-left">
@@ -54,6 +54,7 @@
         {% embed 'back/components/_table.html.twig' %}
 
         {% block thead %}
+            <th></th>
             <th>
                 {{ 'back.adherent.list.header.lastName'|trans }}
                 <div class="sort" data-sort="lastName"></div>
@@ -69,19 +70,22 @@
                 {{ 'back.adherent.list.header.registeredAt'|trans }}
                 <div class="sort" data-sort="registeredAt"></div>
             </th>
+            <th>{{ 'back.adherent.list.header.sold'|trans }}</th>
             <th></th>
         {% endblock %}
 
         {% block tbody %}
             {% for registration in registrations %}
                 <tr>
+                    <td class="gender gender--{{ registration['gender']|lower }}"><i class="icon-user"></i></td>
                     <td class="lastName">{{ registration['lastName'] }}</td>
                     <td class="firstName">{{ registration['firstName'] }}</td>
                     <td class="phone">{{ registration['phone'] }}</td>
                     <td class="email">{{ registration['email'] }}</td>
                     <td class="season">{{ registration['seasonLabel'] }}</td>
                     <td class="registeredAt">{{ registration['registeredAt']|date('d/m/Y') }}</td>
-                    <td class="center">
+                    <td>{{ registration['totalPaid'] }} / {{ registration['toPay'] }}</td>
+                    <td class="action">
                         <a href="{{ path('bo_adherent_edit', {'adherent': registration['adherentId']}) }}" class="button is-warning">
                             <span class="icon"><i class="icon-pencil"></i></span>
                         </a>

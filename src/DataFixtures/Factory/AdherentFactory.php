@@ -62,7 +62,7 @@ final class AdherentFactory extends ModelFactory
             'gender' => $gender,
             'birthDate' => $this->faker->dateTimeBetween('-55 years', '-16 years'),
             'phone' => $this->faker->phoneNumber(),
-            'email' => $email,
+            'email' => strtolower($email),
             'pseudonym' => $firstName.substr($lastName, 0, 1),
             'pictureUrl' => $filePath,
         ];

@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Payment\PriceOption;
 use App\Entity\Purpose;
 use App\Entity\Registration;
 use App\Form\Type\BulmaFileType;
 use App\Form\Type\GoogleCaptchaType;
+use App\Repository\Payment\PriceOptionRepository;
 use App\Repository\PurposeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -60,6 +62,15 @@ class NewRegistrationType extends AbstractType
                 'choice_label' => 'label',
                 'query_builder' => function (PurposeRepository $purposeRepository) {
                     return $purposeRepository->createQueryBuilder('purpose')->orderBy('purpose.rank');
+                },
+            ])
+            ->add('priceOption', EntityType::class, [
+                'class' => PriceOption::class,
+                'choice_label' => function (PriceOption $priceOption) {
+                    return sprintf('%s - %d€', $priceOption->getLabel(), $priceOption->getAmount());
+                },
+                'query_builder' => function (PriceOptionRepository $priceOptionRepository) {
+                    return $priceOptionRepository->createQueryBuilder('price_option')->orderBy('price_option.rank');
                 },
             ])
             ->add('emergency', EmergencyType::class)
