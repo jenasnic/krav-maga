@@ -18,7 +18,7 @@ final class AncvPaymentFactory extends ModelFactory
         return [
             'amount' => self::faker()->randomElement([240, 120, 80, 60]),
             'date' => self::faker()->dateTimeBetween('-3 months', '-1 week'),
-            'number' => 'ANCV-'.self::faker()->numberBetween(1000000, 999999),
+            'number' => 'ANCV-'.self::faker()->numberBetween(100000, 999999),
             'comment' => self::faker()->text(),
         ];
     }

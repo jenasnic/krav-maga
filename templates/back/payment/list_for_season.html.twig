@@ -1,0 +1,87 @@
+{% extends 'back.html.twig' %}
+
+{% block body %}
+
+    <h1 class="title">{{ 'back.payment.grid.title'|trans }}</h1>
+
+    <div class="tabs is-centered is-boxed">
+        <ul>
+            {% for season in seasons %}
+                <li{% if season.id == currentSeason.id %} class="is-active"{% endif %}>
+                    <a href="{{ path('bo_payment_list_for_season', {'season': season.id}) }}">{{ 'back.payment.tab.season'|trans }} {{ season.label }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div data-grid="data-grid">
+
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <div class="field has-addons">
+                        <p class="control has-icons-left">
+                            <input
+                                id="input-search-id"
+                                class="search input"
+                                type="text"
+                                autofocus="autofocus"
+                                placeholder="{{ 'global.search'|trans }}"
+                                data-search='["type", "adherent"]'
+                            />
+                            <span class="icon is-small is-left">
+                                <i class="icon-search"></i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="level-right">
+                <p class="level-item">
+                    <a href="{{ path('bo_export_payment', {'season': currentSeason.id}) }}" target="_blank" class="button is-primary">
+                        <span>{{ 'global.export'|trans }}</span>
+                        <span class="icon is-small">
+                            <i class="icon-export"></i>
+                        </span>
+                    </a>
+                </p>
+            </div>
+        </nav>
+
+        {% embed 'back/components/_table.html.twig' %}
+
+            {% block thead %}
+                <th>
+                    {{ 'back.payment.grid.header.date'|trans }}
+                    <div class="sort" data-sort="date"></div>
+                </th>
+                <th>
+                    {{ 'back.payment.grid.header.type'|trans }}
+                    <div class="sort" data-sort="lastName"></div>
+                </th>
+                <th>{{ 'back.payment.grid.header.amount'|trans }}</th>
+                <th>{{ 'back.payment.grid.header.adherent'|trans }}</th>
+                <th></th>
+            {% endblock %}
+
+            {% block tbody %}
+                {% for payment in payments %}
+                    <tr>
+                        <td>{{ payment.date|date('d/m/Y') }}</td>
+                        <td class="type">{{ ('enum.paymentType.'~payment.paymentType)|trans }}</td>
+                        <td>{{ payment.amount|number_format(2, ',' , ' ') }}</td>
+                        <td class="adherent">{{ payment.adherent.fullName }}</td>
+                        <td class="center">
+                            <a href="{{ path('bo_payment_view_for_season', {'payment': payment.id}) }}" class="button is-info">
+                                <span class="icon"><i class="icon-eye"></i></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endblock %}
+
+        {% endembed %}
+
+    </div>
+
+{% endblock %}

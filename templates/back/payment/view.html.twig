@@ -8,7 +8,7 @@
         <div class="level-left"></div>
         <div class="level-right">
             <p class="level-item">
-                <a href="{{ path('bo_payment_list', { adherent: payment.adherent.id}) }}" target="_blank" class="button is-outlined">
+                <a href="{{ backLink }}" target="_blank" class="button is-outlined">
                     <span>{{ 'global.back'|trans }}</span>
                     <span class="icon"><i class="icon-back"></i></span>
                 </a>
@@ -17,7 +17,7 @@
                 <form
                     data-confirm
                     data-confirm-message="{{ 'global.confirmDelete'|trans }}"
-                    action="{{ path('bo_payment_delete', { payment: payment.id}) }}"
+                    action="{{ deleteLink }}"
                     method="POST"
                 >
                     <input type="hidden" name="_token" value="{{ csrf_token('delete-'~payment.id) }}" />

@@ -24,6 +24,9 @@ doctrine:
         dql:
             string_functions:
                 DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+                DATE: DoctrineExtensions\Query\Mysql\Date
+                IF: DoctrineExtensions\Query\Mysql\IfElse
+                NOW: DoctrineExtensions\Query\Mysql\Now
 
 when@test:
     doctrine:

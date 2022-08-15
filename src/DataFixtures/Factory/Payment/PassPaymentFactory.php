@@ -18,7 +18,7 @@ final class PassPaymentFactory extends ModelFactory
         return [
             'amount' => self::faker()->randomElement([240, 120, 80, 60]),
             'date' => self::faker()->dateTimeBetween('-3 months', '-1 week'),
-            'number' => 'PASS-'.self::faker()->numberBetween(10000, 9999),
+            'number' => 'PASS-'.self::faker()->numberBetween(1000, 9999),
             'comment' => self::faker()->text(),
         ];
     }
