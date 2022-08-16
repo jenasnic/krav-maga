@@ -119,12 +119,19 @@
                 </ul>
             </div>
         </div>
-        <div class="pricing">
-            Tarif : 240 <i class="icon-euro"></i>
+        <div class="card pricing">
+            <div class="card__title">Tarifs</div>
+            <div class="card__detail">
+                <ul>
+                    {% for priceOption in priceOptions %}
+                    <li>{{ priceOption.label }} : <strong>{{ priceOption.amount }} <i class="icon-euro"></i></strong></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-        <div class="equipment">
-            <div class="equipment__title">Équipement</div>
-            <div class="equipment__detail">
+        <div class="card equipment">
+            <div class="card__title">Équipement</div>
+            <div class="card__detail">
                 <ul>
                     <div>Obligatoire</div>
                     <li>Baskets propres dédiées à la salle</li>

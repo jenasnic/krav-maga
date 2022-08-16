@@ -201,18 +201,7 @@
   }
 }
 
-.pricing {
-  font-size: 3em;
-  font-weight: 700;
-  padding: 20px 0 40px 0;
-  text-align: center;
-
-  i {
-    color: color.$primary-color;
-  }
-}
-
-.equipment {
+.card {
   background-color: color.$background-light-color;
   border-radius: 25px;
   box-shadow: 2px 2px 5px -2px color.$scorpion;
@@ -236,10 +225,6 @@
     > ul {
       padding: 0 20px;
 
-      &:first-child {
-        border-right: 1px solid color.$primary-color;
-      }
-
       > div {
         margin-bottom: 10px;
       }
@@ -253,6 +238,24 @@
           color: color.$primary-color;
           font-size: 0.8em;
           margin-right: 10px;
+        }
+
+        i {
+          color: color.$primary-color;
+        }
+      }
+    }
+  }
+
+  &.pricing {
+    margin-bottom: 20px;
+  }
+
+  &.equipment {
+    .card__detail {
+      > ul {
+        &:first-child {
+          border-right: 1px solid color.$primary-color;
         }
       }
     }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Adherent;
+use App\Entity\Payment\AbstractPayment;
 use App\Entity\Registration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -43,18 +44,29 @@ class AdherentRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('adherent');
 
         $queryBuilder
-            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
-            ->innerJoin('registration.season', 'season')
             ->select(
                 'adherent.id AS adherentId',
                 'registration.id AS registrationId',
                 'adherent.firstName',
                 'adherent.lastName',
+                'adherent.gender',
                 'adherent.phone',
                 'adherent.email',
                 'registration.registeredAt',
-                'season.label AS seasonLabel'
+                'season.label AS seasonLabel',
+                'SUM(payment.amount) AS totalPaid',
+                'price_option.amount AS toPay'
             )
+            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
+            ->innerJoin('registration.season', 'season')
+            ->innerJoin('registration.priceOption', 'price_option')
+            ->leftJoin(
+                AbstractPayment::class,
+                'payment',
+                Join::WITH,
+                'payment.season = registration.season AND payment.adherent = adherent'
+            )
+            ->groupBy('adherent')
             ->addOrderBy('registration.registeredAt', 'DESC')
             ->andWhere('registration.verified = TRUE')
         ;

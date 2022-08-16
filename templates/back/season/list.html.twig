@@ -33,7 +33,7 @@
                     <td>{{ season.startDate|date('d/m/Y') }}</td>
                     <td>{{ season.endDate|date('d/m/Y') }}</td>
                     <td>{% if season.active %}<span class="icon has-text-info"><i class="icon-checkmark"></i></span>{% endif %}</td>
-                    <td class="center">
+                    <td class="action">
                         <a href="{{ path('bo_season_edit', {'season': season.id}) }}" class="button is-warning">
                             <span class="icon"><i class="icon-pencil"></i></span>
                         </a>

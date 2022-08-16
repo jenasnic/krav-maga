@@ -9,17 +9,29 @@ use Doctrine\Persistence\ObjectManager;
 
 class SeasonFixtures extends Fixture
 {
+    public const SEASON_2020 = '2020';
+    public const SEASON_2021 = '2021';
+    public const SEASON_2022 = '2022';
+
     public function load(ObjectManager $manager): void
     {
-        $currentYear = (int) (new DateTime('-2 years'))->format('Y');
-
-        for ($i = 2; $i >= 0; --$i) {
-            SeasonFactory::createOne([
-                'label' => $currentYear,
-                'startDate' => new DateTime($currentYear.'-09-01'),
-                'endDate' => new DateTime(++$currentYear.'-08-31'),
-                'active' => (0 === $i),
-            ]);
-        }
+        SeasonFactory::createOne([
+            'label' => self::SEASON_2020,
+            'startDate' => new DateTime('2020-09-01'),
+            'endDate' => new DateTime('2021-08-31'),
+            'active' => false,
+        ]);
+        SeasonFactory::createOne([
+            'label' => self::SEASON_2021,
+            'startDate' => new DateTime('2021-09-01'),
+            'endDate' => new DateTime('2022-08-31'),
+            'active' => false,
+        ]);
+        SeasonFactory::createOne([
+            'label' => self::SEASON_2022,
+            'startDate' => new DateTime('2022-09-01'),
+            'endDate' => new DateTime('2023-08-31'),
+            'active' => true,
+        ]);
     }
 }

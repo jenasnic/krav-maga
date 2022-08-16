@@ -56,6 +56,7 @@ back:
         phone: Téléphone
         registeredAt: Date insc.
         season: Saison
+        sold: Cotisation
     tab:
       adherent: Adherent
       payments: Paiements
@@ -65,7 +66,7 @@ back:
     adherent: Adhérents
     dashboard: Dashboard
     gallery: Trombinoscope
-    payment: Paiements
+    payment: Cotisations
     season: Saisons
 
   payment:
@@ -162,6 +163,7 @@ form:
     medicalCertificateFile: Certificat médical
     medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
     purpose: Objectif
+    priceOption: Formule
 
   payment:
     ancv:
@@ -199,6 +201,7 @@ form:
     medicalCertificateFile: Certificat médical
     privateNote: Notes privée KMIS
     purpose: Objectif
+    pricingOption: Formule
     registeredAt: Date d'inscription
 
 front:
