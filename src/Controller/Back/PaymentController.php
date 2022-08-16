@@ -14,6 +14,7 @@ use App\Form\Payment\CheckPaymentType;
 use App\Form\Payment\NewPaymentType;
 use App\Form\Payment\PassPaymentType;
 use App\Form\Payment\TransferPaymentType;
+use App\Helper\FloatHelper;
 use App\Repository\Payment\PaymentRepository;
 use App\Repository\RegistrationRepository;
 use App\Repository\SeasonRepository;
@@ -57,13 +58,39 @@ class PaymentController extends AbstractController
     #[Route('/adherent/{adherent}/paiements', name: 'bo_payment_list_for_adherent', methods: ['GET'])]
     public function listForAdherent(Adherent $adherent): Response
     {
+        $season = $this->seasonRepository->getActiveSeason();
+
+        if (null === $season) {
+            $this->addFlash('warning', $this->translator->trans('back.season.activate.missingSeason'));
+
+            return $this->redirectToRoute('bo_season_list');
+        }
+
         /** @var int $adherentId */
         $adherentId = $adherent->getId();
+        $registration = $this->registrationRepository->getForAdherent($adherentId);
+        $payments = $this->paymentRepository->findForAdherent($adherentId);
+
+        $amountToPay = 0;
+        if ($registration->getSeason()->getId() === $season->getId()) {
+            $totalPaidOnSeason = array_reduce($payments, function (float $amount, AbstractPayment $payment) use ($season) {
+                if ($payment->getSeason()->getId() === $season->getId()) {
+                    $amount += $payment->getAmount();
+                }
+
+                return $amount;
+            }, 0);
+
+            $amountToPay = $registration->getPriceOption()?->getAmount() - $totalPaidOnSeason;
+        }
 
         return $this->render('back/payment/list_for_adherent.html.twig', [
-            'payments' => $this->paymentRepository->findForAdherent($adherentId),
+            'payments' => $payments,
             'adherent' => $adherent,
-            'registration' => $this->registrationRepository->getForAdherent($adherentId),
+            'registration' => $registration,
+            'currentSeason' => $season,
+            'amountToPay' => $amountToPay,
+            'contributionSold' => FloatHelper::equals($amountToPay, 0),
         ]);
     }
 
