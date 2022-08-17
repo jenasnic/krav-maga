@@ -10,6 +10,18 @@
 
     <h1 class="title">{{ 'back.payment.grid.title'|trans }}</h1>
 
+    {% if (registration.season.id == currentSeason.id) %}
+        {% if not contributionSold %}
+            <div class="notification is-warning">
+                {{ 'back.payment.grid.info.toPay'|trans({'%year%': currentSeason.label, '%amount%': amountToPay}) }}
+            </div>
+        {% else %}
+            <div class="notification is-success">
+                {{ 'back.payment.grid.info.isSold'|trans({'%year%': currentSeason.label}) }}
+            </div>
+        {% endif %}
+    {% endif %}
+
     <nav class="level">
         <div class="level-left"></div>
         <div class="level-right">

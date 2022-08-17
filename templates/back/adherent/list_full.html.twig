@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <h2 class="subtitle">{{ registrations|length }} {{ 'back.adherent.list.count'|trans }}</h2>
+    <h2 class="subtitle">{{ 'back.adherent.list.full'|trans }} - {{ registrations|length }} {{ 'back.adherent.list.count'|trans }}</h2>
 
     <div data-grid="data-grid" class="grid-adherent">
 
@@ -25,29 +25,6 @@
                         </p>
                     </div>
                 </div>
-                {% for filter in filters %}
-                    <p class="level-item">
-                        <a href="{{ path('bo_adherent_list', {'filter': filter}) }}" class="button is-outlined is-info">{{ ('back.adherent.list.filter.'~filter)|trans }}</a>
-                    </p>
-                {% endfor %}
-            </div>
-            <div class="level-right">
-                <p class="level-item">
-                    <a href="{{ path('bo_export_adherent') }}" target="_blank" class="button is-primary">
-                        <span>{{ 'global.export'|trans }}</span>
-                        <span class="icon is-small">
-                            <i class="icon-export"></i>
-                        </span>
-                    </a>
-                </p>
-                <p class="level-item">
-                    <a href="{{ path('bo_registration_new') }}" target="_blank" class="button is-primary">
-                        <span>{{ 'back.adherent.list.action.add'|trans }}</span>
-                        <span class="icon is-small">
-                            <i class="icon-more"></i>
-                        </span>
-                    </a>
-                </p>
             </div>
         </nav>
 
@@ -65,7 +42,8 @@
             </th>
             <th>{{ 'back.adherent.list.header.phone'|trans }}</th>
             <th>{{ 'back.adherent.list.header.email'|trans }}</th>
-            <th class="has-text-centered">{{ 'back.adherent.list.header.sold'|trans }}</th>
+            <th>{{ 'back.adherent.list.header.season'|trans }}</th>
+            <th>{{ 'back.adherent.list.header.verified'|trans }}</th>
             <th></th>
         {% endblock %}
 
@@ -77,17 +55,27 @@
                     <td class="firstName">{{ registration['firstName'] }}</td>
                     <td>{{ registration['phone'] }}</td>
                     <td class="email">{{ registration['email'] }}</td>
-                    <td class="has-text-centered">
-                        {% if registration['totalPaid'] < registration['toPay'] %}
-                            <span class="icon has-text-warning"><i class="icon-cross"></i></span>
-                        {% else %}
+                    <td>{{ registration['seasonLabel'] }}</td>
+                    <td>
+                        {% if registration['registrationVerified'] %}
                             <span class="icon has-text-primary"><i class="icon-checkmark"></i></span>
+                        {% else %}
+                            <span class="icon has-text-warning"><i class="icon-cross"></i></span>
                         {% endif %}
                     </td>
                     <td class="action">
-                        <a href="{{ path('bo_adherent_edit', {'adherent': registration['adherentId']}) }}" class="button is-primary">
-                            <span class="icon"><i class="icon-pencil"></i></span>
-                        </a>
+                        <form
+                            data-confirm
+                            data-confirm-message="{{ 'global.confirmDelete'|trans }}"
+                            action="{{ path('bo_adherent_delete', {'adherent': registration['adherentId']}) }}"
+                            method="POST"
+                        >
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete-'~registration['adherentId']) }}" />
+                            <input type="hidden" name="full-list" value="true" />
+                            <button type="submit" class="button is-danger">
+                                <span class="icon"><i class="icon-cross"></i></span>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             {% endfor %}
@@ -96,10 +84,5 @@
     {% endembed %}
 
     </div>
-
-    <div class="is-flex is-justify-content-flex-end mt-5">
-        <a href="{{ path('bo_adherent_full_list') }}" class="button is-info">{{ 'global.seeAll'|trans }}</a>
-    </div>
-
 
 {% endblock %}

@@ -12,6 +12,7 @@ global:
   more: En savoir plus
   no: Non
   search: Rechercher
+  seeAll: Voir tout
   validate: Valider
   yes: Oui
 
@@ -43,6 +44,8 @@ back:
     delete:
       success: Adhérent supprimé
     list:
+      full: Liste complète
+      count: Adhérent(s)
       filter:
         FEMALE: Femmes
         MALE: Hommes
@@ -57,6 +60,7 @@ back:
         registeredAt: Date insc.
         season: Saison
         sold: Cotisation
+        verified: Validation
     tab:
       adherent: Adherent
       payments: Paiements
@@ -79,6 +83,9 @@ back:
         date: Date
         season: Saison
         type: Type
+      info:
+        isSold : Cotisation %year% soldée
+        toPay : 'Reste à régler sur cotisation %year% : %amount% €'
       title: Liste des paiements
     new:
       title: Nouveau paiement
@@ -201,7 +208,7 @@ form:
     medicalCertificateFile: Certificat médical
     privateNote: Notes privée KMIS
     purpose: Objectif
-    pricingOption: Formule
+    priceOption: Formule
     registeredAt: Date d'inscription
 
 front:

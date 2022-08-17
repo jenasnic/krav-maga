@@ -39,7 +39,7 @@ class AdherentRepository extends ServiceEntityRepository
         }
     }
 
-    public function createSearchQueryBuilder(string $alias = 'registration'): QueryBuilder
+    public function createSearchQueryBuilder(int $seasonId): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('adherent');
 
@@ -58,7 +58,7 @@ class AdherentRepository extends ServiceEntityRepository
                 'price_option.amount AS toPay'
             )
             ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
-            ->innerJoin('registration.season', 'season')
+            ->innerJoin('registration.season', 'season', Join::WITH, 'season.id = :seasonId')
             ->innerJoin('registration.priceOption', 'price_option')
             ->leftJoin(
                 AbstractPayment::class,
@@ -69,6 +69,30 @@ class AdherentRepository extends ServiceEntityRepository
             ->groupBy('adherent')
             ->addOrderBy('registration.registeredAt', 'DESC')
             ->andWhere('registration.verified = TRUE')
+            ->setParameter('seasonId', $seasonId)
+        ;
+
+        return $queryBuilder;
+    }
+
+    public function createSearchAllQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('adherent');
+
+        $queryBuilder
+            ->select(
+                'adherent.id AS adherentId',
+                'adherent.firstName',
+                'adherent.lastName',
+                'adherent.gender',
+                'adherent.phone',
+                'adherent.email',
+                'registration.verified AS registrationVerified',
+                'season.label AS seasonLabel',
+            )
+            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
+            ->innerJoin('registration.season', 'season')
+            ->addOrderBy('registration.registeredAt', 'DESC')
         ;
 
         return $queryBuilder;
