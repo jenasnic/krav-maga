@@ -8,6 +8,7 @@ use App\Domain\Command\Back\SaveRegistrationCommand;
 use App\Domain\Command\Back\SaveRegistrationHandler;
 use App\Entity\Registration;
 use App\Exception\NoActiveSeasonException;
+use App\Form\NewRegistrationType;
 use App\Form\RegistrationType;
 use App\Service\Factory\RegistrationFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,7 @@ class RegistrationController extends AbstractController
     {
     }
 
-    #[Route('/adherent/nouvelle-inscription', name: 'bo_registration_new', methods: ['GET', 'POST'])]
+    #[Route('/adherent/nouvelle-inscription', name: 'bo_registration_new', methods: ['GET', 'POST', 'PATCH'])]
     public function add(
         Request $request,
         RegistrationFactory $registrationFactory,
@@ -36,12 +37,18 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('bo_adherent_list');
         }
 
-        $form = $this->createForm(RegistrationType::class, $registration, [
-            'full_form' => true,
-        ]);
+        $formOptions = ['full_form' => true];
+
+        $isPatch = $request->isMethod(Request::METHOD_PATCH);
+        if ($isPatch) {
+            $formOptions['method'] = Request::METHOD_PATCH;
+            $formOptions['validation_groups'] = false;
+        }
+
+        $form = $this->createForm(NewRegistrationType::class, $registration, $formOptions);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (!$isPatch && $form->isSubmitted() && $form->isValid()) {
             $newRegistrationHandler->handle(new NewRegistrationCommand($registration));
 
             $this->addFlash('info', $this->translator->trans('back.registration.new.success'));
@@ -55,13 +62,21 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/adherent/fiche-inscription/{registration}', name: 'bo_registration_edit', methods: ['GET', 'POST'])]
+    #[Route('/adherent/fiche-inscription/{registration}', name: 'bo_registration_edit', methods: ['GET', 'POST', 'PATCH'])]
     public function edit(Request $request, SaveRegistrationHandler $saveRegistrationHandler, Registration $registration): Response
     {
-        $form = $this->createForm(RegistrationType::class, $registration);
+        $formOptions = [];
+
+        $isPatch = $request->isMethod(Request::METHOD_PATCH);
+        if ($isPatch) {
+            $formOptions['method'] = Request::METHOD_PATCH;
+            $formOptions['validation_groups'] = false;
+        }
+
+        $form = $this->createForm(RegistrationType::class, $registration, $formOptions);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (!$isPatch && $form->isSubmitted() && $form->isValid()) {
             $saveRegistrationHandler->handle(new SaveRegistrationCommand($registration));
 
             $this->addFlash('info', $this->translator->trans('back.registration.edit.success'));

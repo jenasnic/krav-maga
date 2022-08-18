@@ -60,7 +60,7 @@ final class AdherentFactory extends ModelFactory
             'firstName' => $firstName,
             'lastName' => $lastName,
             'gender' => $gender,
-            'birthDate' => $this->faker->dateTimeBetween('-55 years', '-16 years'),
+            'birthDate' => $this->faker->dateTimeBetween('-55 years', '-18 years'),
             'phone' => $this->faker->phoneNumber(),
             'email' => strtolower($email),
             'pseudonym' => $firstName.substr($lastName, 0, 1),

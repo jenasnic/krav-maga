@@ -13,6 +13,24 @@
             <div class="column">{{ form_row(form.adherent.lastName) }}</div>
         </div>
         <div class="columns">
+            <div class="column">{{ form_row(form.withLegalRepresentative, {'attr': {'data-field-update': 'legal-representative'}}) }}</div>
+        </div>
+        <div data-field-update-target="legal-representative">
+            {% if form.legalRepresentative is defined %}
+            <div class="columns">
+                <div class="column">
+                    <div class="fieldset">
+                        {{ form_label(form.legalRepresentative) }}
+                        <div class="columns">
+                            <div class="column">{{ form_row(form.legalRepresentative.firstName) }}</div>
+                            <div class="column">{{ form_row(form.legalRepresentative.lastName) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="columns">
             <div class="column">{{ form_row(form.adherent.pseudonym) }}</div>
             <div class="column">{{ form_row(form.adherent.birthDate) }}</div>
             <div class="column">{{ form_row(form.adherent.gender) }}</div>

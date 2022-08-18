@@ -36,22 +36,30 @@ final class RegistrationFactory extends ModelFactory
         $filePath = $this->uploadPath.$fileName;
         $this->filesystem->copy($this->attestationModel, $filePath);
 
-        $registredAt = $this->faker->dateTimeBetween('-2 months', '-1 week');
+        $registeredAt = $this->faker->dateTimeBetween('-2 months', '-1 week');
+
+        $withLegalRepresentative = $this->faker->boolean(30);
+        $adherentAttributes = [];
+        if ($withLegalRepresentative) {
+            $adherentAttributes['birthDate'] = $this->faker->dateTimeBetween('-18 years', '-11 years');
+        }
 
         return [
             'comment' => $this->faker->text(),
             'privateNote' => $this->faker->text(),
             'licenseNumber' => $this->faker->numberBetween(100000, 999999),
-            'licenseDate' => $registredAt,
+            'licenseDate' => $registeredAt,
             'ffkPassport' => $this->faker->boolean(20),
             'medicalCertificateUrl' => $filePath,
-            'registeredAt' => $registredAt,
+            'registeredAt' => $registeredAt,
             'copyrightAuthorization' => $this->faker->boolean(80),
             'purpose' => PurposeFactory::random()->object(),
             'priceOption' => PriceOptionFactory::random()->object(),
             'emergency' => EmergencyFactory::new(),
-            'adherent' => AdherentFactory::new(),
+            'adherent' => AdherentFactory::new($adherentAttributes),
             'verified' => $this->faker->boolean(80),
+            'withLegalRepresentative' => $withLegalRepresentative,
+            'legalRepresentative' => $withLegalRepresentative ? LegalRepresentativeFactory::new() : null,
         ];
     }
 

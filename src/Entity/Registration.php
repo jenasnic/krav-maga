@@ -42,6 +42,14 @@ class Registration
     #[Assert\NotNull]
     private ?bool $copyrightAuthorization = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $withLegalRepresentative = false;
+
+    #[ORM\OneToOne(targetEntity: LegalRepresentative::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    #[Assert\Valid]
+    private ?LegalRepresentative $legalRepresentative = null;
+
     #[ORM\ManyToOne(targetEntity: Purpose::class)]
     #[ORM\JoinColumn(nullable: true)]
     #[Assert\NotNull]
@@ -173,6 +181,36 @@ class Registration
     public function setCopyrightAuthorization(?bool $copyrightAuthorization): self
     {
         $this->copyrightAuthorization = $copyrightAuthorization;
+
+        return $this;
+    }
+
+    public function isWithLegalRepresentative(): bool
+    {
+        return $this->withLegalRepresentative;
+    }
+
+    public function setWithLegalRepresentative(bool $withLegalRepresentative): self
+    {
+        $this->withLegalRepresentative = $withLegalRepresentative;
+
+        if (!$this->withLegalRepresentative) {
+            $this->legalRepresentative = null;
+        } elseif (null === $this->legalRepresentative) {
+            $this->legalRepresentative = new LegalRepresentative();
+        }
+
+        return $this;
+    }
+
+    public function getLegalRepresentative(): ?LegalRepresentative
+    {
+        return $this->legalRepresentative;
+    }
+
+    public function setLegalRepresentative(?LegalRepresentative $legalRepresentative): self
+    {
+        $this->legalRepresentative = $legalRepresentative;
 
         return $this;
     }

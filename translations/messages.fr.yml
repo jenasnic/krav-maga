@@ -50,6 +50,7 @@ back:
         FEMALE: Femmes
         MALE: Hommes
         YOUNG: Ados
+        ALL: Tous
       action:
         add: Nouvelle inscription
       header:
@@ -144,7 +145,7 @@ form:
     phone: Téléphone
     pictureFile: Photo
     pseudonym: Pseudo
-    pseudonymHelp: Vous pouvez renseigner ici votre pseudonyme Facebook pour faciliter les échanges sur Facebook
+    pseudonymHelp: Renseignez ici votre pseudonyme pour intégrer le <a href="https://www.facebook.com/profile.php?id=100077200202094">groupe Facebook</a> privé du club
     street: Rue
     zipCode: Code postal
 
@@ -159,6 +160,11 @@ form:
     lastName: Nom
     phone: Téléphone
 
+  legalRepresentative:
+    legalRepresentative: Représentant légal
+    firstName: Prénom
+    lastName: Nom
+
   newPayment:
     mode: Mode de paiement
     modePlaceholder: Sélectionnez un moyen de paiement
@@ -171,6 +177,7 @@ form:
     medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
     purpose: Objectif
     priceOption: Formule
+    withLegalRepresentative: Dans le cas d'une personne mineur, merci de renseigner le représentant légal
 
   payment:
     ancv:
@@ -210,6 +217,7 @@ form:
     purpose: Objectif
     priceOption: Formule
     registeredAt: Date d'inscription
+    withLegalRepresentative: Dans le cas d'une personne mineur, merci de renseigner le représentant légal
 
 front:
 

@@ -47,6 +47,7 @@ class AdherentType extends AbstractType
             ->add('pseudonym', TextType::class, [
                 'required' => false,
                 'help' => 'form.adherent.pseudonymHelp',
+                'help_html' => true,
             ])
             ->add('address', AddressType::class, [
                 'label' => false,

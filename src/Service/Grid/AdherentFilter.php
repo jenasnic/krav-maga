@@ -11,6 +11,7 @@ class AdherentFilter implements FilterInterface
     public const YOUNG = 'YOUNG';
     public const MALE = 'MALE';
     public const FEMALE = 'FEMALE';
+    public const ALL = 'ALL';
 
     public function apply(QueryBuilder $queryBuilder, ?string $filter = null): QueryBuilder
     {
@@ -51,6 +52,7 @@ class AdherentFilter implements FilterInterface
             self::YOUNG,
             self::MALE,
             self::FEMALE,
+            self::ALL,
         ];
     }
 }
