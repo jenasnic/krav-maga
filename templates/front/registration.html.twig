@@ -16,6 +16,20 @@
                 {{ form_row(form.adherent.lastName) }}
                 {{ form_row(form.adherent.firstName) }}
             </div>
+            <div class="row col-x1">
+                {{ form_row(form.withLegalRepresentative, {'attr': {'data-field-update': 'legal-representative'}}) }}
+                <div data-field-update-target="legal-representative">
+                    {% if form.legalRepresentative is defined %}
+                        <div class="fieldset">
+                            {{ form_label(form.legalRepresentative) }}
+                            <div class="row col-x2 col-sm-x1">
+                                {{ form_row(form.legalRepresentative.lastName) }}
+                                {{ form_row(form.legalRepresentative.firstName) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
             <div class="row col-x3 col-md-x2 col-sm-x1">
                 {{ form_row(form.adherent.pseudonym) }}
                 {{ form_row(form.adherent.birthDate) }}

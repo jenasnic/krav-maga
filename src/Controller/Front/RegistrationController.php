@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
     ) {
     }
 
-    #[Route('/inscription', name: 'app_registration')]
+    #[Route('/inscription', name: 'app_registration', methods: ['GET', 'POST', 'PATCH'])]
     public function registration(
         Request $request,
         RegistrationFactory $registrationFactory,
@@ -39,10 +39,18 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $form = $this->createForm(NewRegistrationType::class, $registration);
+        $formOptions = ['with_captcha' => true];
+
+        $isPatch = $request->isMethod(Request::METHOD_PATCH);
+        if ($isPatch) {
+            $formOptions['method'] = Request::METHOD_PATCH;
+            $formOptions['validation_groups'] = false;
+        }
+
+        $form = $this->createForm(NewRegistrationType::class, $registration, $formOptions);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if (!$isPatch && $form->isSubmitted() && $form->isValid()) {
             $registrationHandler->handle(new RegistrationCommand($registration));
 
             $this->addFlash('info', $this->translator->trans('front.registration.new.success'));
