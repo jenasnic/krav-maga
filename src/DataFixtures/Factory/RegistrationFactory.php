@@ -14,7 +14,7 @@ use Zenstruck\Foundry\ModelFactory;
  */
 final class RegistrationFactory extends ModelFactory
 {
-    private string $attestationModel = __DIR__.'/data/test.pdf';
+    private string $fileModel = __DIR__.'/data/test.pdf';
 
     private Generator $faker;
 
@@ -32,9 +32,11 @@ final class RegistrationFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $fileName = str_replace('.', '', uniqid('', true)).'.pdf';
-        $filePath = $this->uploadPath.$fileName;
-        $this->filesystem->copy($this->attestationModel, $filePath);
+        $medicalCertificatePath = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
+        $this->filesystem->copy($this->fileModel, $medicalCertificatePath);
+
+        $licenceFormPath = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
+        $this->filesystem->copy($this->fileModel, $licenceFormPath);
 
         $registeredAt = $this->faker->dateTimeBetween('-2 months', '-1 week');
 
@@ -44,22 +46,38 @@ final class RegistrationFactory extends ModelFactory
             $adherentAttributes['birthDate'] = $this->faker->dateTimeBetween('-18 years', '-11 years');
         }
 
+        $usePass15 = $this->faker->boolean(30);
+        $usePass50 = $this->faker->boolean(30);
+
+        if ($usePass15) {
+            $pass15Path = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
+            $this->filesystem->copy($this->fileModel, $pass15Path);
+        }
+        if ($usePass50) {
+            $pass50Path = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
+            $this->filesystem->copy($this->fileModel, $pass50Path);
+        }
+
         return [
-            'comment' => $this->faker->text(),
-            'privateNote' => $this->faker->text(),
-            'licenseNumber' => $this->faker->numberBetween(100000, 999999),
-            'licenseDate' => $registeredAt,
-            'ffkPassport' => $this->faker->boolean(20),
-            'medicalCertificateUrl' => $filePath,
-            'registeredAt' => $registeredAt,
-            'copyrightAuthorization' => $this->faker->boolean(80),
-            'purpose' => PurposeFactory::random()->object(),
-            'priceOption' => PriceOptionFactory::random()->object(),
-            'emergency' => EmergencyFactory::new(),
             'adherent' => AdherentFactory::new($adherentAttributes),
+            'comment' => $this->faker->text(),
+            'copyrightAuthorization' => $this->faker->boolean(80),
+            'emergency' => EmergencyFactory::new(),
+            'legalRepresentative' => $withLegalRepresentative ? LegalRepresentativeFactory::new() : null,
+            'licenceDate' => $registeredAt,
+            'licenceFormUrl' => $licenceFormPath,
+            'licenceNumber' => $this->faker->numberBetween(100000, 999999),
+            'medicalCertificateUrl' => $medicalCertificatePath,
+            'pass15Url' => $usePass15 ? $pass15Path : null,
+            'pass50Url' => $usePass50 ? $pass50Path : null,
+            'priceOption' => PriceOptionFactory::random()->object(),
+            'privateNote' => $this->faker->text(),
+            'purpose' => PurposeFactory::random()->object(),
+            'registeredAt' => $registeredAt,
+            'usePass15' => $usePass15,
+            'usePass50' => $usePass50,
             'verified' => $this->faker->boolean(80),
             'withLegalRepresentative' => $withLegalRepresentative,
-            'legalRepresentative' => $withLegalRepresentative ? LegalRepresentativeFactory::new() : null,
         ];
     }
 

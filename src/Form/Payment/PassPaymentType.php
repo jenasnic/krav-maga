@@ -7,6 +7,7 @@ use App\Entity\Payment\PassPayment;
 use App\Entity\Season;
 use App\Form\DataMapper\Payment\PassPaymentDataMapper;
 use Symfony\Component\Form\DataMapperInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +18,16 @@ class PassPaymentType extends AbstractPaymentType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('number', TextType::class);
+        $builder
+            ->add('amount', ChoiceType::class, [
+                'expanded' => true,
+                'choices' => [
+                    'enum.passSport.PASS_15' => 15,
+                    'enum.passSport.PASS_50' => 50,
+                ],
+            ])
+            ->add('number', TextType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

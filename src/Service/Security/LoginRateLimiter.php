@@ -31,7 +31,7 @@ class LoginRateLimiter extends AbstractRequestRateLimiter
             if ($emailRateLimit->isAccepted()) {
                 $this->emailSender->send(
                     'email/login_throttling.html.twig',
-                    [$this->mailerContact],
+                    $this->mailerContact,
                     ['ip' => $request->getClientIp()],
                 );
             }

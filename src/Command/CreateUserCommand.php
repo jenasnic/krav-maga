@@ -72,7 +72,7 @@ final class CreateUserCommand extends Command
 
             $this->emailSender->send(
                 'email/new_user.html.twig',
-                [$this->mailerContact],
+                $this->mailerContact,
                 ['user' => $user],
             );
         } catch (Exception $e) {

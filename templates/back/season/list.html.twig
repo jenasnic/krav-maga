@@ -29,7 +29,7 @@
         {% block tbody %}
             {% for season in seasons %}
                 <tr>
-                    <td>{{ season.label }}</td>
+                    <td>{{ season.getDisplayLabel() }}</td>
                     <td>{{ season.startDate|date('d/m/Y') }}</td>
                     <td>{{ season.endDate|date('d/m/Y') }}</td>
                     <td>{% if season.active %}<span class="icon has-text-info"><i class="icon-checkmark"></i></span>{% endif %}</td>

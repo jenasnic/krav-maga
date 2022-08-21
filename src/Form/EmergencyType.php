@@ -27,6 +27,7 @@ class EmergencyType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Emergency::class,
             'label_format' => 'form.emergency.%name%',
+            'validation_groups' => ['registration'],
         ]);
     }
 }

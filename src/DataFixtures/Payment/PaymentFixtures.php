@@ -11,9 +11,10 @@ use App\DataFixtures\Factory\RegistrationFactory;
 use App\DataFixtures\Factory\SeasonFactory;
 use App\DataFixtures\RegistrationFixtures;
 use App\DataFixtures\SeasonFixtures;
-use App\Entity\Adherent;
+use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
 use App\Entity\Season;
+use App\Helper\FloatHelper;
 use DateInterval;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -73,39 +74,59 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
 
     protected function createPaymentsForSeason(Registration $registration, Season $season, bool $sold): void
     {
-        $maxCount = (0 === $registration->getPriceOption()?->getAmount() % 3) ? 3 : 2;
-        $paymentCount = $this->faker->numberBetween(1, $maxCount);
+        /** @var PriceOption $priceOption */
+        $priceOption = $registration->getPriceOption();
+        $amount = $priceOption->getAmount();
 
-        $amount = $registration->getPriceOption()?->getAmount() / $paymentCount;
+        /** @var DateTime $startDate */
+        $startDate = $season->getStartDate();
+        $paymentDate = $startDate->add(DateInterval::createFromDateString('+1 month'));
 
-        if (!$sold) {
-            --$paymentCount;
-        }
-
-        while ($paymentCount-- > 0) {
-            /** @var DateTime $startDate */
-            $startDate = $season->getStartDate();
-            $paymentDate = $startDate->add(DateInterval::createFromDateString('+1 month'));
-            $this->createPayment($registration->getAdherent(), $season, $amount, $paymentDate);
-        }
-    }
-
-    protected function createPayment(Adherent $adherent, Season $season, float $amount, DateTime $date): void
-    {
-        $attributes = [
-            'adherent' => $adherent,
+        $paymentAttributes = [
+            'adherent' => $registration->getAdherent(),
             'season' => $season,
-            'amount' => $amount,
-            'date' => $date,
+            'date' => $paymentDate,
         ];
 
-        $type = $this->faker->randomElement(['ancv', 'cash', 'check', 'pass', 'transfer']);
+        if ($registration->isUsePass15()) {
+            $amount -= 15;
+            $paymentAttributes['amount'] = 15;
+            PassPaymentFactory::createOne($paymentAttributes);
+        }
+
+        if ($registration->isUsePass50()) {
+            $amount -= 50;
+            $paymentAttributes['amount'] = 50;
+            PassPaymentFactory::createOne($paymentAttributes);
+        }
+
+        do {
+            $newAmount = ($amount < 100 || $this->faker->boolean()) ? $amount : 60;
+            $paymentDate = $paymentDate->add(DateInterval::createFromDateString('+1 month'));
+
+            if (!$sold && FloatHelper::equals($amount, $newAmount)) {
+                break;
+            }
+
+            $paymentAttributes['amount'] = $newAmount;
+            $paymentAttributes['date'] = $paymentDate;
+            $this->createPayment($paymentAttributes);
+
+            $amount -= $newAmount;
+        } while (FloatHelper::greater($amount, 0));
+    }
+
+    /**
+     * @param array<string, mixed> $attributes
+     */
+    protected function createPayment(array $attributes): void
+    {
+        $type = $this->faker->randomElement(['ancv', 'cash', 'check', 'transfer']);
 
         match ($type) {
             'ancv' => AncvPaymentFactory::createOne($attributes),
             'cash' => CashPaymentFactory::createOne($attributes),
             'check' => CheckPaymentFactory::createOne($attributes),
-            'pass' => PassPaymentFactory::createOne($attributes),
             'transfer' => TransferPaymentFactory::createOne($attributes),
             default => throw new LogicException('invalid type')
         };

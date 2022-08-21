@@ -40,11 +40,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-#        - { path: ^/se-connecter, roles: PUBLIC_ACCESS }
-#        - { path: ^/creer-un-compte, roles: PUBLIC_ACCESS }
-#        - { path: ^/valider-un-compte/[0-9]+, roles: PUBLIC_ACCESS }
-#        - { path: ^/mot-de-passe-oublie, roles: PUBLIC_ACCESS }
-#        - { path: ^/modifier-mot-de-passe, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:

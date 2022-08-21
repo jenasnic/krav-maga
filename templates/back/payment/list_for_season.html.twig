@@ -8,7 +8,7 @@
         <ul>
             {% for season in seasons %}
                 <li{% if season.id == currentSeason.id %} class="is-active"{% endif %}>
-                    <a href="{{ path('bo_payment_list_for_season', {'season': season.id}) }}">{{ 'back.payment.tab.season'|trans }} {{ season.label }}</a>
+                    <a href="{{ path('bo_payment_list_for_season', {'season': season.id}) }}">{{ season.getDisplayLabel() }}</a>
                 </li>
             {% endfor %}
         </ul>

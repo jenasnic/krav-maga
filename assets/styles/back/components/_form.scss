@@ -1,8 +1,28 @@
 @use '../bulma/variables' as bulma;
 
-.form-group--checkbox {
+.form-group {
   > label {
-    padding-left: 10px;
+    position: relative;
+
+    &.required {
+      padding-right: 12px;
+
+      &:after {
+        content: '*';
+        color: bulma.$red;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
+
+  &--checkbox {
+    > label {
+      padding-left: 10px;
+    }
   }
 }
 

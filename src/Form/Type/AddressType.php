@@ -40,6 +40,7 @@ class AddressType extends AbstractType implements DataMapperInterface
             'data_class' => Address::class,
             'empty_data' => null,
             'error_bubbling' => false,
+            'validation_groups' => ['adherent'],
         ]);
     }
 

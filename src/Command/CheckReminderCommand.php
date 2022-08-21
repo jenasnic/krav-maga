@@ -39,7 +39,7 @@ final class CheckReminderCommand extends Command
             if (!empty($checks)) {
                 $this->emailSender->send(
                     'email/check_to_cash.html.twig',
-                    [$this->mailerContact],
+                    $this->mailerContact,
                     ['checks' => $checks],
                 );
 

@@ -29,7 +29,7 @@ final class EmergencyFactory extends ModelFactory
         return [
             'firstName' => $this->faker->firstName(),
             'lastName' => $this->faker->lastName(),
-            'phone' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->numerify('06 ## ## ## ##'),
         ];
     }
 

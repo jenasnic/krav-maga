@@ -80,4 +80,9 @@ class Season
 
         return $this;
     }
+
+    public function getDisplayLabel(): string
+    {
+        return sprintf('%s - %s', $this->getStartDate()?->format('Y'), $this->getendDate()?->format('Y'));
+    }
 }

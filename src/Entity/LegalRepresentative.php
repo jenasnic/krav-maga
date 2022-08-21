@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Helper\StringHelper;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 class LegalRepresentative
@@ -14,9 +15,11 @@ class LegalRepresentative
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\NotBlank(groups: ['registration'])]
     private ?string $firstName = null;
 
     #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\NotBlank(groups: ['registration'])]
     private ?string $lastName = null;
 
     public function getId(): ?int

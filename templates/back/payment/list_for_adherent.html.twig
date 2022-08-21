@@ -13,11 +13,13 @@
     {% if (registration.season.id == currentSeason.id) %}
         {% if not contributionSold %}
             <div class="notification is-warning">
-                {{ 'back.payment.grid.info.toPay'|trans({'%year%': currentSeason.label, '%amount%': amountToPay}) }}
+                <div class="is-size-4 mb-2">{{ registration.priceOption.label }} - {{ registration.priceOption.amount }}€</div>
+                {{ 'back.payment.grid.info.toPay'|trans({'%year%': currentSeason.getDisplayLabel(), '%amount%': amountToPay}) }}
             </div>
         {% else %}
             <div class="notification is-success">
-                {{ 'back.payment.grid.info.isSold'|trans({'%year%': currentSeason.label}) }}
+                <div class="is-size-4 mb-2">{{ registration.priceOption.label }} - {{ registration.priceOption.amount }}€</div>
+                {{ 'back.payment.grid.info.isSold'|trans({'%year%': currentSeason.getDisplayLabel()}) }}
             </div>
         {% endif %}
     {% endif %}
@@ -52,7 +54,7 @@
                     <td>{{ payment.date|date('d/m/Y') }}</td>
                     <td>{{ payment.amount|number_format(2, ',' , ' ') }}</td>
                     <td>{{ ('enum.paymentType.'~payment.paymentType)|trans }}</td>
-                    <td>{{ payment.season.label }}</td>
+                    <td>{{ payment.season.getDisplayLabel() }}</td>
                     <td class="action">
                         <a href="{{ path('bo_payment_view', {'payment': payment.id}) }}" class="button is-info">
                             <span class="icon"><i class="icon-eye"></i></span>

@@ -59,18 +59,18 @@ class AdherentType extends AbstractType
             /** @var Adherent|null $adherent */
             $adherent = $event->getData();
 
-            $constraints = [];
-            $constraints[] = new File([
-                'mimeTypes' => [
-                    'image/gif',
-                    'image/jpg',
-                    'image/jpeg',
-                    'image/png',
-                ],
-            ]);
-
             $options = [
-                'constraints' => $constraints,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/gif',
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                    ]),
+                ],
             ];
 
             if (null !== $adherent?->getPictureUrl()) {
@@ -86,6 +86,7 @@ class AdherentType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Adherent::class,
             'label_format' => 'form.adherent.%name%',
+            'validation_groups' => ['adherent'],
         ]);
     }
 }

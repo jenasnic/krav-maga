@@ -69,10 +69,6 @@ class RegistrationController extends AbstractController
         ConfirmRegistrationHandler $confirmRegistrationHandler,
         Registration $registration,
     ): Response {
-        if (null !== $this->getUser()) {
-            throw $this->createAccessDeniedException();
-        }
-
         try {
             $confirmRegistrationHandler->handle(new ConfirmRegistrationCommand($registration, $request));
 

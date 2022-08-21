@@ -35,8 +35,19 @@ class RemoveFileSubscriber implements EventSubscriberInterface
             $this->filesToRemove[] = $object->getPictureUrl();
         }
 
-        if ($object instanceof Registration && null !== $object->getMedicalCertificateUrl()) {
-            $this->filesToRemove[] = $object->getMedicalCertificateUrl();
+        if ($object instanceof Registration) {
+            if (null !== $object->getMedicalCertificateUrl()) {
+                $this->filesToRemove[] = $object->getMedicalCertificateUrl();
+            }
+            if (null !== $object->getLicenceFormUrl()) {
+                $this->filesToRemove[] = $object->getLicenceFormUrl();
+            }
+            if (null !== $object->getPass15Url()) {
+                $this->filesToRemove[] = $object->getPass15Url();
+            }
+            if (null !== $object->getPass50Url()) {
+                $this->filesToRemove[] = $object->getPass50Url();
+            }
         }
     }
 
