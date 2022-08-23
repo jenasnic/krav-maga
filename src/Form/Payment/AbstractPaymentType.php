@@ -21,7 +21,9 @@ abstract class AbstractPaymentType extends AbstractType
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
             ])
-            ->add('comment', TextareaType::class)
+            ->add('comment', TextareaType::class, [
+                'required' => false,
+            ])
         ;
 
         /** @var Adherent $adherent */

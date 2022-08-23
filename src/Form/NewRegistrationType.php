@@ -5,9 +5,11 @@ namespace App\Form;
 use App\Entity\Registration;
 use App\Form\Type\BulmaFileType;
 use App\Form\Type\GoogleCaptchaType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class NewRegistrationType extends AbstractRegistrationType
 {
@@ -17,6 +19,7 @@ class NewRegistrationType extends AbstractRegistrationType
 
         $builder
             ->add('medicalCertificateFile', BulmaFileType::class, [
+                'required' => false,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -31,7 +34,30 @@ class NewRegistrationType extends AbstractRegistrationType
                 'help' => 'form.newRegistration.medicalCertificateFileHelp',
                 'help_html' => true,
             ])
+            ->add('licenceFormFile', BulmaFileType::class, [
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/gif',
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',
+                            'application/pdf',
+                        ],
+                    ]),
+                ],
+                'help' => 'form.newRegistration.licenceFormFileHelp',
+                'help_html' => true,
+            ])
             ->add('adherent', AdherentType::class)
+            ->add('agreement', CheckboxType::class, [
+                'mapped' => false,
+                'label_html' => true,
+                'constraints' => [
+                    new IsTrue(null, 'form.errors.check_required', ['registration']),
+                ],
+            ])
         ;
 
         if ($options['full_form']) {
@@ -54,6 +80,7 @@ class NewRegistrationType extends AbstractRegistrationType
             'label_format' => 'form.newRegistration.%name%',
             'full_form' => false,
             'with_captcha' => false,
+            'validation_groups' => ['adherent', 'registration'],
         ]);
     }
 }

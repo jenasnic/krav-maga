@@ -33,5 +33,18 @@ final class SaveRegistrationHandler
 
             $registration->setMedicalCertificateUrl($this->fileUploader->upload($registration->getMedicalCertificateFile()));
         }
+
+        if (null !== $registration->getLicenceFormFile()) {
+            if (
+                null !== $registration->getLicenceFormUrl()
+                && file_exists($registration->getLicenceFormUrl())
+            ) {
+                unlink($registration->getLicenceFormUrl());
+            }
+
+            $registration->setLicenceFormUrl($this->fileUploader->upload($registration->getLicenceFormFile()));
+        }
+
+        // @todo : replace pass15 and pass50 files
     }
 }

@@ -22,13 +22,17 @@ enum:
     FEMALE: Femme
     MALE: Homme
 
+  passSport:
+    PASS_15: Pass'sport (15€)
+    PASS_50: Pass'sport (50€)
+    BOTH: Double pass (65€)
+
   paymentType:
     ANCV: Chèque ANCV
     CASH: Espèce
     CHECK: Chèque
     TRANSFER: Virement
-    PASS: Pass Oise
-
+    PASS: Pass'Sport
 
 login:
   password: Mot de passe
@@ -91,8 +95,6 @@ back:
     new:
       title: Nouveau paiement
       success: Paiement ajouté
-    tab:
-      season: Saison
     view:
       title: Paiement
     delete:
@@ -144,15 +146,19 @@ form:
     lastName: Nom
     phone: Téléphone
     pictureFile: Photo
-    pseudonym: Pseudo
-    pseudonymHelp: Renseignez ici votre pseudonyme pour intégrer le <a href="https://www.facebook.com/profile.php?id=100077200202094">groupe Facebook</a> privé du club
-    street: Rue
+    pseudonym: Pseudo Facebook
+    pseudonymHelp: Pour intégrer le <a href="https://www.facebook.com/groups/807864253572677/" target="_blank">groupe Facebook</a> privé du club
+    street: Adresse
     zipCode: Code postal
 
   contact:
     email: Votre email
     message: Message
     success: Votre demande a bien été envoyée.
+
+  documents:
+    label: Documents à fournir
+    help: Les documents peuvent être envoyés numériquement via ce formulaire ou remis en mains propres aux membres du bureau.
 
   emergency:
     emergency: Personne à contacter en cas d'urgence
@@ -170,11 +176,26 @@ form:
     modePlaceholder: Sélectionnez un moyen de paiement
 
   newRegistration:
+    agreement: "Je certifie que les renseignements figurant sur le formulaire d'inscription sont exacts et complets.<br/>
+    J'ai bien pris connaissance que :
+    <ul>
+    <li>L'adhésion au club entraîne obligatoirement la prise de la licence FFKDA</li>
+    <li>L'adhésion au club KMIS implique l’acceptation des <a href=\"/statuts_kmis.pdf\" target=\"_blank\">statuts</a></li>
+    <li>Tout titulaire d’une licence fédérale s’engage à respecter les Statuts et Règlements de la FFK</li>
+    </ul>"
     comment: Commentaire (problème de santé ou autre)
-    copyrightAuthorization: Droit à l'image
-    ffkPassport: Vous possedez déjà un passport FFK
+    copyrightAuthorization: J’autorise le club KMIS à reproduire et communiquer mon image prise dans le cadre de ses activités, sous toutes formes et tous supports.
+    licenceFormFile: Formulaire de demande de licence
+    licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/wp-content/uploads/2022/07/FORMULAIRE-DEMANDE-DE-LICENCE-INTERNET-2022-2023.pdf" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
     medicalCertificateFile: Certificat médical
-    medicalCertificateFileHelp: En cas de renouvellement de licence, vous pouvez compléter et renvoyer le questionnaire santé disponible <a href="https://www.formulaires.service-public.fr/gf/cerfa_15699.do" target="_blank">ici</a>.
+    medicalCertificateFileHelp: "Certificat médical ou attestation sur l’honneur.
+    Pour les nouveaux adhérents majeurs, la fourniture d’un premier certificat médical reste obligatoire :
+    certificat médical de moins de trois mois de non contre-indication à la pratique du Krav maga et des disciplines associées ou à la pratique des arts martiaux, en loisir ou en compétition.
+    Pour les informations sur les documents à fournir, consultez la <a href='https://www.ffkarate.fr/espace-licencies/certificat-medical' target='_blank'>FAQ</a>."
+    pass15File: Document d'elligibilité au Pass'sport
+    pass50File: Document d'elligibilité au Pass'sport Citoyen
+    usePass15: Utiliser le pass'sport
+    usePass50: Utiliser le pass'sport Citoyen
     purpose: Objectif
     priceOption: Formule
     withLegalRepresentative: Dans le cas d'une personne mineur, merci de renseigner le représentant légal
@@ -199,7 +220,7 @@ form:
       date: Date
       amount: Montant
       comment: Commentaire
-      number: N° pass Oise
+      number: N° Pass'Sport
     transfer:
       date: Date
       amount: Montant
@@ -209,14 +230,19 @@ form:
   registration:
     comment: Commentaire de l'adhérent
     copyrightAuthorization: Droit à l'image
-    ffkPassport: Passport FFK
-    licenseDate: Date de la licence
-    licenseNumber: N° de licence
+    internalLabel: Informations complémentaires KMIS
+    licenceDate: Date de la licence
+    licenceFormFile: Formulaire de demande de licence
+    licenceNumber: N° de licence
     medicalCertificateFile: Certificat médical
+    pass15File: Document d'elligibilité au Pass'sport
+    pass50File: Document d'elligibilité au Pass'sport Citoyen
+    priceOption: Formule
     privateNote: Notes privée KMIS
     purpose: Objectif
-    priceOption: Formule
     registeredAt: Date d'inscription
+    usePass15: Utiliser le pass'sport
+    usePass50: Utiliser le pass'sport Citoyen
     withLegalRepresentative: Dans le cas d'une personne mineur, merci de renseigner le représentant légal
 
 front:

@@ -14,17 +14,16 @@ class EmailSender
     }
 
     /**
-     * @param array<string> $receipts
      * @param array<string, mixed> $context
      */
-    public function send(string $template, array $receipts, array $context = []): void
+    public function send(string $template, string $receipt, array $context = []): void
     {
         $emailBuilder = $this->emailBuilderFactory->createEmailBuilder();
 
         $emailBuilder
             ->useTemplate($template, $context)
             ->fromDefault()
-            ->to($receipts)
+            ->to($receipt)
         ;
 
         $this->mailer->send($emailBuilder->getEmail());

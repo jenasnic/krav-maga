@@ -12,6 +12,7 @@ class EmailBuilder
     public function __construct(
         protected Environment $twig,
         protected string $mailerSender,
+        protected string $mailerContact,
     ) {
         $this->email = new Email();
     }
@@ -46,12 +47,16 @@ class EmailBuilder
         return $this;
     }
 
-    /**
-     * @param array<string> $receipts
-     */
-    public function to(array $receipts): self
+    public function to(string $receipt): self
     {
-        $this->email->to(...$receipts);
+        $this->email->to($receipt);
+
+        return $this;
+    }
+
+    public function copy(): self
+    {
+        $this->email->addBcc($this->mailerContact);
 
         return $this;
     }

@@ -12,66 +12,96 @@
     <div class="section">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.registration.page.title'|trans }}</h2>
         {{ form_start(form, {'attr': {'class': 'registration-form'}}) }}
-            <div class="row col-x2 col-sm-x1">
-                {{ form_row(form.adherent.lastName) }}
-                {{ form_row(form.adherent.firstName) }}
-            </div>
-            <div class="row col-x1">
-                {{ form_row(form.withLegalRepresentative, {'attr': {'data-field-update': 'legal-representative'}}) }}
-                <div data-field-update-target="legal-representative">
-                    {% if form.legalRepresentative is defined %}
-                        <div class="fieldset">
-                            {{ form_label(form.legalRepresentative) }}
-                            <div class="row col-x2 col-sm-x1">
-                                {{ form_row(form.legalRepresentative.lastName) }}
-                                {{ form_row(form.legalRepresentative.firstName) }}
-                            </div>
+        <div class="row col-x2 col-sm-x1">
+            {{ form_row(form.adherent.lastName) }}
+            {{ form_row(form.adherent.firstName) }}
+        </div>
+        <div class="row col-x1">
+            {{ form_row(form.withLegalRepresentative, {'attr': {'data-field-update': 'legal-representative'}}) }}
+            <div data-field-update-target="legal-representative">
+                {% if form.legalRepresentative is defined %}
+                    <div class="fieldset">
+                        {{ form_label(form.legalRepresentative) }}
+                        <div class="row col-x2 col-sm-x1">
+                            {{ form_row(form.legalRepresentative.lastName) }}
+                            {{ form_row(form.legalRepresentative.firstName) }}
                         </div>
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
             </div>
+        </div>
+        <div class="fieldset m-top-1">
+            {{ form_label(form.emergency) }}
             <div class="row col-x3 col-md-x2 col-sm-x1">
-                {{ form_row(form.adherent.pseudonym) }}
-                {{ form_row(form.adherent.birthDate) }}
-                {{ form_row(form.adherent.gender) }}
+                {{ form_row(form.emergency.lastName) }}
+                {{ form_row(form.emergency.firstName) }}
+                {{ form_row(form.emergency.phone) }}
             </div>
+        </div>
+        <div class="row col-x3 col-md-x2 col-sm-x1">
+            {{ form_row(form.adherent.pseudonym) }}
+            {{ form_row(form.adherent.birthDate) }}
+            {{ form_row(form.adherent.gender) }}
+        </div>
+        <div class="row col-x2 col-sm-x1">
+            {{ form_row(form.adherent.email) }}
+            {{ form_row(form.adherent.phone) }}
+        </div>
+        <div class="row col-x1">
+            {{ form_row(form.adherent.address.street) }}
+        </div>
+        <div class="row col-x2 col-sm-x1">
+            {{ form_row(form.adherent.address.zipCode) }}
+            {{ form_row(form.adherent.address.city) }}
+        </div>
+        <div class="fieldset m-top-2">
+            <label>{{ 'form.documents.label'|trans }}</label>
+            <div class="help-text">{{ 'form.documents.help'|trans }}</div>
             <div class="row col-x1">
                 {{ form_row(form.adherent.pictureFile) }}
-            </div>
-            <div class="row col-x2 col-sm-x1">
-                {{ form_row(form.adherent.email) }}
-                {{ form_row(form.adherent.phone) }}
-            </div>
-            <div class="row col-x1">
-                {{ form_row(form.adherent.address.street) }}
-            </div>
-            <div class="row col-x2 col-sm-x1">
-                {{ form_row(form.adherent.address.zipCode) }}
-                {{ form_row(form.adherent.address.city) }}
             </div>
             <div class="row col-x1">
                 {{ form_row(form.medicalCertificateFile) }}
             </div>
-            <div class="m-bottom-3">
-                {{ form_row(form.comment) }}
+            <div class="row col-x1">
+                {{ form_row(form.licenceFormFile) }}
             </div>
-            <div class="fieldset">
-                {{ form_label(form.emergency) }}
-                <div class="row col-x3 col-md-x2 col-sm-x1">
-                    {{ form_row(form.emergency.lastName) }}
-                    {{ form_row(form.emergency.firstName) }}
-                    {{ form_row(form.emergency.phone) }}
-                </div>
+        </div>
+        <div class="m-bottom-3">
+            {{ form_row(form.comment) }}
+        </div>
+        {{ form_row(form.purpose) }}
+        {{ form_row(form.priceOption) }}
+        <div class="m-top-3 m-bottom-1">
+            <div class="row col-x1">
+                {{ form_row(form.usePass15, {'attr': {'data-field-update': 'pass-15'}}) }}
             </div>
-
-            {{ form_row(form.purpose) }}
-            {{ form_row(form.priceOption) }}
-            {{ form_row(form.ffkPassport) }}
-            {{ form_row(form.copyrightAuthorization) }}
-            {{ form_row(form.captcha) }}
-            <div class="flex flex--content-end">
-                <button type="submit" class="button">{{ 'global.validate'|trans }} <i class="icon-checkmark"></i></button>
+            <div data-field-update-target="pass-15">
+                {% if form.pass15File is defined %}
+                    <div class="row col-x1 m-bottom-1">
+                        {{ form_row(form.pass15File) }}
+                    </div>
+                {% endif %}
             </div>
+            <div class="row col-x1">
+                {{ form_row(form.usePass50, {'attr': {'data-field-update': 'pass-50'}}) }}
+            </div>
+            <div data-field-update-target="pass-50">
+                {% if form.pass50File is defined %}
+                    <div class="row col-x1 m-bottom-1">
+                        {{ form_row(form.pass50File) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {{ form_row(form.copyrightAuthorization) }}
+        <div class="fieldset agreement-wrapper">
+            {{ form_row(form.agreement) }}
+        </div>
+        {{ form_row(form.captcha) }}
+        <div class="flex flex--content-end">
+            <button type="submit" class="button">{{ 'global.validate'|trans }} <i class="icon-checkmark"></i></button>
+        </div>
         {{ form_end(form) }}
     </div>
 

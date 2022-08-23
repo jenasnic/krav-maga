@@ -15,16 +15,16 @@ class Emergency
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 55)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(groups: ['registration'])]
     private ?string $firstName = null;
 
     #[ORM\Column(type: 'string', length: 55)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(groups: ['registration'])]
     private ?string $lastName = null;
 
     #[ORM\Column(type: 'string', length: 55, nullable: true)]
-    #[Assert\NotBlank]
-    #[Assert\Regex('/^[\d\s]{14}$/')]
+    #[Assert\NotBlank(groups: ['registration'])]
+    #[Assert\Regex('/^[\d\s]{14}$/', groups: ['registration'])]
     private ?string $phone = null;
 
     public function getId(): ?int

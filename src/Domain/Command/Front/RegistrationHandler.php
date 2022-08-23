@@ -43,6 +43,20 @@ final class RegistrationHandler
         if (null !== $registration->getMedicalCertificateFile()) {
             $registration->setMedicalCertificateUrl($this->fileUploader->upload($registration->getMedicalCertificateFile()));
         }
+
+        if (null !== $registration->getLicenceFormFile()) {
+            $registration->setLicenceFormUrl($this->fileUploader->upload($registration->getLicenceFormFile()));
+        }
+
+        // @todo : check if usePass15 is true?
+        if (null !== $registration->getPass15File()) {
+            $registration->setPass15Url($this->fileUploader->upload($registration->getPass15File()));
+        }
+
+        // @todo : check if usePass50 is true?
+        if (null !== $registration->getPass50File()) {
+            $registration->setPass50Url($this->fileUploader->upload($registration->getPass50File()));
+        }
     }
 
     private function sendConfirmationEmail(Registration $registration): void
@@ -62,9 +76,7 @@ final class RegistrationHandler
 
         $this->emailSender->send(
             'email/registration.html.twig',
-            [
-                $registration->getAdherent()->getEmail(),
-            ],
+            $registration->getAdherent()->getEmail(),
             [
                 'registration' => $registration,
                 'confirmLink' => $signatureComponents->getSignedUrl(),

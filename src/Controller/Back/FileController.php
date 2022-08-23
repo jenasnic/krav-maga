@@ -29,9 +29,46 @@ class FileController extends AbstractController
             throw new LogicException('invalid file');
         }
 
-        /** @var Adherent $adherent */
-        $adherent = $registration->getAdherent();
-        $fileName = $this->buildFileName($adherent, $filePath, 'attestation');
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'attestation');
+
+        return $this->getFileContent($filePath, $fileName);
+    }
+
+    #[Route('/telecharger-formulaire-licence/{registration}', name: 'bo_download_licence_form', methods: ['GET'])]
+    public function licenceForm(Registration $registration): Response
+    {
+        $filePath = $registration->getLicenceFormUrl();
+        if (null === $filePath) {
+            throw new LogicException('invalid file');
+        }
+
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'formulaire_licence');
+
+        return $this->getFileContent($filePath, $fileName);
+    }
+
+    #[Route('/telecharger-pass-15/{registration}', name: 'bo_download_pass_15', methods: ['GET'])]
+    public function pass15(Registration $registration): Response
+    {
+        $filePath = $registration->getPass15Url();
+        if (null === $filePath) {
+            throw new LogicException('invalid file');
+        }
+
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_15');
+
+        return $this->getFileContent($filePath, $fileName);
+    }
+
+    #[Route('/telecharger-pass-50/{registration}', name: 'bo_download_pass_50', methods: ['GET'])]
+    public function pass50(Registration $registration): Response
+    {
+        $filePath = $registration->getPass50Url();
+        if (null === $filePath) {
+            throw new LogicException('invalid file');
+        }
+
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_50');
 
         return $this->getFileContent($filePath, $fileName);
     }

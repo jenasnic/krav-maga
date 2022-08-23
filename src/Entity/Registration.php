@@ -24,22 +24,34 @@ class Registration
     private ?string $privateNote = null;
 
     #[ORM\Column(type: 'text', length: 55, nullable: true)]
-    private ?string $licenseNumber = null;
+    private ?string $licenceNumber = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?DateTime $licenseDate = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private bool $ffkPassport = false;
+    private ?DateTime $licenceDate = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $medicalCertificateUrl = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $licenceFormUrl = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $usePass15 = false;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $pass15Url = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $usePass50 = false;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $pass50Url = null;
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $registeredAt;
 
     #[ORM\Column(type: 'boolean')]
-    #[Assert\NotNull]
+    #[Assert\NotNull(groups: ['registration'])]
     private ?bool $copyrightAuthorization = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -47,26 +59,26 @@ class Registration
 
     #[ORM\OneToOne(targetEntity: LegalRepresentative::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    #[Assert\Valid]
+    #[Assert\Valid(groups: ['registration'])]
     private ?LegalRepresentative $legalRepresentative = null;
 
     #[ORM\ManyToOne(targetEntity: Purpose::class)]
     #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotNull]
+    #[Assert\NotNull(groups: ['registration'])]
     private ?Purpose $purpose = null;
 
     #[ORM\ManyToOne(targetEntity: PriceOption::class)]
     #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotNull]
+    #[Assert\NotNull(groups: ['registration'])]
     private ?PriceOption $priceOption = null;
 
     #[ORM\OneToOne(targetEntity: Emergency::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[Assert\Valid]
+    #[Assert\Valid(groups: ['registration'])]
     private ?Emergency $emergency = null;
 
     #[ORM\OneToOne(targetEntity: Adherent::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    #[Assert\Valid]
+    #[Assert\Valid(groups: ['adherent'])]
     private Adherent $adherent;
 
     #[ORM\ManyToOne(targetEntity: Season::class)]
@@ -76,6 +88,12 @@ class Registration
     private bool $verified = false;
 
     private ?UploadedFile $medicalCertificateFile = null;
+
+    private ?UploadedFile $licenceFormFile = null;
+
+    private ?UploadedFile $pass15File = null;
+
+    private ?UploadedFile $pass50File = null;
 
     public function __construct(Adherent $adherent, Season $season)
     {
@@ -113,38 +131,26 @@ class Registration
         return $this;
     }
 
-    public function getLicenseNumber(): ?string
+    public function getLicenceNumber(): ?string
     {
-        return $this->licenseNumber;
+        return $this->licenceNumber;
     }
 
-    public function setLicenseNumber(?string $licenseNumber): self
+    public function setLicenceNumber(?string $licenceNumber): self
     {
-        $this->licenseNumber = $licenseNumber;
+        $this->licenceNumber = $licenceNumber;
 
         return $this;
     }
 
-    public function getLicenseDate(): ?DateTime
+    public function getLicenceDate(): ?DateTime
     {
-        return $this->licenseDate;
+        return $this->licenceDate;
     }
 
-    public function setLicenseDate(?DateTime $licenseDate): self
+    public function setLicenceDate(?DateTime $licenceDate): self
     {
-        $this->licenseDate = $licenseDate;
-
-        return $this;
-    }
-
-    public function isFfkPassport(): bool
-    {
-        return $this->ffkPassport;
-    }
-
-    public function setFfkPassport(bool $ffkPassport): self
-    {
-        $this->ffkPassport = $ffkPassport;
+        $this->licenceDate = $licenceDate;
 
         return $this;
     }
@@ -157,6 +163,66 @@ class Registration
     public function setMedicalCertificateUrl(?string $medicalCertificateUrl): self
     {
         $this->medicalCertificateUrl = $medicalCertificateUrl;
+
+        return $this;
+    }
+
+    public function getLicenceFormUrl(): ?string
+    {
+        return $this->licenceFormUrl;
+    }
+
+    public function setLicenceFormUrl(?string $licenceFormUrl): self
+    {
+        $this->licenceFormUrl = $licenceFormUrl;
+
+        return $this;
+    }
+
+    public function isUsePass15(): bool
+    {
+        return $this->usePass15;
+    }
+
+    public function setUsePass15(bool $usePass15): self
+    {
+        $this->usePass15 = $usePass15;
+
+        return $this;
+    }
+
+    public function getPass15Url(): ?string
+    {
+        return $this->pass15Url;
+    }
+
+    public function setPass15Url(?string $pass15Url): self
+    {
+        $this->pass15Url = $pass15Url;
+
+        return $this;
+    }
+
+    public function isUsePass50(): bool
+    {
+        return $this->usePass50;
+    }
+
+    public function setUsePass50(bool $usePass50): self
+    {
+        $this->usePass50 = $usePass50;
+
+        return $this;
+    }
+
+    public function getPass50Url(): ?string
+    {
+        return $this->pass50Url;
+    }
+
+    public function setPass50Url(?string $pass50Url): self
+    {
+        $this->pass50Url = $pass50Url;
 
         return $this;
     }
@@ -295,6 +361,42 @@ class Registration
     public function setMedicalCertificateFile(?UploadedFile $medicalCertificateFile): self
     {
         $this->medicalCertificateFile = $medicalCertificateFile;
+
+        return $this;
+    }
+
+    public function getLicenceFormFile(): ?UploadedFile
+    {
+        return $this->licenceFormFile;
+    }
+
+    public function setLicenceFormFile(?UploadedFile $licenceFormFile): self
+    {
+        $this->licenceFormFile = $licenceFormFile;
+
+        return $this;
+    }
+
+    public function getPass15File(): ?UploadedFile
+    {
+        return $this->pass15File;
+    }
+
+    public function setPass15File(?UploadedFile $pass15File): self
+    {
+        $this->pass15File = $pass15File;
+
+        return $this;
+    }
+
+    public function getPass50File(): ?UploadedFile
+    {
+        return $this->pass50File;
+    }
+
+    public function setPass50File(?UploadedFile $pass50File): self
+    {
+        $this->pass50File = $pass50File;
 
         return $this;
     }

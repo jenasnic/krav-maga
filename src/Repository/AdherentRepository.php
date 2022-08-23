@@ -106,7 +106,7 @@ class AdherentRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('adherent');
 
         $queryBuilder
-            ->innerJoin('adherent.registration', 'registration')
+            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
             ->innerJoin('registration.purpose', 'purpose')
             ->select(
                 'adherent.id',

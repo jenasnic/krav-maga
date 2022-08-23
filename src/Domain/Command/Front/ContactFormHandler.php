@@ -19,9 +19,7 @@ final class ContactFormHandler
 
         $this->emailSender->send(
             'email/contact_form.html.twig',
-            [
-                $this->mailerContact,
-            ],
+            $this->mailerContact,
             [
                 'email' => $command->email,
                 'message' => $command->message,
@@ -30,9 +28,7 @@ final class ContactFormHandler
 
         $this->emailSender->send(
             'email/contact_form_notification.html.twig',
-            [
-                $contactEmail,
-            ],
+            $contactEmail,
         );
     }
 }

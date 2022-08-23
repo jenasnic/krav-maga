@@ -25,6 +25,7 @@
 
   &--checkbox {
     flex-direction: row;
+    margin-bottom: 15px;
   }
 
   > label {
@@ -111,10 +112,10 @@
 }
 
 .captcha-wrapper {
-  .g-recaptcha {
-    display: flex;
-    justify-content: center;
-  }
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .form-errors {
@@ -231,5 +232,22 @@ select {
     left: 20px;
     padding: 0 10px;
     top: -11px;
+  }
+}
+
+.agreement-wrapper {
+  label {
+    font-style: italic;
+
+    li {
+      padding-left: 30px;
+
+      &:before {
+        @include icons.icon(icons.$icon-checkmark);
+        color: color.$primary-color;
+        font-size: 0.8em;
+        margin-right: 10px;
+      }
+    }
   }
 }

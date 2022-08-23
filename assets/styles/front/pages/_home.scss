@@ -114,7 +114,7 @@
   display: flex;
   font-size: 1rem;
   justify-content: space-between;
-  padding: 20px 0;
+  margin-bottom: 50px;
   width: 100%;
 
   @include media.below(md) {
@@ -130,7 +130,7 @@
     box-sizing: border-box;
     font-size: 1.5em;
     padding: 30px;
-    width: 47%;
+    width: calc(50% - 30px);
 
     @include media.below(md) {
       max-width: 600px;
@@ -208,7 +208,7 @@
   box-sizing: border-box;
   color: color.$text-dark-color;
   font-size: 1.5em;
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   max-width: 600px;
   padding: 30px 10px;
 
@@ -245,10 +245,6 @@
         }
       }
     }
-  }
-
-  &.pricing {
-    margin-bottom: 20px;
   }
 
   &.equipment {

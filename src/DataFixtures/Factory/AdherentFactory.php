@@ -52,8 +52,7 @@ final class AdherentFactory extends ModelFactory
         );
 
         $pictureFixture = (GenderEnum::MALE === $gender) ? $this->malePicture : $this->femalePicture;
-        $fileName = str_replace('.', '', uniqid('', true)).'.jpg';
-        $filePath = $this->uploadPath.$fileName;
+        $filePath = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.jpg';
         $this->filesystem->copy($pictureFixture, $filePath);
 
         return [
@@ -61,8 +60,9 @@ final class AdherentFactory extends ModelFactory
             'lastName' => $lastName,
             'gender' => $gender,
             'birthDate' => $this->faker->dateTimeBetween('-55 years', '-18 years'),
-            'phone' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->numerify('06 ## ## ## ##'),
             'email' => strtolower($email),
+            'address' => AddressFactory::createOne(),
             'pseudonym' => $firstName.substr($lastName, 0, 1),
             'pictureUrl' => $filePath,
         ];
