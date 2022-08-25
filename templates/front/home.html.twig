@@ -34,18 +34,34 @@
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.mmaDefense.title'|trans,
-                        'image': asset('build/images/mma_defense.webp'),
+                        'title': 'front.home.sporting.kmixMma.title'|trans,
+                        'image': asset('build/images/kmix_mma.webp'),
                         'content': 'Pour augmenter ses aptitudes de défense.',
-                        'link': path('app_sporting')~'#mma-defense',
+                        'link': path('app_sporting')~'#kmix-mma',
+                    } %}
+                </div>
+                <div class="swiper-slide">
+                    {% include 'front/components/_home_slide.html.twig' with {
+                        'title': 'front.home.sporting.defenseWomen.title'|trans,
+                        'image': asset('build/images/defense_women.webp'),
+                        'content': 'Pour améliorer votre assurance et vos réflexes.',
+                        'link': path('app_sporting')~'#defense-femme',
+                    } %}
+                </div>
+                <div class="swiper-slide">
+                    {% include 'front/components/_home_slide.html.twig' with {
+                        'title': 'front.home.sporting.defenseTeenager.title'|trans,
+                        'image': asset('build/images/defense_teenager.webp'),
+                        'content': 'Pour améliorer sa condition physique et mentale.',
+                        'link': path('app_sporting')~'#defense-ados',
                     } %}
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
                         'title': 'front.home.sporting.cardioTraining.title'|trans,
-                        'image': asset('build/images/cardio_training.webp'),
+                        'image': asset('build/images/cardio_fit_krav.webp'),
                         'content': 'Pour se doter de la condition physique souhaitée.',
-                        'link': path('app_sporting')~'#cardio-training',
+                        'link': path('app_sporting')~'#cardio-fit-krav',
                     } %}
                 </div>
             </div>
@@ -110,8 +126,8 @@
                     <li>
                         Samedi
                         <ul>
-                            <li>13h00 - 14h00 : Défense Ado (salle 1)</li>
-                            <li>13h00 - 14h00 : Défense Femme (salle 2)</li>
+                            <li>13h00 - 14h00 : Defense Ado (salle 1)</li>
+                            <li>13h00 - 14h00 : Defense Femme (salle 2)</li>
                             <li>14h00 - 15h00 : Cardio Fit Krav</li>
                             <li>15h00 - 17h00 : Krav Defense Training</li>
                         </ul>

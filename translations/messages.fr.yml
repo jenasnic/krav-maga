@@ -190,7 +190,7 @@ form:
     medicalCertificateFile: Certificat médical
     medicalCertificateFileHelp: "Certificat médical ou attestation sur l’honneur.
     Pour les nouveaux adhérents majeurs, la fourniture d’un premier certificat médical reste obligatoire :
-    certificat médical de moins de trois mois de non contre-indication à la pratique du Krav maga et des disciplines associées ou à la pratique des arts martiaux, en loisir ou en compétition.
+    certificat médical de moins de trois mois de non contre-indication à la pratique du Krav Maga et des disciplines associées ou à la pratique des arts martiaux, en loisir ou en compétition.
     Pour les informations sur les documents à fournir, consultez la <a href='https://www.ffkarate.fr/espace-licencies/certificat-medical' target='_blank'>FAQ</a>."
     pass15File: Document d'elligibilité au Pass'sport
     pass50File: Document d'elligibilité au Pass'sport Citoyen
@@ -198,7 +198,7 @@ form:
     usePass50: Utiliser le pass'sport Citoyen
     purpose: Objectif
     priceOption: Formule
-    withLegalRepresentative: Dans le cas d'une personne mineur, merci de renseigner le représentant légal
+    withLegalRepresentative: Dans le cas d'une personne mineure, merci de renseigner le représentant légal
 
   payment:
     ancv:
@@ -261,12 +261,16 @@ front:
     sporting:
       cardioTraining:
         title: Cardio Fit Krav
+      defenseWomen:
+        title: Defense Femmes
+      defenseTeenager:
+        title: Defense Ados
       kmDefense:
         title: Krav Maga Self Defense
+      kmixMma:
+        title: KMix-MMA Defense
       kmTraining:
         title: Krav Defense Training
-      mmaDefense:
-        title: KMix-MMA Defense
 
   footer:
     link:

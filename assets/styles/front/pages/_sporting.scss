@@ -14,6 +14,10 @@
       &__image {
         flex-grow: 1;
 
+        > img {
+          filter: grayscale(100%);
+        }
+
         @include media.below(sm) {
           height: 200px;
           max-height: 30vh;
