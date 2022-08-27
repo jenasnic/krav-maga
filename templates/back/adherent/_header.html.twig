@@ -1,5 +1,11 @@
 <nav class="level">
-    <div class="level-left"></div>
+    <div class="level-left">
+        {% if adherent.id is null %}
+            <h1 class="title center">{{ 'back.adherent.edit.new'|trans }}</h1>
+        {% else %}
+            <h1 class="title"><span class="gender--{{ adherent.gender|lower }}"><i class="icon-user"></i></span> {{ adherent.firstName }} {{ adherent.lastName }}</h1>
+        {% endif %}
+    </div>
     <div class="level-right">
         <p class="level-item">
             <a href="{{ path('bo_adherent_list') }}" class="button is-outlined">

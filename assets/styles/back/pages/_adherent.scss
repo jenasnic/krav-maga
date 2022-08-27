@@ -1,18 +1,20 @@
 @use '../bulma/variables';
 
+.gender {
+  &--male > i {
+    color: variables.$blue;
+  }
+
+  &--female > i {
+    color: variables.$red;
+  }
+}
+
 .grid-adherent {
   table {
     .gender {
       font-size: 1.5rem;
       padding: 10px 15px 0 15px;
-
-      &--male > i {
-        color: variables.$blue;
-      }
-
-      &--female > i {
-        color: variables.$red;
-      }
     }
   }
 }

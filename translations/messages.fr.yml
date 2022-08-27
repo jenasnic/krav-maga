@@ -45,6 +45,7 @@ back:
     edit:
       success: Adhérent mis à jour
       title: Fiche adhérent
+      new: Nouvel adhérent
     delete:
       success: Adhérent supprimé
     list:
