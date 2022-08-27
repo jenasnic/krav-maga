@@ -44,7 +44,7 @@ class Adherent
     #[Assert\Email(groups: ['adherent'])]
     private ?string $email = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $pseudonym = null;
 
     #[ORM\Embedded(class: Address::class)]
