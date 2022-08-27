@@ -6,7 +6,7 @@
 
     <div class="gallery">
     {% for adherent in adherents %}
-        <div class="gallery__adherent gallery__adherent--{{ adherent['gender']|lower }}">
+        <a href="{{ path('bo_adherent_edit', {'adherent': adherent.id}) }}" target="_blank" class="gallery__adherent gallery__adherent--{{ adherent['gender']|lower }}">
             <div class="picture">
             {% if adherent['pictureUrl'] is not null %}
                 <img src="{{ path('bo_download_picture', {'adherent': adherent['id']}) }}" alt="{{ adherent['firstName'] ~ ' ' ~ adherent['lastName'] }}"/>
@@ -16,7 +16,7 @@
             </div>
             <div class="firstName">{{ adherent['firstName'] }}</div>
             <div class="lastName">{{ adherent['lastName'] }}</div>
-        </div>
+        </a>
     {% endfor %}
     </div>
 

@@ -5,11 +5,15 @@
   flex-wrap: wrap;
 
   .gallery__adherent {
-    background-color: variables.$grey-lighter;
-    border: 5px solid;
+    background-color: variables.$background;
+    border: 3px solid;
     border-radius: 10px;
     padding: 20px;
     margin: 10px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
 
     &--male {
       border-color: variables.$blue;
@@ -25,7 +29,7 @@
       width: 120px;
 
       > img {
-        border: 1px solid variables.$grey-darker;
+        border: 1px solid variables.$body-background-color;
         height: 100%;
         object-fit: cover;
         object-position: center;
