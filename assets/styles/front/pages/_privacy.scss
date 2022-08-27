@@ -1,0 +1,37 @@
+@use '../color';
+@use '../media';
+@use '../fonts';
+@use '../icons';
+
+.privacy {
+  font-size: 1.3em;
+
+  .note {
+    font-style: italic;
+  }
+
+  ul {
+    margin-bottom: 30px;
+
+    > li {
+      padding: 5px 10px;
+
+      &:before {
+        @include icons.icon(icons.$icon-play);
+        color: color.$primary-color;
+      }
+
+      &:before {
+        @include icons.icon(icons.$icon-checkmark);
+        color: color.$primary-color;
+        font-size: 0.8em;
+        margin-right: 10px;
+      }
+
+      ul {
+        padding-left: 20px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

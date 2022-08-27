@@ -26,7 +26,7 @@ class ContactFormController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $contactFormHandler->handle($contactForm);
 
-            $this->addFlash('info', $translator->trans('front.contact.form.success'));
+            $this->addFlash('info', $translator->trans('form.contact.success'));
 
             return $this->redirectToRoute('app_contact');
         }

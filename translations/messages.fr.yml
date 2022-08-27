@@ -275,7 +275,6 @@ front:
   footer:
     link:
       cookie: Gestion des cookies
-      legalNotices: Mentions légales
       privacy: Protection des données
 
   menu:
@@ -284,6 +283,10 @@ front:
       home: Accueil
       registration: Inscription
       sporting: Disciplines
+
+  privacy:
+    header:
+      title: Protection des données
 
   registration:
     header:
