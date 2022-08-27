@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /build/images/
+Disallow: /admin/
+Disallow: /index.php?
+Disallow: /se-connecter

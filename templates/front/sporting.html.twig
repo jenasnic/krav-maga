@@ -1,5 +1,13 @@
 {% extends 'front.html.twig' %}
 
+{% block title %}Les disciplines du KMIS{% endblock %}
+
+{% block meta %}
+    <meta name="keywords" content="krav-maga, self-defense, mma, cours femmes, cours ados, cardio training, combat, mental" />
+    <meta name="description" content="Entraînez-vous comme vous voulez vous défendre. Le KMIS vous propose des méthodes simples, exigeantes et efficaces pour progresser efficacement (renforcement musculaire, dépassement de soi, techniques de combat...).">
+    <meta name="og:title" property="og:title" content="Les disciplines du KMIS">
+{% endblock %}
+
 {% block header %}
     {% include 'front/components/_banner.html.twig' with {
         'image': asset('build/images/sporting.webp'),
@@ -15,7 +23,7 @@
             <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.kmDefense.title'|trans }}</h2>
             <div class="sporting">
                 <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
-                    <img src="{{ asset('build/images/km_defense.webp') }}" alt=""/>
+                    <img src="{{ asset('build/images/km_defense.webp') }}" alt="{{ 'front.home.sporting.kmDefense.title'|trans }}"/>
                 </div>
                 <div class="sporting__content">
                     <p>Cette discipline se destine à tous ceux qui veulent apprendre à se défendre sans compromis. Le travail sur la détermination, l’agressivité instantanée, le dépassement de soi, la condition physique et la technique sont mis au profit de la défense personnelle.</p>
@@ -36,7 +44,7 @@
             <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.kmTraining.title'|trans }}</h2>
             <div class="sporting">
                 <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
-                    <img src="{{ asset('build/images/km_training.webp') }}" alt=""/>
+                    <img src="{{ asset('build/images/km_training.webp') }}" alt="{{ 'front.home.sporting.kmTraining.title'|trans }}"/>
                 </div>
                 <div class="sporting__content">
                     <p>Cette discipline s’adresse à ceux qui sont en manque ou en recherche de confiance en soi, qui veulent une porte d’entrée avant de tenter le krav maga self defense, système de défense plus extrême, et/ou qui souhaitent enrichir leurs connaissances avec un bagage technique important.</p>
@@ -56,7 +64,7 @@
             <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.kmixMma.title'|trans }}</h2>
             <div class="sporting">
                 <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
-                    <img src="{{ asset('build/images/kmix_mma.webp') }}" alt=""/>
+                    <img src="{{ asset('build/images/kmix_mma.webp') }}" alt="{{ 'front.home.sporting.kmixMma.title'|trans }}"/>
                 </div>
                 <div class="sporting__content">
                     <p>Le but ici n’est pas de former des combattants à entrer dans une cage, mais de préparer et donner des armes complémentaires si lors d’une agression, les premières actions ne donnent pas l’effet escompté ; on doit alors passer en mode combat, c’est-à-dire avoir une boxe pieds-poings efficace pour décourager ou mettre KO au plus vite, une lutte performante pour être capable d’amener au sol un individu qui serait meilleur « boxeur », ou éviter de se faire emmener au sol dans une situation délicate, et enfin un grappling complet pour être en mesure soit de contrôler soit de mettre un terme au problème si on se retrouve au sol.</p>
@@ -75,7 +83,7 @@
             <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.defenseWomen.title'|trans }}</h2>
             <div class="sporting">
                 <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
-                    <img src="{{ asset('build/images/defense_women.webp') }}" alt=""/>
+                    <img src="{{ asset('build/images/defense_women.webp') }}" alt="{{ 'front.home.sporting.defenseWomen.title'|trans }}"/>
                 </div>
                 <div class="sporting__content">
                     <p>Le Krav Maga version 100% féminin.</p>
@@ -94,7 +102,7 @@
             <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.defenseTeenager.title'|trans }}</h2>
             <div class="sporting">
                 <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
-                    <img src="{{ asset('build/images/defense_teenager.webp') }}" alt=""/>
+                    <img src="{{ asset('build/images/defense_teenager.webp') }}" alt="{{ 'front.home.sporting.defenseTeenager.title'|trans }}"/>
                 </div>
                 <div class="sporting__content">
                     <p>La self defense s’adresse aussi aux adolescents. Au collège, au lycée ou à l’extérieur, les agressions peuvent être rencontrées, parfois même à l'origine de camarades. Réagir face aux différents degrés d’agressions en adaptant son comportement et ses gestes est nécessaire.</p>
@@ -112,7 +120,7 @@
             <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.sporting.cardioTraining.title'|trans }}</h2>
             <div class="sporting">
                 <div class="sporting__image with-background" data-aos="zoom-in" data-aos-duration="1200">
-                    <img src="{{ asset('build/images/cardio_fit_krav.webp') }}" alt=""/>
+                    <img src="{{ asset('build/images/cardio_fit_krav.webp') }}" alt="{{ 'front.home.sporting.cardioTraining.title'|trans }}"/>
                 </div>
                 <div class="sporting__content">
                     <p>Un cours dédié à l’amélioration de la condition physique et au dépassement de soi qui s’adapte à tous pour réaliser la répétition de plus, la seconde d’exercice de plus, celle qui peut vous sauver. Dans la rue, la condition physique et la volonté de ne pas lâcher  sont primordiales : pour courir plus vite, frapper plus fort, combattre ou contrôler plus longtemps, elle est une véritable alliée. Renforcement musculaire, cardiovasculaire et mental, la formule est complète.</p>
