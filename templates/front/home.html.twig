@@ -1,14 +1,20 @@
 {% extends 'front.html.twig' %}
 
+{% block meta %}
+    <meta name="keywords" content="Krav Maga, self-defense, club Oise, Villers-Sous-Saint-Leu, Mogneville" />
+    <meta name="description" content="Le KMIS, club de Krav Maga Self Defense dans l'Oise vous permettra d'apprendre à vous défendre. Venez améliorer votre condition physique, développer votre mental et vos techniques de combat.">
+    <meta name="og:title" property="og:title" content="Krav Maga Impact System">
+{% endblock %}
+
 {% block header %}
     {% include 'front/components/_banner-home.html.twig' %}
 {% endblock %}
 
 {% block body %}
 
-    <div id="club" class="section">
+    <div id="club" class="section" itemscope itemtype="https://schema.org/Organization">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.home.section.club'|trans }}</h2>
-        <p>Le KMIS offre tout un panel de disciplines complémentaires toutes axées autour de la défense. Que ce soit l'amélioration de la condition physique qui permettra par exemple une meilleure gestion des effets du stress, de l'apprentissage de techniques de combat ou de défense ou bien plus spécifiquement LA Self Defense, vous trouverez la ou les disciplines qui vous permettront de vous épanouir avec une équipe à votre écoute et mobilisée pour la réussite de chacun.</p>
+        <p>Le <span itemprop="name">KMIS</span> offre tout un panel de disciplines complémentaires toutes axées autour de la défense. Que ce soit l'amélioration de la condition physique qui permettra par exemple une meilleure gestion des effets du stress, de l'apprentissage de techniques de combat ou de défense ou bien plus spécifiquement LA Self Defense, vous trouverez la ou les disciplines qui vous permettront de vous épanouir avec une équipe à votre écoute et mobilisée pour la réussite de chacun.</p>
         <p>Chacun trouvera une ou plusieurs activités lui permettant de sortir de sa zone de confort et progresser efficacement.</p>
     </div>
 
@@ -84,7 +90,12 @@
                     >
                         Localisation <i class="icon-location"></i>
                     </a>
-                    <div class="address">4 place Jean Jaurès<br/>60140 Mogneville</div>
+                    <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">4 place Jean Jaurès</span><br/>
+                        <span itemprop="postalCode">60140</span> <span itemprop="addressLocality">Mogneville</span>
+                        <meta itemprop="addressRegion" content="Oise" />
+
+                    </div>
                 </div>
                 <ul class="session__time">
                     <li>
@@ -113,7 +124,11 @@
                     >
                         Localisation <i class="icon-location"></i>
                     </a>
-                    <div class="address">23 rue du Castel<br/>60340 Villers-Sous-Saint-Leu</div>
+                    <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+                        <span itemprop="streetAddress">23 rue du Castel</span><br/>
+                        <span itemprop="postalCode">60340</span> <span itemprop="addressLocality">Villers-Sous-Saint-Leu</span>
+                        <meta itemprop="addressRegion" content="Oise" />
+                    </div>
                 </div>
                 <ul class="session__time">
                     <li>

@@ -1,5 +1,13 @@
 {% extends 'front.html.twig' %}
 
+{% block title %}Contactez-nous{% endblock %}
+
+{% block meta %}
+    <meta name="keywords" content="krav-maga, self-defense, mma, cours femmes, cours ados, cardio training, combat, mental" />
+    <meta name="description" content="Des questions sur la pratique du Krav Maga et/ou de la self defense ? N'hésitez pas à nous contacter ou retouvez nous à Mogneville et à Villers-Sous-Saint-Leu au cours de nos entraînements.">
+    <meta name="og:title" property="og:title" content="Contactez-nous">
+{% endblock %}
+
 {% block header %}
     {% include 'front/components/_banner.html.twig' with {
         'image': asset('build/images/contact.webp'),
@@ -10,22 +18,26 @@
 
 {% block body %}
 
-    <div class="section">
+    <div class="section" itemscope itemtype="https://schema.org/Organization">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.contact.page.title'|trans }}</h2>
-        <p>Pour tout renseignement, vous pouvez nous contacter au <a href="tel:0783237428">07.83.23.74.28</a> ou nous laisser un message à l'aide du formulaire ci-dessous.</p>
+        <p>Pour tout renseignement, vous pouvez nous contacter au <a href="tel:0783237428" itemprop="telephone">07.83.23.74.28</a> ou nous laisser un message à l'aide du formulaire ci-dessous.</p>
         <p>
             Vous pouvez aussi nous retrouver :
             <ul class="contact-locations">
                 <li>
-                    à Mogneville le lundi et le mercredi de 19h30 à 22h30
-                    <a href="https://www.google.com/maps/search/4+place+jean+jaures+60140+mogneville/@49.3177976,2.4699965,17z/data=!3m1!4b1" target="_blank">
+                    à <span itemprop="addressLocality">Mogneville</span> le lundi et le mercredi de 19h30 à 22h30
+                    <a itemscope itemtype="https://schema.org/GeoCoordinates" href="https://www.google.com/maps/search/4+place+jean+jaures+60140+mogneville/@49.3177976,2.4699965,17z/data=!3m1!4b1" target="_blank">
                         <i class="icon-location"></i>
+                        <meta itemprop="latitude" content="49.3177976" />
+                        <meta itemprop="longitude" content="2.4699965" />
                     </a>
                 </li>
                 <li>
-                    à Villers-Sous-Saint-Leu le vendredi de 19h30 à 22h30 et le samedi de 13h00 à 17h00
-                    <a href="https://www.google.com/maps/place/23+Rue+du+Castel,+60340+Villers-Sous-Saint-Leu/@49.2142549,2.396175,17z/data=!3m1!4b1!4m5!3m4!1s0x47e648d4a31f8c93:0x7abe632340c2a373!8m2!3d49.2142549!4d2.3983637" target="_blank">
+                    à <span itemprop="addressLocality">Villers-Sous-Saint-Leu</span> le vendredi de 19h30 à 22h30 et le samedi de 13h00 à 17h00
+                    <a itemscope itemtype="https://schema.org/GeoCoordinates" href="https://www.google.com/maps/place/23+Rue+du+Castel,+60340+Villers-Sous-Saint-Leu/@49.2142549,2.396175,17z/data=!3m1!4b1!4m5!3m4!1s0x47e648d4a31f8c93:0x7abe632340c2a373!8m2!3d49.2142549!4d2.3983637" target="_blank">
                         <i class="icon-location"></i>
+                        <meta itemprop="latitude" content="49.2142549" />
+                        <meta itemprop="longitude" content="2.396175" />
                     </a>
                 </li>
             </ul>
