@@ -16,4 +16,10 @@ class HomeController extends AbstractController
             'priceOptions' => $priceOptionRepository->findAllOrdered(),
         ]);
     }
+
+    #[Route('/protections-des-donnees', name: 'app_privacy')]
+    public function privacy(): Response
+    {
+        return $this->render('front/privacy.html.twig');
+    }
 }

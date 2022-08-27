@@ -1,0 +1,54 @@
+@use '../color';
+@use '../media';
+@use '../icons';
+
+ul.list {
+
+  > li {
+    padding: 5px 0;
+
+    &:before {
+      @include icons.icon(icons.$icon-checkmark);
+      color: color.$primary-color;
+      font-size: 0.8em;
+      margin-right: 10px;
+    }
+
+    i {
+      font-size: 1.3em;
+    }
+  }
+
+
+
+
+
+  > li {
+    padding: 5px 10px;
+
+    &:before {
+      @include icons.icon(icons.$icon-play);
+      color: color.$primary-color;
+    }
+
+    > ul {
+      padding: 10px 10px 10px 30px;
+
+      @include media.below(sm) {
+        padding: 10px;
+      }
+
+      > li {
+        font-size: 0.7em;
+        padding: 5px 0;
+
+        &:before {
+          @include icons.icon(icons.$icon-checkmark);
+          color: color.$primary-color;
+          font-size: 0.8em;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

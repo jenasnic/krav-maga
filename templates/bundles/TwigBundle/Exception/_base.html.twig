@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>{% block title %}Erreur{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="/favicon.svg" />
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="flash-wrapper">
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="flash flash--{{ type }}" data-flash="{{ type }}">{{ message|raw }}</div>
+            {% endfor %}
+        {% endfor %}
+        </div>
+        <div class="error-content with-overlay with-background">
+            <img src="{{ asset('build/images/error.webp') }}" alt="Erreur"/>
+            <div class="error-message">
+                {% block message %}{% endblock %}
+            </div>
+            <div class="error-button">
+                <a href="{{ path('app_home') }}" class="button">Retour</a>
+            </div>
+        </div>
+    </body>
+</html>
