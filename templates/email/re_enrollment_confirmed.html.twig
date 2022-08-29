@@ -1,8 +1,8 @@
-{% block subject %}[KMIS] Inscription confirmée{% endblock %}
+{% block subject %}[KMIS] Réinscription validée{% endblock %}
 
 {% block html %}
 Bonjour,<br/>
-<p>Bienvenue au KMIS !</p>
+<p>Merci pour votre réinscription au KMIS.</p>
 <p>Pour régler votre cotisation {{ registration.season.getDisplayLabel() }}, vous pouvez :</p>
 <ul>
     <li>Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.</li>
@@ -10,21 +10,10 @@ Bonjour,<br/>
     <li>
         Utiliser la plateforme <a href="https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis" target="_blank">HelloAsso</a>
         {% if discountCode is not null %}
-            - Pour profiter
-            (pour profiter de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
+        (pour profiter de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
         {% endif %}.
     </li>
 </ul>
-<p><strong>Information Assurance aux licenciés</strong></p>
-<p>Si lors de votre demande de licence vous avez choisi d’adhérer à l’assurance « GARANTIES DE BASE ACCIDENTS CORPORELS » proposée par la FFK, consultez sur ffkarate.fr toutes les conditions relatives à :</p>
-<ul>
-    <li>votre assurance « Individuelle accident »</li>
-    <li>votre assurance « Responsabilité civile »</li>
-</ul>
-<p>
-    Partenaire « Santé » : le Groupe MDS - Mutuelle des Sportifs<br/>
-    Plus d’informations <a href="https://www.ffkarate.fr/espace-licencies/assurances/">ici</a>
-</p>
 <p>Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.</p>
 <p>Cordialement</p>
 <p>L'équipe KMIS</p>
@@ -34,27 +23,17 @@ Bonjour,<br/>
 {% block text %}
 Bonjour,
 
-Bienvenue au KMIS !
+Merci pour votre réinscription au KMIS.
 
 Pour régler votre cotisation {{ registration.season.getDisplayLabel() }}, vous pouvez :
 
 - Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.
 - Effectuer un virement en précisant votre nom/prénom (RIB disponible ici : {{ absolute_url('/iban_kmis.pdf') }}.
 - Utiliser la plateforme HelloAsso à l'adresse suivante : https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis
-  {% if discountCode is not null -%}
-  Pour profiter de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}".
-  {%- endif %}
+{% if discountCode is not null -%}
+    Pour profiter de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}".
+{%- endif %}
 
-
-Information Assurance aux licenciés
-
-Si lors de votre demande de licence vous avez choisi d’adhérer à l’assurance « GARANTIES DE BASE ACCIDENTS CORPORELS » proposée par la FFK, consultez sur ffkarate.fr toutes les conditions relatives à :</p>
-
-- votre assurance « Individuelle accident »
-- votre assurance « Responsabilité civile »
-
-Partenaire « Santé » : le Groupe MDS - Mutuelle des Sportifs
-Plus d’informations sur : https://www.ffkarate.fr/espace-licencies/assurances/
 
 Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.
 

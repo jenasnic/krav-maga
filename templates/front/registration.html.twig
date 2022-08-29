@@ -1,4 +1,4 @@
-{% extends 'front.html.twig' %}
+{% extends 'layout/_front.html.twig' %}
 
 {% block title %}Inscivez-vous au KMIS{% endblock %}
 
@@ -86,7 +86,7 @@
             </div>
             <div data-field-update-target="pass-15">
                 {% if form.pass15File is defined %}
-                    <div class="row col-x1 m-bottom-1">
+                    <div class="row col-x1 m-bottom-2">
                         {{ form_row(form.pass15File) }}
                     </div>
                 {% endif %}
@@ -96,7 +96,7 @@
             </div>
             <div data-field-update-target="pass-50">
                 {% if form.pass50File is defined %}
-                    <div class="row col-x1 m-bottom-1">
+                    <div class="row col-x1 m-bottom-2">
                         {{ form_row(form.pass50File) }}
                     </div>
                 {% endif %}

@@ -5,7 +5,7 @@ namespace App\Domain\Command\Front;
 use App\Entity\Registration;
 use App\Repository\RegistrationRepository;
 use App\Service\Email\EmailSender;
-use App\Service\FileUploader;
+use App\Service\File\FileUploader;
 use LogicException;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 

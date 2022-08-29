@@ -57,9 +57,9 @@
   <div{% with {attr: row_attr|merge({'class': 'form-group form-group--checkbox'})} %}{{ block('attributes') }}{% endwith %}>
     {{- form_widget(form, widget_attr) -}}
     {{- form_label(form) -}}
+    {{- form_help(form) -}}
+    {{- form_errors(form) -}}
   </div>
-  {{- form_errors(form) -}}
-  {{- form_help(form) -}}
 {%- endblock -%}
 
 {% block masked_widget %}

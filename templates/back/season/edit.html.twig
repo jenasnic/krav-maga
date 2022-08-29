@@ -1,4 +1,4 @@
-{% extends 'back.html.twig' %}
+{% extends 'layout/_back.html.twig' %}
 
 {% block body %}
 
@@ -8,10 +8,11 @@
         <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
             <form
                 data-confirm
-                data-confirm-message="{{ 'global.confirmActivate'|trans }}"
+                data-confirm-message="{{ 'back.season.edit.confirmActivate'|trans }}"
                 action="{{ path('bo_season_activate', {'season': season.id}) }}"
                 method="POST"
             >
+                <input type="hidden" name="_token" value="{{ csrf_token('activate-'~season.id) }}" />
                 <button type="submit" class="button is-danger">{{ 'global.activate'|trans }}</button>
             </form>
         </div>

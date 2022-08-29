@@ -46,19 +46,22 @@ final class ConfirmRegistrationHandler
             default => null,
         };
 
+        $this->entityManager->flush();
+
+        /** @var string $adherentEmail */
+        $adherentEmail = $registration->getAdherent()->getEmail();
+
         $email = $this->emailBuilder
             ->useTemplate('email/registration_confirmed.html.twig', [
                 'registration' => $command->registration,
                 'discountCode' => $discountCode,
             ])
             ->fromDefault()
-            ->to($command->registration->getAdherent()->getEmail())
+            ->to($adherentEmail)
             ->copy()
             ->getEmail()
         ;
 
         $this->emailSender->sendEmail($email);
-
-        $this->entityManager->flush();
     }
 }

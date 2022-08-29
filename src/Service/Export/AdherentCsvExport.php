@@ -2,7 +2,6 @@
 
 namespace App\Service\Export;
 
-use App\Entity\Adherent;
 use App\Entity\Registration;
 use App\Repository\RegistrationRepository;
 use LogicException;
@@ -33,9 +32,7 @@ class AdherentCsvExport extends AbstractCsvExport
             'Nom',
             'Prénom',
             'Représentant légal',
-            'Nom contact',
-            'Prénom contact',
-            'Téléphone contact',
+            'Contact urgence',
             'Pseudo Facebook',
             'Date de naissance',
             'Sexe',
@@ -45,6 +42,12 @@ class AdherentCsvExport extends AbstractCsvExport
             'Commentaire',
             'Objectif',
             'Droit à l\'image',
+            'N° de licence',
+            'Date licence',
+            'Saison',
+            'Formule',
+            'Pass 15',
+            'Pass 50',
         ];
     }
 
@@ -59,26 +62,41 @@ class AdherentCsvExport extends AbstractCsvExport
 
         $legalRepresentative = '';
         if ($data->isWithLegalRepresentative()) {
-            $legalRepresentative = sprintf('%s %s', $data->getLegalRepresentative()->getLastName(), $data->getLegalRepresentative()->getFirstName());
+            $legalRepresentative = sprintf(
+                '%s %s',
+                $data->getLegalRepresentative()?->getLastName() ?? '',
+                $data->getLegalRepresentative()?->getFirstName() ?? '',
+            );
         }
+
+        $emergencyContact = sprintf(
+            '%s %s [%s]',
+            $data->getEmergency()?->getLastName() ?? '',
+            $data->getEmergency()?->getFirstName() ?? '',
+            $data->getEmergency()?->getPhone() ?? '',
+        );
 
         /** @var array<int, string> $line */
         $line = [
             $data->getAdherent()->getLastName(),
             $data->getAdherent()->getFirstName(),
             $legalRepresentative,
-            $data->getEmergency()->getLastName(),
-            $data->getEmergency()->getFirstName(),
-            $data->getEmergency()->getPhone(),
+            $emergencyContact,
             $data->getAdherent()->getPseudonym(),
-            $data->getAdherent()->getBirthDate()->format('d/m/Y'),
+            $data->getAdherent()->getBirthDate()?->format('d/m/Y') ?? '',
             $this->translator->trans('enum.gender.'.$data->getAdherent()->getGender()),
             $data->getAdherent()->getEmail(),
             $data->getAdherent()->getPhone(),
             $data->getAdherent()->getAddress(),
             $data->getComment(),
-            $data->getPurpose()->getLabel(),
+            $data->getPurpose()?->getLabel(),
             $data->getCopyrightAuthorization() ? $this->translator->trans('global.yes') : $this->translator->trans('global.no'),
+            $data->getLicenceNumber(),
+            $data->getLicenceDate()?->format('d/m/Y'),
+            $data->getSeason()->getDisplayLabel(),
+            $data->getPriceOption()?->getLabel(),
+            $data->isUsePass15() ? $this->translator->trans('global.yes') : $this->translator->trans('global.no'),
+            $data->isUsePass50() ? $this->translator->trans('global.yes') : $this->translator->trans('global.no'),
         ];
 
         return $line;

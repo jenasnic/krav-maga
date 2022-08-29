@@ -30,6 +30,8 @@ abstract class AbstractRegistrationType extends AbstractType
     {
     }
 
+    abstract protected function showPassSportHelp(): bool;
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -122,11 +124,18 @@ abstract class AbstractRegistrationType extends AbstractType
 
     protected function processPassField(FormInterface $form, bool $usePass, string $checkboxFieldName, string $uploadFieldName, ?string $downloadUri = null): void
     {
-        $subBuilder = $form->getConfig()->getFormFactory()->createNamedBuilder($checkboxFieldName, CheckboxType::class, null, [
+        $passOptions = [
             'required' => false,
             'false_values' => [null, '0', 'false'],
             'auto_initialize' => false,
-        ]);
+        ];
+
+        if ($this->showPassSportHelp()) {
+            $passOptions['help'] = sprintf('form.registration.%sHelp', $checkboxFieldName);
+            $passOptions['help_html'] = true;
+        }
+
+        $subBuilder = $form->getConfig()->getFormFactory()->createNamedBuilder($checkboxFieldName, CheckboxType::class, null, $passOptions);
 
         $subBuilder->addEventListener(
             FormEvents::POST_SUBMIT,
