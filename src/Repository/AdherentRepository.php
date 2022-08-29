@@ -9,7 +9,6 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Generator;
 
 /**
  * @extends ServiceEntityRepository<Adherent>
@@ -96,36 +95,6 @@ class AdherentRepository extends ServiceEntityRepository
         ;
 
         return $queryBuilder;
-    }
-
-    /**
-     * @return Generator<array<string, mixed>>
-     */
-    public function findForExport(): Generator
-    {
-        $queryBuilder = $this->createQueryBuilder('adherent');
-
-        $queryBuilder
-            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
-            ->innerJoin('registration.purpose', 'purpose')
-            ->select(
-                'adherent.id',
-                'adherent.firstName',
-                'adherent.lastName',
-                'adherent.gender',
-                'DATE_FORMAT(adherent.birthDate, \'%d/%m/%Y\') AS birthDate',
-                'adherent.phone',
-                'adherent.email',
-                'purpose.label AS purposeLabel',
-                'registration.copyrightAuthorization',
-                'DATE_FORMAT(registration.registeredAt, \'%d/%m/%Y\') AS registeredAt',
-            )
-        ;
-
-        /** @var array<string, mixed> $item */
-        foreach ($queryBuilder->getQuery()->toIterable() as $item) {
-            yield $item;
-        }
     }
 
     /**

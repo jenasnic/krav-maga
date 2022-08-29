@@ -44,4 +44,9 @@ class Address
     {
         return $this->city;
     }
+
+    public function __toString(): string
+    {
+        return sprintf('%s - %s %s', $this->street, $this->zipCode, $this->city);
+    }
 }
