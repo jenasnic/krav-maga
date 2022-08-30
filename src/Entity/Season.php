@@ -83,6 +83,6 @@ class Season
 
     public function getDisplayLabel(): string
     {
-        return sprintf('%s - %s', $this->getStartDate()?->format('Y'), $this->getendDate()?->format('Y'));
+        return sprintf('%s-%s', $this->getStartDate()?->format('Y'), $this->getendDate()?->format('Y'));
     }
 }

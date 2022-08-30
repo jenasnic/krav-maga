@@ -11,5 +11,10 @@
 .table {
   td.action {
     padding: 8px 15px 0 15px;
+
+    .action-wrapper {
+      display: flex;
+      gap: 10px;
+    }
   }
 }
