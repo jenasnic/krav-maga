@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Registration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Generator;
 use LogicException;
 
 /**
@@ -51,5 +52,23 @@ class RegistrationRepository extends ServiceEntityRepository
         }
 
         return $registration;
+    }
+
+    /**
+     * @return Generator<Registration>
+     */
+    public function findForExport(): Generator
+    {
+        $queryBuilder = $this->createQueryBuilder('registration');
+
+        $queryBuilder
+            ->innerJoin('registration.purpose', 'purpose')
+            ->innerJoin('registration.adherent', 'adherent')
+        ;
+
+        /** @var Registration $item */
+        foreach ($queryBuilder->getQuery()->toIterable() as $item) {
+            yield $item;
+        }
     }
 }
