@@ -59,4 +59,9 @@ class RegistrationType extends AbstractRegistrationType
             'validation_groups' => ['registration'],
         ]);
     }
+
+    protected function showPassSportHelp(): bool
+    {
+        return false;
+    }
 }

@@ -28,9 +28,14 @@ class AdherentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
+            ->add('firstName', TextType::class, [
+                'disabled' => $options['re_enrollment'],
+            ])
+            ->add('lastName', TextType::class, [
+                'disabled' => $options['re_enrollment'],
+            ])
             ->add('gender', ChoiceType::class, [
+                'disabled' => $options['re_enrollment'],
                 'expanded' => true,
                 'choices' => [
                     'enum.gender.MALE' => GenderEnum::MALE,
@@ -38,6 +43,7 @@ class AdherentType extends AbstractType
                 ],
             ])
             ->add('birthDate', DateType::class, [
+                'disabled' => $options['re_enrollment'],
                 'widget' => 'single_text',
             ])
             ->add('phone', MaskedType::class, [
@@ -54,12 +60,12 @@ class AdherentType extends AbstractType
             ])
         ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
             $form = $event->getForm();
             /** @var Adherent|null $adherent */
             $adherent = $event->getData();
 
-            $options = [
+            $fieldOptions = [
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -74,18 +80,26 @@ class AdherentType extends AbstractType
             ];
 
             if (null !== $adherent?->getPictureUrl()) {
-                $options['download_uri'] = $this->router->generate('bo_download_picture', ['adherent' => $adherent->getId()]);
+                if ($options['re_enrollment']) {
+                    $fieldOptions['help'] = 'form.adherent.pictureFileHelp';
+                } else {
+                    $fieldOptions['download_uri'] = $this->router->generate('bo_download_picture', ['adherent' => $adherent->getId()]);
+                }
             }
 
-            $form->add('pictureFile', BulmaFileType::class, $options);
+            $form->add('pictureFile', BulmaFileType::class, $fieldOptions);
         });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        $resolver->setDefined('re_enrollment');
+        $resolver->setAllowedTypes('re_enrollment', 'bool');
+
         $resolver->setDefaults([
             'data_class' => Adherent::class,
             'label_format' => 'form.adherent.%name%',
+            're_enrollment' => false,
             'validation_groups' => ['adherent'],
         ]);
     }

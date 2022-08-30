@@ -50,7 +50,9 @@ class NewRegistrationType extends AbstractRegistrationType
                 'help' => 'form.newRegistration.licenceFormFileHelp',
                 'help_html' => true,
             ])
-            ->add('adherent', AdherentType::class)
+            ->add('adherent', AdherentType::class, [
+                're_enrollment' => $options['re_enrollment'],
+            ])
             ->add('agreement', CheckboxType::class, [
                 'mapped' => false,
                 'label_html' => true,
@@ -71,16 +73,23 @@ class NewRegistrationType extends AbstractRegistrationType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefined(['full_form', 'with_captcha']);
+        $resolver->setDefined(['full_form', 'with_captcha', 're_enrollment']);
         $resolver->setAllowedTypes('full_form', 'bool');
         $resolver->setAllowedTypes('with_captcha', 'bool');
+        $resolver->setAllowedTypes('re_enrollment', 'bool');
 
         $resolver->setDefaults([
             'data_class' => Registration::class,
             'label_format' => 'form.newRegistration.%name%',
             'full_form' => false,
             'with_captcha' => false,
+            're_enrollment' => false,
             'validation_groups' => ['adherent', 'registration'],
         ]);
+    }
+
+    protected function showPassSportHelp(): bool
+    {
+        return true;
     }
 }

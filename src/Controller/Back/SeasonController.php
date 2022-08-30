@@ -2,6 +2,8 @@
 
 namespace App\Controller\Back;
 
+use App\Domain\Command\Back\ActivateSeasonCommand;
+use App\Domain\Command\Back\ActivateSeasonHandler;
 use App\Entity\Season;
 use App\Exception\SeasonAlreadyDefinedException;
 use App\Form\SeasonType;
@@ -58,24 +60,19 @@ class SeasonController extends AbstractController
         }
 
         return $this->renderForm('back/season/edit.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
             'season' => $season,
         ]);
     }
 
     #[Route('/saison-sportive/activer/{season}', name: 'bo_season_activate', methods: ['POST'])]
-    public function activate(Season $season): Response
+    public function activate(Request $request, ActivateSeasonHandler $activateSeasonHandler, Season $season): Response
     {
-        $activeSeason = $this->seasonRepository->getActiveSeason();
-        if (null !== $activeSeason) {
-            $activeSeason->setActive(false);
-            $this->seasonRepository->add($activeSeason, true);
+        if ($this->isCsrfTokenValid('activate-'.$season->getId(), (string) $request->request->get('_token'))) {
+            $activateSeasonHandler->handle(new ActivateSeasonCommand($season));
+
+            $this->addFlash('info', $this->translator->trans('back.season.activate.success'));
         }
-
-        $season->setActive(true);
-        $this->seasonRepository->add($season, true);
-
-        $this->addFlash('success', $this->translator->trans('back.season.edit.success'));
 
         return $this->redirectToRoute('bo_season_list');
     }

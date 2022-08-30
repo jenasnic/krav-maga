@@ -1,15 +1,12 @@
 <?php
 
-namespace App\Domain\Command\Front;
+namespace App\Domain\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ContactFormCommand
+class ReEnrollment
 {
     #[Assert\NotBlank]
     #[Assert\Email]
     public ?string $email = null;
-
-    #[Assert\NotBlank]
-    public ?string $message = null;
 }

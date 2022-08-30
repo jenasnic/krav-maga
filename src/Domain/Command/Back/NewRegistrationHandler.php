@@ -4,7 +4,7 @@ namespace App\Domain\Command\Back;
 
 use App\Entity\Registration;
 use App\Repository\RegistrationRepository;
-use App\Service\FileUploader;
+use App\Service\File\FileUploader;
 
 final class NewRegistrationHandler
 {

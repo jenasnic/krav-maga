@@ -119,4 +119,22 @@ class AdherentRepository extends ServiceEntityRepository
         /** @var array<array<string>> */
         return $queryBuilder->getQuery()->getResult();
     }
+
+    /**
+     * @return array<Adherent>
+     */
+    public function findForSeason(int $seasonId): array
+    {
+        $queryBuilder = $this->createQueryBuilder('adherent');
+
+        $queryBuilder
+            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
+            ->innerJoin('registration.season', 'season')
+            ->andWhere('season.id = :seasonId')
+            ->setParameter('seasonId', $seasonId)
+        ;
+
+        /** @var array<Adherent> */
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

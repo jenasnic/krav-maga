@@ -1,0 +1,17 @@
+{% extends 'layout/_basic.html.twig' %}
+
+{% block content %}
+
+    <div id="re-enrollement-form">
+        {{ form_start(form) }}
+        <div class="row col-x1">
+            {{ form_row(form.email) }}
+        </div>
+        {{ form_row(form.captcha) }}
+        <div class="flex flex--content-center">
+            <button type="submit" class="button">{{ 'global.validate'|trans }} <i class="icon-checkmark"></i></button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
