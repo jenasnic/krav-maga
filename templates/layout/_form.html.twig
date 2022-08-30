@@ -83,12 +83,12 @@
     <label class="file-label" data-input-file="data-input-file">
       <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
       <span class="file-cta">
-          <span class="file-icon"><i class="icon-upload"></i></span>
-          <span class="file-label">{{ 'global.browse'|trans }}</span>
-        </span>
+        <span class="file-icon"><i class="icon-upload"></i></span>
+        <span class="file-label">{{ 'global.browse'|trans }}</span>
+      </span>
       <span class="file-name">
           {% if value is not empty %}{{ value }}{% endif %}
-        </span>
+      </span>
     </label>
     {% if download_uri is defined %}
       <a href="{{ download_uri }}" target="_blank" class="button download">
