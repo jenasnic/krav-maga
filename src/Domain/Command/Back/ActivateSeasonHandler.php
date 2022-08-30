@@ -36,6 +36,7 @@ final class ActivateSeasonHandler
 
             foreach ($adherents as $adherent) {
                 $token = $this->reEnrollmentTokenFactory->create($adherent);
+                $this->entityManager->persist($token);
                 $this->entityManager->flush();
 
                 /** @var string $adherentEmail */

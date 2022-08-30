@@ -64,18 +64,23 @@
                         {% endif %}
                     </td>
                     <td class="action">
-                        <form
-                            data-confirm
-                            data-confirm-message="{{ 'global.confirmDelete'|trans }}"
-                            action="{{ path('bo_adherent_delete', {'adherent': registration['adherentId']}) }}"
-                            method="POST"
-                        >
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete-'~registration['adherentId']) }}" />
-                            <input type="hidden" name="full-list" value="true" />
-                            <button type="submit" class="button is-danger">
-                                <span class="icon"><i class="icon-cross"></i></span>
-                            </button>
-                        </form>
+                        <div class="action-wrapper">
+                            <a href="{{ path('bo_adherent_edit', {'adherent': registration['adherentId']}) }}" class="button is-primary">
+                                <span class="icon"><i class="icon-pencil"></i></span>
+                            </a>
+                            <form
+                                data-confirm
+                                data-confirm-message="{{ 'global.confirmDelete'|trans }}"
+                                action="{{ path('bo_adherent_delete', {'adherent': registration['adherentId']}) }}"
+                                method="POST"
+                            >
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete-'~registration['adherentId']) }}" />
+                                <input type="hidden" name="full-list" value="true" />
+                                <button type="submit" class="button is-danger">
+                                    <span class="icon"><i class="icon-cross"></i></span>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}

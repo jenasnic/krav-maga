@@ -2,7 +2,6 @@
 
 namespace App\Domain\Command\Front;
 
-use App\Enum\PassSportEnum;
 use App\Service\Email\EmailBuilder;
 use App\Service\Email\EmailSender;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,6 +10,8 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class ConfirmRegistrationHandler
 {
+    use RegistrationTrait;
+
     public function __construct(
         private readonly VerifyEmailHelperInterface $verifyEmailHelper,
         private readonly EntityManagerInterface $entityManager,
@@ -39,22 +40,18 @@ final class ConfirmRegistrationHandler
             throw new LogicException('invalid registration');
         }
 
-        $discountCode = match (true) {
-            $registration->isUsePass15() && $registration->isUsePass50() => PassSportEnum::BOTH,
-            $registration->isUsePass15() => PassSportEnum::PASS_15,
-            $registration->isUsePass50() => PassSportEnum::PASS_50,
-            default => null,
-        };
-
         $this->entityManager->flush();
 
         /** @var string $adherentEmail */
         $adherentEmail = $registration->getAdherent()->getEmail();
+        $discountCode = $this->getDiscountCode($registration);
+        $amountToPay = $this->getAmountToPay($registration);
 
         $email = $this->emailBuilder
             ->useTemplate('email/registration_confirmed.html.twig', [
                 'registration' => $command->registration,
                 'discountCode' => $discountCode,
+                'amountToPay' => $amountToPay,
             ])
             ->fromDefault()
             ->to($adherentEmail)

@@ -4,7 +4,6 @@ namespace App\Domain\Command\Front;
 
 use App\Entity\Registration;
 use App\Enum\FileTypeEnum;
-use App\Enum\PassSportEnum;
 use App\Service\Email\EmailBuilder;
 use App\Service\Email\EmailSender;
 use App\Service\File\FileCleaner;
@@ -13,6 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class ReEnrollmentHandler
 {
+    use RegistrationTrait;
+
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly EmailBuilder $emailBuilder,
@@ -30,20 +31,16 @@ final class ReEnrollmentHandler
         $this->entityManager->remove($command->reEnrollmentToken);
         $this->entityManager->flush();
 
-        $discountCode = match (true) {
-            $registration->isUsePass15() && $registration->isUsePass50() => PassSportEnum::BOTH,
-            $registration->isUsePass15() => PassSportEnum::PASS_15,
-            $registration->isUsePass50() => PassSportEnum::PASS_50,
-            default => null,
-        };
-
         /** @var string $adherentEmail */
         $adherentEmail = $registration->getAdherent()->getEmail();
+        $discountCode = $this->getDiscountCode($registration);
+        $amountToPay = $this->getAmountToPay($registration);
 
         $email = $this->emailBuilder
             ->useTemplate('email/re_enrollment_confirmed.html.twig', [
                 'registration' => $registration,
                 'discountCode' => $discountCode,
+                'amountToPay' => $amountToPay,
             ])
             ->fromDefault()
             ->to($adherentEmail)

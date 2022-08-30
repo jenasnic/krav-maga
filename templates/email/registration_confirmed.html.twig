@@ -1,18 +1,17 @@
 {% block subject %}[KMIS] Inscription confirmée{% endblock %}
 
 {% block html %}
-Bonjour,<br/>
+Bonjour {{ registration.adherent.getFullName() }},<br/>
 <p>Bienvenue au KMIS !</p>
-<p>Pour régler votre cotisation {{ registration.season.getDisplayLabel() }}, vous pouvez :</p>
+<p>Pour régler votre cotisation {{ registration.season.getDisplayLabel() }} d'un montant de {{ amountToPay }}€, vous pouvez :</p>
 <ul>
     <li>Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.</li>
     <li>Effectuer un virement en précisant votre nom/prénom (RIB disponible <a href="{{ absolute_url('/iban_kmis.pdf') }}" target="_blank">ici</a>).</li>
     <li>
         Utiliser la plateforme <a href="https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis" target="_blank">HelloAsso</a>
-        {% if discountCode is not null %}
-            - Pour profiter
-            (pour profiter de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
-        {% endif %}.
+        {%- if discountCode is not null %}
+            (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
+        {%- endif %}.
     </li>
 </ul>
 <p><strong>Information Assurance aux licenciés</strong></p>
@@ -25,25 +24,23 @@ Bonjour,<br/>
     Partenaire « Santé » : le Groupe MDS - Mutuelle des Sportifs<br/>
     Plus d’informations <a href="https://www.ffkarate.fr/espace-licencies/assurances/">ici</a>
 </p>
-<p>Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.</p>
+<p><strong>Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.</strong></p>
 <p>Cordialement</p>
 <p>L'équipe KMIS</p>
 <img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
 {% endblock %}
 
 {% block text %}
-Bonjour,
+Bonjour {{ registration.adherent.getFullName() }},
 
 Bienvenue au KMIS !
 
-Pour régler votre cotisation {{ registration.season.getDisplayLabel() }}, vous pouvez :
+Pour régler votre cotisation {{ registration.season.getDisplayLabel() }} d'un montant de {{ amountToPay }}€, vous pouvez :
 
 - Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.
 - Effectuer un virement en précisant votre nom/prénom (RIB disponible ici : {{ absolute_url('/iban_kmis.pdf') }}.
 - Utiliser la plateforme HelloAsso à l'adresse suivante : https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis
-  {% if discountCode is not null -%}
-  Pour profiter de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}".
-  {%- endif %}
+  {%- if discountCode is not null %} (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}"){%- endif %}.
 
 
 Information Assurance aux licenciés
