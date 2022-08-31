@@ -34,7 +34,7 @@ class RegistrationController extends AbstractController
         try {
             $registration = $registrationFactory->createNew();
         } catch (NoActiveSeasonException $exception) {
-            $this->addFlash('warning', $this->translator->trans('front.registration.new.noActiveSeason'));
+            $this->addFlash('error', $this->translator->trans('front.registration.new.noActiveSeason'));
 
             return $this->redirectToRoute('app_home');
         }
