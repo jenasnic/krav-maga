@@ -1,5 +1,4 @@
 @use '../color';
-@use '../fonts';
 @use '../media';
 
 $default-margin: 50px;
@@ -13,15 +12,18 @@ $default-margin: 50px;
     padding: 0 $default-margin;
   }
 
+  @include media.below(sm) {
+    padding: 0 30px;
+  }
+
   h2, h3 {
     color: color.$text-dark-color;
-    font-family: fonts.$text-title-font;
     font-size: 6rem;
     line-height: 6rem;
 
     @include media.below(sm) {
-      font-size: 5rem;
-      line-height: 5rem;
+      font-size: 4rem;
+      line-height: 4rem;
     }
   }
 
@@ -34,6 +36,7 @@ $default-margin: 50px;
     font-size: 4rem;
     line-height: 4rem;
     margin: $default-margin 0 30px 0;
+    text-align: left;
 
     @include media.below(sm) {
       font-size: 3rem;

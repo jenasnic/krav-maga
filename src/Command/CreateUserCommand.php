@@ -18,7 +18,7 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[AsCommand(name: 'security:create-admin')]
+#[AsCommand(name: 'app:create-admin')]
 final class CreateUserCommand extends Command
 {
     public function __construct(
