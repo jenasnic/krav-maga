@@ -30,6 +30,7 @@ enum:
     ANCV: Chèque ANCV
     CASH: Espèce
     CHECK: Chèque
+    HELLO_ASSO: HelloAsso
     TRANSFER: Virement
     PASS: Pass'Sport
 
@@ -187,7 +188,9 @@ form:
     </ul>"
     comment: Commentaire (problème de santé ou autre)
     copyrightAuthorization: J’autorise le club KMIS à reproduire et communiquer mon image prise dans le cadre de ses activités, sous toutes formes et tous supports.
+    licenceDate: Date de la licence
     licenceFormFile: Formulaire de demande de licence
+    licenceNumber: N° de licence
     licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/wp-content/uploads/2022/07/FORMULAIRE-DEMANDE-DE-LICENCE-INTERNET-2022-2023.pdf" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
     medicalCertificateFile: Certificat médical
     medicalCertificateFileHelp: "Certificat médical ou attestation sur l’honneur.
@@ -196,6 +199,7 @@ form:
     Pour les informations sur les documents à fournir, consultez la <a href='https://www.ffkarate.fr/espace-licencies/certificat-medical' target='_blank'>FAQ</a>."
     pass15File: Document d'elligibilité au Pass'Sports Citoyen
     pass50File: Document d'elligibilité au Pass'Sports
+    privateNote: Notes privée KMIS
     usePass15: Utiliser le Pass'Sports Citoyen (15€)
     usePass50: Utiliser le Pass'Sports (50€)
     purpose: Objectif
@@ -218,6 +222,10 @@ form:
       comment: Commentaire
       number: N° chèque
       cashingDate: Date d'encaissement
+    helloAsso:
+      date: Date
+      amount: Montant
+      comment: Commentaire
     pass:
       date: Date
       amount: Montant

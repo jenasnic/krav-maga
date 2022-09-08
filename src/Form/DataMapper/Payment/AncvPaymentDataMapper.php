@@ -5,6 +5,7 @@ namespace App\Form\DataMapper\Payment;
 use App\Entity\Adherent;
 use App\Entity\Payment\AncvPayment;
 use App\Entity\Season;
+use DateTime;
 use Exception;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -30,6 +31,7 @@ class AncvPaymentDataMapper implements DataMapperInterface
         $forms = iterator_to_array($forms);
 
         $forms['amount']->setData($viewData->getAmount());
+        $forms['date']->setData($viewData->getDate());
         $forms['comment']->setData($viewData->getComment());
         $forms['number']->setData($viewData->getNumber());
     }
@@ -48,6 +50,8 @@ class AncvPaymentDataMapper implements DataMapperInterface
 
             /** @var float|null $amount */
             $amount = $forms['amount']->getData();
+            /** @var DateTime|null $date */
+            $date = $forms['date']->getData();
             /** @var string|null $comment */
             $comment = $forms['comment']->getData();
             /** @var string|null $number */
@@ -56,6 +60,9 @@ class AncvPaymentDataMapper implements DataMapperInterface
             $viewData->setAmount($amount);
             $viewData->setComment($comment);
             $viewData->setNumber($number);
+            if (null !== $date) {
+                $viewData->setDate($date);
+            }
         } catch (Exception $e) {
             throw new TransformationFailedException('Unable to map data for ancv payment', 0, $e);
         }

@@ -43,7 +43,7 @@ class RegistrationType extends AbstractRegistrationType
             }
 
             if (null !== $registration->getLicenceFormUrl()) {
-                $medicalCertificateOptions['download_uri'] = $this->router->generate('bo_download_licence_form', ['registration' => $registration->getId()]);
+                $licenceFormOptions['download_uri'] = $this->router->generate('bo_download_licence_form', ['registration' => $registration->getId()]);
             }
 
             $form->add('medicalCertificateFile', BulmaFileType::class, $medicalCertificateOptions);

@@ -39,7 +39,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $formOptions = ['with_captcha' => true];
+        $formOptions = [];
 
         $isPatch = $request->isMethod(Request::METHOD_PATCH);
         if ($isPatch) {

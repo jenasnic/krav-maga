@@ -5,7 +5,7 @@ const displayFlash = () => {
   }
 
   flash.classList.add('show');
-  setTimeout(closeFlash, 3500, flash);
+  setTimeout(closeFlash, 5000, flash);
 }
 
 const closeFlash = (flash) => {

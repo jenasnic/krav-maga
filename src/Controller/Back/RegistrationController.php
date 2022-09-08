@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('bo_adherent_list');
         }
 
-        $formOptions = ['full_form' => true];
+        $formOptions = ['kmis_version' => true];
 
         $isPatch = $request->isMethod(Request::METHOD_PATCH);
         if ($isPatch) {
