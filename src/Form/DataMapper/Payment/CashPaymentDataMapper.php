@@ -5,6 +5,7 @@ namespace App\Form\DataMapper\Payment;
 use App\Entity\Adherent;
 use App\Entity\Payment\CashPayment;
 use App\Entity\Season;
+use DateTime;
 use Exception;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -30,6 +31,7 @@ class CashPaymentDataMapper implements DataMapperInterface
         $forms = iterator_to_array($forms);
 
         $forms['amount']->setData($viewData->getAmount());
+        $forms['date']->setData($viewData->getDate());
         $forms['comment']->setData($viewData->getComment());
     }
 
@@ -47,11 +49,16 @@ class CashPaymentDataMapper implements DataMapperInterface
 
             /** @var float|null $amount */
             $amount = $forms['amount']->getData();
+            /** @var DateTime|null $date */
+            $date = $forms['date']->getData();
             /** @var string|null $comment */
             $comment = $forms['comment']->getData();
 
             $viewData->setAmount($amount);
             $viewData->setComment($comment);
+            if (null !== $date) {
+                $viewData->setDate($date);
+            }
         } catch (Exception $e) {
             throw new TransformationFailedException('Unable to map data for cash payment', 0, $e);
         }

@@ -107,10 +107,11 @@
             {{ form_row(form.agreement) }}
         </div>
         {{ form_row(form.captcha) }}
-        <div class="flex flex--content-end">
+        <div class="flex flex--content-center">
             <button type="submit" class="button">{{ 'global.validate'|trans }} <i class="icon-checkmark"></i></button>
         </div>
         {{ form_end(form) }}
+        <p class="note m-top-2">Veuillez cliquer sur le lien reçu par email pour valider votre inscription.</p>
     </div>
 
 {% endblock %}

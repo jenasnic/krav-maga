@@ -30,6 +30,11 @@ p {
   font-size: 1.3rem;
   line-height: 1.8rem;
   margin-bottom: 20px;
+
+  &.note {
+    color: color.$primary-color;
+    text-align: center;
+  }
 }
 
 img {

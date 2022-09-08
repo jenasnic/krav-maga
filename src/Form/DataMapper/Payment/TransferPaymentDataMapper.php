@@ -5,6 +5,7 @@ namespace App\Form\DataMapper\Payment;
 use App\Entity\Adherent;
 use App\Entity\Payment\TransferPayment;
 use App\Entity\Season;
+use DateTime;
 use Exception;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
@@ -30,6 +31,7 @@ class TransferPaymentDataMapper implements DataMapperInterface
         $forms = iterator_to_array($forms);
 
         $forms['amount']->setData($viewData->getAmount());
+        $forms['date']->setData($viewData->getDate());
         $forms['comment']->setData($viewData->getComment());
         $forms['label']->setData($viewData->getLabel());
     }
@@ -47,6 +49,8 @@ class TransferPaymentDataMapper implements DataMapperInterface
 
                 /** @var float|null $amount */
                 $amount = $forms['amount']->getData();
+                /** @var DateTime|null $date */
+                $date = $forms['date']->getData();
                 /** @var string|null $comment */
                 $comment = $forms['comment']->getData();
                 /** @var string|null $label */
@@ -55,6 +59,9 @@ class TransferPaymentDataMapper implements DataMapperInterface
                 $viewData->setAmount($amount);
                 $viewData->setComment($comment);
                 $viewData->setLabel($label);
+                if (null !== $date) {
+                    $viewData->setDate($date);
+                }
             }
         } catch (Exception $e) {
             throw new TransformationFailedException('Unable to map data for transfer payment', 0, $e);

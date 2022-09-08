@@ -88,10 +88,7 @@ class ReEnrollmentController extends AbstractController
 
         $this->prepareRegistrationForReEnrollment($registration, $season);
 
-        $formOptions = [
-            're_enrollment' => true,
-            'with_captcha' => true,
-        ];
+        $formOptions = ['re_enrollment' => true];
 
         $isPatch = $request->isMethod(Request::METHOD_PATCH);
         if ($isPatch) {

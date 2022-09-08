@@ -112,9 +112,12 @@ abstract class AbstractRegistrationType extends AbstractType
             ->add('privateNote', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('licenceNumber', TextType::class)
+            ->add('licenceNumber', TextType::class, [
+                'required' => false,
+            ])
             ->add('licenceDate', DateType::class, [
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('registeredAt', DateType::class, [
                 'widget' => 'single_text',

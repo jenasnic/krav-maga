@@ -17,6 +17,9 @@ class NewRegistrationType extends AbstractRegistrationType
     {
         parent::buildForm($builder, $options);
 
+        /** @var bool $forKmis */
+        $forKmis = $options['kmis_version'];
+
         $builder
             ->add('medicalCertificateFile', BulmaFileType::class, [
                 'required' => false,
@@ -31,7 +34,7 @@ class NewRegistrationType extends AbstractRegistrationType
                         ],
                     ]),
                 ],
-                'help' => 'form.newRegistration.medicalCertificateFileHelp',
+                'help' => !$forKmis ? 'form.newRegistration.medicalCertificateFileHelp' : null,
                 'help_html' => true,
             ])
             ->add('licenceFormFile', BulmaFileType::class, [
@@ -47,42 +50,40 @@ class NewRegistrationType extends AbstractRegistrationType
                         ],
                     ]),
                 ],
-                'help' => 'form.newRegistration.licenceFormFileHelp',
+                'help' => !$forKmis ? 'form.newRegistration.licenceFormFileHelp' : null,
                 'help_html' => true,
             ])
             ->add('adherent', AdherentType::class, [
                 're_enrollment' => $options['re_enrollment'],
             ])
-            ->add('agreement', CheckboxType::class, [
-                'mapped' => false,
-                'label_html' => true,
-                'constraints' => [
-                    new IsTrue(null, 'form.errors.check_required', ['registration']),
-                ],
-            ])
         ;
 
-        if ($options['full_form']) {
+        if ($options['kmis_version']) {
             $this->addInternalFields($builder, $options);
-        }
-
-        if ($options['with_captcha']) {
-            $builder->add('captcha', GoogleCaptchaType::class);
+        } else {
+            $builder
+                ->add('captcha', GoogleCaptchaType::class)
+                ->add('agreement', CheckboxType::class, [
+                    'mapped' => false,
+                    'label_html' => true,
+                    'constraints' => [
+                        new IsTrue(null, 'form.errors.check_required', ['registration']),
+                    ],
+                ])
+            ;
         }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefined(['full_form', 'with_captcha', 're_enrollment']);
-        $resolver->setAllowedTypes('full_form', 'bool');
-        $resolver->setAllowedTypes('with_captcha', 'bool');
+        $resolver->setDefined(['kmis_version', 're_enrollment']);
+        $resolver->setAllowedTypes('kmis_version', 'bool');
         $resolver->setAllowedTypes('re_enrollment', 'bool');
 
         $resolver->setDefaults([
             'data_class' => Registration::class,
             'label_format' => 'form.newRegistration.%name%',
-            'full_form' => false,
-            'with_captcha' => false,
+            'kmis_version' => false,
             're_enrollment' => false,
             'validation_groups' => ['adherent', 'registration'],
         ]);

@@ -29,6 +29,7 @@ class NewPaymentType extends AbstractType
             'choices' => [
                 'enum.paymentType.CASH' => CashPaymentType::class,
                 'enum.paymentType.CHECK' => CheckPaymentType::class,
+                'enum.paymentType.HELLO_ASSO' => HelloAssoPaymentType::class,
                 'enum.paymentType.TRANSFER' => TransferPaymentType::class,
                 'enum.paymentType.ANCV' => AncvPaymentType::class,
                 'enum.paymentType.PASS' => PassPaymentType::class,

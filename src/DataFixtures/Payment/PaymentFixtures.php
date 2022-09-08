@@ -5,6 +5,7 @@ namespace App\DataFixtures\Payment;
 use App\DataFixtures\Factory\Payment\AncvPaymentFactory;
 use App\DataFixtures\Factory\Payment\CashPaymentFactory;
 use App\DataFixtures\Factory\Payment\CheckPaymentFactory;
+use App\DataFixtures\Factory\Payment\HelloAssoPaymentFactory;
 use App\DataFixtures\Factory\Payment\PassPaymentFactory;
 use App\DataFixtures\Factory\Payment\TransferPaymentFactory;
 use App\DataFixtures\Factory\RegistrationFactory;
@@ -100,20 +101,25 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
             PassPaymentFactory::createOne($paymentAttributes);
         }
 
-        do {
-            $newAmount = ($amount < 100 || $this->faker->boolean()) ? $amount : 60;
-            $paymentDate = $paymentDate->add(DateInterval::createFromDateString('+1 month'));
+        if ($this->faker->boolean(20)) {
+            $paymentAttributes['amount'] = $amount;
+            HelloAssoPaymentFactory::createOne($paymentAttributes);
+        } else {
+            do {
+                $newAmount = ($amount < 100 || $this->faker->boolean()) ? $amount : 60;
+                $paymentDate = $paymentDate->add(DateInterval::createFromDateString('+1 month'));
 
-            if (!$sold && FloatHelper::equals($amount, $newAmount)) {
-                break;
-            }
+                if (!$sold && FloatHelper::equals($amount, $newAmount)) {
+                    break;
+                }
 
-            $paymentAttributes['amount'] = $newAmount;
-            $paymentAttributes['date'] = $paymentDate;
-            $this->createPayment($paymentAttributes);
+                $paymentAttributes['amount'] = $newAmount;
+                $paymentAttributes['date'] = $paymentDate;
+                $this->createPayment($paymentAttributes);
 
-            $amount -= $newAmount;
-        } while (FloatHelper::greater($amount, 0));
+                $amount -= $newAmount;
+            } while (FloatHelper::greater($amount, 0));
+        }
     }
 
     /**

@@ -31,6 +31,7 @@ class CheckPaymentDataMapper implements DataMapperInterface
         $forms = iterator_to_array($forms);
 
         $forms['amount']->setData($viewData->getAmount());
+        $forms['date']->setData($viewData->getDate());
         $forms['comment']->setData($viewData->getComment());
         $forms['number']->setData($viewData->getNumber());
         $forms['cashingDate']->setData($viewData->getCashingDate());
@@ -50,6 +51,8 @@ class CheckPaymentDataMapper implements DataMapperInterface
 
             /** @var float|null $amount */
             $amount = $forms['amount']->getData();
+            /** @var DateTime|null $date */
+            $date = $forms['date']->getData();
             /** @var string|null $comment */
             $comment = $forms['comment']->getData();
             /** @var string|null $number */
@@ -61,6 +64,9 @@ class CheckPaymentDataMapper implements DataMapperInterface
             $viewData->setComment($comment);
             $viewData->setNumber($number);
             $viewData->setCashingDate($cashingDate);
+            if (null !== $date) {
+                $viewData->setDate($date);
+            }
         } catch (Exception $e) {
             throw new TransformationFailedException('Unable to map data for check payment', 0, $e);
         }

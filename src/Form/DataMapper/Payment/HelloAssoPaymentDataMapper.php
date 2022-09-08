@@ -3,7 +3,7 @@
 namespace App\Form\DataMapper\Payment;
 
 use App\Entity\Adherent;
-use App\Entity\Payment\PassPayment;
+use App\Entity\Payment\HelloAssoPayment;
 use App\Entity\Season;
 use DateTime;
 use Exception;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Traversable;
 
-class PassPaymentDataMapper implements DataMapperInterface
+class HelloAssoPaymentDataMapper implements DataMapperInterface
 {
     public function __construct(
         protected Adherent $adherent,
@@ -20,11 +20,11 @@ class PassPaymentDataMapper implements DataMapperInterface
     }
 
     /**
-     * @param PassPayment|null $viewData
+     * @param HelloAssoPayment|null $viewData
      */
     public function mapDataToForms($viewData, Traversable $forms): void
     {
-        if (!$viewData instanceof PassPayment) {
+        if (!$viewData instanceof HelloAssoPayment) {
             return;
         }
 
@@ -33,11 +33,10 @@ class PassPaymentDataMapper implements DataMapperInterface
         $forms['amount']->setData($viewData->getAmount());
         $forms['date']->setData($viewData->getDate());
         $forms['comment']->setData($viewData->getComment());
-        $forms['number']->setData($viewData->getNumber());
     }
 
     /**
-     * @param PassPayment|null $viewData
+     * @param HelloAssoPayment|null $viewData
      */
     public function mapFormsToData(Traversable $forms, &$viewData): void
     {
@@ -45,7 +44,7 @@ class PassPaymentDataMapper implements DataMapperInterface
 
         try {
             if (null === $viewData) {
-                $viewData = new PassPayment($this->adherent, $this->season);
+                $viewData = new HelloAssoPayment($this->adherent, $this->season);
             }
 
             /** @var float|null $amount */
@@ -54,17 +53,14 @@ class PassPaymentDataMapper implements DataMapperInterface
             $date = $forms['date']->getData();
             /** @var string|null $comment */
             $comment = $forms['comment']->getData();
-            /** @var string|null $number */
-            $number = $forms['number']->getData();
 
             $viewData->setAmount($amount);
             $viewData->setComment($comment);
-            $viewData->setNumber($number);
             if (null !== $date) {
                 $viewData->setDate($date);
             }
         } catch (Exception $e) {
-            throw new TransformationFailedException('Unable to map data for pass payment', 0, $e);
+            throw new TransformationFailedException('Unable to map data for Hello Asso payment', 0, $e);
         }
     }
 }
