@@ -10,6 +10,7 @@ use App\Entity\Registration;
 use App\Exception\NoActiveSeasonException;
 use App\Form\NewRegistrationType;
 use App\Form\RegistrationType;
+use App\Repository\RegistrationRepository;
 use App\Service\Factory\RegistrationFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,5 +89,18 @@ class RegistrationController extends AbstractController
              'form' => $form->createView(),
              'registration' => $registration,
          ]);
+    }
+
+    #[Route('/adherent/verifier-inscription/{registration}', name: 'bo_registration_verify', methods: ['POST'])]
+    public function delete(Request $request, RegistrationRepository $registrationRepository, Registration $registration): Response
+    {
+        if ($this->isCsrfTokenValid('verify-'.$registration->getId(), (string) $request->request->get('_token'))) {
+            $registration->setVerified(true);
+            $registrationRepository->add($registration, true);
+
+            $this->addFlash('info', $this->translator->trans('back.registration.verify.success'));
+        }
+
+        return $this->redirectToRoute('bo_registration_edit', ['registration' => $registration->getId()], Response::HTTP_SEE_OTHER);
     }
 }

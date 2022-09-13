@@ -13,6 +13,22 @@
                 <span class="icon"><i class="icon-back"></i></span>
             </a>
         </p>
+        {% if not registration.verified %}
+            <p class="level-item">
+                <form
+                    data-confirm
+                    data-confirm-message="{{ 'global.confirmVerify'|trans }}"
+                    action="{{ path('bo_registration_verify', {'registration': registration.id}) }}"
+                    method="POST"
+                >
+                    <input type="hidden" name="_token" value="{{ csrf_token('verify-'~registration.id) }}" />
+                    <button type="submit" class="button is-warning">
+                        <span>{{ 'global.verify'|trans }}</span>
+                        <span class="icon"><i class="icon-checkmark"></i></span>
+                    </button>
+                </form>
+            </p>
+        {% endif %}
         <p class="level-item">
             <form
                 data-confirm
