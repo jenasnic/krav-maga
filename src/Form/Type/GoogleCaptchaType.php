@@ -30,7 +30,7 @@ class GoogleCaptchaType extends AbstractType
         $resolver->setDefaults([
             'mapped' => false,
             'constraints' => [
-                new GoogleCaptcha(null, ['registration']),
+                new GoogleCaptcha(),
             ],
             'error_bubbling' => false,
         ]);
