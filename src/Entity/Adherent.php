@@ -19,37 +19,37 @@ class Adherent
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 55)]
-    #[Assert\NotBlank(groups: ['adherent'])]
+    #[Assert\NotBlank]
     private ?string $firstName = null;
 
     #[ORM\Column(type: 'string', length: 55)]
-    #[Assert\NotBlank(groups: ['adherent'])]
+    #[Assert\NotBlank]
     private ?string $lastName = null;
 
     #[ORM\Column(type: 'string', length: 55)]
-    #[Assert\NotNull(groups: ['adherent'])]
+    #[Assert\NotNull]
     private ?string $gender = null;
 
     #[ORM\Column(type: 'datetime')]
-    #[Assert\NotNull(groups: ['adherent'])]
+    #[Assert\NotNull]
     private ?DateTime $birthDate = null;
 
     #[ORM\Column(type: 'string', length: 55, nullable: true)]
-    #[Assert\NotBlank(groups: ['adherent'])]
-    #[Assert\Regex('/^[\d\s]{14}$/', groups: ['adherent'])]
+    #[Assert\NotBlank]
+    #[Assert\Regex('/^[\d\s]{14}$/')]
     private ?string $phone = null;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Assert\NotBlank(groups: ['adherent'])]
-    #[Assert\Email(groups: ['adherent'])]
+    #[Assert\NotBlank]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $pseudonym = null;
 
     #[ORM\Embedded(class: Address::class)]
-    #[Assert\NotNull(groups: ['adherent'])]
-    #[Assert\Valid(groups: ['adherent'])]
+    #[Assert\NotNull]
+    #[Assert\Valid]
     private ?Address $address = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

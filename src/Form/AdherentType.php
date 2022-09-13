@@ -100,7 +100,6 @@ class AdherentType extends AbstractType
             'data_class' => Adherent::class,
             'label_format' => 'form.adherent.%name%',
             're_enrollment' => false,
-            'validation_groups' => ['adherent'],
         ]);
     }
 }

@@ -78,7 +78,7 @@ abstract class AbstractRegistrationType extends AbstractType
                     throw new LogicException('invalid parent');
                 }
 
-                $this->toggleLegalRepresentative($form->getParent(), (true === $form->getData()));
+                $this->toggleLegalRepresentative($form->getParent(), true === $form->getData());
             }
         );
 
@@ -149,7 +149,7 @@ abstract class AbstractRegistrationType extends AbstractType
                     throw new LogicException('invalid parent');
                 }
 
-                $this->togglePass($form->getParent(), $uploadFieldName, (true === $form->getData()), $downloadUri);
+                $this->togglePass($form->getParent(), $uploadFieldName, true === $form->getData(), $downloadUri);
             }
         );
 
@@ -187,12 +187,14 @@ abstract class AbstractRegistrationType extends AbstractType
                         'application/pdf',
                     ],
                 ]),
-                new NotNull(null, null, ['registration']),
             ],
         ];
 
         if (null !== $downloadUri) {
             $options['download_uri'] = $downloadUri;
+            $options['required'] = false;
+        } else {
+            $options['constraints'][] = new NotNull();
         }
 
         $form->add($fieldName, BulmaFileType::class, $options);
