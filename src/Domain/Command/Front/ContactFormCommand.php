@@ -12,4 +12,6 @@ class ContactFormCommand
 
     #[Assert\NotBlank]
     public ?string $message = null;
+
+    public ?string $ip = null;
 }

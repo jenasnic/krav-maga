@@ -24,6 +24,7 @@ class ContactFormController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $contactForm->ip = $request->getClientIp();
             $contactFormHandler->handle($contactForm);
 
             $this->addFlash('info', $translator->trans('form.contact.success'));

@@ -23,6 +23,7 @@ final class ContactFormHandler
             [
                 'email' => $command->email,
                 'message' => $command->message,
+                'ip' => $command->ip,
             ],
         );
 

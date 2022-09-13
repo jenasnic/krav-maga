@@ -1,14 +1,14 @@
 {% block subject %}[KMIS] Demande de contact{% endblock %}
 
 {% block html %}
-<p>Demande de contact de la part de "{{ email }}"</p>
+<p>Demande de contact de la part de "{{ email }}" [{{ ip }}]</p>
 <div>{{ message|nl2br }}</div>
 <p>L'équipe KMIS</p>
 <img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
 {% endblock %}
 
 {% block text %}
-Demande de contact de la part de "{{ email }}"
+Demande de contact de la part de "{{ email }}" [{{ ip }}]
 
 {{ message }}
 
