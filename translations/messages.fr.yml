@@ -3,6 +3,7 @@ global:
   back: Retour
   browse: Parcourir
   cancel: Annuler
+  confirmVerify: Confirmer la vérification ?
   confirmDelete: Confirmer la suppression ?
   delete: Supprimer
   export: Exporter
@@ -13,6 +14,7 @@ global:
   search: Rechercher
   seeAll: Voir tout
   validate: Valider
+  verify: Verifier
   yes: Oui
 
 enum:
@@ -110,6 +112,8 @@ back:
       success: Nouvelle inscription créée
       title: Nouvelle inscription
       season: Saison
+    verify:
+      success: Inscription vérifiée
 
   season:
     activate:
