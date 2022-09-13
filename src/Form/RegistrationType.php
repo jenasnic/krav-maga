@@ -56,7 +56,6 @@ class RegistrationType extends AbstractRegistrationType
         $resolver->setDefaults([
             'data_class' => Registration::class,
             'label_format' => 'form.registration.%name%',
-            'validation_groups' => ['registration'],
         ]);
     }
 

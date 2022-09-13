@@ -51,7 +51,7 @@ class Registration
     private DateTime $registeredAt;
 
     #[ORM\Column(type: 'boolean')]
-    #[Assert\NotNull(groups: ['registration'])]
+    #[Assert\NotNull]
     private ?bool $copyrightAuthorization = null;
 
     #[ORM\Column(type: 'boolean')]
@@ -59,26 +59,26 @@ class Registration
 
     #[ORM\OneToOne(targetEntity: LegalRepresentative::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    #[Assert\Valid(groups: ['registration'])]
+    #[Assert\Valid]
     private ?LegalRepresentative $legalRepresentative = null;
 
     #[ORM\ManyToOne(targetEntity: Purpose::class)]
     #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotNull(groups: ['registration'])]
+    #[Assert\NotNull]
     private ?Purpose $purpose = null;
 
     #[ORM\ManyToOne(targetEntity: PriceOption::class)]
     #[ORM\JoinColumn(nullable: true)]
-    #[Assert\NotNull(groups: ['registration'])]
+    #[Assert\NotNull]
     private ?PriceOption $priceOption = null;
 
     #[ORM\OneToOne(targetEntity: Emergency::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[Assert\Valid(groups: ['registration'])]
+    #[Assert\Valid]
     private ?Emergency $emergency = null;
 
     #[ORM\OneToOne(targetEntity: Adherent::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    #[Assert\Valid(groups: ['adherent'])]
+    #[Assert\Valid]
     private Adherent $adherent;
 
     #[ORM\ManyToOne(targetEntity: Season::class)]

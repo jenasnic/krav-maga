@@ -9,15 +9,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Address
 {
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\NotBlank(groups: ['adherent'])]
+    #[Assert\NotBlank]
     private ?string $street;
 
     #[ORM\Column(type: 'string', length: 25, nullable: true)]
-    #[Assert\NotBlank(groups: ['adherent'])]
+    #[Assert\NotBlank]
     private ?string $zipCode;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Assert\NotBlank(groups: ['adherent'])]
+    #[Assert\NotBlank]
     private ?string $city;
 
     public function __construct(

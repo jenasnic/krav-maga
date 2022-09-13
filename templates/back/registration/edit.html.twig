@@ -72,6 +72,7 @@
                 <div data-field-update-target="pass-15">
                     {% if form.pass15File is defined %}
                         {{ form_widget(form.pass15File) }}
+                        {{ form_errors(form.pass15File) }}
                     {% endif %}
                 </div>
             </div>
@@ -84,6 +85,7 @@
                 <div data-field-update-target="pass-50">
                     {% if form.pass50File is defined %}
                         {{ form_widget(form.pass50File) }}
+                        {{ form_errors(form.pass50File) }}
                     {% endif %}
                 </div>
             </div>

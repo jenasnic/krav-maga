@@ -35,7 +35,9 @@ final class ResetLimiterCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         try {
+            /** @var string $ip */
             $ip = $input->getArgument('ip');
+            /** @var string $account */
             $account = $input->getArgument('account');
 
             $this->loginLimiter->create($ip)->reset();

@@ -85,7 +85,6 @@ class NewRegistrationType extends AbstractRegistrationType
             'label_format' => 'form.newRegistration.%name%',
             'kmis_version' => false,
             're_enrollment' => false,
-            'validation_groups' => ['adherent', 'registration'],
         ]);
     }
 

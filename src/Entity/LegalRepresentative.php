@@ -15,11 +15,11 @@ class LegalRepresentative
     private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 55)]
-    #[Assert\NotBlank(groups: ['registration'])]
+    #[Assert\NotBlank]
     private ?string $firstName = null;
 
     #[ORM\Column(type: 'string', length: 55)]
-    #[Assert\NotBlank(groups: ['registration'])]
+    #[Assert\NotBlank]
     private ?string $lastName = null;
 
     public function getId(): ?int

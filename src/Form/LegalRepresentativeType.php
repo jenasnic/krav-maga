@@ -23,7 +23,6 @@ class LegalRepresentativeType extends AbstractType
         $resolver->setDefaults([
             'data_class' => LegalRepresentative::class,
             'label_format' => 'form.legalRepresentative.%name%',
-            'validation_groups' => ['registration'],
         ]);
     }
 }
