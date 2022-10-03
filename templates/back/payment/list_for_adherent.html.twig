@@ -59,6 +59,9 @@
                         <a href="{{ path('bo_payment_view', {'payment': payment.id}) }}" class="button is-info">
                             <span class="icon"><i class="icon-eye"></i></span>
                         </a>
+                        <a href="{{ path('bo_payment_edit', {'adherent': adherent.id, 'payment': payment.id}) }}" class="button is-primary">
+                            <span class="icon"><i class="icon-pencil"></i></span>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

@@ -2,10 +2,18 @@
 
 namespace App\Controller\Back;
 
+use App\Domain\Command\Back\EditPaymentCommand;
+use App\Domain\Command\Back\EditPaymentHandler;
 use App\Domain\Command\Back\NewPaymentCommand;
 use App\Domain\Command\Back\NewPaymentHandler;
 use App\Entity\Adherent;
 use App\Entity\Payment\AbstractPayment;
+use App\Entity\Payment\AncvPayment;
+use App\Entity\Payment\CashPayment;
+use App\Entity\Payment\CheckPayment;
+use App\Entity\Payment\HelloAssoPayment;
+use App\Entity\Payment\PassPayment;
+use App\Entity\Payment\TransferPayment;
 use App\Entity\Season;
 use App\Enum\PaymentTypeEnum;
 use App\Form\Payment\AncvPaymentType;
@@ -19,6 +27,7 @@ use App\Helper\FloatHelper;
 use App\Repository\Payment\PaymentRepository;
 use App\Repository\RegistrationRepository;
 use App\Repository\SeasonRepository;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -136,6 +145,39 @@ class PaymentController extends AbstractController
         ]);
     }
 
+    #[Route('/adherent/modifier-paiement/{payment}', name: 'bo_payment_edit', methods: ['GET', 'POST', 'PATCH'])]
+    public function edit(Request $request, EditPaymentHandler $editPaymentHandler, AbstractPayment $payment): Response
+    {
+        $paymentType = match (true) {
+            $payment instanceof AncvPayment => AncvPaymentType::class,
+            $payment instanceof CashPayment => CashPaymentType::class,
+            $payment instanceof CheckPayment => CheckPaymentType::class,
+            $payment instanceof HelloAssoPayment => HelloAssoPaymentType::class,
+            $payment instanceof PassPayment => PassPaymentType::class,
+            $payment instanceof TransferPayment => TransferPaymentType::class,
+            default => throw new LogicException('unknown payment type'),
+        };
+
+        $form = $this->createForm($paymentType, $payment, [
+            'adherent' => $payment->getAdherent(),
+            'season' => $payment->getSeason(),
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editPaymentHandler->handle(new EditPaymentCommand($payment));
+
+            $this->addFlash('info', $this->translator->trans('back.payment.edit.success'));
+
+            return $this->redirectToRoute('bo_payment_list_for_adherent', ['adherent' => $payment->getAdherent()->getId()]);
+        }
+
+        return $this->render('back/payment/edit.html.twig', [
+            'form' => $form->createView(),
+            'payment' => $payment,
+        ]);
+    }
+
     #[Route('/adherent/consulter-paiement/{payment}', name: 'bo_payment_view', methods: ['GET'])]
     public function viewForAdherent(AbstractPayment $payment): Response
     {
@@ -183,7 +225,7 @@ class PaymentController extends AbstractController
             PaymentTypeEnum::HELLO_ASSO => $this->createForm(HelloAssoPaymentType::class, $payment, $options),
             PaymentTypeEnum::PASS => $this->createForm(PassPaymentType::class, $payment, $options),
             PaymentTypeEnum::TRANSFER => $this->createForm(TransferPaymentType::class, $payment, $options),
-            default => throw new \LogicException('invalid payment type'),
+            default => throw new LogicException('invalid payment type'),
         };
 
         return $this->render('back/payment/view.html.twig', [
