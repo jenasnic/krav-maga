@@ -145,37 +145,20 @@ class PaymentController extends AbstractController
         ]);
     }
 
-    #[Route('/adherent/modifier-paiement/{payment}', name: 'bo_payment_edit', methods: ['GET', 'POST', 'PATCH'])]
-    public function edit(Request $request, EditPaymentHandler $editPaymentHandler, AbstractPayment $payment): Response
+    #[Route('/adherent/modifier-paiement/{payment}', name: 'bo_payment_edit', methods: ['GET', 'POST'])]
+    public function editForAdherent(Request $request, EditPaymentHandler $editPaymentHandler, AbstractPayment $payment): Response
     {
-        $paymentType = match (true) {
-            $payment instanceof AncvPayment => AncvPaymentType::class,
-            $payment instanceof CashPayment => CashPaymentType::class,
-            $payment instanceof CheckPayment => CheckPaymentType::class,
-            $payment instanceof HelloAssoPayment => HelloAssoPaymentType::class,
-            $payment instanceof PassPayment => PassPaymentType::class,
-            $payment instanceof TransferPayment => TransferPaymentType::class,
-            default => throw new LogicException('unknown payment type'),
-        };
+        $backlink = $this->generateUrl('bo_payment_list_for_adherent', ['adherent' => $payment->getAdherent()->getId()]);
 
-        $form = $this->createForm($paymentType, $payment, [
-            'adherent' => $payment->getAdherent(),
-            'season' => $payment->getSeason(),
-        ]);
-        $form->handleRequest($request);
+        return $this->edit($request, $editPaymentHandler, $payment, $backlink);
+    }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $editPaymentHandler->handle(new EditPaymentCommand($payment));
+    #[Route('/paiement/modifier/{payment}', name: 'bo_payment_edit_for_season', methods: ['GET', 'POST'])]
+    public function editForSeason(Request $request, EditPaymentHandler $editPaymentHandler, AbstractPayment $payment): Response
+    {
+        $backlink = $this->generateUrl('bo_payment_list_for_season');
 
-            $this->addFlash('info', $this->translator->trans('back.payment.edit.success'));
-
-            return $this->redirectToRoute('bo_payment_list_for_adherent', ['adherent' => $payment->getAdherent()->getId()]);
-        }
-
-        return $this->render('back/payment/edit.html.twig', [
-            'form' => $form->createView(),
-            'payment' => $payment,
-        ]);
+        return $this->edit($request, $editPaymentHandler, $payment, $backlink);
     }
 
     #[Route('/adherent/consulter-paiement/{payment}', name: 'bo_payment_view', methods: ['GET'])]
@@ -208,6 +191,39 @@ class PaymentController extends AbstractController
     public function deleteForSeason(Request $request, AbstractPayment $payment): Response
     {
         return $this->delete($request, $payment, $this->generateUrl('bo_payment_list_for_season', ['season' => $payment->getSeason()->getId()]));
+    }
+
+    protected function edit(Request $request, EditPaymentHandler $editPaymentHandler, AbstractPayment $payment, string $backLink): Response
+    {
+        $paymentType = match (true) {
+            $payment instanceof AncvPayment => AncvPaymentType::class,
+            $payment instanceof CashPayment => CashPaymentType::class,
+            $payment instanceof CheckPayment => CheckPaymentType::class,
+            $payment instanceof HelloAssoPayment => HelloAssoPaymentType::class,
+            $payment instanceof PassPayment => PassPaymentType::class,
+            $payment instanceof TransferPayment => TransferPaymentType::class,
+            default => throw new LogicException('unknown payment type'),
+        };
+
+        $form = $this->createForm($paymentType, $payment, [
+            'adherent' => $payment->getAdherent(),
+            'season' => $payment->getSeason(),
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $editPaymentHandler->handle(new EditPaymentCommand($payment));
+
+            $this->addFlash('info', $this->translator->trans('back.payment.edit.success'));
+
+            return $this->redirect($backLink);
+        }
+
+        return $this->render('back/payment/edit.html.twig', [
+            'form' => $form->createView(),
+            'payment' => $payment,
+            'backLink' => $backLink,
+        ]);
     }
 
     protected function view(AbstractPayment $payment, string $backLink, string $deleteLink): Response
