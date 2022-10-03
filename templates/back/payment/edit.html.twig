@@ -11,7 +11,7 @@
         {{ form_row(form) }}
         <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
             <div class="block">
-                <a href="{{ path('bo_payment_list_for_adherent', {'adherent': payment.adherent.id}) }}" class="button is-outlined">{{ 'global.cancel'|trans }}</a>
+                <a href="{{ backLink }}" class="button is-outlined">{{ 'global.cancel'|trans }}</a>
                 <button type="submit" class="button is-primary">{{ 'global.validate'|trans }}</button>
             </div>
         </div>
