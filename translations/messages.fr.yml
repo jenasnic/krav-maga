@@ -98,6 +98,9 @@ back:
     new:
       title: Nouveau paiement
       success: Paiement ajouté
+    edit:
+      title: Paiement
+      success: Paiement mis à jour
     view:
       title: Paiement
     delete:
