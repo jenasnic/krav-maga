@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures\Factory;
 
-use App\DataFixtures\Factory\Payment\PriceOptionFactory;
+use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
 use Faker\Factory;
 use Faker\Generator;
@@ -46,16 +46,16 @@ final class RegistrationFactory extends ModelFactory
             $adherentAttributes['birthDate'] = $this->faker->dateTimeBetween('-18 years', '-11 years');
         }
 
-        $usePass15 = $this->faker->boolean(30);
-        $usePass50 = $this->faker->boolean(30);
+        $usePassCitizen = $this->faker->boolean(30);
+        $usePassSport = $this->faker->boolean(30);
 
-        if ($usePass15) {
-            $pass15Path = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
-            $this->filesystem->copy($this->fileModel, $pass15Path);
+        if ($usePassCitizen) {
+            $passCitizenPath = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
+            $this->filesystem->copy($this->fileModel, $passCitizenPath);
         }
-        if ($usePass50) {
-            $pass50Path = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
-            $this->filesystem->copy($this->fileModel, $pass50Path);
+        if ($usePassSport) {
+            $passSportPath = $this->uploadPath.str_replace('.', '', uniqid('', true)).'.pdf';
+            $this->filesystem->copy($this->fileModel, $passSportPath);
         }
 
         return [
@@ -68,17 +68,27 @@ final class RegistrationFactory extends ModelFactory
             'licenceFormUrl' => $licenceFormPath,
             'licenceNumber' => $this->faker->numberBetween(100000, 999999),
             'medicalCertificateUrl' => $medicalCertificatePath,
-            'pass15Url' => $usePass15 ? $pass15Path : null,
-            'pass50Url' => $usePass50 ? $pass50Path : null,
-            'priceOption' => PriceOptionFactory::random()->object(),
+            'passCitizenUrl' => $usePassCitizen ? $passCitizenPath : null,
+            'passSportUrl' => $usePassSport ? $passSportPath : null,
             'privateNote' => $this->faker->text(),
             'purpose' => PurposeFactory::random()->object(),
             'registeredAt' => $registeredAt,
-            'usePass15' => $usePass15,
-            'usePass50' => $usePass50,
+            'usePassCitizen' => $usePassCitizen,
+            'usePassSport' => $usePassSport,
             'verified' => $this->faker->boolean(80),
             'withLegalRepresentative' => $withLegalRepresentative,
         ];
+    }
+
+    protected function initialize(): self
+    {
+        return $this->afterInstantiate(function (Registration $registration, array $attributes) {
+            if (!array_key_exists('priceOption', $attributes)) {
+                /** @var PriceOption $priceOption */
+                $priceOption = $this->faker->randomElement($registration->getSeason()->getPriceOptions()->toArray());
+                $registration->setPriceOption($priceOption);
+            }
+        });
     }
 
     protected static function getClass(): string

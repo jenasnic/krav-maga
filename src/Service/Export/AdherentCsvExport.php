@@ -95,8 +95,8 @@ class AdherentCsvExport extends AbstractCsvExport
             $data->getLicenceDate()?->format('d/m/Y'),
             $data->getSeason()->getDisplayLabel(),
             $data->getPriceOption()?->getLabel(),
-            $data->isUsePass15() ? $this->translator->trans('global.yes') : $this->translator->trans('global.no'),
-            $data->isUsePass50() ? $this->translator->trans('global.yes') : $this->translator->trans('global.no'),
+            $data->isUsePassCitizen() ? $this->translator->trans('global.yes') : $this->translator->trans('global.no'),
+            $data->isUsePassSport() ? $this->translator->trans('global.yes') : $this->translator->trans('global.no'),
         ];
 
         return $line;

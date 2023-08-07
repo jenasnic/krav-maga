@@ -38,16 +38,16 @@ final class SaveRegistrationHandler
             $registration->setLicenceFormUrl($this->fileUploader->upload($licenceFormFile));
         }
 
-        $pass15File = $registration->getPass15File();
-        if (null !== $pass15File) {
-            $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_15);
-            $registration->setPass15Url($this->fileUploader->upload($pass15File));
+        $passCitizenFile = $registration->getPassCitizenFile();
+        if (null !== $passCitizenFile) {
+            $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_CITIZEN);
+            $registration->setPassCitizenUrl($this->fileUploader->upload($passCitizenFile));
         }
 
-        $pass50File = $registration->getPass50File();
-        if (null !== $pass50File) {
-            $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_50);
-            $registration->setPass50Url($this->fileUploader->upload($pass50File));
+        $passSportFile = $registration->getPassSportFile();
+        if (null !== $passSportFile) {
+            $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_SPORT);
+            $registration->setPassSportUrl($this->fileUploader->upload($passSportFile));
         }
     }
 }

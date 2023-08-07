@@ -66,26 +66,26 @@
         </div>
         <div class="columns">
             <div class="column">
-                {{ form_row(form.usePass15, {'attr': {'data-field-update': 'pass-15'}}) }}
+                {{ form_row(form.usePassCitizen, {'attr': {'data-field-update': 'pass-Citizen'}}) }}
             </div>
             <div class="column">
-                <div data-field-update-target="pass-15">
-                    {% if form.pass15File is defined %}
-                        {{ form_widget(form.pass15File) }}
-                        {{ form_errors(form.pass15File) }}
+                <div data-field-update-target="pass-Citizen">
+                    {% if form.passCitizenFile is defined %}
+                        {{ form_widget(form.passCitizenFile) }}
+                        {{ form_errors(form.passCitizenFile) }}
                     {% endif %}
                 </div>
             </div>
         </div>
         <div class="columns">
             <div class="column">
-                {{ form_row(form.usePass50, {'attr': {'data-field-update': 'pass-50'}}) }}
+                {{ form_row(form.usePassSport, {'attr': {'data-field-update': 'pass-Sport'}}) }}
             </div>
             <div class="column">
-                <div data-field-update-target="pass-50">
-                    {% if form.pass50File is defined %}
-                        {{ form_widget(form.pass50File) }}
-                        {{ form_errors(form.pass50File) }}
+                <div data-field-update-target="pass-Sport">
+                    {% if form.passSportFile is defined %}
+                        {{ form_widget(form.passSportFile) }}
+                        {{ form_errors(form.passSportFile) }}
                     {% endif %}
                 </div>
             </div>

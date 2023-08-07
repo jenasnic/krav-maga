@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use App\Entity\Payment\PriceOption;
 use App\Repository\SeasonRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,10 +32,19 @@ class Season
     #[Assert\NotNull]
     private ?DateTime $endDate = null;
 
+    /**
+     * @var Collection<int, PriceOption>
+     */
+    #[ORM\OneToMany(mappedBy: 'season', targetEntity: PriceOption::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['rank' => 'ASC'])]
+    private Collection $priceOptions;
+
     public function __construct(string $label)
     {
         $this->label = $label;
         $this->active = false;
+
+        $this->priceOptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,6 +89,30 @@ class Season
     public function setEndDate(?DateTime $endDate): self
     {
         $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PriceOption>
+     */
+    public function getPriceOptions(): Collection
+    {
+        return $this->priceOptions;
+    }
+
+    public function addPriceOption(PriceOption $priceOption): self
+    {
+        if (!$this->priceOptions->contains($priceOption)) {
+            $this->priceOptions->add($priceOption);
+        }
+
+        return $this;
+    }
+
+    public function removePriceOption(PriceOption $priceOption): self
+    {
+        $this->priceOptions->removeElement($priceOption);
 
         return $this;
     }

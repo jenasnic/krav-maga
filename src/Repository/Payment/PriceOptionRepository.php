@@ -33,18 +33,4 @@ class PriceOptionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-    /**
-     * @return array<PriceOption>
-     */
-    public function findAllOrdered(): array
-    {
-        /** @var array<PriceOption> */
-        return $this
-            ->createQueryBuilder('price_option')
-            ->addOrderBy('price_option.rank')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
 }
