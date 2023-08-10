@@ -1,12 +1,12 @@
-@use '../bulma/variables';
+@use '../bulma/variables' as bulma;
 
 .gender {
   &--male > i {
-    color: variables.$blue;
+    color: bulma.$blue;
   }
 
   &--female > i {
-    color: variables.$red;
+    color: bulma.$red;
   }
 }
 
