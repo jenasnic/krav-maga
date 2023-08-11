@@ -65,6 +65,7 @@
             </th>
             <th>{{ 'back.adherent.list.header.phone'|trans }}</th>
             <th>{{ 'back.adherent.list.header.email'|trans }}</th>
+            <th class="has-text-centered">{{ 'back.adherent.list.header.reEnrollment'|trans }}</th>
             <th class="has-text-centered">{{ 'back.adherent.list.header.sold'|trans }}</th>
             <th></th>
         {% endblock %}
@@ -77,6 +78,13 @@
                     <td class="firstName">{{ registration['firstName'] }}</td>
                     <td>{{ registration['phone'] }}</td>
                     <td class="email">{{ registration['email'] }}</td>
+                    <td class="has-text-centered">
+                        {% if registration['reEnrollment'] %}
+                            <span class="icon has-text-warning"><i class="icon-cross"></i></span>
+                        {% else %}
+                            <span class="icon has-text-primary"><i class="icon-checkmark"></i></span>
+                        {% endif %}
+                    </td>
                     <td class="has-text-centered">
                         {% if registration['totalPaid'] < registration['toPay'] %}
                             <span class="icon has-text-warning"><i class="icon-cross"></i></span>

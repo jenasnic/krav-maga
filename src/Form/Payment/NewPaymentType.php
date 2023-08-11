@@ -33,6 +33,7 @@ class NewPaymentType extends AbstractType
                 'enum.paymentType.TRANSFER' => TransferPaymentType::class,
                 'enum.paymentType.ANCV' => AncvPaymentType::class,
                 'enum.paymentType.PASS' => PassPaymentType::class,
+                'enum.paymentType.DISCOUNT' => DiscountPaymentType::class,
             ],
         ]);
 

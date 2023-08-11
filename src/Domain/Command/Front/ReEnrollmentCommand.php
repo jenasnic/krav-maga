@@ -9,7 +9,8 @@ class ReEnrollmentCommand
 {
     public function __construct(
         public Registration $registration,
-        public ReEnrollmentToken $reEnrollmentToken,
+        public ?ReEnrollmentToken $reEnrollmentToken = null,
+        public bool $sendEmail = false,
     ) {
     }
 }

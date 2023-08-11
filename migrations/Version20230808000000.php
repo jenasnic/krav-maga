@@ -21,6 +21,8 @@ final class Version20230808000000 extends AbstractMigration
         $this->addSql('ALTER TABLE price_option ADD CONSTRAINT FK_171FA8E04EC001D1 FOREIGN KEY (season_id) REFERENCES season (id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_171FA8E04EC001D1 ON price_option (season_id)');
         $this->addSql('ALTER TABLE registration RENAME COLUMN use_pass15 TO use_pass_citizen, RENAME COLUMN pass15_url TO pass_citizen_url, RENAME COLUMN use_pass50 TO use_pass_sport, RENAME COLUMN pass50_url TO pass_sport_url, ADD re_enrollment TINYINT(1) NOT NULL DEFAULT FALSE');
+        $this->addSql('CREATE TABLE payment_discount (id INT NOT NULL, discount VARCHAR(100) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE payment_discount ADD CONSTRAINT FK_A126F666BF396750 FOREIGN KEY (id) REFERENCES payment (id) ON DELETE CASCADE');
 
         $this->addSql('SET FOREIGN_KEY_CHECKS = 1');
     }
@@ -32,5 +34,6 @@ final class Version20230808000000 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_171FA8E04EC001D1 ON price_option');
         $this->addSql('ALTER TABLE price_option DROP season_id');
         $this->addSql('ALTER TABLE registration RENAME COLUMN use_pass_citizen TO use_pass15, RENAME COLUMN pass_citizen_url TO pass15_url, RENAME COLUMN use_pass_sport TO use_pass50, RENAME COLUMN pass_sport_url TO pass50_url, DROP re_enrollment');
+        $this->addSql('DROP TABLE payment_discount');
     }
 }

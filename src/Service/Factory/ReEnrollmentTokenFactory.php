@@ -13,7 +13,7 @@ class ReEnrollmentTokenFactory
         return new ReEnrollmentToken(
             substr(uniqid().bin2hex(random_bytes(20)), 0, 55),
             $adherent,
-            new DateTime('+2 months'),
+            new DateTime('+3 months'),
         );
     }
 }

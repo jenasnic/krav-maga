@@ -52,6 +52,7 @@ class AdherentRepository extends ServiceEntityRepository
                 'adherent.phone',
                 'adherent.email',
                 'registration.registeredAt',
+                'registration.reEnrollment',
                 'season.label AS seasonLabel',
                 'SUM(payment.amount) AS totalPaid',
                 'price_option.amount AS toPay'

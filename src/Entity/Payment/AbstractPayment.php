@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     'ancv' => AncvPayment::class,
     'cash' => CashPayment::class,
     'check' => CheckPayment::class,
+    'discount' => DiscountPayment::class,
     'hello_asso' => HelloAssoPayment::class,
     'pass' => PassPayment::class,
     'transfer' => TransferPayment::class,
