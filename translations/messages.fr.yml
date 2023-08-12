@@ -1,5 +1,6 @@
 global:
   activate: Activer
+  add: Ajouter
   back: Retour
   browse: Parcourir
   cancel: Annuler
@@ -106,6 +107,11 @@ back:
     delete:
       success: Paiement supprimé
 
+  priceOption:
+    form:
+      amount: Montant
+      label: Nom de la formule
+
   registration:
     edit:
       success: Fiche inscription mise à jour
@@ -129,6 +135,7 @@ back:
     form:
       startDate: Début
       endDate: Fin
+      addPriceOption: Ajouter une formule
     grid:
       action:
         add: Nouvelle saison

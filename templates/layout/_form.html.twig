@@ -104,3 +104,35 @@
     <div class="captcha-error">{{ form_errors(form) }}</div>
   </div>
 {% endblock %}
+
+{% block collection_widget %}
+  {{ form_errors(form) }}
+  <ul
+    id="{{ form.vars.id }}_form"
+    class="collection-type"
+    data-collection-type="li"
+    {% if (allow_add) %}
+      data-prototype="{{ form_row(form.vars.prototype)|e('html_attr') }}"
+      data-prototype-name="{{ prototype.vars['name']|default('__name__') }}"
+      data-trigger-add="{{ 'global.add'|trans }}"
+    {% endif %}
+    {% if (allow_delete) %}
+      data-trigger-remove="{{ 'global.delete'|trans }}"
+      data-trigger-remove-confirm="{{ 'global.confirmDelete'|trans }}"
+    {% endif %}
+  >
+    {% if (allow_add) %}
+      <button class="button is-success add-item">
+        <span class="icon is-small">
+          <i class="icon-more"></i>
+        </span>
+        <span>{{ 'global.add'|trans }}</span>
+      </button>
+    {% endif %}
+    {% for child in form %}
+      <li class="collection-type-item">
+        {{ form_row(child) }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Form\DataMapper\Payment;
+
+use App\Entity\Payment\PriceOption;
+use App\Entity\Season;
+use Symfony\Component\Form\DataMapperInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
+
+class PriceOptionDataMapper implements DataMapperInterface
+{
+    public function __construct(private readonly Season $season)
+    {
+    }
+
+    public function mapDataToForms(mixed $viewData, \Traversable $forms): void
+    {
+        if (!$viewData instanceof PriceOption) {
+            return;
+        }
+
+        $forms = iterator_to_array($forms);
+
+        $forms['label']->setData($viewData->getLabel());
+        $forms['amount']->setData($viewData->getAmount());
+        $forms['rank']->setData($viewData->getRank());
+    }
+
+    public function mapFormsToData(\Traversable $forms, mixed &$viewData): void
+    {
+        $forms = iterator_to_array($forms);
+
+        try {
+            $label = $forms['label']->getData();
+            $amount = $forms['amount']->getData();
+            $rank = $forms['rank']->getData();
+
+            if (null === $viewData) {
+                $viewData = new PriceOption($label, $amount, $this->season);
+                $viewData->setRank($rank);
+
+                return;
+            }
+
+            $viewData->setLabel($label);
+            $viewData->setAmount($amount);
+            $viewData->setRank($rank);
+        } catch (\Exception $e) {
+            throw new TransformationFailedException('Unable to map data for pass payment', 0, $e);
+        }
+    }
+}
