@@ -2,24 +2,26 @@
 
 namespace App\Domain\Command\Front;
 
+use App\Entity\Payment\DiscountPayment;
 use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
 use App\Entity\Season;
 use App\Enum\DiscountCodeEnum;
 use App\Enum\FileTypeEnum;
-use App\Repository\ReEnrollmentTokenRepository;
 use App\Service\Email\EmailBuilder;
 use App\Service\Email\EmailSender;
 use App\Service\File\FileCleaner;
 use App\Service\File\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ReEnrollmentHandler
 {
     use RegistrationTrait;
 
     public function __construct(
-        private readonly ReEnrollmentTokenRepository $reEnrollmentTokenRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator,
         private readonly EmailBuilder $emailBuilder,
         private readonly EmailSender $emailSender,
         private readonly FileUploader $fileUploader,
@@ -32,34 +34,47 @@ final class ReEnrollmentHandler
         $registration = $command->registration;
 
         $this->processUpload($registration);
-        $this->reEnrollmentTokenRepository->remove($command->reEnrollmentToken, true);
-
-        /** @var string $adherentEmail */
-        $adherentEmail = $registration->getAdherent()->getEmail();
-        $discountCode = $this->getDiscountCode($registration);
-        $amountToPay = $this->getAmountToPay($registration);
 
         $reEnrollmentCode = $registration->getPriceOption()->getId() === $this->getMostExpensivePriceOption($registration->getSeason())->getId()
             ? DiscountCodeEnum::KMIS_30
             : DiscountCodeEnum::KMIS_20
         ;
 
-        $amountToPay -= (DiscountCodeEnum::KMIS_30 === $reEnrollmentCode) ? 30 : 20;
+        $discountPayment = new DiscountPayment($registration->getAdherent(), $registration->getSeason());
+        $discountPayment->setAmount((DiscountCodeEnum::KMIS_30 === $reEnrollmentCode) ? 30 : 20);
+        $discountPayment->setDiscount($this->translator->trans(sprintf('front.reEnrollment.discount.%s', $reEnrollmentCode)));
 
-        $email = $this->emailBuilder
-            ->useTemplate('email/re_enrollment_confirmed.html.twig', [
-                'registration' => $registration,
-                'reEnrollmentCode' => $reEnrollmentCode,
-                'discountCode' => $discountCode,
-                'amountToPay' => $amountToPay,
-            ])
-            ->fromDefault()
-            ->to($adherentEmail)
-            ->copy()
-            ->getEmail()
-        ;
+        if (null !== $command->reEnrollmentToken) {
+            $this->entityManager->remove($command->reEnrollmentToken);
+        }
 
-        $this->emailSender->sendEmail($email);
+        $this->entityManager->persist($discountPayment);
+        $this->entityManager->persist($registration);
+        $this->entityManager->flush();
+
+        if ($command->sendEmail) {
+            /** @var string $adherentEmail */
+            $adherentEmail = $registration->getAdherent()->getEmail();
+            $discountCode = $this->getDiscountCode($registration);
+            $amountToPay = $this->getAmountToPay($registration);
+
+            $amountToPay -= $discountPayment->getAmount();
+
+            $email = $this->emailBuilder
+                ->useTemplate('email/re_enrollment_confirmed.html.twig', [
+                    'registration' => $registration,
+                    'reEnrollmentCode' => $reEnrollmentCode,
+                    'discountCode' => $discountCode,
+                    'amountToPay' => $amountToPay,
+                ])
+                ->fromDefault()
+                ->to($adherentEmail)
+                ->copy()
+                ->getEmail()
+            ;
+
+            $this->emailSender->sendEmail($email);
+        }
     }
 
     private function processUpload(Registration $registration): void

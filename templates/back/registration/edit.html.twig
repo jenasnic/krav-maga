@@ -2,13 +2,19 @@
 
 {% block body %}
 
-    {% include 'back/adherent/_header.html.twig' with {
-        'current': 'registration',
-        'adherent': registration.adherent,
-        'registration': registration,
-    } %}
-
-    <h1 class="title">{{ 'back.registration.edit.title'|trans }} - {{ 'back.registration.edit.season'|trans }} {{ registration.season.getDisplayLabel() }}</h1>
+    {% if reEnrollment %}
+        <h1 class="title">
+            {{ 'back.registration.reEnrollment.title'|trans }}
+            - {{ registration.adherent.fullName }}
+            - {{ 'back.registration.edit.season'|trans }} {{ registration.season.getDisplayLabel() }}</h1>
+    {% else %}
+        {% include 'back/adherent/_header.html.twig' with {
+            'current': 'registration',
+            'adherent': registration.adherent,
+            'registration': registration,
+        } %}
+        <h1 class="title">{{ 'back.registration.edit.title'|trans }} - {{ 'back.registration.edit.season'|trans }} {{ registration.season.getDisplayLabel() }}</h1>
+    {% endif %}
 
     <div class="form-wrapper">
         {{ form_start(form) }}

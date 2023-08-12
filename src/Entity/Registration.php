@@ -417,4 +417,15 @@ class Registration
 
         return $this;
     }
+
+    public function prepareForReEnrollment(Season $season): void
+    {
+        $this->setSeason($season);
+        $this->setCopyrightAuthorization(null);
+        $this->setUsePassCitizen(false);
+        $this->setUsePassSport(false);
+        $this->setLicenceDate(null);
+        $this->setPriceOption(null);
+        $this->setReEnrollment(true);
+    }
 }

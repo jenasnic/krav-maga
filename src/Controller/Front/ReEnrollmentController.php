@@ -86,7 +86,8 @@ class ReEnrollmentController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $this->prepareRegistrationForReEnrollment($registration, $season);
+        $registration->prepareForReEnrollment($season);
+        $this->removeRegistrationFilesForReEnrollment($registration);
 
         $formOptions = ['re_enrollment' => true];
 
@@ -100,7 +101,7 @@ class ReEnrollmentController extends AbstractController
         $form->handleRequest($request);
 
         if (!$isPatch && $form->isSubmitted() && $form->isValid()) {
-            $reEnrollmentHandler->handle(new ReEnrollmentCommand($registration, $reEnrollmentToken));
+            $reEnrollmentHandler->handle(new ReEnrollmentCommand($registration, $reEnrollmentToken, true));
 
             $this->requestStack->getSession()->remove(self::RE_ENROLLMENT_TOKEN);
 
@@ -132,16 +133,8 @@ class ReEnrollmentController extends AbstractController
         return $reEnrollmentToken;
     }
 
-    protected function prepareRegistrationForReEnrollment(Registration $registration, Season $season): void
+    protected function removeRegistrationFilesForReEnrollment(Registration $registration): void
     {
-        $registration->setSeason($season);
-        $registration->setCopyrightAuthorization(null);
-        $registration->setUsePassCitizen(false);
-        $registration->setUsePassSport(false);
-        $registration->setLicenceDate(null);
-        $registration->setPriceOption(null);
-        $registration->setReEnrollment(true);
-
         // remove useless attached files (should be renewed)
         $this->fileCleaner->cleanEntity($registration, FileTypeEnum::MEDICAL_CERTIFICATE);
         $this->fileCleaner->cleanEntity($registration, FileTypeEnum::LICENCE_FORM);

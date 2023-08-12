@@ -12,6 +12,7 @@ global:
   logout: Se déconnecter
   more: En savoir plus
   no: Non
+  reEnrollment: Réinscrire
   search: Rechercher
   seeAll: Voir tout
   validate: Valider
@@ -33,6 +34,7 @@ enum:
     ANCV: Chèque ANCV
     CASH: Espèce
     CHECK: Chèque
+    DISCOUNT: Remise
     HELLO_ASSO: HelloAsso
     TRANSFER: Virement
     PASS: Pass'Sport
@@ -66,6 +68,7 @@ back:
         firstName: Prénom
         lastName: Nom
         phone: Téléphone
+        reEnrollment: Réinscription
         registeredAt: Date insc.
         season: Saison
         sold: Cotisation
@@ -121,6 +124,10 @@ back:
       success: Nouvelle inscription créée
       title: Nouvelle inscription
       season: Saison
+    reEnrollment:
+      title: Réinscription
+      success: Réinscription validée
+      error: Vous ne pouvez pas procéder à la réinscription
     verify:
       success: Inscription vérifiée
 
@@ -205,7 +212,7 @@ form:
     licenceDate: Date de la licence
     licenceFormFile: Formulaire de demande de licence
     licenceNumber: N° de licence
-    licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/wp-content/uploads/2022/07/FORMULAIRE-DEMANDE-DE-LICENCE-INTERNET-2022-2023.pdf" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
+    licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/espace-clubs/prise-de-licence/" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
     medicalCertificateFile: Certificat médical
     medicalCertificateFileHelp: "Le certificat médical n’est plus nécessaire pour tout licencié majeur.
     Certificat médical ou attestation sur l’honneur pour les licenciés mineurs.
@@ -217,6 +224,7 @@ form:
     usePassSport: Utiliser le Pass'Sports (50€)
     purpose: Objectif
     priceOption: Formule
+    registeredAt: Inscrit le
     withLegalRepresentative: Dans le cas d'une personne mineure, merci de renseigner le représentant légal
 
   payment:
@@ -235,6 +243,11 @@ form:
       comment: Commentaire
       number: N° chèque
       cashingDate: Date d'encaissement
+    discount:
+      date: Date
+      amount: Montant
+      comment: Commentaire
+      discount: Libellé de la remise
     helloAsso:
       date: Date
       amount: Montant
@@ -335,6 +348,9 @@ front:
     error: Token de réinscription invalide ou adresse email incorrecte.
     expired: Le lien de réinscription n'est plus valide.<br/>Veuillez contacter les membres du bureau pour vous réinscrire.
     noSeason: La nouvelle saison sportive n'a pas encore été ouverte.<br/>Revenez plus tard pour vous réinscrire.
+    discount:
+      KMIS20: Réduction ancien adhérent
+      KMIS30: Réduction ancien adhérent (formule Impact Access)
 
   sporting:
     header:
