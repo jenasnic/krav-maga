@@ -2,7 +2,6 @@
 
 namespace App\Command;
 
-use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -43,7 +42,7 @@ final class ResetLimiterCommand extends Command
             $this->loginLimiter->create($ip)->reset();
             $this->loginLimiter->create($account)->reset();
             $this->emailLimiter->create('login_throttling')->reset();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $io->error(sprintf('An error occurs : %s', $e->getMessage()));
 
             return 1;

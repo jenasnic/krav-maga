@@ -11,14 +11,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Traversable;
-use TypeError;
 
 class AddressType extends AbstractType implements DataMapperInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -31,9 +26,6 @@ class AddressType extends AbstractType implements DataMapperInterface
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -43,7 +35,7 @@ class AddressType extends AbstractType implements DataMapperInterface
         ]);
     }
 
-    public function mapDataToForms($viewData, Traversable $forms): void
+    public function mapDataToForms($viewData, \Traversable $forms): void
     {
         if (null === $viewData) {
             return;
@@ -61,7 +53,7 @@ class AddressType extends AbstractType implements DataMapperInterface
         $forms['city']->setData($viewData->getCity());
     }
 
-    public function mapFormsToData(Traversable $forms, &$viewData): void
+    public function mapFormsToData(\Traversable $forms, &$viewData): void
     {
         $forms = iterator_to_array($forms);
 
@@ -78,7 +70,7 @@ class AddressType extends AbstractType implements DataMapperInterface
             $city = $forms['city']->getData();
 
             $viewData = new Address($street, $zipCode, $city);
-        } catch (TypeError $error) {
+        } catch (\TypeError $error) {
             if ($allEmpty) {
                 $viewData = null;
             } else {

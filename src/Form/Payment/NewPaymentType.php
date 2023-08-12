@@ -5,7 +5,6 @@ namespace App\Form\Payment;
 use App\Domain\Command\Back\NewPaymentCommand;
 use App\Entity\Adherent;
 use App\Entity\Season;
-use LogicException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,7 +49,7 @@ class NewPaymentType extends AbstractType
                 $form = $event->getForm();
 
                 if (null === $form->getParent()) {
-                    throw new LogicException('invalid parent');
+                    throw new \LogicException('invalid parent');
                 }
 
                 /** @var string|null $mode */

@@ -9,7 +9,6 @@ use App\Entity\Payment\PassPayment;
 use App\Entity\Payment\TransferPayment;
 use App\Entity\Season;
 use App\Repository\Payment\PaymentRepository;
-use LogicException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -53,7 +52,7 @@ class PaymentCsvExport extends AbstractCsvExport
     protected function buildLine(mixed $data): array
     {
         if (!$data instanceof AbstractPayment) {
-            throw new LogicException('invalid data');
+            throw new \LogicException('invalid data');
         }
 
         /** @var float $amount */

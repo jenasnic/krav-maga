@@ -2,8 +2,6 @@
 
 namespace App\Exception;
 
-use Exception;
-
-class NoActiveSeasonException extends Exception
+class NoActiveSeasonException extends \Exception
 {
 }

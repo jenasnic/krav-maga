@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Season;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -52,7 +51,7 @@ class SeasonRepository extends ServiceEntityRepository
     public function existForYear(?string $year = null): bool
     {
         if (null === $year) {
-            $year = (new DateTime())->format('Y');
+            $year = (new \DateTime())->format('Y');
         }
 
         $queryBuilder = $this->createQueryBuilder('season');

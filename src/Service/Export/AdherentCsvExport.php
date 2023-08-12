@@ -4,7 +4,6 @@ namespace App\Service\Export;
 
 use App\Entity\Registration;
 use App\Repository\RegistrationRepository;
-use LogicException;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -57,7 +56,7 @@ class AdherentCsvExport extends AbstractCsvExport
     protected function buildLine(mixed $data): array
     {
         if (!$data instanceof Registration) {
-            throw new LogicException('invalid data');
+            throw new \LogicException('invalid data');
         }
 
         $legalRepresentative = '';

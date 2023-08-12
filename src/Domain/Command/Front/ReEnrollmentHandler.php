@@ -35,7 +35,7 @@ final class ReEnrollmentHandler
 
         $this->processUpload($registration);
 
-        $reEnrollmentCode = $registration->getPriceOption()->getId() === $this->getMostExpensivePriceOption($registration->getSeason())->getId()
+        $reEnrollmentCode = $registration->getPriceOption()?->getId() === $this->getMostExpensivePriceOption($registration->getSeason())->getId()
             ? DiscountCodeEnum::KMIS_30
             : DiscountCodeEnum::KMIS_20
         ;

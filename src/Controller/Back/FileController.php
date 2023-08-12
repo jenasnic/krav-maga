@@ -4,7 +4,6 @@ namespace App\Controller\Back;
 
 use App\Entity\Adherent;
 use App\Entity\Registration;
-use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +25,7 @@ class FileController extends AbstractController
     {
         $filePath = $registration->getMedicalCertificateUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'attestation');
@@ -39,7 +38,7 @@ class FileController extends AbstractController
     {
         $filePath = $registration->getLicenceFormUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'formulaire_licence');
@@ -52,7 +51,7 @@ class FileController extends AbstractController
     {
         $filePath = $registration->getPassCitizenUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_citizen');
@@ -65,7 +64,7 @@ class FileController extends AbstractController
     {
         $filePath = $registration->getPassSportUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_sport');
@@ -78,7 +77,7 @@ class FileController extends AbstractController
     {
         $filePath = $adherent->getPictureUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($adherent, $filePath, 'photo');

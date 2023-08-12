@@ -27,7 +27,6 @@ use App\Helper\FloatHelper;
 use App\Repository\Payment\PaymentRepository;
 use App\Repository\RegistrationRepository;
 use App\Repository\SeasonRepository;
-use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -202,7 +201,7 @@ class PaymentController extends AbstractController
             $payment instanceof HelloAssoPayment => HelloAssoPaymentType::class,
             $payment instanceof PassPayment => PassPaymentType::class,
             $payment instanceof TransferPayment => TransferPaymentType::class,
-            default => throw new LogicException('unknown payment type'),
+            default => throw new \LogicException('unknown payment type'),
         };
 
         $form = $this->createForm($paymentType, $payment, [
@@ -241,7 +240,7 @@ class PaymentController extends AbstractController
             PaymentTypeEnum::HELLO_ASSO => $this->createForm(HelloAssoPaymentType::class, $payment, $options),
             PaymentTypeEnum::PASS => $this->createForm(PassPaymentType::class, $payment, $options),
             PaymentTypeEnum::TRANSFER => $this->createForm(TransferPaymentType::class, $payment, $options),
-            default => throw new LogicException('invalid payment type'),
+            default => throw new \LogicException('invalid payment type'),
         };
 
         return $this->render('back/payment/view.html.twig', [

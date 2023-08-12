@@ -2,9 +2,7 @@
 
 namespace App\Exception;
 
-use Exception;
-
-class EmptyExportException extends Exception
+class EmptyExportException extends \Exception
 {
     public function __construct(string $message)
     {

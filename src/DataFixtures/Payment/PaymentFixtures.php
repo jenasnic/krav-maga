@@ -16,14 +16,11 @@ use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
 use App\Entity\Season;
 use App\Helper\FloatHelper;
-use DateInterval;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
-use LogicException;
 use Zenstruck\Foundry\Proxy;
 
 class PaymentFixtures extends Fixture implements DependentFixtureInterface
@@ -78,9 +75,9 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
         $priceOption = $registration->getPriceOption();
         $amount = $priceOption->getAmount();
 
-        /** @var DateTime $startDate */
+        /** @var \DateTime $startDate */
         $startDate = $season->getStartDate();
-        $paymentDate = $startDate->add(DateInterval::createFromDateString('+1 month'));
+        $paymentDate = $startDate->add(\DateInterval::createFromDateString('+1 month'));
 
         $paymentAttributes = [
             'adherent' => $registration->getAdherent(),
@@ -106,7 +103,7 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
         } else {
             do {
                 $newAmount = ($amount < 100 || $this->faker->boolean()) ? $amount : 60;
-                $paymentDate = $paymentDate->add(DateInterval::createFromDateString('+1 month'));
+                $paymentDate = $paymentDate->add(\DateInterval::createFromDateString('+1 month'));
 
                 if (!$sold && FloatHelper::equals($amount, $newAmount)) {
                     break;
@@ -133,7 +130,7 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
             'cash' => CashPaymentFactory::createOne($attributes),
             'check' => CheckPaymentFactory::createOne($attributes),
             'transfer' => TransferPaymentFactory::createOne($attributes),
-            default => throw new LogicException('invalid type')
+            default => throw new \LogicException('invalid type')
         };
     }
 }

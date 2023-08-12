@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ReEnrollmentTokenRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReEnrollmentTokenRepository::class)]
@@ -18,9 +17,9 @@ class ReEnrollmentToken
     private Adherent $adherent;
 
     #[ORM\Column(type: 'datetime')]
-    private DateTime $expiresAt;
+    private \DateTime $expiresAt;
 
-    public function __construct(string $id, Adherent $adherent, DateTime $expiresAt)
+    public function __construct(string $id, Adherent $adherent, \DateTime $expiresAt)
     {
         $this->id = $id;
         $this->adherent = $adherent;
@@ -37,7 +36,7 @@ class ReEnrollmentToken
         return $this->adherent;
     }
 
-    public function getExpiresAt(): DateTime
+    public function getExpiresAt(): \DateTime
     {
         return $this->expiresAt;
     }

@@ -3,8 +3,6 @@
 namespace App\DataFixtures\Factory;
 
 use App\Entity\Season;
-use DateInterval;
-use DateTime;
 use Zenstruck\Foundry\ModelFactory;
 
 /**
@@ -19,12 +17,12 @@ final class SeasonFactory extends ModelFactory
     {
         $date = self::faker()->dateTimeBetween('-4 years', '+1 year');
         $year = $date->format('Y');
-        $nextYear = $date->add(DateInterval::createFromDateString('+1 year'))->format('Y');
+        $nextYear = $date->add(\DateInterval::createFromDateString('+1 year'))->format('Y');
 
         return [
             'label' => $year,
-            'startDate' => new DateTime($year.'-09-01'),
-            'endDate' => new DateTime($nextYear.'-08-31'),
+            'startDate' => new \DateTime($year.'-09-01'),
+            'endDate' => new \DateTime($nextYear.'-08-31'),
         ];
     }
 

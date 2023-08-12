@@ -7,7 +7,6 @@ use App\Domain\Command\Front\ReEnrollmentHandler;
 use App\Domain\Model\ReEnrollment;
 use App\Entity\ReEnrollmentToken;
 use App\Entity\Registration;
-use App\Entity\Season;
 use App\Enum\FileTypeEnum;
 use App\Form\NewRegistrationType;
 use App\Form\ReEnrollmentType;
@@ -15,7 +14,6 @@ use App\Repository\ReEnrollmentTokenRepository;
 use App\Repository\RegistrationRepository;
 use App\Repository\SeasonRepository;
 use App\Service\File\FileCleaner;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -69,7 +67,7 @@ class ReEnrollmentController extends AbstractController
     ): Response {
         $reEnrollmentToken = $this->getReEnrollmentToken();
 
-        if ($reEnrollmentToken->getExpiresAt() < new DateTime()) {
+        if ($reEnrollmentToken->getExpiresAt() < new \DateTime()) {
             $this->addFlash('error', $this->translator->trans('front.reEnrollment.expired'));
 
             return $this->redirectToRoute('app_home');

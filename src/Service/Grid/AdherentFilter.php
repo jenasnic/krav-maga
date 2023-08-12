@@ -3,7 +3,6 @@
 namespace App\Service\Grid;
 
 use App\Enum\GenderEnum;
-use DateTime;
 use Doctrine\ORM\QueryBuilder;
 
 class AdherentFilter implements FilterInterface
@@ -23,7 +22,7 @@ class AdherentFilter implements FilterInterface
             case self::YOUNG:
                 $queryBuilder
                     ->andWhere('adherent.birthDate > :minorDate')
-                    ->setParameter('minorDate', new DateTime('-18 years'))
+                    ->setParameter('minorDate', new \DateTime('-18 years'))
                 ;
                 break;
             case self::MALE:

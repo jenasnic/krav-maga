@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Entity\Payment\PriceOption;
 use App\Repository\RegistrationRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -27,7 +26,7 @@ class Registration
     private ?string $licenceNumber = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?DateTime $licenceDate = null;
+    private ?\DateTime $licenceDate = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $medicalCertificateUrl = null;
@@ -48,7 +47,7 @@ class Registration
     private ?string $passSportUrl = null;
 
     #[ORM\Column(type: 'datetime')]
-    private DateTime $registeredAt;
+    private \DateTime $registeredAt;
 
     #[ORM\Column(type: 'boolean')]
     #[Assert\NotNull]
@@ -102,7 +101,7 @@ class Registration
     {
         $this->adherent = $adherent;
         $this->season = $season;
-        $this->registeredAt = new DateTime();
+        $this->registeredAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -146,12 +145,12 @@ class Registration
         return $this;
     }
 
-    public function getLicenceDate(): ?DateTime
+    public function getLicenceDate(): ?\DateTime
     {
         return $this->licenceDate;
     }
 
-    public function setLicenceDate(?DateTime $licenceDate): self
+    public function setLicenceDate(?\DateTime $licenceDate): self
     {
         $this->licenceDate = $licenceDate;
 
@@ -230,12 +229,12 @@ class Registration
         return $this;
     }
 
-    public function getRegisteredAt(): DateTime
+    public function getRegisteredAt(): \DateTime
     {
         return $this->registeredAt;
     }
 
-    public function setRegisteredAt(DateTime $registeredAt): Registration
+    public function setRegisteredAt(\DateTime $registeredAt): Registration
     {
         $this->registeredAt = $registeredAt;
 
@@ -283,8 +282,6 @@ class Registration
 
         return $this;
     }
-
-
 
     public function getLegalRepresentative(): ?LegalRepresentative
     {
