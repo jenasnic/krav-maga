@@ -5,7 +5,6 @@ namespace App\Domain\Command\Front;
 use App\Service\Email\EmailBuilder;
 use App\Service\Email\EmailSender;
 use Doctrine\ORM\EntityManagerInterface;
-use LogicException;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class ConfirmRegistrationHandler
@@ -25,7 +24,7 @@ final class ConfirmRegistrationHandler
         $registration = $command->registration;
 
         if (null === $registration->getId() || null === $registration->getAdherent()->getEmail()) {
-            throw new LogicException('invalid registration');
+            throw new \LogicException('invalid registration');
         }
 
         $this->verifyEmailHelper->validateEmailConfirmation(
@@ -37,7 +36,7 @@ final class ConfirmRegistrationHandler
         $registration->setVerified(true);
 
         if (null === $command->registration->getAdherent()->getEmail()) {
-            throw new LogicException('invalid registration');
+            throw new \LogicException('invalid registration');
         }
 
         $this->entityManager->flush();

@@ -6,7 +6,6 @@ use App\DataFixtures\Factory\RegistrationFactory;
 use App\DataFixtures\Factory\SeasonFactory;
 use App\DataFixtures\Payment\PriceOptionFixtures;
 use App\Entity\Season;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -36,7 +35,7 @@ class RegistrationFixtures extends Fixture implements DependentFixtureInterface
         /** @var Proxy<Season> $season */
         foreach (SeasonFactory::all() as $season) {
             $season = $season->object();
-            $registrationDate = new DateTime(sprintf('%s-09-15', $season->getLabel()));
+            $registrationDate = new \DateTime(sprintf('%s-09-15', $season->getLabel()));
 
             if ($season->isActive()) {
                 foreach ($season->getPriceOptions() as $priceOption) {
@@ -46,7 +45,7 @@ class RegistrationFixtures extends Fixture implements DependentFixtureInterface
                         'season' => $season,
                         'registeredAt' => $registrationDate,
                         'priceOption' => $priceOption,
-                        'reEnrollment' => $this->faker->boolean()
+                        'reEnrollment' => $this->faker->boolean(),
                     ]);
                 }
             } else {

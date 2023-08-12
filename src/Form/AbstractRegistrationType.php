@@ -6,9 +6,7 @@ use App\Entity\Payment\PriceOption;
 use App\Entity\Purpose;
 use App\Entity\Registration;
 use App\Form\Type\BulmaFileType;
-use App\Repository\Payment\PriceOptionRepository;
 use App\Repository\PurposeRepository;
-use LogicException;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -66,7 +64,7 @@ abstract class AbstractRegistrationType extends AbstractType
                 $form = $event->getForm();
 
                 if (null === $form->getParent()) {
-                    throw new LogicException('invalid parent');
+                    throw new \LogicException('invalid parent');
                 }
 
                 $this->toggleLegalRepresentative($form->getParent(), true === $form->getData());
@@ -151,7 +149,7 @@ abstract class AbstractRegistrationType extends AbstractType
                 $form = $event->getForm();
 
                 if (null === $form->getParent()) {
-                    throw new LogicException('invalid parent');
+                    throw new \LogicException('invalid parent');
                 }
 
                 $this->togglePass($form->getParent(), $uploadFieldName, true === $form->getData(), $downloadUri);

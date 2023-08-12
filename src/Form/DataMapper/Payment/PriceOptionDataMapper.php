@@ -13,6 +13,9 @@ class PriceOptionDataMapper implements DataMapperInterface
     {
     }
 
+    /**
+     * @param PriceOption|null $viewData
+     */
     public function mapDataToForms(mixed $viewData, \Traversable $forms): void
     {
         if (!$viewData instanceof PriceOption) {
@@ -26,13 +29,19 @@ class PriceOptionDataMapper implements DataMapperInterface
         $forms['rank']->setData($viewData->getRank());
     }
 
+    /**
+     * @param PriceOption|null $viewData
+     */
     public function mapFormsToData(\Traversable $forms, mixed &$viewData): void
     {
         $forms = iterator_to_array($forms);
 
         try {
+            /** @var string $label */
             $label = $forms['label']->getData();
+            /** @var float $amount */
             $amount = $forms['amount']->getData();
+            /** @var int $rank */
             $rank = $forms['rank']->getData();
 
             if (null === $viewData) {

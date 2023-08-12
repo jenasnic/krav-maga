@@ -2,8 +2,6 @@
 
 namespace App\Exception;
 
-use Exception;
-
-class SeasonAlreadyDefinedException extends Exception
+class SeasonAlreadyDefinedException extends \Exception
 {
 }

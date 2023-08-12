@@ -67,7 +67,7 @@ class PriceOptionFixtures extends Fixture implements DependentFixtureInterface
                 ]);
             }
 
-            $increment++;
+            ++$increment;
         }
     }
 

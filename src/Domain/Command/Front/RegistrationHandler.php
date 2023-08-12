@@ -6,7 +6,6 @@ use App\Entity\Registration;
 use App\Repository\RegistrationRepository;
 use App\Service\Email\EmailSender;
 use App\Service\File\FileUploader;
-use LogicException;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class RegistrationHandler
@@ -24,7 +23,7 @@ final class RegistrationHandler
         $registration = $command->registration;
 
         if (null !== $registration->getId()) {
-            throw new LogicException('registration already persisted');
+            throw new \LogicException('registration already persisted');
         }
 
         $this->processUpload($registration);
@@ -62,7 +61,7 @@ final class RegistrationHandler
     private function sendConfirmationEmail(Registration $registration): void
     {
         if (null === $registration->getId() || null === $registration->getAdherent()->getEmail()) {
-            throw new LogicException('invalid adherent');
+            throw new \LogicException('invalid adherent');
         }
 
         $signatureComponents = $this->verifyEmailHelper->generateSignature(

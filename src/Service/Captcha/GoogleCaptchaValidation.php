@@ -2,7 +2,6 @@
 
 namespace App\Service\Captcha;
 
-use LogicException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -19,7 +18,7 @@ class GoogleCaptchaValidation
     {
         $currentRequest = $this->requestStack->getCurrentRequest();
         if (null === $currentRequest) {
-            throw new LogicException('Current request can\'t be empty.');
+            throw new \LogicException('Current request can\'t be empty.');
         }
 
         $response = $this->googleCaptchaClient->request('POST', 'siteverify', [

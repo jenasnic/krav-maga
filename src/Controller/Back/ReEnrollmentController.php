@@ -30,7 +30,6 @@ class ReEnrollmentController extends AbstractController
         Request $request,
         Registration $registration,
     ): Response {
-
         $season = $this->seasonRepository->getActiveSeason();
         if (null === $season || $season->getId() === $registration->getSeason()->getId()) {
             $this->addFlash('error', $this->translator->trans('back.registration.reEnrollment.error'));

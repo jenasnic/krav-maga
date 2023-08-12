@@ -5,8 +5,6 @@ namespace App\Repository;
 use App\Entity\Registration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Generator;
-use LogicException;
 
 /**
  * @extends ServiceEntityRepository<Registration>
@@ -48,16 +46,16 @@ class RegistrationRepository extends ServiceEntityRepository
         ;
 
         if (!$registration instanceof Registration) {
-            throw new LogicException(sprintf('no registration for adherent %d', $adherentId));
+            throw new \LogicException(sprintf('no registration for adherent %d', $adherentId));
         }
 
         return $registration;
     }
 
     /**
-     * @return Generator<Registration>
+     * @return \Generator<Registration>
      */
-    public function findForExport(): Generator
+    public function findForExport(): \Generator
     {
         $queryBuilder = $this->createQueryBuilder('registration');
 

@@ -4,7 +4,6 @@ namespace App\Service\Export;
 
 use App\Domain\Export\ExportCSV;
 use App\Exception\EmptyExportException;
-use Generator;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 abstract class AbstractCsvExport
@@ -22,9 +21,9 @@ abstract class AbstractCsvExport
     abstract protected function getFilename(): string;
 
     /**
-     * @param Generator<mixed> $generator
+     * @param \Generator<mixed> $generator
      */
-    protected function getStreamedResponse(Generator $generator): StreamedResponse
+    protected function getStreamedResponse(\Generator $generator): StreamedResponse
     {
         $current = $generator->current();
         if (null === $current) {

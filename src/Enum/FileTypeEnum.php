@@ -4,7 +4,6 @@ namespace App\Enum;
 
 use App\Entity\Adherent;
 use App\Entity\Registration;
-use LogicException;
 
 class FileTypeEnum
 {
@@ -41,7 +40,7 @@ class FileTypeEnum
                 self::PASS_SPORT,
             ],
             $entity instanceof Adherent => [self::PICTURE],
-            default => throw new LogicException('unsupported entity type'),
+            default => throw new \LogicException('unsupported entity type'),
         };
     }
 }

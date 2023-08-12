@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Helper\StringHelper;
 use App\Repository\AdherentRepository;
 use App\ValueObject\Address;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,7 +31,7 @@ class Adherent
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotNull]
-    private ?DateTime $birthDate = null;
+    private ?\DateTime $birthDate = null;
 
     #[ORM\Column(type: 'string', length: 55, nullable: true)]
     #[Assert\NotBlank]
@@ -104,12 +103,12 @@ class Adherent
         return $this;
     }
 
-    public function getBirthDate(): ?DateTime
+    public function getBirthDate(): ?\DateTime
     {
         return $this->birthDate;
     }
 
-    public function setBirthDate(?DateTime $birthDate): self
+    public function setBirthDate(?\DateTime $birthDate): self
     {
         $this->birthDate = $birthDate;
 

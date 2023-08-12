@@ -4,7 +4,6 @@ namespace App\Service\Factory;
 
 use App\Entity\Adherent;
 use App\Entity\ReEnrollmentToken;
-use DateTime;
 
 class ReEnrollmentTokenFactory
 {
@@ -13,7 +12,7 @@ class ReEnrollmentTokenFactory
         return new ReEnrollmentToken(
             substr(uniqid().bin2hex(random_bytes(20)), 0, 55),
             $adherent,
-            new DateTime('+3 months'),
+            new \DateTime('+3 months'),
         );
     }
 }
