@@ -111,6 +111,7 @@ class ReEnrollmentController extends AbstractController
 
         return $this->render('front/registration.html.twig', [
             'form' => $form->createView(),
+            'reEnrollment' => true,
         ]);
     }
 
@@ -135,15 +136,16 @@ class ReEnrollmentController extends AbstractController
     {
         $registration->setSeason($season);
         $registration->setCopyrightAuthorization(null);
-        $registration->setUsePass15(false);
-        $registration->setUsePass50(false);
+        $registration->setUsePassCitizen(false);
+        $registration->setUsePassSport(false);
         $registration->setLicenceDate(null);
         $registration->setPriceOption(null);
+        $registration->setReEnrollment(true);
 
         // remove useless attached files (should be renewed)
         $this->fileCleaner->cleanEntity($registration, FileTypeEnum::MEDICAL_CERTIFICATE);
         $this->fileCleaner->cleanEntity($registration, FileTypeEnum::LICENCE_FORM);
-        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_15);
-        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_50);
+        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_CITIZEN);
+        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_SPORT);
     }
 }

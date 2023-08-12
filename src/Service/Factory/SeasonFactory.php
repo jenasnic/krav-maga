@@ -24,6 +24,11 @@ class SeasonFactory
             throw new SeasonAlreadyDefinedException(sprintf('A season is already set for year %s', $currentYear));
         }
 
-        return new Season($currentYear);
+        $season = new Season($currentYear);
+
+        $season->setStartDate(new DateTime(sprintf('%s-09-01', $currentYear)));
+        $season->setEndDate(new DateTime(sprintf('%s-08-31', (int) $currentYear + 1)));
+
+        return $season;
     }
 }

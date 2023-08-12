@@ -3,16 +3,16 @@
 namespace App\Domain\Command\Front;
 
 use App\Entity\Registration;
-use App\Enum\PassSportEnum;
+use App\Enum\DiscountCodeEnum;
 
 trait RegistrationTrait
 {
     protected function getDiscountCode(Registration $registration): ?string
     {
         return match (true) {
-            $registration->isUsePass15() && $registration->isUsePass50() => PassSportEnum::BOTH,
-            $registration->isUsePass15() => PassSportEnum::PASS_15,
-            $registration->isUsePass50() => PassSportEnum::PASS_50,
+            $registration->isUsePassCitizen() && $registration->isUsePassSport() => DiscountCodeEnum::BOTH,
+            $registration->isUsePassCitizen() => DiscountCodeEnum::PASS_20,
+            $registration->isUsePassSport() => DiscountCodeEnum::PASS_50,
             default => null,
         };
     }
@@ -22,11 +22,11 @@ trait RegistrationTrait
         /** @var float $amountToPay */
         $amountToPay = $registration->getPriceOption()?->getAmount();
 
-        if ($registration->isUsePass15()) {
-            $amountToPay -= 15;
+        if ($registration->isUsePassCitizen()) {
+            $amountToPay -= 20;
         }
 
-        if ($registration->isUsePass15()) {
+        if ($registration->isUsePassCitizen()) {
             $amountToPay -= 50;
         }
 

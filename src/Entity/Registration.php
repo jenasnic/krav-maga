@@ -36,16 +36,16 @@ class Registration
     private ?string $licenceFormUrl = null;
 
     #[ORM\Column(type: 'boolean')]
-    private bool $usePass15 = false;
+    private bool $usePassCitizen = false;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $pass15Url = null;
+    private ?string $passCitizenUrl = null;
 
     #[ORM\Column(type: 'boolean')]
-    private bool $usePass50 = false;
+    private bool $usePassSport = false;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $pass50Url = null;
+    private ?string $passSportUrl = null;
 
     #[ORM\Column(type: 'datetime')]
     private DateTime $registeredAt;
@@ -56,6 +56,9 @@ class Registration
 
     #[ORM\Column(type: 'boolean')]
     private bool $withLegalRepresentative = false;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $reEnrollment = false;
 
     #[ORM\OneToOne(targetEntity: LegalRepresentative::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
@@ -91,9 +94,9 @@ class Registration
 
     private ?UploadedFile $licenceFormFile = null;
 
-    private ?UploadedFile $pass15File = null;
+    private ?UploadedFile $passCitizenFile = null;
 
-    private ?UploadedFile $pass50File = null;
+    private ?UploadedFile $passSportFile = null;
 
     public function __construct(Adherent $adherent, Season $season)
     {
@@ -179,50 +182,50 @@ class Registration
         return $this;
     }
 
-    public function isUsePass15(): bool
+    public function isUsePassCitizen(): bool
     {
-        return $this->usePass15;
+        return $this->usePassCitizen;
     }
 
-    public function setUsePass15(bool $usePass15): self
+    public function setUsePassCitizen(bool $usePassCitizen): self
     {
-        $this->usePass15 = $usePass15;
+        $this->usePassCitizen = $usePassCitizen;
 
         return $this;
     }
 
-    public function getPass15Url(): ?string
+    public function getPassCitizenUrl(): ?string
     {
-        return $this->pass15Url;
+        return $this->passCitizenUrl;
     }
 
-    public function setPass15Url(?string $pass15Url): self
+    public function setPassCitizenUrl(?string $passCitizenUrl): self
     {
-        $this->pass15Url = $pass15Url;
+        $this->passCitizenUrl = $passCitizenUrl;
 
         return $this;
     }
 
-    public function isUsePass50(): bool
+    public function isUsePassSport(): bool
     {
-        return $this->usePass50;
+        return $this->usePassSport;
     }
 
-    public function setUsePass50(bool $usePass50): self
+    public function setUsePassSport(bool $usePassSport): self
     {
-        $this->usePass50 = $usePass50;
+        $this->usePassSport = $usePassSport;
 
         return $this;
     }
 
-    public function getPass50Url(): ?string
+    public function getPassSportUrl(): ?string
     {
-        return $this->pass50Url;
+        return $this->passSportUrl;
     }
 
-    public function setPass50Url(?string $pass50Url): self
+    public function setPassSportUrl(?string $passSportUrl): self
     {
-        $this->pass50Url = $pass50Url;
+        $this->passSportUrl = $passSportUrl;
 
         return $this;
     }
@@ -268,6 +271,20 @@ class Registration
 
         return $this;
     }
+
+    public function isReEnrollment(): bool
+    {
+        return $this->reEnrollment;
+    }
+
+    public function setReEnrollment(bool $reEnrollment): self
+    {
+        $this->reEnrollment = $reEnrollment;
+
+        return $this;
+    }
+
+
 
     public function getLegalRepresentative(): ?LegalRepresentative
     {
@@ -377,26 +394,26 @@ class Registration
         return $this;
     }
 
-    public function getPass15File(): ?UploadedFile
+    public function getPassCitizenFile(): ?UploadedFile
     {
-        return $this->pass15File;
+        return $this->passCitizenFile;
     }
 
-    public function setPass15File(?UploadedFile $pass15File): self
+    public function setPassCitizenFile(?UploadedFile $passCitizenFile): self
     {
-        $this->pass15File = $pass15File;
+        $this->passCitizenFile = $passCitizenFile;
 
         return $this;
     }
 
-    public function getPass50File(): ?UploadedFile
+    public function getPassSportFile(): ?UploadedFile
     {
-        return $this->pass50File;
+        return $this->passSportFile;
     }
 
-    public function setPass50File(?UploadedFile $pass50File): self
+    public function setPassSportFile(?UploadedFile $passSportFile): self
     {
-        $this->pass50File = $pass50File;
+        $this->passSportFile = $passSportFile;
 
         return $this;
     }

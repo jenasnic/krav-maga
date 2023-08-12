@@ -48,14 +48,14 @@ final class RegistrationHandler
             $registration->setLicenceFormUrl($this->fileUploader->upload($registration->getLicenceFormFile()));
         }
 
-        // @todo : check if usePass15 is true?
-        if (null !== $registration->getPass15File()) {
-            $registration->setPass15Url($this->fileUploader->upload($registration->getPass15File()));
+        // @todo : check if usePassCitizen is true?
+        if (null !== $registration->getPassCitizenFile()) {
+            $registration->setPassCitizenUrl($this->fileUploader->upload($registration->getPassCitizenFile()));
         }
 
-        // @todo : check if usePass50 is true?
-        if (null !== $registration->getPass50File()) {
-            $registration->setPass50Url($this->fileUploader->upload($registration->getPass50File()));
+        // @todo : check if usePassSport is true?
+        if (null !== $registration->getPassSportFile()) {
+            $registration->setPassSportUrl($this->fileUploader->upload($registration->getPassSportFile()));
         }
     }
 

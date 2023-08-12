@@ -2,7 +2,7 @@
 
 namespace App\Controller\Front;
 
-use App\Repository\Payment\PriceOptionRepository;
+use App\Repository\SeasonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,10 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(PriceOptionRepository $priceOptionRepository): Response
+    public function index(SeasonRepository $seasonRepository): Response
     {
+        $activeSeason = $seasonRepository->getActiveSeason();
+        $priceOptions = $activeSeason ? $activeSeason->getPriceOptions()->toArray() : [];
+
         return $this->render('front/home.html.twig', [
-            'priceOptions' => $priceOptionRepository->findAllOrdered(),
+            'priceOptions' => $priceOptions,
         ]);
     }
 
