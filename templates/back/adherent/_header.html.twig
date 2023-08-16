@@ -13,6 +13,14 @@
                 <span class="icon"><i class="icon-back"></i></span>
             </a>
         </p>
+        {% if not registration.season.active %}
+            <p class="level-item">
+                <a href="{{ path('bo_re_enrollment', {'registration': registration.id}) }}" class="button is-primary">
+                    <span>{{ 'global.reEnrollment'|trans }}</span>
+                    <span class="icon"><i class="icon-clipboard"></i></span>
+                </a>
+            </p>
+        {% endif %}
         {% if not registration.verified %}
             <p class="level-item">
                 <form

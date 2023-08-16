@@ -13,17 +13,11 @@ class MaskNumberTransformer implements DataTransformerInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($data)
     {
         return (string) $data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function reverseTransform($data)
     {
         if (null === $data) {

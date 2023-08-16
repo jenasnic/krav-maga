@@ -6,7 +6,6 @@ use App\Entity\Registration;
 use App\Repository\RegistrationRepository;
 use App\Service\Email\EmailSender;
 use App\Service\File\FileUploader;
-use LogicException;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class RegistrationHandler
@@ -24,7 +23,7 @@ final class RegistrationHandler
         $registration = $command->registration;
 
         if (null !== $registration->getId()) {
-            throw new LogicException('registration already persisted');
+            throw new \LogicException('registration already persisted');
         }
 
         $this->processUpload($registration);
@@ -48,21 +47,21 @@ final class RegistrationHandler
             $registration->setLicenceFormUrl($this->fileUploader->upload($registration->getLicenceFormFile()));
         }
 
-        // @todo : check if usePass15 is true?
-        if (null !== $registration->getPass15File()) {
-            $registration->setPass15Url($this->fileUploader->upload($registration->getPass15File()));
+        // @todo : check if usePassCitizen is true?
+        if (null !== $registration->getPassCitizenFile()) {
+            $registration->setPassCitizenUrl($this->fileUploader->upload($registration->getPassCitizenFile()));
         }
 
-        // @todo : check if usePass50 is true?
-        if (null !== $registration->getPass50File()) {
-            $registration->setPass50Url($this->fileUploader->upload($registration->getPass50File()));
+        // @todo : check if usePassSport is true?
+        if (null !== $registration->getPassSportFile()) {
+            $registration->setPassSportUrl($this->fileUploader->upload($registration->getPassSportFile()));
         }
     }
 
     private function sendConfirmationEmail(Registration $registration): void
     {
         if (null === $registration->getId() || null === $registration->getAdherent()->getEmail()) {
-            throw new LogicException('invalid adherent');
+            throw new \LogicException('invalid adherent');
         }
 
         $signatureComponents = $this->verifyEmailHelper->generateSignature(

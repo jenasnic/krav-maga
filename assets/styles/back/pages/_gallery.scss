@@ -1,11 +1,11 @@
-@use '../bulma/variables';
+@use '../bulma/variables' as bulma;
 
 .gallery {
   display: flex;
   flex-wrap: wrap;
 
   .gallery__adherent {
-    background-color: variables.$background;
+    background-color: bulma.$background;
     border: 3px solid;
     border-radius: 10px;
     padding: 20px;
@@ -16,11 +16,11 @@
     }
 
     &--male {
-      border-color: variables.$blue;
+      border-color: bulma.$blue;
     }
 
     &--female {
-      border-color: variables.$red;
+      border-color: bulma.$red;
     }
 
     > .picture {
@@ -29,7 +29,7 @@
       width: 120px;
 
       > img {
-        border: 1px solid variables.$body-background-color;
+        border: 1px solid bulma.$body-background-color;
         height: 100%;
         object-fit: cover;
         object-position: center;

@@ -11,7 +11,7 @@
 {% block header %}
     {% include 'front/components/_banner.html.twig' with {
         'image': asset('build/images/registration.webp'),
-        'title': ('front.registration.header.title'|trans),
+        'title': reEnrollment ? ('front.reEnrollment.header.title'|trans) : ('front.registration.header.title'|trans),
     } only %}
 {% endblock %}
 
@@ -82,22 +82,22 @@
         {{ form_row(form.priceOption) }}
         <div class="m-top-3 m-bottom-1">
             <div class="row col-x1">
-                {{ form_row(form.usePass15, {'attr': {'data-field-update': 'pass-15'}}) }}
+                {{ form_row(form.usePassCitizen, {'attr': {'data-field-update': 'pass-citizen'}}) }}
             </div>
-            <div data-field-update-target="pass-15">
-                {% if form.pass15File is defined %}
+            <div data-field-update-target="pass-citizen">
+                {% if form.passCitizenFile is defined %}
                     <div class="row col-x1 m-bottom-2">
-                        {{ form_row(form.pass15File) }}
+                        {{ form_row(form.passCitizenFile) }}
                     </div>
                 {% endif %}
             </div>
             <div class="row col-x1">
-                {{ form_row(form.usePass50, {'attr': {'data-field-update': 'pass-50'}}) }}
+                {{ form_row(form.usePassSport, {'attr': {'data-field-update': 'pass-sport'}}) }}
             </div>
-            <div data-field-update-target="pass-50">
-                {% if form.pass50File is defined %}
+            <div data-field-update-target="pass-sport">
+                {% if form.passSportFile is defined %}
                     <div class="row col-x1 m-bottom-2">
-                        {{ form_row(form.pass50File) }}
+                        {{ form_row(form.passSportFile) }}
                     </div>
                 {% endif %}
             </div>
@@ -111,7 +111,9 @@
             <button type="submit" class="button">{{ 'global.validate'|trans }} <i class="icon-checkmark"></i></button>
         </div>
         {{ form_end(form) }}
-        <p class="note m-top-2">Veuillez cliquer sur le lien reçu par email pour valider votre inscription.</p>
+        {% if not reEnrollment %}
+            <p class="note m-top-2">Veuillez cliquer sur le lien reçu par email pour valider votre inscription.</p>
+        {% endif %}
     </div>
 
 {% endblock %}

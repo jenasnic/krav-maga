@@ -16,14 +16,11 @@ use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
 use App\Entity\Season;
 use App\Helper\FloatHelper;
-use DateInterval;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
-use LogicException;
 use Zenstruck\Foundry\Proxy;
 
 class PaymentFixtures extends Fixture implements DependentFixtureInterface
@@ -37,27 +34,26 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $season2020 = SeasonFactory::find(['label' => SeasonFixtures::SEASON_2020])->object();
-        $season2021 = SeasonFactory::find(['label' => SeasonFixtures::SEASON_2021])->object();
-        $season2022 = SeasonFactory::find(['label' => SeasonFixtures::SEASON_2022])->object();
+        /** @var array<Proxy<Registration>> $registrations */
+        $registrations = RegistrationFactory::all();
+        /** @var array<Proxy<Season>> $seasons */
+        $seasons = SeasonFactory::all();
 
-        /** @var Proxy<Registration> $registration */
-        foreach (RegistrationFactory::all() as $registration) {
+        foreach ($registrations as $registration) {
             $registration = $registration->object();
 
-            if (SeasonFixtures::SEASON_2020 === $registration->getSeason()->getLabel()) {
-                $this->createPaymentsForSeason($registration, $season2020, true);
-            } elseif (SeasonFixtures::SEASON_2021 === $registration->getSeason()->getLabel()) {
-                if ($this->faker->boolean(80)) {
-                    $this->createPaymentsForSeason($registration, $season2020, true);
+            foreach ($seasons as $season) {
+                $season = $season->object();
+
+                if ($season->getId() === $registration->getSeason()->getId()) {
+                    $soldPayment = !$season->isActive() || $this->faker->boolean(60);
+                    $this->createPaymentsForSeason($registration, $season, $soldPayment);
+                } elseif (
+                    $registration->isReEnrollment()
+                    && (int) $season->getLabel() === (int) $registration->getSeason()->getLabel() - 1
+                ) {
+                    $this->createPaymentsForSeason($registration, $season, true);
                 }
-                $this->createPaymentsForSeason($registration, $season2021, true);
-            } else {
-                if ($this->faker->boolean(80)) {
-                    $this->createPaymentsForSeason($registration, $season2020, true);
-                    $this->createPaymentsForSeason($registration, $season2021, true);
-                }
-                $this->createPaymentsForSeason($registration, $season2022, $this->faker->boolean(60));
             }
         }
     }
@@ -79,9 +75,9 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
         $priceOption = $registration->getPriceOption();
         $amount = $priceOption->getAmount();
 
-        /** @var DateTime $startDate */
+        /** @var \DateTime $startDate */
         $startDate = $season->getStartDate();
-        $paymentDate = $startDate->add(DateInterval::createFromDateString('+1 month'));
+        $paymentDate = $startDate->add(\DateInterval::createFromDateString('+1 month'));
 
         $paymentAttributes = [
             'adherent' => $registration->getAdherent(),
@@ -89,13 +85,13 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
             'date' => $paymentDate,
         ];
 
-        if ($registration->isUsePass15()) {
-            $amount -= 15;
-            $paymentAttributes['amount'] = 15;
+        if ($registration->isUsePassCitizen()) {
+            $amount -= 20;
+            $paymentAttributes['amount'] = 20;
             PassPaymentFactory::createOne($paymentAttributes);
         }
 
-        if ($registration->isUsePass50()) {
+        if ($registration->isUsePassSport()) {
             $amount -= 50;
             $paymentAttributes['amount'] = 50;
             PassPaymentFactory::createOne($paymentAttributes);
@@ -107,7 +103,7 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
         } else {
             do {
                 $newAmount = ($amount < 100 || $this->faker->boolean()) ? $amount : 60;
-                $paymentDate = $paymentDate->add(DateInterval::createFromDateString('+1 month'));
+                $paymentDate = $paymentDate->add(\DateInterval::createFromDateString('+1 month'));
 
                 if (!$sold && FloatHelper::equals($amount, $newAmount)) {
                     break;
@@ -134,7 +130,7 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
             'cash' => CashPaymentFactory::createOne($attributes),
             'check' => CheckPaymentFactory::createOne($attributes),
             'transfer' => TransferPaymentFactory::createOne($attributes),
-            default => throw new LogicException('invalid type')
+            default => throw new \LogicException('invalid type')
         };
     }
 }

@@ -82,3 +82,26 @@
     top: -11px;
   }
 }
+
+[data-collection-type] {
+  position: relative;
+
+  .add-item{
+    position: absolute;
+    top: -50px;
+    right: 0;
+  }
+
+  .remove-item {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .collection-type-item {
+    border: 1px solid bulma.$primary;
+    padding: 10px 70px 10px 10px;
+    position: relative;
+    margin-top: 20px;
+  }
+}

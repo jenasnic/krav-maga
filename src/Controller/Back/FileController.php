@@ -4,7 +4,6 @@ namespace App\Controller\Back;
 
 use App\Entity\Adherent;
 use App\Entity\Registration;
-use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +25,7 @@ class FileController extends AbstractController
     {
         $filePath = $registration->getMedicalCertificateUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'attestation');
@@ -39,7 +38,7 @@ class FileController extends AbstractController
     {
         $filePath = $registration->getLicenceFormUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'formulaire_licence');
@@ -47,28 +46,28 @@ class FileController extends AbstractController
         return $this->getFileContent($filePath, $fileName);
     }
 
-    #[Route('/telecharger-pass-15/{registration}', name: 'bo_download_pass_15', methods: ['GET'])]
-    public function pass15(Registration $registration): Response
+    #[Route('/telecharger-pass-citizen/{registration}', name: 'bo_download_pass_citizen', methods: ['GET'])]
+    public function passCitizen(Registration $registration): Response
     {
-        $filePath = $registration->getPass15Url();
+        $filePath = $registration->getPassCitizenUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
-        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_15');
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_citizen');
 
         return $this->getFileContent($filePath, $fileName);
     }
 
-    #[Route('/telecharger-pass-50/{registration}', name: 'bo_download_pass_50', methods: ['GET'])]
-    public function pass50(Registration $registration): Response
+    #[Route('/telecharger-pass-sport/{registration}', name: 'bo_download_pass_sport', methods: ['GET'])]
+    public function passSport(Registration $registration): Response
     {
-        $filePath = $registration->getPass50Url();
+        $filePath = $registration->getPassSportUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
-        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_50');
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'pass_sport');
 
         return $this->getFileContent($filePath, $fileName);
     }
@@ -78,7 +77,7 @@ class FileController extends AbstractController
     {
         $filePath = $adherent->getPictureUrl();
         if (null === $filePath) {
-            throw new LogicException('invalid file');
+            throw new \LogicException('invalid file');
         }
 
         $fileName = $this->buildFileName($adherent, $filePath, 'photo');

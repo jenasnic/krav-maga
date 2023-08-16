@@ -91,6 +91,12 @@
 .icon-facebook:before {
   content: "\ea91";
 }
+.icon-drag:before {
+  content: "\e989";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
 .icon-sort-asc:before {
   content: "\e90c";
 }
@@ -112,6 +118,7 @@ $icon-play: "\ea1c";
 $icon-sort: "\e90e";
 $icon-sort-asc: "\e90c";
 $icon-sort-desc: "\e90d";
+$icon-drag: "\e989";
 
 @mixin icon($icon) {
   font-family: 'icomoon' !important;

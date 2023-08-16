@@ -6,8 +6,6 @@ use App\Entity\User;
 use App\Enum\RoleEnum;
 use App\Repository\UserRepository;
 use App\Service\Email\EmailSender;
-use Exception;
-use LogicException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
@@ -45,7 +43,7 @@ final class CreateUserCommand extends Command
         try {
             $email = $input->getArgument('email');
             if (!is_string($email)) {
-                throw new LogicException('invalid email');
+                throw new \LogicException('invalid email');
             }
 
             /** @var QuestionHelper $helper */
@@ -57,7 +55,7 @@ final class CreateUserCommand extends Command
 
             $password = $helper->ask($input, $output, $question);
             if (!is_string($password)) {
-                throw new LogicException('invalid password');
+                throw new \LogicException('invalid password');
             }
 
             $user = new User();
@@ -75,7 +73,7 @@ final class CreateUserCommand extends Command
                 $this->mailerContact,
                 ['user' => $user],
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $io->error(sprintf('An error occurs : %s', $e->getMessage()));
 
             return 1;

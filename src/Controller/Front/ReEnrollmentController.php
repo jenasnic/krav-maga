@@ -7,7 +7,6 @@ use App\Domain\Command\Front\ReEnrollmentHandler;
 use App\Domain\Model\ReEnrollment;
 use App\Entity\ReEnrollmentToken;
 use App\Entity\Registration;
-use App\Entity\Season;
 use App\Enum\FileTypeEnum;
 use App\Form\NewRegistrationType;
 use App\Form\ReEnrollmentType;
@@ -15,7 +14,6 @@ use App\Repository\ReEnrollmentTokenRepository;
 use App\Repository\RegistrationRepository;
 use App\Repository\SeasonRepository;
 use App\Service\File\FileCleaner;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -69,7 +67,7 @@ class ReEnrollmentController extends AbstractController
     ): Response {
         $reEnrollmentToken = $this->getReEnrollmentToken();
 
-        if ($reEnrollmentToken->getExpiresAt() < new DateTime()) {
+        if ($reEnrollmentToken->getExpiresAt() < new \DateTime()) {
             $this->addFlash('error', $this->translator->trans('front.reEnrollment.expired'));
 
             return $this->redirectToRoute('app_home');
@@ -86,7 +84,8 @@ class ReEnrollmentController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        $this->prepareRegistrationForReEnrollment($registration, $season);
+        $registration->prepareForReEnrollment($season);
+        $this->removeRegistrationFilesForReEnrollment($registration);
 
         $formOptions = ['re_enrollment' => true];
 
@@ -100,7 +99,7 @@ class ReEnrollmentController extends AbstractController
         $form->handleRequest($request);
 
         if (!$isPatch && $form->isSubmitted() && $form->isValid()) {
-            $reEnrollmentHandler->handle(new ReEnrollmentCommand($registration, $reEnrollmentToken));
+            $reEnrollmentHandler->handle(new ReEnrollmentCommand($registration, $reEnrollmentToken, true));
 
             $this->requestStack->getSession()->remove(self::RE_ENROLLMENT_TOKEN);
 
@@ -111,6 +110,7 @@ class ReEnrollmentController extends AbstractController
 
         return $this->render('front/registration.html.twig', [
             'form' => $form->createView(),
+            'reEnrollment' => true,
         ]);
     }
 
@@ -131,19 +131,12 @@ class ReEnrollmentController extends AbstractController
         return $reEnrollmentToken;
     }
 
-    protected function prepareRegistrationForReEnrollment(Registration $registration, Season $season): void
+    protected function removeRegistrationFilesForReEnrollment(Registration $registration): void
     {
-        $registration->setSeason($season);
-        $registration->setCopyrightAuthorization(null);
-        $registration->setUsePass15(false);
-        $registration->setUsePass50(false);
-        $registration->setLicenceDate(null);
-        $registration->setPriceOption(null);
-
         // remove useless attached files (should be renewed)
         $this->fileCleaner->cleanEntity($registration, FileTypeEnum::MEDICAL_CERTIFICATE);
         $this->fileCleaner->cleanEntity($registration, FileTypeEnum::LICENCE_FORM);
-        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_15);
-        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_50);
+        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_CITIZEN);
+        $this->fileCleaner->cleanEntity($registration, FileTypeEnum::PASS_SPORT);
     }
 }

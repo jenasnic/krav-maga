@@ -6,9 +6,7 @@ use App\Entity\Payment\PriceOption;
 use App\Entity\Purpose;
 use App\Entity\Registration;
 use App\Form\Type\BulmaFileType;
-use App\Repository\Payment\PriceOptionRepository;
 use App\Repository\PurposeRepository;
-use LogicException;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -53,15 +51,6 @@ abstract class AbstractRegistrationType extends AbstractType
                     return $purposeRepository->createQueryBuilder('purpose')->orderBy('purpose.rank');
                 },
             ])
-            ->add('priceOption', EntityType::class, [
-                'class' => PriceOption::class,
-                'choice_label' => function (PriceOption $priceOption) {
-                    return sprintf('%s - %d€', $priceOption->getLabel(), $priceOption->getAmount());
-                },
-                'query_builder' => function (PriceOptionRepository $priceOptionRepository) {
-                    return $priceOptionRepository->createQueryBuilder('price_option')->orderBy('price_option.rank');
-                },
-            ])
             ->add('emergency', EmergencyType::class)
             ->add('withLegalRepresentative', CheckboxType::class, [
                 'required' => false,
@@ -75,7 +64,7 @@ abstract class AbstractRegistrationType extends AbstractType
                 $form = $event->getForm();
 
                 if (null === $form->getParent()) {
-                    throw new LogicException('invalid parent');
+                    throw new \LogicException('invalid parent');
                 }
 
                 $this->toggleLegalRepresentative($form->getParent(), true === $form->getData());
@@ -83,21 +72,35 @@ abstract class AbstractRegistrationType extends AbstractType
         );
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $form = $event->getForm();
-
             /** @var Registration $registration */
             $registration = $event->getData();
-            $downloadPass15Uri = (null !== $registration->getId() && null !== $registration->getPass15Url())
-                ? $this->router->generate('bo_download_pass_15', ['registration' => $registration->getId()])
+            $form = $event->getForm();
+
+            $priceOptionOptions = [
+                'class' => PriceOption::class,
+                'choice_label' => function (PriceOption $priceOption) {
+                    return sprintf('%s - %d€', $priceOption->getLabel(), $priceOption->getAmount());
+                },
+                'choices' => $registration->getSeason()->getPriceOptions()->toArray(),
+            ];
+
+            if ($registration->isReEnrollment()) {
+                $priceOptionOptions['help'] = 'form.registration.priceOptionReEnrollmentHelp';
+            }
+
+            $form->add('priceOption', EntityType::class, $priceOptionOptions);
+
+            $downloadPassCitizenUri = (null !== $registration->getId() && null !== $registration->getPassCitizenUrl())
+                ? $this->router->generate('bo_download_pass_citizen', ['registration' => $registration->getId()])
                 : null
             ;
-            $downloadPass50Uri = (null !== $registration->getId() && null !== $registration->getPass50Url())
-                ? $this->router->generate('bo_download_pass_50', ['registration' => $registration->getId()])
+            $downloadPassSportUri = (null !== $registration->getId() && null !== $registration->getPassSportUrl())
+                ? $this->router->generate('bo_download_pass_sport', ['registration' => $registration->getId()])
                 : null
             ;
 
-            $this->processPassField($form, $registration->isUsePass15(), 'usePass15', 'pass15File', $downloadPass15Uri);
-            $this->processPassField($form, $registration->isUsePass50(), 'usePass50', 'pass50File', $downloadPass50Uri);
+            $this->processPassField($form, $registration->isUsePassCitizen(), 'usePassCitizen', 'passCitizenFile', $downloadPassCitizenUri);
+            $this->processPassField($form, $registration->isUsePassSport(), 'usePassSport', 'passSportFile', $downloadPassSportUri);
 
             $this->toggleLegalRepresentative($form, $registration->isWithLegalRepresentative());
         });
@@ -146,7 +149,7 @@ abstract class AbstractRegistrationType extends AbstractType
                 $form = $event->getForm();
 
                 if (null === $form->getParent()) {
-                    throw new LogicException('invalid parent');
+                    throw new \LogicException('invalid parent');
                 }
 
                 $this->togglePass($form->getParent(), $uploadFieldName, true === $form->getData(), $downloadUri);

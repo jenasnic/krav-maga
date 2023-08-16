@@ -2,8 +2,6 @@
 
 namespace App\Domain\Export;
 
-use LogicException;
-
 class ExportCSV
 {
     /**
@@ -17,7 +15,7 @@ class ExportCSV
     {
         $openResource = fopen($file, 'r+');
         if (false === $openResource) {
-            throw new LogicException(sprintf('Error when opening file "%s"!', $file));
+            throw new \LogicException(sprintf('Error when opening file "%s"!', $file));
         }
         $this->handle = $openResource;
         $this->isClose = false;

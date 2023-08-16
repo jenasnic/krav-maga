@@ -5,11 +5,8 @@ namespace App\Form\DataMapper\Payment;
 use App\Entity\Adherent;
 use App\Entity\Payment\CheckPayment;
 use App\Entity\Season;
-use DateTime;
-use Exception;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Traversable;
 
 class CheckPaymentDataMapper implements DataMapperInterface
 {
@@ -22,7 +19,7 @@ class CheckPaymentDataMapper implements DataMapperInterface
     /**
      * @param CheckPayment|null $viewData
      */
-    public function mapDataToForms($viewData, Traversable $forms): void
+    public function mapDataToForms($viewData, \Traversable $forms): void
     {
         if (!$viewData instanceof CheckPayment) {
             return;
@@ -40,7 +37,7 @@ class CheckPaymentDataMapper implements DataMapperInterface
     /**
      * @param CheckPayment|null $viewData
      */
-    public function mapFormsToData(Traversable $forms, &$viewData): void
+    public function mapFormsToData(\Traversable $forms, &$viewData): void
     {
         $forms = iterator_to_array($forms);
 
@@ -51,13 +48,13 @@ class CheckPaymentDataMapper implements DataMapperInterface
 
             /** @var float|null $amount */
             $amount = $forms['amount']->getData();
-            /** @var DateTime|null $date */
+            /** @var \DateTime|null $date */
             $date = $forms['date']->getData();
             /** @var string|null $comment */
             $comment = $forms['comment']->getData();
             /** @var string|null $number */
             $number = $forms['number']->getData();
-            /** @var DateTime|null $cashingDate */
+            /** @var \DateTime|null $cashingDate */
             $cashingDate = $forms['cashingDate']->getData();
 
             $viewData->setAmount($amount);
@@ -67,7 +64,7 @@ class CheckPaymentDataMapper implements DataMapperInterface
             if (null !== $date) {
                 $viewData->setDate($date);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new TransformationFailedException('Unable to map data for check payment', 0, $e);
         }
     }

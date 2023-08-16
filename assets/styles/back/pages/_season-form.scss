@@ -1,0 +1,35 @@
+@use '../bulma/variables' as bulma;
+@use '../../front/icons';
+
+.price-option-list {
+  border: 1px solid bulma.$primary;
+  border-radius: 5px;
+  margin-top: 50px;
+  max-width: 850px;
+  padding: 0 20px 20px 20px;
+
+  .add-item {
+    left: 0;
+    right: unset;
+  }
+
+  .collection-type-item {
+    background-color: bulma.$light;
+    border: none;
+    border-radius: 5px;
+    padding-left: 60px;
+
+    &:before {
+      @include icons.icon(icons.$icon-drag);
+      cursor: pointer;
+      font-size: 1.5em;
+      left: 15px;
+      position: absolute;
+      top: 25px;
+    }
+
+    label {
+      color: bulma.$black-bis;
+    }
+  }
+}

@@ -8,9 +8,9 @@ Bonjour {{ registration.adherent.getFullName() }},<br/>
     <li>Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.</li>
     <li>Effectuer un virement en précisant votre nom/prénom (RIB disponible <a href="{{ absolute_url('/iban_kmis.pdf') }}" target="_blank">ici</a>).</li>
     <li>
-        Utiliser la plateforme <a href="https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis" target="_blank">HelloAsso</a>
+        Utiliser la plateforme <a href="https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/reinscription-kmis-2023-2024" target="_blank">HelloAsso</a>
         {%- if discountCode is not null %}
-            (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
+        (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
         {%- endif %}.
     </li>
 </ul>
@@ -39,9 +39,8 @@ Pour régler votre cotisation {{ registration.season.getDisplayLabel() }} d'un m
 
 - Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.
 - Effectuer un virement en précisant votre nom/prénom (RIB disponible ici : {{ absolute_url('/iban_kmis.pdf') }}.
-- Utiliser la plateforme HelloAsso à l'adresse suivante : https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis
+- Utiliser la plateforme HelloAsso à l'adresse suivante : https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/reinscription-kmis-2023-2024
   {%- if discountCode is not null %} (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}"){%- endif %}.
-
 
 Information Assurance aux licenciés
 

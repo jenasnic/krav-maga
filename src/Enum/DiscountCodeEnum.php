@@ -2,11 +2,11 @@
 
 namespace App\Enum;
 
-class PassSportEnum
+class DiscountCodeEnum
 {
-    public const PASS_15 = 'PASS15';
+    public const PASS_20 = 'PASS20';
     public const PASS_50 = 'PASS50';
-    public const BOTH = 'PASS50+15';
+    public const BOTH = 'PASS50+20';
 
     /**
      * @return array<string>
@@ -14,7 +14,7 @@ class PassSportEnum
     public static function getAll(): array
     {
         return [
-            self::PASS_15,
+            self::PASS_20,
             self::PASS_50,
             self::BOTH,
         ];

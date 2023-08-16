@@ -5,7 +5,6 @@ namespace App\Entity\Payment;
 use App\Entity\Adherent;
 use App\Entity\Season;
 use App\Repository\Payment\PaymentRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -16,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     'ancv' => AncvPayment::class,
     'cash' => CashPayment::class,
     'check' => CheckPayment::class,
+    'discount' => DiscountPayment::class,
     'hello_asso' => HelloAssoPayment::class,
     'pass' => PassPayment::class,
     'transfer' => TransferPayment::class,
@@ -30,7 +30,7 @@ abstract class AbstractPayment
 
     #[ORM\Column(type: 'datetime')]
     #[Assert\NotNull]
-    protected DateTime $date;
+    protected \DateTime $date;
 
     #[ORM\Column(type: 'float')]
     #[Assert\GreaterThan(0)]
@@ -50,7 +50,7 @@ abstract class AbstractPayment
     {
         $this->adherent = $adherent;
         $this->season = $season;
-        $this->date = new DateTime();
+        $this->date = new \DateTime();
     }
 
     public function getId(): ?int
@@ -58,12 +58,12 @@ abstract class AbstractPayment
         return $this->id;
     }
 
-    public function getDate(): DateTime
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
 
-    public function setDate(DateTime $date): self
+    public function setDate(\DateTime $date): self
     {
         $this->date = $date;
 

@@ -4,7 +4,6 @@ namespace App\Command;
 
 use App\Repository\Payment\CheckPaymentRepository;
 use App\Service\Email\EmailSender;
-use Exception;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,7 +46,7 @@ final class CheckReminderCommand extends Command
             } else {
                 $io->success('No reminder to send!');
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $io->error(sprintf('An error occurs : %s', $e->getMessage()));
 
             return 1;

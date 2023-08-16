@@ -4,7 +4,6 @@ namespace App\Entity\Payment;
 
 use App\Enum\PaymentTypeEnum;
 use App\Repository\Payment\CheckPaymentRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,7 +16,7 @@ class CheckPayment extends AbstractPayment
     private ?string $number = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    protected ?DateTime $cashingDate = null;
+    protected ?\DateTime $cashingDate = null;
 
     public function getNumber(): ?string
     {
@@ -31,12 +30,12 @@ class CheckPayment extends AbstractPayment
         return $this;
     }
 
-    public function getCashingDate(): ?DateTime
+    public function getCashingDate(): ?\DateTime
     {
         return $this->cashingDate;
     }
 
-    public function setCashingDate(?DateTime $cashingDate): self
+    public function setCashingDate(?\DateTime $cashingDate): self
     {
         $this->cashingDate = $cashingDate;
 
