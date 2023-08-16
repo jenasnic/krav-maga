@@ -6,7 +6,6 @@ use App\Entity\Payment\DiscountPayment;
 use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
 use App\Entity\Season;
-use App\Enum\DiscountCodeEnum;
 use App\Enum\FileTypeEnum;
 use App\Service\Email\EmailBuilder;
 use App\Service\Email\EmailSender;
@@ -35,14 +34,11 @@ final class ReEnrollmentHandler
 
         $this->processUpload($registration);
 
-        $reEnrollmentCode = $registration->getPriceOption()?->getId() === $this->getMostExpensivePriceOption($registration->getSeason())->getId()
-            ? DiscountCodeEnum::KMIS_30
-            : DiscountCodeEnum::KMIS_20
-        ;
+        $reEnrollmentDiscount = $registration->getPriceOption()?->getId() === $this->getMostExpensivePriceOption($registration->getSeason())->getId() ? 30 : 20;
 
         $discountPayment = new DiscountPayment($registration->getAdherent(), $registration->getSeason());
-        $discountPayment->setAmount((DiscountCodeEnum::KMIS_30 === $reEnrollmentCode) ? 30 : 20);
-        $discountPayment->setDiscount($this->translator->trans(sprintf('front.reEnrollment.discount.%s', $reEnrollmentCode)));
+        $discountPayment->setAmount($reEnrollmentDiscount);
+        $discountPayment->setDiscount($this->translator->trans(sprintf('front.reEnrollment.discount.%s', $reEnrollmentDiscount)));
 
         if (null !== $command->reEnrollmentToken) {
             $this->entityManager->remove($command->reEnrollmentToken);
@@ -63,7 +59,6 @@ final class ReEnrollmentHandler
             $email = $this->emailBuilder
                 ->useTemplate('email/re_enrollment_confirmed.html.twig', [
                     'registration' => $registration,
-                    'reEnrollmentCode' => $reEnrollmentCode,
                     'discountCode' => $discountCode,
                     'amountToPay' => $amountToPay,
                 ])

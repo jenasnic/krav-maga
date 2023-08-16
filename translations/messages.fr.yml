@@ -349,8 +349,8 @@ front:
     expired: Le lien de réinscription n'est plus valide.<br/>Veuillez contacter les membres du bureau pour vous réinscrire.
     noSeason: La nouvelle saison sportive n'a pas encore été ouverte.<br/>Revenez plus tard pour vous réinscrire.
     discount:
-      KMIS20: Réduction ancien adhérent
-      KMIS30: Réduction ancien adhérent (formule Impact Access)
+      20: Réduction ancien adhérent
+      30: Réduction ancien adhérent (formule Impact Access)
 
   sporting:
     header:
