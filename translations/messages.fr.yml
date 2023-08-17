@@ -313,6 +313,8 @@ front:
         title: KMix-MMA
       kmTraining:
         title: Krav Maga
+      kravChildren:
+        title: Krav Maga enfants
 
   footer:
     link:
