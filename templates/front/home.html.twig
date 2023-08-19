@@ -70,6 +70,14 @@
                         'link': path('app_sporting')~'#cardio-fit-krav',
                     } %}
                 </div>
+                <div class="swiper-slide">
+                    {% include 'front/components/_home_slide.html.twig' with {
+                        'title': 'front.home.sporting.kravChildren.title'|trans,
+                        'image': asset('build/images/krav_children.webp'),
+                        'content': 'Pour se dépenser, améliorer sa motricité et s\'amuser.',
+                        'link': path('app_sporting')~'#krav-children',
+                    } %}
+                </div>
             </div>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-prev"></div>
