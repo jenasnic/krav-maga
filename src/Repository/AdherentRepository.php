@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Adherent;
 use App\Entity\Payment\AbstractPayment;
+use App\Entity\ReEnrollmentToken;
 use App\Entity\Registration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -124,14 +125,16 @@ class AdherentRepository extends ServiceEntityRepository
     /**
      * @return array<Adherent>
      */
-    public function findForSeason(int $seasonId): array
+    public function findForReEnrollment(int $seasonId): array
     {
         $queryBuilder = $this->createQueryBuilder('adherent');
 
         $queryBuilder
             ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
             ->innerJoin('registration.season', 'season')
+            ->leftJoin(ReEnrollmentToken::class, 're_enrollment_token', Join::WITH, 're_enrollment_token.adherent = adherent')
             ->andWhere('season.id = :seasonId')
+            ->andWhere('re_enrollment_token.id IS NULL')
             ->setParameter('seasonId', $seasonId)
         ;
 

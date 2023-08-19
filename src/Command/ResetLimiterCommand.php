@@ -45,11 +45,11 @@ final class ResetLimiterCommand extends Command
         } catch (\Exception $e) {
             $io->error(sprintf('An error occurs : %s', $e->getMessage()));
 
-            return 1;
+            return self::FAILURE;
         }
 
         $io->success('Security limiter unlocked!');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

@@ -49,9 +49,9 @@ final class CheckReminderCommand extends Command
         } catch (\Exception $e) {
             $io->error(sprintf('An error occurs : %s', $e->getMessage()));
 
-            return 1;
+            return self::FAILURE;
         }
 
-        return 0;
+        return self::SUCCESS;
     }
 }
