@@ -4,7 +4,7 @@
 <p>Demande de contact de la part de "{{ email }}" [{{ ip }}]</p>
 <div>{{ message|nl2br }}</div>
 <p>L'équipe KMIS</p>
-<img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
+<img src="{{ frontBaseUrl ~ asset('build/images/sign.png') }}" alt="KMIS" style="width: 200px;" />
 {% endblock %}
 
 {% block text %}
