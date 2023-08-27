@@ -26,6 +26,14 @@
   }
 }
 
+.container-wysiwyg {
+  margin-bottom: 20px;
+
+  .tox-tinymce {
+    min-height: 300px;
+  }
+}
+
 .select {
   display: block;
 

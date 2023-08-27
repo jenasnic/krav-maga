@@ -4,6 +4,7 @@ import { bindBulmaFile } from './components/bulma-file';
 import { bindFormFieldUpdate } from './components/field-update';
 import { bindCollectionType } from './components/collection-type';
 import { bindSortable } from './components/sortable';
+import { bindWysiwyg } from './components/wysiwyg/tinymce';
 
 const mapping = {
   '[data-mask-input]': bindInputMask,
@@ -13,6 +14,7 @@ const mapping = {
   '[data-collection-type]': bindCollectionType,
   '[data-sortable]': bindSortable,
   'form[data-confirm]': bindConfirmForm,
+  'textarea.wysiwyg': bindWysiwyg,
 };
 
 export const bindForm = (element) => {
