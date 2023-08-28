@@ -64,10 +64,6 @@
         }
       }
 
-      i {
-        font-size: 1.2em;
-      }
-
       @include media.above(sm) {
         &:not(:last-child) {
           &:after {
@@ -84,6 +80,28 @@
 
       @include media.below(sm) {
         padding: 20px;
+      }
+    }
+
+    > .social-network {
+      display: flex;
+      gap: 20px;
+      margin-top: 2px;
+      padding: 0 20px;
+
+      @include media.below(sm) {
+        margin-top: 22px;
+      }
+
+      i {
+        color: color.$primary-color;
+        display: block;
+        font-size: 1.2em;
+
+        &:hover {
+          transform: scale(1.1);
+          transition: all 0.2s;
+        }
       }
     }
   }
