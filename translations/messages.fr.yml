@@ -329,6 +329,10 @@ front:
       registration: Inscription
       sporting: Disciplines
 
+  news:
+    header:
+      title: Actualités
+
   privacy:
     header:
       title: Protection des données
