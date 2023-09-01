@@ -5,7 +5,7 @@
                 {% block thead %}{% endblock %}
             </tr>
         </thead>
-        <tbody class="list">
+        <tbody class="list"{% if isDraggable is defined and isDraggable == true %} data-sortable{% endif %}>
             {% block tbody %}{% endblock %}
         </tbody>
     </table>

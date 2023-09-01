@@ -11,15 +11,20 @@ class FileUploader
     ) {
     }
 
-    public function upload(UploadedFile $uploadedFile): string
+    public function upload(UploadedFile $uploadedFile, ?string $folder = null): string
     {
+        $basePath = $this->uploadPath;
+        if (null === $folder) {
+            $basePath .= $folder;
+        }
+
         $fileName = sprintf(
             '%s.%s',
             str_replace('.', '', uniqid('', true)),
             $uploadedFile->getClientOriginalExtension()
         );
 
-        $uploadedFile->move($this->uploadPath, $fileName);
+        $uploadedFile->move($basePath, $fileName);
 
         return $this->uploadPath.DIRECTORY_SEPARATOR.$fileName;
     }
