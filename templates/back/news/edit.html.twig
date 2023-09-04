@@ -1,0 +1,30 @@
+{% extends 'layout/_back.html.twig' %}
+
+{% block body %}
+
+    <h1 class="title">{{ 'back.news.edit.title'|trans }}</h1>
+
+    {{ form_start(form) }}
+    <div class="columns">
+        <div class="column">{{ form_row(form.active) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.title) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.content) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.details) }}</div>
+    </div>
+    <div class="columns">
+        <div class="column">{{ form_row(form.pictureFile) }}</div>
+    </div>
+    <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
+        <div class="block">
+            <button type="submit" class="button is-primary">{{ 'global.validate'|trans }}</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

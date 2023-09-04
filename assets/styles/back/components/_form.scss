@@ -26,6 +26,26 @@
   }
 }
 
+.container-wysiwyg {
+  margin-bottom: 20px;
+
+  .tox-tinymce {
+    border-color: bulma.$grey-light;
+    border-radius: bulma.$radius;
+    min-height: 300px;
+
+    .tox-edit-area__iframe {
+      background-color: bulma.$grey-lighter !important;
+    }
+  }
+
+  &--small {
+    .tox-tinymce {
+      min-height: 150px;
+    }
+  }
+}
+
 .select {
   display: block;
 

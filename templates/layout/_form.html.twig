@@ -33,6 +33,12 @@
   {{ parent() }}
 {%- endblock textarea_widget -%}
 
+{% block wysiwyg_widget %}
+  <div class="container-wysiwyg{% if small_size %} container-wysiwyg--small{% endif %}">
+    {{ form_widget(form, {attr: {class: 'wysiwyg'}}) }}
+  </div>
+{% endblock %}
+
 {%- block button_widget -%}
   {%- set attr = attr|merge({'class': (attr.class|default('') ~ ' button')|trim}) -%}
   {{ parent() }}

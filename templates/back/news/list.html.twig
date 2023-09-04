@@ -1,0 +1,79 @@
+{% extends 'layout/_back.html.twig' %}
+
+{% block body %}
+
+    <h2 class="subtitle">{{ newsCount }} {{ 'back.news.list.count'|trans }}</h2>
+
+    <div data-grid="data-grid">
+
+        <nav class="level">
+            <div class="level-left"></div>
+            <div class="level-right">
+                <p class="level-item">
+                    <a href="{{ path('bo_news_new') }}" class="button is-primary">
+                        <span>{{ 'back.news.list.action.add'|trans }}</span>
+                        <span class="icon is-small">
+                            <i class="icon-more"></i>
+                        </span>
+                    </a>
+                </p>
+            </div>
+        </nav>
+
+        {{ form_start(form, {'attr': {'id': 'news-list-form'}}) }}
+
+        {% embed 'back/components/_table.html.twig' with {'isDraggable': true} %}
+
+        {% block thead %}
+            <th class="full">{{ 'back.news.list.header.title'|trans }}</th>
+            <th class="has-text-centered">{{ 'back.news.list.header.picture'|trans }}</th>
+            <th class="has-text-centered">{{ 'back.news.list.header.active'|trans }}</th>
+            <th></th>
+        {% endblock %}
+
+        {% block tbody %}
+            {% if newsCount > 0 %}
+                {% for i in 0..(newsCount-1) %}
+                    <tr>
+                        <td class="draggable">
+                            {{ form.children[i].vars.data.title }}
+                            {{ form_row(form.children[i].rank, {'attr': {'data-rank': ''}}) }}
+                        </td>
+                        <td class="has-text-centered">
+                            {% if form.children[i].vars.data.pictureUrl %}
+                                <span class="icon has-text-primary"><i class="icon-checkmark"></i></span>
+                            {% else %}
+                                <span class="icon has-text-warning"><i class="icon-cross"></i></span>
+                            {% endif %}
+                        </td>
+                        <td class="has-text-centered">
+                            {% if form.children[i].vars.data.active %}
+                                <span class="icon has-text-primary"><i class="icon-checkmark"></i></span>
+                            {% else %}
+                                <span class="icon has-text-warning"><i class="icon-cross"></i></span>
+                            {% endif %}
+                        </td>
+                        <td class="action">
+                            <a href="{{ path('bo_news_edit', {'news': form.children[i].vars.data.id}) }}" class="button is-primary">
+                                <span class="icon"><i class="icon-pencil"></i></span>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        {% endblock %}
+
+    {% endembed %}
+
+    <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
+        <div class="block">
+            <button type="submit" class="button is-primary">{{ 'global.saveOrder'|trans }}</button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+    </div>
+
+
+{% endblock %}

@@ -12,3 +12,4 @@ AOS.init({
 
 import './front/menu';
 import './front/home';
+import './front/news';

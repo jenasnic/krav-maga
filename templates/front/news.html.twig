@@ -1,0 +1,24 @@
+{% extends 'layout/_front.html.twig' %}
+
+{% block title %}Les actualités du KMIS{% endblock %}
+
+{% block meta %}
+    <meta name="keywords" content="actualités krav-maga, stages, forum des associations, portes ouvertes" />
+    <meta name="description" content="Suivez des stages pour vous perfectionner dans le domaine des arts martiaux.">
+    <meta name="og:title" property="og:title" content="Les actualités du KMIS">
+{% endblock %}
+
+{% block header %}
+    {% include 'front/components/_banner.html.twig' with {
+        'image': asset('build/images/sporting.webp'),
+        'title': ('front.news.header.title'|trans),
+    } only %}
+{% endblock %}
+
+{% block body %}
+    <div class="news-wrapper">
+        {% for newsItem in newsList %}
+            {% include 'front/components/_news.html.twig' with {'news': newsItem} only %}
+        {% endfor %}
+    </div>
+{% endblock %}
