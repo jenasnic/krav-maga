@@ -35,4 +35,5 @@ yarn-error.log
 ###> project ###
 /upload/*
 !/upload/.gitignore
+!/upload/news/.gitignore
 ###< upload ###
