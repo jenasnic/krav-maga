@@ -33,8 +33,8 @@
   {{ parent() }}
 {%- endblock textarea_widget -%}
 
-{% block wysiwyg_row %}
-  <div class="container-wysiwyg">
+{% block wysiwyg_widget %}
+  <div class="container-wysiwyg{% if small_size %} container-wysiwyg--small{% endif %}">
     {{ form_widget(form, {attr: {class: 'wysiwyg'}}) }}
   </div>
 {% endblock %}

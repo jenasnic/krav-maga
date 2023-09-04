@@ -4,6 +4,7 @@ namespace App\Repository\Content;
 
 use App\Entity\Content\News;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,15 +38,43 @@ class NewsRepository extends ServiceEntityRepository
     /**
      * @return array<News>
      */
+    public function findAllOrdered(): array
+    {
+        /** @var array<News> */
+        return $this
+            ->createQueryBuilder('news')
+            ->orderBy('news.rank', Criteria::ASC)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return array<News>
+     */
     public function findOrdered(): array
     {
         /** @var array<News> */
         return $this
             ->createQueryBuilder('news')
             ->andWhere('news.active = TRUE')
-            ->orderBy('news.rank ASC')
+            ->orderBy('news.rank', Criteria::ASC)
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function getFirstRank(): int
+    {
+        $query = $this
+            ->createQueryBuilder('news')
+            ->select('MIN(news.rank)')
+            ->getQuery()
+        ;
+
+        /** @var int $minRank */
+        $minRank = $query->getSingleScalarResult() ?? 0;
+
+        return $minRank;
     }
 }

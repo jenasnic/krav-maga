@@ -13,6 +13,7 @@ global:
   more: En savoir plus
   no: Non
   reEnrollment: Réinscrire
+  saveOrder: Enregistrer l'ordre
   search: Rechercher
   seeAll: Voir tout
   validate: Valider
@@ -82,8 +83,27 @@ back:
     adherent: Adhérents
     dashboard: Dashboard
     gallery: Trombinoscope
+    news: Actualites
     payment: Cotisations
     season: Saisons
+
+  news:
+    edit:
+      success: Actualité mise à jour
+      title: Actualité
+      new: Nouvelle actualité
+    delete:
+      success: Actualité supprimée
+    list:
+      count: Actualité(s)
+      action:
+        add: Nouvelle actualité
+      header:
+        title: Titre
+        active: Publiée
+        picture: Image
+      order:
+        success: Ordre des actualités mis à jour
 
   payment:
     grid:
@@ -227,6 +247,13 @@ form:
     registeredAt: Inscrit le
     withLegalRepresentative: Dans le cas d'une personne mineure, merci de renseigner le représentant légal
 
+  news:
+    active: Publiée
+    content: Contenu
+    details: Informations complémentaires
+    pictureFile: Image
+    title: Titre
+
   payment:
     ancv:
       date: Date
@@ -286,6 +313,9 @@ form:
 
   reEnrollment:
     email: Confirmer votre email
+
+  wysiwyg:
+    help: Taper 'Enter' pour créer un nouveau paragraphe, 'Shift + Enter' pour réaliser un simple saut de ligne.
 
 front:
 

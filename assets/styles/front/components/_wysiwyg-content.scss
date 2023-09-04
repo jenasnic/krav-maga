@@ -1,0 +1,15 @@
+@use '../color';
+@use '../icons';
+
+.wysiwyg-content {
+  li {
+    padding-left: 30px;
+
+    &:before {
+      @include icons.icon(icons.$icon-checkmark);
+      color: color.$primary-color;
+      font-size: 0.8em;
+      margin-right: 10px;
+    }
+  }
+}
