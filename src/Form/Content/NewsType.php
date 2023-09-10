@@ -27,7 +27,7 @@ class NewsType extends AbstractType
             ->add('title', TextType::class)
             ->add('content', WysiwygType::class)
             ->add('details', WysiwygType::class, ['small_size' => true])
-            ->add('active', CheckboxType::class, ['required' => true])
+            ->add('active', CheckboxType::class, ['required' => false])
         ;
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
