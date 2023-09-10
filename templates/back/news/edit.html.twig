@@ -2,7 +2,39 @@
 
 {% block body %}
 
-    <h1 class="title">{{ 'back.news.edit.title'|trans }}</h1>
+    <nav class="level">
+        <div class="level-left">
+            {% if news.id is null %}
+                <h1 class="title">{{ 'back.news.edit.new'|trans }}</h1>
+            {% else %}
+                <h1 class="title">{{ 'back.news.edit.title'|trans }}</h1>
+            {% endif %}
+        </div>
+        <div class="level-right">
+            <p class="level-item">
+                <a href="{{ path('bo_news_list') }}" class="button is-outlined">
+                    <span>{{ 'global.back'|trans }}</span>
+                    <span class="icon"><i class="icon-back"></i></span>
+                </a>
+            </p>
+            {% if news.id is not null %}
+                <p class="level-item">
+                    <form
+                        data-confirm
+                        data-confirm-message="{{ 'global.confirmDelete'|trans }}"
+                        action="{{ path('bo_news_delete', {'news': news.id}) }}"
+                        method="POST"
+                    >
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete-'~news.id) }}" />
+                        <button type="submit" class="button is-danger">
+                            <span>{{ 'global.delete'|trans }}</span>
+                            <span class="icon"><i class="icon-cross"></i></span>
+                        </button>
+                    </form>
+                </p>
+            {% endif %}
+        </div>
+    </nav>
 
     {{ form_start(form) }}
     <div class="columns">

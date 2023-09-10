@@ -5,7 +5,7 @@ namespace App\Controller\Back;
 use App\Domain\Command\Back\Content\SaveNewsCommand;
 use App\Domain\Command\Back\Content\SaveNewsHandler;
 use App\Entity\Content\News;
-use App\Form\Content\NewsRankType;
+use App\Form\Content\NewsListType;
 use App\Form\Content\NewsType;
 use App\Repository\Content\NewsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +32,7 @@ class NewsController extends AbstractController
 
         $form = $this->createForm(CollectionType::class, $newsList, [
             'label' => false,
-            'entry_type' => NewsRankType::class,
+            'entry_type' => NewsListType::class,
             'entry_options' => [
                 'label' => false,
             ],

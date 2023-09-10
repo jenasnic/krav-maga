@@ -21,8 +21,5 @@ class SeasonFixtures extends Fixture
                 'active' => (1 === $i),
             ]);
         }
-
-        // [1] => 2021
-        // [2] => 2022
     }
 }

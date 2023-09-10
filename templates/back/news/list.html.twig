@@ -47,11 +47,7 @@
                             {% endif %}
                         </td>
                         <td class="has-text-centered">
-                            {% if form.children[i].vars.data.active %}
-                                <span class="icon has-text-primary"><i class="icon-checkmark"></i></span>
-                            {% else %}
-                                <span class="icon has-text-warning"><i class="icon-cross"></i></span>
-                            {% endif %}
+                            {{ form_row(form.children[i].active) }}
                         </td>
                         <td class="action">
                             <a href="{{ path('bo_news_edit', {'news': form.children[i].vars.data.id}) }}" class="button is-primary">
@@ -67,7 +63,7 @@
 
     <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
         <div class="block">
-            <button type="submit" class="button is-primary">{{ 'global.saveOrder'|trans }}</button>
+            <button type="submit" class="button is-primary">{{ 'global.save'|trans }}</button>
         </div>
     </div>
 
