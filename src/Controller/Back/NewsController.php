@@ -96,4 +96,10 @@ class NewsController extends AbstractController
 
         return $this->redirectToRoute('bo_news_list', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/actualites/previsualier/{news}', name: 'bo_news_preview', methods: ['GET'])]
+    public function preview(News $news): Response
+    {
+        return $this->render('back/news/preview.html.twig', ['news' => $news]);
+    }
 }

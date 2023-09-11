@@ -27,10 +27,4 @@ class NewsController extends AbstractController
 
         return $this->file($news->getPictureUrl());
     }
-
-    #[Route('/image-actualite-deprecated/{name}', name: 'app_news_picture_deprecated')]
-    public function pictureDeprecated(string $uploadPath, string $name): Response
-    {
-        return $this->file($uploadPath.'news/'.$name);
-    }
 }

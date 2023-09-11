@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr" prefix="og: http://ogp.me/ns#">
+<head>
+    <title>{{ 'back.news.preview.title'|trans }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/favicon.svg" />
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<div id="page">
+    <div id="page-content">
+        <div class="news-wrapper">
+            {% include 'front/components/_news.html.twig' with {'news': news} only %}
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{{ asset('build/tarteaucitron.js') }}"></script>
+<script type="text/javascript" src="{{ asset('build/tarteaucitron.services.js') }}"></script>
+<script type="text/javascript" src="{{ asset('build/lang/tarteaucitron.fr.js') }}"></script>
+</body>
+</html>

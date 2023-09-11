@@ -12,6 +12,7 @@ global:
   logout: Se déconnecter
   more: En savoir plus
   no: Non
+  preview: Prévisualiser
   reEnrollment: Réinscrire
   save: Enregistrer
   search: Rechercher
@@ -104,6 +105,8 @@ back:
         picture: Image
       order:
         success: Ordre des actualités mis à jour
+    preview:
+      title: Prévisualisation actualité
 
   payment:
     grid:

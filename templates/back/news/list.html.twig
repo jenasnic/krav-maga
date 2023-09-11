@@ -50,9 +50,15 @@
                             {{ form_row(form.children[i].active) }}
                         </td>
                         <td class="action">
-                            <a href="{{ path('bo_news_edit', {'news': form.children[i].vars.data.id}) }}" class="button is-primary">
-                                <span class="icon"><i class="icon-pencil"></i></span>
-                            </a>
+                            <div class="action-wrapper">
+                                <button type="button" class="button is-info" data-preview-url="{{ path('bo_news_preview', {'news': form.children[i].vars.data.id}) }}">
+                                    <span>{{ 'global.preview'|trans }}</span>
+                                    <span class="icon"><i class="icon-eye"></i></span>
+                                </button>
+                                <a href="{{ path('bo_news_edit', {'news': form.children[i].vars.data.id}) }}" class="button is-primary">
+                                    <span class="icon"><i class="icon-pencil"></i></span>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
@@ -71,5 +77,12 @@
 
     </div>
 
+    <div id="modal-preview" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <iframe id="iframe-preview"></iframe>
+        </div>
+        <button class="modal-close is-large"></button>
+    </div>
 
 {% endblock %}
