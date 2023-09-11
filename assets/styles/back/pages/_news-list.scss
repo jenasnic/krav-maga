@@ -1,0 +1,16 @@
+#modal-preview {
+  height: 100vh;
+  width: 100vw;
+
+  .modal-content {
+    height: 100%;
+    margin: 20px auto;
+    max-width: 976px;
+    width: 100%;
+
+    #iframe-preview {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
