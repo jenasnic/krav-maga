@@ -53,14 +53,18 @@
 
       &:hover {
         &:before {
-          box-sizing: border-box;
-          position: absolute;
-          content: '';
-          height: 1px;
-          width: calc(100% - 40px);
-          left: 20px;
           bottom: 0;
           box-shadow: 0 5px color.$primary-color;
+          box-sizing: border-box;
+          content: '';
+          height: 1px;
+          left: 20px;
+          position: absolute;
+          width: calc(100% - 40px);
+
+          @include media.below(sm) {
+            bottom: 10px;
+          }
         }
       }
 
@@ -69,17 +73,17 @@
           &:after {
             background-color: color.$primary-color;
             content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 1px;
             height: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 1px;
           }
         }
       }
 
       @include media.below(sm) {
-        padding: 20px;
+        padding: 15px 20px;
       }
     }
 
@@ -90,7 +94,7 @@
       padding: 0 20px;
 
       @include media.below(sm) {
-        margin-top: 22px;
+        margin-top: 32px;
       }
 
       i {
