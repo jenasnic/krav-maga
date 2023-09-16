@@ -163,6 +163,7 @@ back:
       success: Saison sportive mise à jour
       confirmActivate: En activant la saison, les adherents recevront un email de réinscription. Êtes-vous sûr de vouloir continuer ?
     form:
+      help: Les dates de début et fin de la saison sont utilisées pour définir la période d'ouverture des inscriptions. En dehors de cette période, l'entrée de menu "Inscription" ne sera pas affichée.
       startDate: Début
       endDate: Fin
       addPriceOption: Ajouter une formule
@@ -359,6 +360,7 @@ front:
     item:
       contact: Contact
       home: Accueil
+      news: Actualités
       registration: Inscription
       sporting: Disciplines
 

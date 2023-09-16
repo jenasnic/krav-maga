@@ -25,7 +25,7 @@
         </div>
         <div id="page" class="{% block page_classes %}{% endblock %}">
             <header id="header">
-                {% include 'front/components/_menu.html.twig' %}
+                {{ render(controller('App\\Controller\\Front\\MenuController::menu')) }}
                 {% block header %}{% endblock %}
             </header>
             <div id="page-content">

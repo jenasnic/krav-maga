@@ -21,6 +21,7 @@
     {% endif %}
 
     {{ form_start(form, {'attr': {'id': 'season-form'}}) }}
+    <div class="notification is-warning">{{ 'back.season.form.help'|trans }}</div>
     <div class="columns">
         <div class="column">
             {{ form_row(form.startDate) }}
