@@ -86,10 +86,10 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('back/registration/edit.html.twig', [
-             'form' => $form->createView(),
-             'registration' => $registration,
-             'reEnrollment' => false,
-         ]);
+            'form' => $form->createView(),
+            'registration' => $registration,
+            'reEnrollment' => false,
+        ]);
     }
 
     #[Route('/adherent/verifier-inscription/{registration}', name: 'bo_registration_verify', methods: ['POST'])]

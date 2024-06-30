@@ -45,9 +45,9 @@ class AdherentController extends AbstractController
         $queryBuilder = $adherentFiler->apply($queryBuilder, $filter);
 
         return $this->render('back/adherent/list.html.twig', [
-             'registrations' => $queryBuilder->getQuery()->getResult(),
-             'filters' => $adherentFiler->getFilters(),
-         ]);
+            'registrations' => $queryBuilder->getQuery()->getResult(),
+            'filters' => $adherentFiler->getFilters(),
+        ]);
     }
 
     #[Route('/adherent/liste-complete', name: 'bo_adherent_full_list', methods: ['GET'])]
@@ -56,8 +56,8 @@ class AdherentController extends AbstractController
         $queryBuilder = $this->adherentRepository->createSearchAllQueryBuilder();
 
         return $this->render('back/adherent/list_full.html.twig', [
-             'registrations' => $queryBuilder->getQuery()->getResult(),
-         ]);
+            'registrations' => $queryBuilder->getQuery()->getResult(),
+        ]);
     }
 
     #[Route('/adherent/modifier/{adherent}', name: 'bo_adherent_edit', methods: ['GET', 'POST'])]
@@ -78,10 +78,10 @@ class AdherentController extends AbstractController
         $adherentId = $adherent->getId();
 
         return $this->render('back/adherent/edit.html.twig', [
-             'form' => $form->createView(),
-             'adherent' => $adherent,
-             'registration' => $this->registrationRepository->getForAdherent($adherentId),
-         ]);
+            'form' => $form->createView(),
+            'adherent' => $adherent,
+            'registration' => $this->registrationRepository->getForAdherent($adherentId),
+        ]);
     }
 
     #[Route('/adherent/supprimer/{adherent}', name: 'bo_adherent_delete', methods: ['POST'])]

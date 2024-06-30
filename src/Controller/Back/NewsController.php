@@ -52,7 +52,7 @@ class NewsController extends AbstractController
         return $this->render('back/news/list.html.twig', [
             'form' => $form->createView(),
             'newsCount' => count($newsList),
-         ]);
+        ]);
     }
 
     #[Route('/actualites/nouvelle-actualite', name: 'bo_news_new', methods: ['GET', 'POST'])]
@@ -80,9 +80,9 @@ class NewsController extends AbstractController
         }
 
         return $this->render('back/news/edit.html.twig', [
-             'form' => $form->createView(),
-             'news' => $news,
-         ]);
+            'form' => $form->createView(),
+            'news' => $news,
+        ]);
     }
 
     #[Route('/actualites/supprimer/{news}', name: 'bo_news_delete', methods: ['POST'])]
