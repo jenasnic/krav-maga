@@ -16,13 +16,17 @@ class ReEnrollmentToken
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Adherent $adherent;
 
+    #[ORM\ManyToOne(targetEntity: Season::class)]
+    private Season $season;
+
     #[ORM\Column(type: 'datetime')]
     private \DateTime $expiresAt;
 
-    public function __construct(string $id, Adherent $adherent, \DateTime $expiresAt)
+    public function __construct(string $id, Adherent $adherent, Season $season, \DateTime $expiresAt)
     {
         $this->id = $id;
         $this->adherent = $adherent;
+        $this->season = $season;
         $this->expiresAt = $expiresAt;
     }
 
@@ -34,6 +38,11 @@ class ReEnrollmentToken
     public function getAdherent(): Adherent
     {
         return $this->adherent;
+    }
+
+    public function getSeason(): Season
+    {
+        return $this->season;
     }
 
     public function getExpiresAt(): \DateTime

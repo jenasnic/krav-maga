@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Adherent;
 use App\Entity\Payment\AbstractPayment;
-use App\Entity\ReEnrollmentToken;
 use App\Entity\Registration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -125,20 +124,45 @@ class AdherentRepository extends ServiceEntityRepository
     /**
      * @return array<Adherent>
      */
-    public function findForReEnrollment(int $seasonId): array
+    public function findWithReEnrollmentToNotify(int $limit = 0): array
+    {
+        $queryBuilder = $this
+            ->createQueryBuilder('adherent')
+            ->andWhere('adherent.reEnrollmentToNotify = TRUE')
+        ;
+
+        if ($limit > 0) {
+            $queryBuilder->setMaxResults($limit);
+        }
+
+        /** @var array<Adherent> */
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function setReEnrollmentToNotify(int $seasonId): void
+    {
+        $query = <<<SQL
+                UPDATE adherent AS _adherent
+                INNER JOIN registration AS _registration ON _registration.adherent_id = _adherent.id AND _registration.season_id = :seasonId
+                SET _adherent.re_enrollment_to_notify = 1;
+            SQL;
+
+        $statement = $this->getEntityManager()->getConnection()->prepare($query);
+
+        $statement->bindValue('seasonId', $seasonId);
+        $statement->executeQuery();
+    }
+
+    public function countReEnrollmentToNotify(): int
     {
         $queryBuilder = $this->createQueryBuilder('adherent');
 
         $queryBuilder
-            ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
-            ->innerJoin('registration.season', 'season')
-            ->leftJoin(ReEnrollmentToken::class, 're_enrollment_token', Join::WITH, 're_enrollment_token.adherent = adherent')
-            ->andWhere('season.id = :seasonId')
-            ->andWhere('re_enrollment_token.id IS NULL')
-            ->setParameter('seasonId', $seasonId)
+            ->select('COUNT(adherent)')
+            ->andWhere('adherent.reEnrollmentToNotify = TRUE')
         ;
 
-        /** @var array<Adherent> */
-        return $queryBuilder->getQuery()->getResult();
+        /** @var int */
+        return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 }

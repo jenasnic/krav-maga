@@ -2,7 +2,6 @@
 
 namespace App\Service\Notifier;
 
-use App\Entity\Season;
 use App\Repository\AdherentRepository;
 use App\Repository\SeasonRepository;
 use App\Service\Email\EmailSender;
@@ -21,26 +20,24 @@ class ReEnrollmentNotifier
     }
 
     /**
-     * @param Season $season season used to identify adherents that need to receive re-enrollment email
-     * @param ?int $limit limit on sent emails to avoid "Mails peer session limit" error
+     * @param int $limit limit on sent emails to avoid "Mails peer session limit" error (0 means no limit)
      *
      * @return int Number of re-enrollment emails sent
      */
-    public function notify(Season $season, ?int $limit = null): int
+    public function notify(int $limit = 0): int
     {
-        $activeSeason = $this->seasonRepository->getActiveSeason();
+        $season = $this->seasonRepository->getActiveSeason();
 
-        if (null === $activeSeason || $activeSeason->getId() === $season->getId()) {
-            throw new \LogicException('can not process re-enrollment notification (specified season already active or no active season)');
+        if (null === $season) {
+            return 0;
         }
 
-        /** @var int $seasonId */
-        $seasonId = $season->getId();
-        $adherents = $this->adherentRepository->findForReEnrollment($seasonId);
+        $adherents = $this->adherentRepository->findWithReEnrollmentToNotify($limit);
 
-        $processedAdherentCount = 0;
+        $emailSentCount = 0;
         foreach ($adherents as $adherent) {
-            $token = $this->reEnrollmentTokenFactory->create($adherent);
+            $token = $this->reEnrollmentTokenFactory->create($adherent, $season);
+            $adherent->setReEnrollmentToNotify(false);
             $this->entityManager->persist($token);
             $this->entityManager->flush();
 
@@ -53,17 +50,13 @@ class ReEnrollmentNotifier
                 [
                     'adherent' => $adherent,
                     'token' => $token,
-                    'season' => $activeSeason,
+                    'season' => $season,
                 ]
             );
 
-            ++$processedAdherentCount;
-
-            if (null !== $limit && $processedAdherentCount >= $limit) {
-                break;
-            }
+            ++$emailSentCount;
         }
 
-        return $processedAdherentCount;
+        return $emailSentCount;
     }
 }

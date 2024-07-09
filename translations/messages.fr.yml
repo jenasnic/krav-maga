@@ -151,6 +151,13 @@ back:
       title: Réinscription
       success: Réinscription validée
       error: Vous ne pouvez pas procéder à la réinscription
+      clearToken:
+        button: Supprimer les tokens de réinscription expirés
+        message: Les tokens de réinscription expirés ont été supprimés
+      notify:
+        button: Envoyer les prochaines notifications
+        confirm: Confirmer l'envoi des notifications
+        message: Les mails de réinscription ont bien été envoyés
     verify:
       success: Inscription vérifiée
 

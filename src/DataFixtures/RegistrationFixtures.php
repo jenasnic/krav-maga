@@ -32,6 +32,8 @@ class RegistrationFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
+        $isReEnrollmentAvailable = false;
+
         /** @var Proxy<Season> $season */
         foreach (SeasonFactory::all() as $season) {
             $season = $season->object();
@@ -40,7 +42,6 @@ class RegistrationFixtures extends Fixture implements DependentFixtureInterface
             if ($season->isActive()) {
                 foreach ($season->getPriceOptions() as $priceOption) {
                     $count = self::REGISTRATION_COUNT_FOR_PRICING[$priceOption->getLabel()];
-
                     RegistrationFactory::createMany($count, [
                         'season' => $season,
                         'registeredAt' => $registrationDate,
@@ -49,12 +50,14 @@ class RegistrationFixtures extends Fixture implements DependentFixtureInterface
                     ]);
                 }
             } else {
-                RegistrationFactory::createMany(5, [
+                RegistrationFactory::createMany($this->faker->numberBetween(5, 8), [
                     'season' => $season,
                     'registeredAt' => $registrationDate,
-                    'reEnrollment' => false,
+                    'reEnrollment' => $isReEnrollmentAvailable && $this->faker->boolean(),
                 ]);
             }
+
+            $isReEnrollmentAvailable = true;
         }
     }
 

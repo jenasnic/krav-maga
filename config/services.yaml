@@ -16,6 +16,7 @@ services:
             $uploadPath: '%kernel.project_dir%/upload/'
             $mailerSender: '%env(string:MAILER_SENDER)%'
             $mailerContact: '%env(string:MAILER_CONTACT)%'
+            $mailerMaxPacketSize: '%env(int:MAILER_MAX_PACKET_SIZE)%'
             $googleCaptchaSiteKey: '%env(string:GOOGLE_CAPTCHA_SITE_KEY)%'
             $googleCaptchaPrivateKey: '%env(string:GOOGLE_CAPTCHA_PRIVATE_KEY)%'
 

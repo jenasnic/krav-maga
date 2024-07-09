@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class SeasonFixtures extends Fixture
 {
-    public const SEASON_COUNT = 2;
+    public const SEASON_COUNT = 3;
 
     public function load(ObjectManager $manager): void
     {
