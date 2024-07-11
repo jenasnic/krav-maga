@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\DataFixtures\Factory\ReEnrollmentTokenFactory;
 use App\DataFixtures\Factory\RegistrationFactory;
+use App\DataFixtures\Factory\SeasonFactory;
 use App\Entity\Registration;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -14,12 +15,21 @@ class ReEnrollmentTokenFixtures extends Fixture implements DependentFixtureInter
 {
     public function load(ObjectManager $manager): void
     {
-        $registration2021 = RegistrationFactory::findBy(['registeredAt' => new \DateTime('2021-09-15')]);
+        $lastSeason = SeasonFactory::find(['label' => (new \DateTime('-1year'))->format('Y')])->object();
+        $previousSeason = SeasonFactory::find(['label' => (new \DateTime('-2year'))->format('Y')])->object();
 
-        /** @var Proxy<Registration> $registration */
-        foreach ($registration2021 as $registration) {
+        /** @var array<Proxy<Registration>> $previousSeasonRegistrations */
+        $previousSeasonRegistrations = RegistrationFactory::findBy(['season' => $previousSeason->getId()]);
+
+        $previousSeasonAdherents = array_map(
+            fn (Proxy $registration) => $registration->getAdherent(),
+            $previousSeasonRegistrations
+        );
+
+        foreach ($previousSeasonAdherents as $adherent) {
             ReEnrollmentTokenFactory::createOne([
-                'adherent' => $registration->getAdherent(),
+                'adherent' => $adherent,
+                'season' => $lastSeason,
             ]);
         }
     }

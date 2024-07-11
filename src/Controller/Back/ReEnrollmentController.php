@@ -7,8 +7,10 @@ use App\Domain\Command\Front\ReEnrollmentHandler;
 use App\Entity\Registration;
 use App\Enum\FileTypeEnum;
 use App\Form\RegistrationType;
+use App\Repository\ReEnrollmentTokenRepository;
 use App\Repository\SeasonRepository;
 use App\Service\File\FileCleaner;
+use App\Service\Notifier\ReEnrollmentNotifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +22,17 @@ class ReEnrollmentController extends AbstractController
     public function __construct(
         protected TranslatorInterface $translator,
         protected SeasonRepository $seasonRepository,
+        protected ReEnrollmentTokenRepository $reEnrollmentTokenRepository,
+        protected ReEnrollmentNotifier $reEnrollmentNotifier,
         protected ReEnrollmentHandler $reEnrollmentHandler,
         protected FileCleaner $fileCleaner,
+        protected int $mailerMaxPacketSize,
     ) {
     }
 
     #[Route('/adherent/re-inscription/{registration}', name: 'bo_re_enrollment', methods: ['GET', 'POST', 'PATCH'])]
-    public function reEnrollment(
-        Request $request,
-        Registration $registration,
-    ): Response {
+    public function reEnrollment(Request $request, Registration $registration): Response
+    {
         $season = $this->seasonRepository->getActiveSeason();
         if (null === $season || $season->getId() === $registration->getSeason()->getId()) {
             $this->addFlash('error', $this->translator->trans('back.registration.reEnrollment.error'));
@@ -64,6 +67,30 @@ class ReEnrollmentController extends AbstractController
             'registration' => $registration,
             'reEnrollment' => true,
         ]);
+    }
+
+    #[Route('/adherent/notifier/re-inscription', name: 'bo_re_enrollment_notify', methods: ['POST'])]
+    public function reEnrollmentNotify(Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('re_enrollment_notify', (string) $request->request->get('_token'))) {
+            $this->reEnrollmentNotifier->notify($this->mailerMaxPacketSize);
+
+            $this->addFlash('info', $this->translator->trans('back.registration.reEnrollment.notify.message'));
+        }
+
+        return $this->redirectToRoute('bo_season_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/adherent/token-re-inscription-expire/supprimer', name: 'bo_re_enrollment_expired_token_clear', methods: ['POST'])]
+    public function reEnrollmentExpiredTokenClear(Request $request): Response
+    {
+        if ($this->isCsrfTokenValid('re_enrollment_expired_token_clear', (string) $request->request->get('_token'))) {
+            $this->reEnrollmentTokenRepository->removeExpiredToken();
+
+            $this->addFlash('info', $this->translator->trans('back.registration.reEnrollment.clearToken.message'));
+        }
+
+        return $this->redirectToRoute('bo_season_list', [], Response::HTTP_SEE_OTHER);
     }
 
     protected function removeRegistrationFilesForReEnrollment(Registration $registration): void

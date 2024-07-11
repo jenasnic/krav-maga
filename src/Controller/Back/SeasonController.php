@@ -7,6 +7,8 @@ use App\Domain\Command\Back\ActivateSeasonHandler;
 use App\Entity\Season;
 use App\Exception\SeasonAlreadyDefinedException;
 use App\Form\SeasonType;
+use App\Repository\AdherentRepository;
+use App\Repository\ReEnrollmentTokenRepository;
 use App\Repository\SeasonRepository;
 use App\Service\Factory\SeasonFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +22,8 @@ class SeasonController extends AbstractController
     public function __construct(
         protected TranslatorInterface $translator,
         protected SeasonRepository $seasonRepository,
+        protected AdherentRepository $adherentRepository,
+        protected ReEnrollmentTokenRepository $reEnrollmentTokenRepository,
     ) {
     }
 
@@ -28,6 +32,9 @@ class SeasonController extends AbstractController
     {
         return $this->render('back/season/list.html.twig', [
             'seasons' => $this->seasonRepository->search(),
+            'hasExpiredToken' => $this->reEnrollmentTokenRepository->hasExpiredToken(),
+            'reEnrollmentToNotifyCount' => $this->adherentRepository->countReEnrollmentToNotify(),
+            'activeSeason' => $this->seasonRepository->getActiveSeason(),
         ]);
     }
 

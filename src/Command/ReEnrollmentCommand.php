@@ -14,11 +14,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 #[AsCommand(name: 'app:re-enrollment')]
 final class ReEnrollmentCommand extends Command
 {
-    public const DEFAULT_SENT_EMAIL_LIMIT = 10;
-
     public function __construct(
         private readonly SeasonRepository $seasonRepository,
         private readonly ReEnrollmentNotifier $reEnrollmentNotifier,
+        private readonly int $mailerMaxPacketSize,
     ) {
         parent::__construct();
     }
@@ -26,9 +25,8 @@ final class ReEnrollmentCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Send re-enrollment email to adherent (send emails as a pack of 10 to avoid "Mails peer session limit").')
-            ->addArgument('year', InputArgument::REQUIRED, 'Year of season concerned for re-enrollment (should be season before active season).')
-            ->addArgument('limit', InputArgument::OPTIONAL, 'Limit on sent emails to avoid "Mails peer session limit" error (default 10).')
+            ->setDescription('Send re-enrollment email to adherent (use max packet size define in .env to avoid "Mails peer session limit").')
+            ->addArgument('limit', InputArgument::OPTIONAL, 'Limit on sent emails to avoid "Mails peer session limit" error (override MAILER_MAX_PACKET_SIZE from .env).')
         ;
     }
 
@@ -36,21 +34,19 @@ final class ReEnrollmentCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        /** @var string $year */
-        $year = $input->getArgument('year');
         /** @var int $limit */
-        $limit = $input->getArgument('limit') ?? self::DEFAULT_SENT_EMAIL_LIMIT;
+        $limit = $input->getArgument('limit') ?? $this->mailerMaxPacketSize;
 
         try {
-            $season = $this->seasonRepository->getForYear($year);
+            $season = $this->seasonRepository->getActiveSeason();
 
             if (null === $season) {
-                $io->error(sprintf('Season %s not found', $year));
+                $io->error('No active season found');
 
                 return self::FAILURE;
             }
 
-            $count = $this->reEnrollmentNotifier->notify($season, $limit);
+            $count = $this->reEnrollmentNotifier->notify($limit);
 
             $io->success(sprintf('%d re-enrollement emails sent!', $count));
         } catch (\Exception $e) {

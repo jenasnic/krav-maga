@@ -51,6 +51,9 @@ class Adherent
     #[Assert\Valid]
     private ?Address $address = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $reEnrollmentToNotify = false;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $pictureUrl = null;
 
@@ -159,6 +162,18 @@ class Adherent
     public function setAddress(?Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function isReEnrollmentToNotify(): bool
+    {
+        return $this->reEnrollmentToNotify;
+    }
+
+    public function setReEnrollmentToNotify(bool $reEnrollmentToNotify): self
+    {
+        $this->reEnrollmentToNotify = $reEnrollmentToNotify;
 
         return $this;
     }

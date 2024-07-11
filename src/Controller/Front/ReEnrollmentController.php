@@ -12,7 +12,6 @@ use App\Form\NewRegistrationType;
 use App\Form\ReEnrollmentType;
 use App\Repository\ReEnrollmentTokenRepository;
 use App\Repository\RegistrationRepository;
-use App\Repository\SeasonRepository;
 use App\Service\File\FileCleaner;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,12 +61,12 @@ class ReEnrollmentController extends AbstractController
     public function reEnrollmentUpdate(
         Request $request,
         RegistrationRepository $registrationRepository,
-        SeasonRepository $seasonRepository,
         ReEnrollmentHandler $reEnrollmentHandler,
     ): Response {
         $reEnrollmentToken = $this->getReEnrollmentToken();
+        $season = $reEnrollmentToken->getSeason();
 
-        if ($reEnrollmentToken->getExpiresAt() < new \DateTime()) {
+        if ($reEnrollmentToken->getExpiresAt() < new \DateTime() || !$season->isActive()) {
             $this->addFlash('error', $this->translator->trans('front.reEnrollment.expired'));
 
             return $this->redirectToRoute('app_home');
@@ -77,14 +76,7 @@ class ReEnrollmentController extends AbstractController
         $adherentId = $reEnrollmentToken->getAdherent()->getId();
         $registration = $registrationRepository->getForAdherent($adherentId);
 
-        $season = $seasonRepository->getActiveSeason();
-        if (null === $season) {
-            $this->addFlash('error', $this->translator->trans('front.reEnrollment.expired'));
-
-            return $this->redirectToRoute('app_home');
-        }
-
-        $registration->prepareForReEnrollment($season);
+        $registration->prepareForReEnrollment($reEnrollmentToken->getSeason());
         $this->removeRegistrationFilesForReEnrollment($registration);
 
         $formOptions = ['re_enrollment' => true];
