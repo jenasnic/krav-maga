@@ -56,6 +56,7 @@ abstract class AbstractRegistrationType extends AbstractType
                 'required' => false,
                 'false_values' => [null, '0', 'false'],
             ])
+            ->add('ccasDiscount', CheckboxType::class, ['required' => false])
         ;
 
         $builder->get('withLegalRepresentative')->addEventListener(

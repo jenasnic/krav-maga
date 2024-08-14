@@ -64,7 +64,6 @@
         </div>
         <div class="fieldset m-top-2">
             <label>{{ 'form.documents.label'|trans }}</label>
-            <div class="help-text">{{ 'form.documents.help'|trans }}</div>
             <div class="row col-x1">
                 {{ form_row(form.adherent.pictureFile) }}
             </div>
@@ -80,6 +79,7 @@
         </div>
         {{ form_row(form.purpose) }}
         {{ form_row(form.priceOption) }}
+        {{ form_row(form.ccasDiscount) }}
         <div class="m-top-3 m-bottom-1">
             <div class="row col-x1">
                 {{ form_row(form.usePassCitizen, {'attr': {'data-field-update': 'pass-citizen'}}) }}

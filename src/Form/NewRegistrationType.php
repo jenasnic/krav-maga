@@ -22,7 +22,6 @@ class NewRegistrationType extends AbstractRegistrationType
 
         $builder
             ->add('medicalCertificateFile', BulmaFileType::class, [
-                'required' => false,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -38,7 +37,6 @@ class NewRegistrationType extends AbstractRegistrationType
                 'help_html' => true,
             ])
             ->add('licenceFormFile', BulmaFileType::class, [
-                'required' => false,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [

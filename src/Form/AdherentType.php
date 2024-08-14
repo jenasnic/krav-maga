@@ -66,7 +66,6 @@ class AdherentType extends AbstractType
             $adherent = $event->getData();
 
             $fieldOptions = [
-                'required' => false,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -80,6 +79,8 @@ class AdherentType extends AbstractType
             ];
 
             if (null !== $adherent?->getPictureUrl()) {
+                $fieldOptions['required'] = false;
+
                 if ($options['re_enrollment']) {
                     $fieldOptions['help'] = 'form.adherent.pictureFileHelp';
                 } else {
