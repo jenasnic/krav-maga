@@ -50,7 +50,7 @@ class ReEnrollmentController extends AbstractController
 
             $this->requestStack->getSession()->set(self::RE_ENROLLMENT_TOKEN, $token);
 
-            return $this->redirectToRoute('app_re_enrollement_update');
+            return $this->redirectToRoute('app_re_enrollment_update');
         }
 
         return $this->render('front/re_enrollment.html.twig', [
@@ -58,7 +58,7 @@ class ReEnrollmentController extends AbstractController
         ]);
     }
 
-    #[Route('/reinscription/mise-a-jour', name: 'app_re_enrollement_update')]
+    #[Route('/reinscription/mise-a-jour', name: 'app_re_enrollment_update')]
     public function reEnrollmentUpdate(
         Request $request,
         RegistrationRepository $registrationRepository,

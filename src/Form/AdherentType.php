@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class AdherentType extends AbstractType
 {
@@ -65,7 +66,11 @@ class AdherentType extends AbstractType
             /** @var Adherent|null $adherent */
             $adherent = $event->getData();
 
+            /** @var bool $forKmis */
+            $forKmis = $options['kmis_version'];
+
             $fieldOptions = [
+                'required' => !$forKmis,
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
@@ -86,6 +91,8 @@ class AdherentType extends AbstractType
                 } else {
                     $fieldOptions['download_uri'] = $this->router->generate('bo_download_picture', ['adherent' => $adherent->getId()]);
                 }
+            } elseif (!$forKmis) {
+                $fieldOptions['constraints'][] = new NotNull();
             }
 
             $form->add('pictureFile', BulmaFileType::class, $fieldOptions);
@@ -94,7 +101,8 @@ class AdherentType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefined('re_enrollment');
+        $resolver->setDefined(['kmis_version', 're_enrollment']);
+        $resolver->setAllowedTypes('kmis_version', 'bool');
         $resolver->setAllowedTypes('re_enrollment', 'bool');
 
         $resolver->setDefaults([

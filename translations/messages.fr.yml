@@ -213,6 +213,7 @@ form:
 
   documents:
     label: Documents à fournir
+    warning: "Attention : tous les documents doivent être envoyés lors de votre inscription."
 
   emergency:
     emergency: Personne à contacter en cas d'urgence
