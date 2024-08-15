@@ -13,10 +13,11 @@ class ReEnrollmentToken
     private string $id;
 
     #[ORM\OneToOne(targetEntity: Adherent::class)]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private Adherent $adherent;
 
     #[ORM\ManyToOne(targetEntity: Season::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private Season $season;
 
     #[ORM\Column(type: 'datetime')]

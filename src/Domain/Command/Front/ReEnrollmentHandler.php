@@ -104,6 +104,7 @@ final class ReEnrollmentHandler
         /** @var PriceOption $result */
         $result = $season->getPriceOptions()->first();
 
+        /** @var PriceOption $priceOption */
         foreach ($season->getPriceOptions() as $priceOption) {
             if ($priceOption->getAmount() > $result->getAmount()) {
                 $result = $priceOption;

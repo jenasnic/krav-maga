@@ -40,6 +40,7 @@ class ReEnrollmentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var ReEnrollmentToken|null $reEnrollmentToken */
             $reEnrollmentToken = $this->reEnrollmentTokenRepository->find($token);
             if (null === $reEnrollmentToken || $reEnrollmentToken->getAdherent()->getEmail() !== $reEnrollment->email) {
                 $this->addFlash('error', $this->translator->trans('front.reEnrollment.error'));
@@ -114,6 +115,7 @@ class ReEnrollmentController extends AbstractController
             throw $this->createNotFoundException('No re-enrollment token found.');
         }
 
+        /** @var ReEnrollmentToken|null $reEnrollmentToken */
         $reEnrollmentToken = $this->reEnrollmentTokenRepository->find($token);
 
         if (null === $reEnrollmentToken) {

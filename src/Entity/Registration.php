@@ -82,11 +82,12 @@ class Registration
     private ?Emergency $emergency = null;
 
     #[ORM\OneToOne(targetEntity: Adherent::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     #[Assert\Valid]
     private Adherent $adherent;
 
     #[ORM\ManyToOne(targetEntity: Season::class)]
+    #[ORM\JoinColumn(nullable: false)]
     protected Season $season;
 
     #[ORM\Column(type: 'boolean')]

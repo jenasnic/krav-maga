@@ -5,9 +5,6 @@ parameters:
         constant_hassers: false
     ignoreErrors:
         -
-            message: '/(.*)should return ([\w\|\\<>]+) but returns mixed./'
-            path: **/*Repository.php
-        -
             message: '/(.*)type mapping mismatch(.*)database expects(.*)/'
             path: **/Entity/**.php
     excludePaths:
