@@ -51,6 +51,20 @@
             </div>
         </nav>
 
+        <nav class="level">
+            <div class="level-left">
+                {% for season in seasons %}
+                    <p class="level-item">
+                        {% if season.id == currentSeason.id %}
+                            <span class="button is-warning">{{ season.displayLabel }}</span>
+                        {% else %}
+                            <a href="{{ path('bo_adherent_by_season_list', {'season': season.id}) }}" class="button is-info">{{ season.displayLabel }}</a>
+                        {% endif %}
+                    </p>
+                {% endfor %}
+            </div>
+        </nav>
+
         {% embed 'back/components/_table.html.twig' %}
 
         {% block thead %}

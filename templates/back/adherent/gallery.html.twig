@@ -4,6 +4,22 @@
 
     <h1 class="title">{{ 'back.gallery.title'|trans }}</h1>
 
+    {% if seasons|length > 0 %}
+        <nav class="level">
+            <div class="level-left">
+                {% for season in seasons %}
+                    <p class="level-item">
+                        {% if currentSeason is not null and season.id == currentSeason.id %}
+                            <span class="button is-warning">{{ season.displayLabel }}</span>
+                        {% else %}
+                            <a href="{{ path('bo_adherent_gallery', {'season': season.id}) }}" class="button is-info">{{ season.displayLabel }}</a>
+                        {% endif %}
+                    </p>
+                {% endfor %}
+            </div>
+        </nav>
+    {% endif %}
+
     <div class="gallery">
     {% for adherent in adherents %}
         <a href="{{ path('bo_adherent_edit', {'adherent': adherent.id}) }}" target="_blank" class="gallery__adherent gallery__adherent--{{ adherent['gender']|lower }}">

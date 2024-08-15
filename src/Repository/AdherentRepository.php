@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Adherent;
 use App\Entity\Payment\AbstractPayment;
 use App\Entity\Registration;
+use App\Entity\Season;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -101,7 +102,7 @@ class AdherentRepository extends ServiceEntityRepository
     /**
      * @return array<array<string>>
      */
-    public function findForGallery(): array
+    public function findForGallery(?Season $season = null): array
     {
         $queryBuilder = $this->createQueryBuilder('adherent');
 
@@ -116,6 +117,17 @@ class AdherentRepository extends ServiceEntityRepository
             ->addOrderBy('adherent.lastName', 'ASC')
             ->addOrderBy('adherent.firstName', 'ASC')
         ;
+
+        if (null !== $season) {
+            /** @var int $seasonId */
+            $seasonId = $season->getId();
+
+            $queryBuilder
+                ->innerJoin(Registration::class, 'registration', Join::WITH, 'registration.adherent = adherent')
+                ->innerJoin('registration.season', 'season', Join::WITH, 'season.id = :seasonId')
+                ->setParameter('seasonId', $seasonId)
+            ;
+        }
 
         /** @var array<array<string>> */
         return $queryBuilder->getQuery()->getResult();
