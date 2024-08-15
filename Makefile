@@ -114,4 +114,4 @@ phpcsfix:
 
 .PHONY: phpstan
 phpstan:
-	$(DOCKER_USER) $(PHPSTAN_BIN) analyse src --level=max
+	$(DOCKER_USER) $(PHPSTAN_BIN) analyse src --configuration='./phpstan.neon'
