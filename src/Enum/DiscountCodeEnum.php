@@ -4,9 +4,9 @@ namespace App\Enum;
 
 class DiscountCodeEnum
 {
-    public const PASS_20 = 'PASS20';
-    public const PASS_50 = 'PASS50';
-    public const BOTH = 'PASS50+20';
+    public const PASS_CITIZEN = 'PASS15';
+    public const PASS_SPORT = 'PASS50';
+    public const BOTH = 'PASS50+15';
 
     /**
      * @return array<string>
@@ -14,8 +14,8 @@ class DiscountCodeEnum
     public static function getAll(): array
     {
         return [
-            self::PASS_20,
-            self::PASS_50,
+            self::PASS_CITIZEN,
+            self::PASS_SPORT,
             self::BOTH,
         ];
     }

@@ -2,7 +2,7 @@
 
 {% block html %}
 Bonjour {{ registration.adherent.getFullName() }},<br/>
-<p>Bienvenue au KMIS !</p>
+<p>Merci pour votre inscription au KMIS.</p>
 <p>Pour régler votre cotisation {{ registration.season.getDisplayLabel() }} d'un montant de {{ amountToPay }}€, vous pouvez :</p>
 <ul>
     <li>Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.</li>
@@ -20,11 +20,8 @@ Bonjour {{ registration.adherent.getFullName() }},<br/>
     <li>votre assurance « Individuelle accident »</li>
     <li>votre assurance « Responsabilité civile »</li>
 </ul>
-<p>
-    Partenaire « Santé » : le Groupe MDS - Mutuelle des Sportifs<br/>
-    Plus d’informations <a href="https://www.ffkarate.fr/espace-licencies/assurances/">ici</a>
-</p>
-<p><strong>Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.</strong></p>
+<p>WTW : Partenaire Santé de la FFK (plus d’informations <a href="https://www.ffkarate.fr/espace-licencies/assurances/">ici</a>).</p>
+<p><strong>Pratique sur tatamis. Pour les équipements nécessaires : demandez conseils aux instructeurs.</strong></p>
 <p>Cordialement</p>
 <p>L'équipe KMIS</p>
 <img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
@@ -33,7 +30,7 @@ Bonjour {{ registration.adherent.getFullName() }},<br/>
 {% block text %}
 Bonjour {{ registration.adherent.getFullName() }},
 
-Bienvenue au KMIS !
+Merci pour votre inscription au KMIS.
 
 Pour régler votre cotisation {{ registration.season.getDisplayLabel() }} d'un montant de {{ amountToPay }}€, vous pouvez :
 
@@ -42,7 +39,6 @@ Pour régler votre cotisation {{ registration.season.getDisplayLabel() }} d'un m
 - Utiliser la plateforme HelloAsso à l'adresse suivante : https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis-2024-2025
   {%- if discountCode is not null %} (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}"){%- endif %}.
 
-
 Information Assurance aux licenciés
 
 Si lors de votre demande de licence vous avez choisi d’adhérer à l’assurance « GARANTIES DE BASE ACCIDENTS CORPORELS » proposée par la FFK, consultez sur ffkarate.fr toutes les conditions relatives à :</p>
@@ -50,10 +46,9 @@ Si lors de votre demande de licence vous avez choisi d’adhérer à l’assuran
 - votre assurance « Individuelle accident »
 - votre assurance « Responsabilité civile »
 
-Partenaire « Santé » : le Groupe MDS - Mutuelle des Sportifs
-Plus d’informations sur : https://www.ffkarate.fr/espace-licencies/assurances/
+WTW : Partenaire Santé de la FFK (plus d’informations sur https://www.ffkarate.fr/espace-licencies/assurances
 
-Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.
+Pratique sur tatamis. Pour les équipements nécessaires : demandez conseils aux instructeurs.
 
 Cordialement
 

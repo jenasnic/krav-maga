@@ -5,7 +5,6 @@ Bonjour {{ adherent.getFullName() }},<br/>
 <p>La nouvelle saison sportive {{ season.getDisplayLabel() }} arrive bientôt.</p>
 <p>Vous pouvez vous réinscrire dès maintenant en cliquant <a href="{{ absolute_url(path('app_re_enrollment', {'token': token.id})) }}">ici</a>.</p>
 <p>Ce lien restera valide jusqu'au {{ token.expiresAt|date('d/m/Y') }}.</p>
-<p>En tant qu'ancien adhérent, vous bénéficiez d'un tarif préférentiel sur les formules : -30€ sur la formule Impact Access et -20€ sur les autres formules.</p>
 <p>Cordialement</p>
 <p>L'équipe KMIS</p>
 <img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
@@ -20,8 +19,6 @@ Vous pouvez vous réinscrire dès maintenant en suivant ce lien :
 {{ absolute_url(path('app_re_enrollment', {'token': token.id})) }}
 
 Ce lien restera valide jusqu'au {{ token.expiresAt|date('d/m/Y') }}.
-
-En tant qu'ancien adhérent, vous bénéficiez d'un tarif préférentiel sur les formules : -30€ sur la formule Impact Access et -20€ sur les autres formules.
 
 Cordialement
 

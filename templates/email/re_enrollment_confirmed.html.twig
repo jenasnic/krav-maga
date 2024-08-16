@@ -8,9 +8,9 @@ Bonjour {{ registration.adherent.getFullName() }},<br/>
     <li>Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.</li>
     <li>Effectuer un virement en précisant votre nom/prénom (RIB disponible <a href="{{ absolute_url('/iban_kmis.pdf') }}" target="_blank">ici</a>).</li>
     <li>
-        Utiliser la plateforme <a href="https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/reinscription-kmis-2024-2025" target="_blank">HelloAsso</a>
+        Utiliser la plateforme <a href="https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis-2024-2025" target="_blank">HelloAsso</a>
         {%- if discountCode is not null %}
-        (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
+            (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}")
         {%- endif %}.
     </li>
 </ul>
@@ -21,7 +21,7 @@ Bonjour {{ registration.adherent.getFullName() }},<br/>
     <li>votre assurance « Responsabilité civile »</li>
 </ul>
 <p>WTW : Partenaire Santé de la FFK (plus d’informations <a href="https://www.ffkarate.fr/espace-licencies/assurances/">ici</a>).</p>
-<p><strong>Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.</strong></p>
+<p><strong>Pratique sur tatamis. Pour les équipements nécessaires : demandez conseils aux instructeurs.</strong></p>
 <p>Cordialement</p>
 <p>L'équipe KMIS</p>
 <img src="{{ absolute_url(asset('build/images/sign.png')) }}" alt="KMIS" style="width: 200px;" />
@@ -36,7 +36,7 @@ Pour régler votre cotisation {{ registration.season.getDisplayLabel() }} d'un m
 
 - Régler le montant de votre cotisation par chèque (à l'ordre du KMIS) ou en espèce directement auprès des membres du bureau.
 - Effectuer un virement en précisant votre nom/prénom (RIB disponible ici : {{ absolute_url('/iban_kmis.pdf') }}.
-- Utiliser la plateforme HelloAsso à l'adresse suivante : https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/reinscription-kmis-2024-2025
+- Utiliser la plateforme HelloAsso à l'adresse suivante : https://www.helloasso.com/associations/krav-maga-impact-system/adhesions/adhesion-kmis-2024-2025
   {%- if discountCode is not null %} (pour bénéficier de votre réduction Pass'Sport, utiliser le code de réduction "{{ discountCode }}"){%- endif %}.
 
 Information Assurance aux licenciés
@@ -48,7 +48,7 @@ Si lors de votre demande de licence vous avez choisi d’adhérer à l’assuran
 
 WTW : Partenaire Santé de la FFK (plus d’informations sur https://www.ffkarate.fr/espace-licencies/assurances
 
-Nous vous rappelons que l'accès à la salle nécessite une paire de baskets propres dédiées.
+Pratique sur tatamis. Pour les équipements nécessaires : demandez conseils aux instructeurs.
 
 Cordialement
 

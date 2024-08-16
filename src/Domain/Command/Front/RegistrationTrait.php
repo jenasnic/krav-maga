@@ -11,8 +11,8 @@ trait RegistrationTrait
     {
         return match (true) {
             $registration->isUsePassCitizen() && $registration->isUsePassSport() => DiscountCodeEnum::BOTH,
-            $registration->isUsePassCitizen() => DiscountCodeEnum::PASS_20,
-            $registration->isUsePassSport() => DiscountCodeEnum::PASS_50,
+            $registration->isUsePassCitizen() => DiscountCodeEnum::PASS_CITIZEN,
+            $registration->isUsePassSport() => DiscountCodeEnum::PASS_SPORT,
             default => null,
         };
     }

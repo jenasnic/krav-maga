@@ -238,7 +238,6 @@ form:
     <li>L'adhésion au club KMIS implique l’acceptation des <a href=\"/statuts_kmis.pdf\" target=\"_blank\">statuts</a></li>
     <li>Tout titulaire d’une licence fédérale s’engage à respecter les Statuts et Règlements de la FFK</li>
     </ul>"
-    ccasDiscount: Réduction de 10€ pour les mineurs habitant Villers-Sous-Saint-Leu (financée par le CCAS)
     comment: Commentaire (problème de santé ou autre)
     copyrightAuthorization: J’autorise le club KMIS à reproduire et communiquer mon image prise dans le cadre de ses activités, sous toutes formes et tous supports.
     licenceDate: Date de la licence
@@ -302,7 +301,6 @@ form:
       label: Libellé
 
   registration:
-    ccasDiscount: Réduction de 10€ - mineurs Villers-Sous-Saint-Leu (financée par le CCAS)
     comment: Commentaire de l'adhérent
     copyrightAuthorization: Droit à l'image
     internalLabel: Informations complémentaires KMIS
