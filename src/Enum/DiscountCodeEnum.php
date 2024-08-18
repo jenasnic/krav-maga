@@ -2,6 +2,8 @@
 
 namespace App\Enum;
 
+use App\Entity\Registration;
+
 class DiscountCodeEnum
 {
     public const PASS_CITIZEN = 'PASS15';
@@ -18,5 +20,25 @@ class DiscountCodeEnum
             self::PASS_SPORT,
             self::BOTH,
         ];
+    }
+
+    public static function getDiscountCode(Registration $registration): ?string
+    {
+        return match (true) {
+            $registration->isUsePassCitizen() && $registration->isUsePassSport() => self::BOTH,
+            $registration->isUsePassCitizen() => self::PASS_CITIZEN,
+            $registration->isUsePassSport() => self::PASS_SPORT,
+            default => null,
+        };
+    }
+
+    public static function getDiscountAmount(string $discountCode): float
+    {
+        return match ($discountCode) {
+            self::PASS_CITIZEN => 15,
+            self::PASS_SPORT => 50,
+            self::BOTH => 65,
+            default => 0,
+        };
     }
 }

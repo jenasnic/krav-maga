@@ -73,9 +73,9 @@ class ReEnrollmentController extends AbstractController
     public function reEnrollmentNotify(Request $request): Response
     {
         if ($this->isCsrfTokenValid('re_enrollment_notify', (string) $request->request->get('_token'))) {
-            $this->reEnrollmentNotifier->notify($this->mailerMaxPacketSize);
+            $emailSentCount = $this->reEnrollmentNotifier->notify($this->mailerMaxPacketSize);
 
-            $this->addFlash('info', $this->translator->trans('back.registration.reEnrollment.notify.message'));
+            $this->addFlash('info', $this->translator->trans('back.registration.reEnrollment.notify.message', ['%count%' => $emailSentCount]));
         }
 
         return $this->redirectToRoute('bo_season_list', [], Response::HTTP_SEE_OTHER);

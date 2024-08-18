@@ -15,6 +15,7 @@ use App\DataFixtures\SeasonFixtures;
 use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
 use App\Entity\Season;
+use App\Enum\DiscountCodeEnum;
 use App\Helper\FloatHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -86,14 +87,16 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
         ];
 
         if ($registration->isUsePassCitizen()) {
-            $amount -= 20;
-            $paymentAttributes['amount'] = 20;
+            $discountAmount = DiscountCodeEnum::getDiscountAmount(DiscountCodeEnum::PASS_CITIZEN);
+            $amount -= $discountAmount;
+            $paymentAttributes['amount'] = $discountAmount;
             PassPaymentFactory::createOne($paymentAttributes);
         }
 
         if ($registration->isUsePassSport()) {
-            $amount -= 50;
-            $paymentAttributes['amount'] = 50;
+            $discountAmount = DiscountCodeEnum::getDiscountAmount(DiscountCodeEnum::PASS_SPORT);
+            $amount -= $discountAmount;
+            $paymentAttributes['amount'] = $discountAmount;
             PassPaymentFactory::createOne($paymentAttributes);
         }
 

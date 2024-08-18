@@ -19,6 +19,7 @@
 
     <div class="section">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.registration.page.title'|trans }}</h2>
+        <h3 class="subtitle">{{ registration.season.displayLabel() }}</h3>
         {{ form_start(form, {'attr': {'class': 'registration-form'}}) }}
         <div class="row col-x2 col-sm-x1">
             {{ form_row(form.adherent.lastName) }}

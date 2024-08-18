@@ -7,7 +7,7 @@
     <h1 class="title">{{ 'back.season.edit.title'|trans }} {{ season.getDisplayLabel() }}</h1>
 
     {% if season.id is not null and not season.active %}
-        <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center">
+        <div class="is-flex is-flex-direction-row is-justify-content-flex-end is-align-content-center m-bottom-2">
             <form
                 data-confirm
                 data-confirm-message="{{ 'back.season.edit.confirmActivate'|trans }}"

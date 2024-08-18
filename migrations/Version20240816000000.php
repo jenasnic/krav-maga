@@ -16,6 +16,7 @@ final class Version20240816000000 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE payment CHANGE adherent_id adherent_id INT NOT NULL, CHANGE season_id season_id INT NOT NULL');
+        $this->addSql('DELETE FROM re_enrollment_token WHERE season_id IS NULL');
         $this->addSql('ALTER TABLE re_enrollment_token CHANGE adherent_id adherent_id INT NOT NULL, CHANGE season_id season_id INT NOT NULL');
         $this->addSql('ALTER TABLE registration CHANGE adherent_id adherent_id INT NOT NULL, CHANGE season_id season_id INT NOT NULL');
     }

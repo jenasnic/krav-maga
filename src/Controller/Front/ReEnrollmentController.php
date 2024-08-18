@@ -103,6 +103,7 @@ class ReEnrollmentController extends AbstractController
 
         return $this->render('front/registration.html.twig', [
             'form' => $form->createView(),
+            'registration' => $registration,
             'reEnrollment' => true,
         ]);
     }

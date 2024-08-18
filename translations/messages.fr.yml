@@ -157,7 +157,7 @@ back:
       notify:
         button: Envoyer les prochaines notifications
         confirm: Confirmer l'envoi des notifications
-        message: Les mails de réinscription ont bien été envoyés
+        message: Les mails de réinscription ont bien été envoyés (%count% mails)
     verify:
       success: Inscription vérifiée
 
@@ -244,7 +244,7 @@ form:
     licenceFormFile: Formulaire de demande de licence
     licenceNumber: N° de licence
     licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/wp-content/uploads/2024/07/DEMANDE_LICENCE_INTERNET_2024-2025_modifiable.pdf" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
-    medicalCertificateFile: Certificat médical
+    medicalCertificateFile: Certificat médical ou attestation sur l'honneur
     medicalCertificateFileHelp: "Certificat médical ou attestation sur l’honneur.
     Pour les informations sur les documents à fournir, consultez la <a href='https://www.ffkarate.fr/espace-licencies/certificat-medical/' target='_blank'>note d’information</a>."
     passCitizenFile: Document d'elligibilité au Pass'Sports Citoyen
@@ -307,7 +307,7 @@ form:
     licenceDate: Date de la licence
     licenceFormFile: Formulaire de demande de licence
     licenceNumber: N° de licence
-    medicalCertificateFile: Certificat médical
+    medicalCertificateFile: Certificat médical ou attestation sur l'honneur
     passCitizenFile: Document d'elligibilité au Pass'sport
     passSportFile: Document d'elligibilité au Pass'sport Citoyen
     priceOption: Formule
@@ -396,9 +396,6 @@ front:
     error: Token de réinscription invalide ou adresse email incorrecte.
     expired: Le lien de réinscription n'est plus valide.<br/>Veuillez contacter les membres du bureau pour vous réinscrire.
     noSeason: La nouvelle saison sportive n'a pas encore été ouverte.<br/>Revenez plus tard pour vous réinscrire.
-    discount:
-      20: Réduction ancien adhérent
-      30: Réduction ancien adhérent (formule Impact Access)
 
   sporting:
     header:

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Command\Front;
 
+use App\Enum\DiscountCodeEnum;
 use App\Service\Email\EmailBuilder;
 use App\Service\Email\EmailSender;
 use Doctrine\ORM\EntityManagerInterface;
@@ -9,8 +10,6 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 final class ConfirmRegistrationHandler
 {
-    use RegistrationTrait;
-
     public function __construct(
         private readonly VerifyEmailHelperInterface $verifyEmailHelper,
         private readonly EntityManagerInterface $entityManager,
@@ -43,8 +42,13 @@ final class ConfirmRegistrationHandler
 
         /** @var string $adherentEmail */
         $adherentEmail = $registration->getAdherent()->getEmail();
-        $discountCode = $this->getDiscountCode($registration);
-        $amountToPay = $this->getAmountToPay($registration);
+        $discountCode = DiscountCodeEnum::getDiscountCode($registration);
+
+        /** @var float $amountToPay */
+        $amountToPay = $registration->getPriceOption()?->getAmount();
+        if (null !== $discountCode) {
+            $amountToPay -= DiscountCodeEnum::getDiscountAmount($discountCode);
+        }
 
         $email = $this->emailBuilder
             ->useTemplate('email/registration_confirmed.html.twig', [

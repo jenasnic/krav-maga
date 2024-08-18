@@ -155,7 +155,9 @@ class AdherentRepository extends ServiceEntityRepository
     {
         $query = <<<SQL
                 UPDATE adherent AS _adherent
-                INNER JOIN registration AS _registration ON _registration.adherent_id = _adherent.id AND _registration.season_id = :seasonId
+                INNER JOIN registration AS _registration ON _registration.adherent_id = _adherent.id
+                    AND _registration.season_id = :seasonId
+                    AND _registration.verified = 1
                 SET _adherent.re_enrollment_to_notify = 1;
             SQL;
 
