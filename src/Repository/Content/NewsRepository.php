@@ -4,7 +4,7 @@ namespace App\Repository\Content;
 
 use App\Entity\Content\News;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -43,7 +43,7 @@ class NewsRepository extends ServiceEntityRepository
         /** @var array<News> */
         return $this
             ->createQueryBuilder('news')
-            ->orderBy('news.rank', Criteria::ASC)
+            ->orderBy('news.rank', Order::Ascending)
             ->getQuery()
             ->getResult()
         ;
@@ -58,7 +58,7 @@ class NewsRepository extends ServiceEntityRepository
         return $this
             ->createQueryBuilder('news')
             ->andWhere('news.active = TRUE')
-            ->orderBy('news.rank', Criteria::ASC)
+            ->orderBy('news.rank', Order::Ascending)
             ->getQuery()
             ->getResult()
         ;

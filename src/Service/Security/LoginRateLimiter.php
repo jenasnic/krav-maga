@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\RateLimiter\AbstractRequestRateLimiter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\RateLimiter\RateLimit;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\SecurityRequestAttributes;
 
 class LoginRateLimiter extends AbstractRequestRateLimiter
 {
@@ -41,7 +41,7 @@ class LoginRateLimiter extends AbstractRequestRateLimiter
 
     protected function getLimiters(Request $request): array
     {
-        $username = $request->attributes->get(Security::LAST_USERNAME, '');
+        $username = $request->attributes->get(SecurityRequestAttributes::LAST_USERNAME, '');
         if (!is_string($username)) {
             throw new \LogicException('invalid username');
         }
