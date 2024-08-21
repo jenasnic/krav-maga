@@ -2,25 +2,19 @@
 
 namespace App\Domain\Command\Front;
 
-use App\Entity\Payment\DiscountPayment;
-use App\Entity\Payment\PriceOption;
 use App\Entity\Registration;
-use App\Entity\Season;
+use App\Enum\DiscountCodeEnum;
 use App\Enum\FileTypeEnum;
 use App\Service\Email\EmailBuilder;
 use App\Service\Email\EmailSender;
 use App\Service\File\FileCleaner;
 use App\Service\File\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ReEnrollmentHandler
 {
-    use RegistrationTrait;
-
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly TranslatorInterface $translator,
         private readonly EmailBuilder $emailBuilder,
         private readonly EmailSender $emailSender,
         private readonly FileUploader $fileUploader,
@@ -34,27 +28,23 @@ final class ReEnrollmentHandler
 
         $this->processUpload($registration);
 
-        $reEnrollmentDiscount = $registration->getPriceOption()?->getId() === $this->getMostExpensivePriceOption($registration->getSeason())->getId() ? 30 : 20;
-
-        $discountPayment = new DiscountPayment($registration->getAdherent(), $registration->getSeason());
-        $discountPayment->setAmount($reEnrollmentDiscount);
-        $discountPayment->setDiscount($this->translator->trans(sprintf('front.reEnrollment.discount.%s', $reEnrollmentDiscount)));
-
         if (null !== $command->reEnrollmentToken) {
             $this->entityManager->remove($command->reEnrollmentToken);
         }
 
-        $this->entityManager->persist($discountPayment);
         $this->entityManager->persist($registration);
         $this->entityManager->flush();
 
         if ($command->sendEmail) {
             /** @var string $adherentEmail */
             $adherentEmail = $registration->getAdherent()->getEmail();
-            $discountCode = $this->getDiscountCode($registration);
-            $amountToPay = $this->getAmountToPay($registration);
+            $discountCode = DiscountCodeEnum::getDiscountCode($registration);
 
-            $amountToPay -= $discountPayment->getAmount();
+            /** @var float $amountToPay */
+            $amountToPay = $registration->getPriceOption()?->getAmount();
+            if (null !== $discountCode) {
+                $amountToPay -= DiscountCodeEnum::getDiscountAmount($discountCode);
+            }
 
             $email = $this->emailBuilder
                 ->useTemplate('email/re_enrollment_confirmed.html.twig', [
@@ -97,19 +87,5 @@ final class ReEnrollmentHandler
         if (null !== $registration->getPassSportFile()) {
             $registration->setPassSportUrl($this->fileUploader->upload($registration->getPassSportFile()));
         }
-    }
-
-    private function getMostExpensivePriceOption(Season $season): PriceOption
-    {
-        /** @var PriceOption $result */
-        $result = $season->getPriceOptions()->first();
-
-        foreach ($season->getPriceOptions() as $priceOption) {
-            if ($priceOption->getAmount() > $result->getAmount()) {
-                $result = $priceOption;
-            }
-        }
-
-        return $result;
     }
 }

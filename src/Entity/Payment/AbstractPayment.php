@@ -40,10 +40,11 @@ abstract class AbstractPayment
     protected ?string $comment = null;
 
     #[ORM\ManyToOne(targetEntity: Adherent::class)]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     protected Adherent $adherent;
 
     #[ORM\ManyToOne(targetEntity: Season::class)]
+    #[ORM\JoinColumn(nullable: false)]
     protected Season $season;
 
     public function __construct(Adherent $adherent, Season $season)

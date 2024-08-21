@@ -1,0 +1,13 @@
+parameters:
+    level: max
+    symfony:
+        container_xml_path: ./var/cache/dev/App_KernelDevDebugContainer.xml
+        constant_hassers: false
+    ignoreErrors:
+        -
+            message: '/(.*)type mapping mismatch(.*)database expects(.*)/'
+            path: **/Entity/**.php
+    excludePaths:
+    doctrine:
+        objectManagerLoader: tests/object-manager.php
+        searchOtherMethodsForQueryBuilderBeginning: true

@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\DataFixtures\Factory\RegistrationFactory;
 use App\DataFixtures\Factory\SeasonFactory;
 use App\DataFixtures\Payment\PriceOptionFixtures;
+use App\Entity\Payment\PriceOption;
 use App\Entity\Season;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -40,6 +41,7 @@ class RegistrationFixtures extends Fixture implements DependentFixtureInterface
             $registrationDate = new \DateTime(sprintf('%s-09-15', $season->getLabel()));
 
             if ($season->isActive()) {
+                /** @var PriceOption $priceOption */
                 foreach ($season->getPriceOptions() as $priceOption) {
                     $count = self::REGISTRATION_COUNT_FOR_PRICING[$priceOption->getLabel()];
                     RegistrationFactory::createMany($count, [

@@ -39,3 +39,21 @@
     }
   }
 }
+
+@for $i from 1 through 5 {
+  .m-top-#{$i} {
+    margin-top: #{$i * 10}px;
+  }
+
+  .m-right-#{$i} {
+    margin-right: #{$i * 10}px;
+  }
+
+  .m-bottom-#{$i} {
+    margin-bottom: #{$i * 10}px;
+  }
+
+  .m-left-#{$i} {
+    margin-left: #{$i * 10}px;
+  }
+}

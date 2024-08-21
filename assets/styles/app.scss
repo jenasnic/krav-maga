@@ -12,6 +12,7 @@
 @use 'front/components/form';
 @use 'front/components/grid';
 @use 'front/components/menu';
+@use 'front/components/notification';
 @use 'front/components/section';
 @use 'front/components/tac';
 @use 'front/components/with-background';
@@ -20,7 +21,6 @@
 
 @use 'front/pages/basic';
 @use 'front/pages/contact';
-@use 'front/pages/error';
 @use 'front/pages/home';
 @use 'front/pages/news';
 @use 'front/pages/privacy';

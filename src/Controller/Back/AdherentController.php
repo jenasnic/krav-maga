@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Domain\Command\Back\SaveAdherentCommand;
 use App\Domain\Command\Back\SaveAdherentHandler;
 use App\Entity\Adherent;
+use App\Entity\Season;
 use App\Form\AdherentType;
 use App\Repository\AdherentRepository;
 use App\Repository\RegistrationRepository;
@@ -27,14 +28,38 @@ class AdherentController extends AbstractController
     }
 
     #[Route('/adherent/liste/{filter}', name: 'bo_adherent_list', methods: ['GET'])]
-    public function list(AdherentFilter $adherentFiler, ?string $filter = null): Response
+    public function list(AdherentFilter $adherentFilter, ?string $filter = null): Response
     {
-        $season = $this->seasonRepository->getActiveSeason();
+        $seasons = $this->seasonRepository->search();
+        $activeSeasons = array_filter($seasons, fn (Season $season) => $season->isActive());
 
-        if (null === $season) {
+        if (empty($activeSeasons)) {
             $this->addFlash('warning', $this->translator->trans('back.season.activate.missingSeason'));
 
             return $this->redirectToRoute('bo_season_list');
+        }
+
+        $activeSeason = array_shift($activeSeasons);
+        /** @var int $activeSeasonId */
+        $activeSeasonId = $activeSeason->getId();
+
+        $queryBuilder = $this->adherentRepository->createSearchQueryBuilder($activeSeasonId);
+
+        $queryBuilder = $adherentFilter->apply($queryBuilder, $filter);
+
+        return $this->render('back/adherent/list.html.twig', [
+            'registrations' => $queryBuilder->getQuery()->getResult(),
+            'currentSeason' => $activeSeason,
+            'seasons' => $seasons,
+            'filters' => $adherentFilter->getFilters(),
+        ]);
+    }
+
+    #[Route('/adherent/saison/{season}', name: 'bo_adherent_by_season_list', methods: ['GET'])]
+    public function listBySeason(Season $season): Response
+    {
+        if ($season->isActive()) {
+            return $this->redirectToRoute('bo_adherent_list');
         }
 
         /** @var int $seasonId */
@@ -42,16 +67,16 @@ class AdherentController extends AbstractController
 
         $queryBuilder = $this->adherentRepository->createSearchQueryBuilder($seasonId);
 
-        $queryBuilder = $adherentFiler->apply($queryBuilder, $filter);
-
         return $this->render('back/adherent/list.html.twig', [
             'registrations' => $queryBuilder->getQuery()->getResult(),
-            'filters' => $adherentFiler->getFilters(),
+            'currentSeason' => $season,
+            'seasons' => $this->seasonRepository->search(),
+            'filters' => [],
         ]);
     }
 
     #[Route('/adherent/liste-complete', name: 'bo_adherent_full_list', methods: ['GET'])]
-    public function listAll(AdherentFilter $adherentFiler, ?string $filter = null): Response
+    public function listAll(): Response
     {
         $queryBuilder = $this->adherentRepository->createSearchAllQueryBuilder();
 
@@ -63,7 +88,7 @@ class AdherentController extends AbstractController
     #[Route('/adherent/modifier/{adherent}', name: 'bo_adherent_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SaveAdherentHandler $saveAdherentHandler, Adherent $adherent): Response
     {
-        $form = $this->createForm(AdherentType::class, $adherent);
+        $form = $this->createForm(AdherentType::class, $adherent, ['kmis_version' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -100,11 +125,17 @@ class AdherentController extends AbstractController
         return $this->redirectToRoute('bo_adherent_list', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/adherent/trombinoscope', name: 'bo_adherent_gallery', methods: ['GET'])]
-    public function gallery(): Response
+    #[Route('/adherent/trombinoscope/{season}', name: 'bo_adherent_gallery', methods: ['GET'])]
+    public function gallery(?Season $season = null): Response
     {
+        if (null === $season) {
+            $season = $this->seasonRepository->getActiveSeason();
+        }
+
         return $this->render('back/adherent/gallery.html.twig', [
-            'adherents' => $this->adherentRepository->findForGallery(),
+            'adherents' => $this->adherentRepository->findForGallery($season),
+            'seasons' => $this->seasonRepository->search(),
+            'currentSeason' => $season,
         ]);
     }
 }

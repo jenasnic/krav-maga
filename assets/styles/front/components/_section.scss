@@ -38,6 +38,11 @@ $default-margin: 50px;
     margin: $default-margin 0 30px 0;
     text-align: left;
 
+    &.subtitle {
+      margin: -30px 0 50px;
+      text-align: center;
+    }
+
     @include media.below(sm) {
       font-size: 3rem;
       line-height: 3rem;

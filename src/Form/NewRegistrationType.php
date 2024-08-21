@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class NewRegistrationType extends AbstractRegistrationType
 {
@@ -20,41 +21,38 @@ class NewRegistrationType extends AbstractRegistrationType
         /** @var bool $forKmis */
         $forKmis = $options['kmis_version'];
 
+        $fileConstraints = [
+            new File([
+                'mimeTypes' => [
+                    'image/gif',
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'application/pdf',
+                ],
+            ]),
+        ];
+
+        if (!$forKmis) {
+            $fileConstraints[] = new NotNull();
+        }
+
         $builder
             ->add('medicalCertificateFile', BulmaFileType::class, [
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'mimeTypes' => [
-                            'image/gif',
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/png',
-                            'application/pdf',
-                        ],
-                    ]),
-                ],
+                'required' => !$forKmis,
+                'constraints' => $fileConstraints,
                 'help' => !$forKmis ? 'form.newRegistration.medicalCertificateFileHelp' : null,
                 'help_html' => true,
             ])
             ->add('licenceFormFile', BulmaFileType::class, [
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'mimeTypes' => [
-                            'image/gif',
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/png',
-                            'application/pdf',
-                        ],
-                    ]),
-                ],
+                'required' => !$forKmis,
+                'constraints' => $fileConstraints,
                 'help' => !$forKmis ? 'form.newRegistration.licenceFormFileHelp' : null,
                 'help_html' => true,
             ])
             ->add('adherent', AdherentType::class, [
                 're_enrollment' => $options['re_enrollment'],
+                'kmis_version' => $options['kmis_version'],
             ])
         ;
 

@@ -40,6 +40,7 @@ class ReEnrollmentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var ReEnrollmentToken|null $reEnrollmentToken */
             $reEnrollmentToken = $this->reEnrollmentTokenRepository->find($token);
             if (null === $reEnrollmentToken || $reEnrollmentToken->getAdherent()->getEmail() !== $reEnrollment->email) {
                 $this->addFlash('error', $this->translator->trans('front.reEnrollment.error'));
@@ -49,7 +50,7 @@ class ReEnrollmentController extends AbstractController
 
             $this->requestStack->getSession()->set(self::RE_ENROLLMENT_TOKEN, $token);
 
-            return $this->redirectToRoute('app_re_enrollement_update');
+            return $this->redirectToRoute('app_re_enrollment_update');
         }
 
         return $this->render('front/re_enrollment.html.twig', [
@@ -57,7 +58,7 @@ class ReEnrollmentController extends AbstractController
         ]);
     }
 
-    #[Route('/reinscription/mise-a-jour', name: 'app_re_enrollement_update')]
+    #[Route('/reinscription/mise-a-jour', name: 'app_re_enrollment_update')]
     public function reEnrollmentUpdate(
         Request $request,
         RegistrationRepository $registrationRepository,
@@ -102,6 +103,7 @@ class ReEnrollmentController extends AbstractController
 
         return $this->render('front/registration.html.twig', [
             'form' => $form->createView(),
+            'registration' => $registration,
             'reEnrollment' => true,
         ]);
     }
@@ -114,6 +116,7 @@ class ReEnrollmentController extends AbstractController
             throw $this->createNotFoundException('No re-enrollment token found.');
         }
 
+        /** @var ReEnrollmentToken|null $reEnrollmentToken */
         $reEnrollmentToken = $this->reEnrollmentTokenRepository->find($token);
 
         if (null === $reEnrollmentToken) {

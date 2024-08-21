@@ -48,7 +48,7 @@ final class ReEnrollmentCommand extends Command
 
             $count = $this->reEnrollmentNotifier->notify($limit);
 
-            $io->success(sprintf('%d re-enrollement emails sent!', $count));
+            $io->success(sprintf('%d re-enrollment emails sent!', $count));
         } catch (\Exception $e) {
             $io->error(sprintf('An error occurs : %s', $e->getMessage()));
 

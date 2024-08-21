@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../../fonts/icomoon/icomoon.eot?s4gzd3');
-  src:  url('../../fonts/icomoon/icomoon.eot?s4gzd3#iefix') format('embedded-opentype'),
-    url('../../fonts/icomoon/icomoon.ttf?s4gzd3') format('truetype'),
-    url('../../fonts/icomoon/icomoon.woff?s4gzd3') format('woff'),
-    url('../../fonts/icomoon/icomoon.svg?s4gzd3#icomoon') format('svg');
+  src:  url('../../fonts/icomoon/icomoon.eot?cqujqs');
+  src:  url('../../fonts/icomoon/icomoon.eot?cqujqs#iefix') format('embedded-opentype'),
+    url('../../fonts/icomoon/icomoon.ttf?cqujqs') format('truetype'),
+    url('../../fonts/icomoon/icomoon.woff?cqujqs') format('woff'),
+    url('../../fonts/icomoon/icomoon.svg?cqujqs#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -100,6 +100,9 @@
 .icon-instagram:before {
   content: "\ea92";
 }
+.icon-alert:before {
+  content: "\e92b";
+}
 .icon-sort-asc:before {
   content: "\e90c";
 }
@@ -114,6 +117,7 @@ $icon-back: "\e967";
 $icon-bin: "\e9ac";
 $icon-checkmark: "\ea10";
 $icon-cross: "\ea0f";
+$icon-drag: "\e989";
 $icon-export: "\e961";
 $icon-menu: "\e9bd";
 $icon-more: "\ea0a";
@@ -122,7 +126,7 @@ $icon-search: "\e986";
 $icon-sort: "\e90e";
 $icon-sort-asc: "\e90c";
 $icon-sort-desc: "\e90d";
-$icon-drag: "\e989";
+$icon-alert: "\e92b";
 
 @mixin icon($icon) {
   font-family: 'icomoon' !important;

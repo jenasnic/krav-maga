@@ -22,7 +22,7 @@ class PassPaymentType extends AbstractPaymentType
             ->add('amount', ChoiceType::class, [
                 'expanded' => true,
                 'choices' => [
-                    'enum.passSport.PASS_CITIZEN' => 20,
+                    'enum.passSport.PASS_CITIZEN' => 15,
                     'enum.passSport.PASS_SPORT' => 50,
                 ],
             ])

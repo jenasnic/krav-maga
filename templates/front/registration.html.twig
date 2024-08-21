@@ -4,7 +4,7 @@
 
 {% block meta %}
     <meta name="keywords" content="Insciption club krav-maga self-defense, mma, cours femmes, cours ados, cardio training, combat, mental" />
-    <meta name="description" content="Inscrivez vous au club du KMIS, club de krav maga self defense dans l'Oise (Villers-Sous-Saint-Leu 60340 et Mogneville 60140).">
+    <meta name="description" content="Inscrivez vous au club du KMIS, club de krav maga self defense dans l'Oise (Liancourt 60140 et Villers-Sous-Saint-Leu 60340).">
     <meta name="og:title" property="og:title" content="Inscivez-vous au KMIS">
 {% endblock %}
 
@@ -19,6 +19,7 @@
 
     <div class="section">
         <h2 data-aos="zoom-out" data-aos-duration="1000">{{ 'front.registration.page.title'|trans }}</h2>
+        <h3 class="subtitle">{{ registration.season.displayLabel() }}</h3>
         {{ form_start(form, {'attr': {'class': 'registration-form'}}) }}
         <div class="row col-x2 col-sm-x1">
             {{ form_row(form.adherent.lastName) }}
@@ -64,7 +65,7 @@
         </div>
         <div class="fieldset m-top-2">
             <label>{{ 'form.documents.label'|trans }}</label>
-            <div class="help-text">{{ 'form.documents.help'|trans }}</div>
+            <div class="warning m-bottom-2">{{ 'form.documents.warning'|trans }}</div>
             <div class="row col-x1">
                 {{ form_row(form.adherent.pictureFile) }}
             </div>
