@@ -5,25 +5,19 @@ namespace App\Service\Subscriber;
 use App\Entity\Adherent;
 use App\Entity\Content\News;
 use App\Entity\Registration;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\Persistence\ObjectManager;
 
-class RemoveFileSubscriber implements EventSubscriberInterface
+#[AsDoctrineListener(event: Events::preRemove)]
+#[AsDoctrineListener(event: Events::postRemove)]
+class RemoveFileSubscriber
 {
     /**
      * @var array<string>
      */
     private array $filesToRemove = [];
-
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::preRemove,
-            Events::postRemove,
-        ];
-    }
 
     /**
      * @param LifecycleEventArgs<ObjectManager> $args
