@@ -3,10 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Registration;
+use App\Enum\RegistrationTypeEnum;
 use App\Form\Type\BulmaFileType;
 use App\Form\Type\GoogleCaptchaType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -38,12 +42,6 @@ class NewRegistrationType extends AbstractRegistrationType
         }
 
         $builder
-            ->add('medicalCertificateFile', BulmaFileType::class, [
-                'required' => !$forKmis,
-                'constraints' => $fileConstraints,
-                'help' => !$forKmis ? 'form.newRegistration.medicalCertificateFileHelp' : null,
-                'help_html' => true,
-            ])
             ->add('licenceFormFile', BulmaFileType::class, [
                 'required' => !$forKmis,
                 'constraints' => $fileConstraints,
@@ -55,6 +53,32 @@ class NewRegistrationType extends AbstractRegistrationType
                 'kmis_version' => $options['kmis_version'],
             ])
         ;
+
+        if ($forKmis) {
+            $builder->add('medicalCertificateFile', BulmaFileType::class, [
+                'required' => false,
+                'constraints' => $fileConstraints,
+            ]);
+        } else {
+            $builder->get('registrationType')->addEventListener(
+                FormEvents::POST_SUBMIT,
+                function (FormEvent $event) use ($forKmis) {
+                    $form = $event->getForm();
+
+                    if (null === $form->getParent()) {
+                        throw new \LogicException('invalid parent');
+                    }
+
+                    /** @var string $registrationType */
+                    $registrationType = $form->getData();
+                    if (!in_array($registrationType, [RegistrationTypeEnum::COMPETITOR, RegistrationTypeEnum::MINOR])) {
+                        return;
+                    }
+
+                    $this->toggleMedicalCertificate($form->getParent(), $registrationType, $forKmis);
+                }
+            );
+        }
 
         if ($options['kmis_version']) {
             $this->addInternalFields($builder, $options);
@@ -89,5 +113,34 @@ class NewRegistrationType extends AbstractRegistrationType
     protected function showPassSportHelp(): bool
     {
         return true;
+    }
+
+    protected function toggleMedicalCertificate(FormInterface $form, string $registrationType, bool $forKmis): void
+    {
+        $fileConstraints = [
+            new File([
+                'mimeTypes' => [
+                    'image/gif',
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'application/pdf',
+                ],
+            ]),
+        ];
+
+        if (!$forKmis) {
+            $fileConstraints[] = new NotNull();
+        }
+
+        $isForMinor = RegistrationTypeEnum::MINOR === $registrationType;
+
+        $form->add('medicalCertificateFile', BulmaFileType::class, [
+            'label' => $isForMinor ? 'form.newRegistration.medicalCertificateFile.forMinor' : 'form.newRegistration.medicalCertificateFile.default',
+            'required' => !$forKmis,
+            'constraints' => $fileConstraints,
+            'help' => (!$forKmis && $isForMinor) ? 'form.newRegistration.medicalCertificateFileHelp' : null,
+            'help_html' => true,
+        ]);
     }
 }

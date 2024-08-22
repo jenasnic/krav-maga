@@ -41,6 +41,11 @@ enum:
     TRANSFER: Virement
     PASS: Pass'Sport
 
+  registrationType:
+    ADULT: Adulte
+    MINOR: Mineur
+    COMPETITOR: Compétiteur
+
 login:
   password: Mot de passe
   title: Connexion
@@ -213,7 +218,6 @@ form:
 
   documents:
     label: Documents à fournir
-    warning: "Attention : tous les documents doivent être envoyés lors de votre inscription."
 
   emergency:
     emergency: Personne à contacter en cas d'urgence
@@ -244,7 +248,9 @@ form:
     licenceFormFile: Formulaire de demande de licence
     licenceNumber: N° de licence
     licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/wp-content/uploads/2024/07/DEMANDE_LICENCE_INTERNET_2024-2025_modifiable.pdf" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
-    medicalCertificateFile: Certificat médical ou attestation sur l'honneur
+    medicalCertificateFile:
+      default: Certificat médical
+      forMinor: Certificat médical ou attestation sur l'honneur
     medicalCertificateFileHelp: "Certificat médical ou attestation sur l’honneur.
     Pour les informations sur les documents à fournir, consultez la <a href='https://www.ffkarate.fr/espace-licencies/certificat-medical/' target='_blank'>note d’information</a>."
     passCitizenFile: Document d'elligibilité au Pass'Sports Citoyen
