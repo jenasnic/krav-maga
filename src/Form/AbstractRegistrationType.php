@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Payment\PriceOption;
 use App\Entity\Purpose;
 use App\Entity\Registration;
+use App\Enum\RegistrationTypeEnum;
 use App\Form\Type\BulmaFileType;
 use App\Repository\PurposeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -55,6 +56,15 @@ abstract class AbstractRegistrationType extends AbstractType
             ->add('withLegalRepresentative', CheckboxType::class, [
                 'required' => false,
                 'false_values' => [null, '0', 'false'],
+            ])
+            ->add('registrationType', ChoiceType::class, [
+                'label' => false,
+                'expanded' => true,
+                'choices' => [
+                    'enum.registrationType.ADULT' => RegistrationTypeEnum::ADULT,
+                    'enum.registrationType.MINOR' => RegistrationTypeEnum::MINOR,
+                    'enum.registrationType.COMPETITOR' => RegistrationTypeEnum::COMPETITOR,
+                ],
             ])
         ;
 

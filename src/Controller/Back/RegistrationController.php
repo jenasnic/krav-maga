@@ -32,6 +32,7 @@ class RegistrationController extends AbstractController
     ): Response {
         try {
             $registration = $registrationFactory->createNew();
+            $registration->setVerified(true);
         } catch (NoActiveSeasonException $exception) {
             $this->addFlash('warning', $this->translator->trans('back.season.activate.missingSeason'));
 

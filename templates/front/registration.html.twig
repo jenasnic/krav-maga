@@ -65,12 +65,16 @@
         </div>
         <div class="fieldset m-top-2">
             <label>{{ 'form.documents.label'|trans }}</label>
-            <div class="warning m-bottom-2">{{ 'form.documents.warning'|trans }}</div>
+            <div class="row col-x1">
+                {{ form_row(form.registrationType, {'attr': {'data-field-update': 'registration-type'}}) }}
+            </div>
             <div class="row col-x1">
                 {{ form_row(form.adherent.pictureFile) }}
             </div>
-            <div class="row col-x1">
-                {{ form_row(form.medicalCertificateFile) }}
+            <div data-field-update-target="registration-type">
+                {% if form.medicalCertificateFile is defined %}
+                    {{ form_row(form.medicalCertificateFile) }}
+                {% endif %}
             </div>
             <div class="row col-x1">
                 {{ form_row(form.licenceFormFile) }}

@@ -56,6 +56,10 @@ class Registration
     #[ORM\Column(type: 'boolean')]
     private bool $withLegalRepresentative = false;
 
+    #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\NotNull]
+    private ?string $registrationType = null;
+
     #[ORM\Column(type: 'boolean')]
     private bool $reEnrollment = false;
 
@@ -268,6 +272,18 @@ class Registration
         } elseif (null === $this->legalRepresentative) {
             $this->legalRepresentative = new LegalRepresentative();
         }
+
+        return $this;
+    }
+
+    public function getRegistrationType(): ?string
+    {
+        return $this->registrationType;
+    }
+
+    public function setRegistrationType(?string $registrationType): self
+    {
+        $this->registrationType = $registrationType;
 
         return $this;
     }
