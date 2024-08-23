@@ -319,7 +319,6 @@ form:
     priceOption: Formule
     privateNote: Notes privée KMIS
     purpose: Objectif
-    priceOptionReEnrollmentHelp: "En tant qu'ancien adhérent, vous bénéficiez d'un tarif préférentiel sur les formules : -30€ sur la formule Impact Access et -20€ sur les autres formules."
     registeredAt: Date d'inscription
     usePassCitizen: Utiliser le Pass'Sports Citoyen (15€)
     usePassCitizenHelp: Éligibilité et conditions d’utilisations <a href="https://www.oise.fr/les-pass-citoyens-du-conseil-departemental-de-loise/le-passsports-citoyen" target="_blank">ici</a> (sélectionner discipline "Karaté" et commune du club "Mogneville").
