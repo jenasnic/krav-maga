@@ -94,10 +94,6 @@ abstract class AbstractRegistrationType extends AbstractType
                 'choices' => $registration->getSeason()->getPriceOptions()->toArray(),
             ];
 
-            if ($registration->isReEnrollment()) {
-                $priceOptionOptions['help'] = 'form.registration.priceOptionReEnrollmentHelp';
-            }
-
             $form->add('priceOption', EntityType::class, $priceOptionOptions);
 
             $downloadPassCitizenUri = (null !== $registration->getId() && null !== $registration->getPassCitizenUrl())
