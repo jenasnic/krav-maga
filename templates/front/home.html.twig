@@ -88,90 +88,41 @@
     <div id="practical-info" class="section">
         <h2 data-aos="zoom-out">{{ 'front.home.section.practicalInfo'|trans }}</h2>
         <div class="sessions">
-            <div class="session">
-                <div class="session__city">
-                    <div class="name">Liancourt</div>
-                    <a
-                        href="https://www.google.com/maps/place/Collège+La+Rochefoucauld/@49.3262507,2.4592501,16z/data=!3m1!4b1!4m6!3m5!1s0x47e64ac4d94d7355:0xb2ec60327646476a!8m2!3d49.3262473!4d2.464121!16s%2Fg%2F1ttdm910"
-                        class="link-icon-button"
-                        target="_blank"
-                    >
-                        Localisation <i class="icon-location"></i>
-                    </a>
-                    <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
-                        <span itemprop="streetAddress">Gymnase - Collège La Rochefoucauld<br/>Rue du général De Gaulle</span><br/>
-                        <span itemprop="postalCode">60140</span> <span itemprop="addressLocality">Liancourt</span>
-                        <meta itemprop="addressRegion" content="Oise" />
-
-                    </div>
-                </div>
-                <ul class="session__time">
-                    <li>
-                        Lundi
-                        <ul>
-                            <li>19h00 - 20h00 : Krav Maga Ados</li>
-                            <li>19h00 - 20h30 : KMix-MMA</li>
-                            <li>20h00 - 21h30 : Krav Maga / Self Defense</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Mardi
-                        <ul>
-                            <li>18h30 - 19h30 : Krav Maga enfants</li>
-                            <li>19h30 - 21h00 : Cours Élite</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Mercredi
-                        <ul>
-                            <li>19h00 - 20h00 : Cardio Fit</li>
-                            <li>20h00 - 21h30 : Krav Maga / Self Defense</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div class="session">
-                <div class="session__city">
-                    <div class="name">Villers-Sous-Saint-Leu</div>
-                    <a
-                        href="https://www.google.com/maps/place/23+Rue+du+Castel,+60340+Villers-Sous-Saint-Leu/@49.2142549,2.396175,17z/data=!3m1!4b1!4m5!3m4!1s0x47e648d4a31f8c93:0x7abe632340c2a373!8m2!3d49.2142549!4d2.3983637"
-                        class="link-icon-button"
-                        target="_blank"
-                    >
-                        Localisation <i class="icon-location"></i>
-                    </a>
-                    <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
-                        <span itemprop="streetAddress">23 rue du Castel</span><br/>
-                        <span itemprop="postalCode">60340</span> <span itemprop="addressLocality">Villers-Sous-Saint-Leu</span>
-                        <meta itemprop="addressRegion" content="Oise" />
-                    </div>
-                </div>
-                <ul class="session__time">
-                    <li>
-                        Jeudi
-                        <ul>
-                            <li>20h30 - 21h30 : Defense Femmes </li>
-                        </ul>
-                    </li>
-                    <li>
-                        Vendredi
-                        <ul>
-                            <li>19h30 - 20h30 : Krav Maga Ados</li>
-                            <li>19h30 - 21h00 : KMix-MMA</li>
-                            <li>20h30 - 22h00 : Krav Maga / Self Defense</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Samedi
-                        <ul>
-                            <li>
-                                14h00 - 17h00 : Stages thématiques<br/>
-                                <i>(informations pratiques communiquées par mail)</i>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+            {% include 'front/components/_home_location.html.twig' with {
+                'city': 'Liancourt',
+                'mapLink': 'https://www.google.com/maps/place/Collège+La+Rochefoucauld/@49.3262507,2.4592501,16z/data=!3m1!4b1!4m6!3m5!1s0x47e64ac4d94d7355:0xb2ec60327646476a!8m2!3d49.3262473!4d2.464121!16s%2Fg%2F1ttdm910',
+                'addressStreet1': 'Gymnase - Collège La Rochefoucauld',
+                'addressStreet2': 'Rue du général De Gaulle',
+                'addressZipCode': '60140',
+                'planning': {
+                    'Lundi': ['19h00 - 20h00 : Krav Maga Ados', '19h00 - 20h30 : KMix-MMA', '20h00 - 21h30 : Krav Maga / Self Defense'],
+                    'Mardi': ['18h30 - 19h30 : Krav Maga enfants', '19h30 - 21h00 : Cours Élite'],
+                    'Mercredi': ['19h00 - 20h00 : Cardio Fit', '20h00 - 21h30 : Krav Maga / Self Defense'],
+                }
+            } %}
+            {% include 'front/components/_home_location.html.twig' with {
+                'city': 'Villers-Sous-Saint-Leu',
+                'mapLink': 'https://www.google.com/maps/place/23+Rue+du+Castel,+60340+Villers-Sous-Saint-Leu/@49.2142549,2.396175,17z/data=!3m1!4b1!4m5!3m4!1s0x47e648d4a31f8c93:0x7abe632340c2a373!8m2!3d49.2142549!4d2.3983637',
+                'addressStreet1': '23 rue du Castel',
+                'addressStreet2': null,
+                'addressZipCode': '60340',
+                'planning': {
+                    'Vendredi': ['19h30 - 20h30 : Krav Maga Ados', '19h30 - 21h00 : KMix-MMA', '20h30 - 22h00 : Krav Maga / Self Defense'],
+                    'Samedi': ['14h00 - 17h00 : Stages thématiques<br/><i>(informations pratiques communiquées par mail)</i>'],
+                }
+            } %}
+        </div>
+        <div class="sessions sessions--center">
+            {% include 'front/components/_home_location.html.twig' with {
+                'city': 'Précy-sur-Oise',
+                'mapLink': 'https://www.google.com/maps/place/34+Sente+Sorel,+60460+Pr%C3%A9cy-sur-Oise/@49.212344,2.3721153,17z/data=!3m1!4b1!4m6!3m5!1s0x47e64f23b2c84ab9:0x601a1dd1c86a36f4!8m2!3d49.2123406!4d2.3769862!16s%2Fg%2F11c4nbmb5q',
+                'addressStreet1': 'Dojo - 34 sente Sorel',
+                'addressStreet2': null,
+                'addressZipCode': '60460',
+                'planning': {
+                    'Jeudi': ['19h00 - 20h30 : Krav Maga / Self Defense'],
+                }
+            } %}
         </div>
         <div class="card pricing">
             <div class="card__title">Tarifs</div>

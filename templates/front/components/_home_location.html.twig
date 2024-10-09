@@ -1,0 +1,26 @@
+<div class="session">
+    <div class="session__city">
+        <div class="name">{{ city }}</div>
+        <a href="{{ mapLink }}" class="link-icon-button" target="_blank">Localisation <i class="icon-location"></i></a>
+        <div class="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="streetAddress">
+                {{ addressStreet1 }}
+                {% if addressStreet2 %}<br/>{{ addressStreet2 }}{% endif %}
+            </span><br/>
+            <span itemprop="postalCode">{{ addressZipCode }}</span> <span itemprop="addressLocality">{{ city }}</span>
+            <meta itemprop="addressRegion" content="Oise" />
+        </div>
+    </div>
+    <ul class="session__time">
+    {% for day, schedules in planning %}
+        <li>
+            {{ day }}
+            <ul>
+            {% for schedule in schedules %}
+                <li>{{ schedule|raw }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
