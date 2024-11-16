@@ -15,7 +15,7 @@ services:
       NGINX_HOST: local.krav-maga
 
   db:
-    image: mariadb:10.8.2
+    image: mariadb:10.5.26
     environment:
       MARIADB_ROOT_PASSWORD: root
 
