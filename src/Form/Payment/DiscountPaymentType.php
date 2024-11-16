@@ -17,9 +17,7 @@ class DiscountPaymentType extends AbstractPaymentType
     {
         parent::buildForm($builder, $options);
 
-        $builder
-            ->add('discount', TextType::class)
-        ;
+        $builder->add('discount', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

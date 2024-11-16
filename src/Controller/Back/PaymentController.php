@@ -11,6 +11,7 @@ use App\Entity\Payment\AbstractPayment;
 use App\Entity\Payment\AncvPayment;
 use App\Entity\Payment\CashPayment;
 use App\Entity\Payment\CheckPayment;
+use App\Entity\Payment\DiscountPayment;
 use App\Entity\Payment\HelloAssoPayment;
 use App\Entity\Payment\PassPayment;
 use App\Entity\Payment\TransferPayment;
@@ -19,6 +20,7 @@ use App\Enum\PaymentTypeEnum;
 use App\Form\Payment\AncvPaymentType;
 use App\Form\Payment\CashPaymentType;
 use App\Form\Payment\CheckPaymentType;
+use App\Form\Payment\DiscountPaymentType;
 use App\Form\Payment\HelloAssoPaymentType;
 use App\Form\Payment\NewPaymentType;
 use App\Form\Payment\PassPaymentType;
@@ -198,6 +200,7 @@ class PaymentController extends AbstractController
             $payment instanceof AncvPayment => AncvPaymentType::class,
             $payment instanceof CashPayment => CashPaymentType::class,
             $payment instanceof CheckPayment => CheckPaymentType::class,
+            $payment instanceof DiscountPayment => DiscountPaymentType::class,
             $payment instanceof HelloAssoPayment => HelloAssoPaymentType::class,
             $payment instanceof PassPayment => PassPaymentType::class,
             $payment instanceof TransferPayment => TransferPaymentType::class,
