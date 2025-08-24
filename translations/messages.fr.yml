@@ -208,6 +208,8 @@ form:
     pictureFileHelp: Votre photo est déjà disponible, vous pouvez ainsi laisser ce champ vide ou si vous le souhaitez en charger une nouvelle.
     pseudonym: Pseudo Facebook
     pseudonymHelp: Pour intégrer le <a href="https://www.facebook.com/groups/807864253572677/" target="_blank">groupe Facebook</a> privé du club
+    reEnrollmentToNotify: Notification de désinscription
+    reEnrollmentToNotifyHelp: Cocher pour relancer le mail de résincription ou décocher pour ignorer la relance de désinscription.
     street: Adresse
     zipCode: Code postal
 
@@ -247,7 +249,7 @@ form:
     licenceDate: Date de la licence
     licenceFormFile: Formulaire de demande de licence
     licenceNumber: N° de licence
-    licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/wp-content/uploads/2024/07/DEMANDE_LICENCE_INTERNET_2024-2025_modifiable.pdf" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
+    licenceFormFileHelp: Vous pouvez télécharger un exemplaire du formulaire <a href="https://www.ffkarate.fr/wp-content/uploads/2025/07/DEMANDE_LICENCE_INTERNET_2025-2026_MD.pdf" target="_blank">ici</a> ou obtenir un formulaire auprès des membres du bureau.
     medicalCertificateFile:
       default: Certificat médical
       forMinor: Certificat médical ou attestation sur l'honneur
@@ -257,7 +259,8 @@ form:
     passSportFile: Document d'elligibilité au Pass'Sports
     privateNote: Notes privée KMIS
     usePassCitizen: Utiliser le Pass'Sports Citoyen (15€)
-    usePassSport: Utiliser le Pass'Sports (50€)
+    usePassSport: Utiliser le Pass'Sports (70€)
+    useCCAS: Aide du CCAS (10€)
     purpose: Objectif
     priceOption: Formule
     registeredAt: Inscrit le
@@ -322,8 +325,10 @@ form:
     registeredAt: Date d'inscription
     usePassCitizen: Utiliser le Pass'Sports Citoyen (15€)
     usePassCitizenHelp: Éligibilité et conditions d’utilisations <a href="https://www.oise.fr/les-pass-citoyens-du-conseil-departemental-de-loise/le-passsports-citoyen" target="_blank">ici</a> (sélectionner discipline "Karaté" et commune du club "Mogneville").
-    usePassSport: Utiliser le Pass'Sports (50€)
+    usePassSport: Utiliser le Pass'Sports (70€)
     usePassSportHelp: Éligibilité et conditions d’utilisations <a href="https://www.sports.gouv.fr/pratiques-sportives/sports-pour-tous/pass-sport/" target="_blank">ici</a>.
+    useCCAS: Aide du CCAS (10€)
+    useCCASHelp: 10 € pour les - de 18 ans résidant à Villers-sous-Saint-Leu
     withLegalRepresentative: Dans le cas d'une personne mineur, merci de renseigner le représentant légal
 
   reEnrollment:

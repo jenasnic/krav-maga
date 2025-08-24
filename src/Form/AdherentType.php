@@ -8,6 +8,7 @@ use App\Form\Type\AddressType;
 use App\Form\Type\BulmaFileType;
 use App\Form\Type\MaskedType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -58,6 +59,10 @@ class AdherentType extends AbstractType
             ])
             ->add('address', AddressType::class, [
                 'label' => false,
+            ])
+            ->add('reEnrollmentToNotify', CheckboxType::class, [
+                'required' => false,
+                'help' => 'form.adherent.reEnrollmentToNotifyHelp',
             ])
         ;
 
