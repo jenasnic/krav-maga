@@ -44,34 +44,68 @@
 
     {% endembed %}
 
-    {% if reEnrollmentToNotifyCount > 0 and activeSeason is not null %}
-        <form
-            data-confirm
-            data-confirm-message="{{ 'back.registration.reEnrollment.notify.confirm'|trans }}"
-            action="{{ path('bo_re_enrollment_notify') }}"
-            method="POST"
-        >
-            <input type="hidden" name="_token" value="{{ csrf_token('re_enrollment_notify') }}" />
-            <button type="submit" class="button is-warning">
-                <span>{{ 'back.registration.reEnrollment.notify.button'|trans }}</span>
-                <span class="icon"><i class="icon-mail"></i></span>
-            </button>
-        </form>
-    {% endif %}
-
-    {% if hasExpiredToken %}
-        <form
-            data-confirm
-            data-confirm-message="{{ 'global.confirmDelete'|trans }}"
-            action="{{ path('bo_re_enrollment_expired_token_clear') }}"
-            method="POST"
-        >
-            <input type="hidden" name="_token" value="{{ csrf_token('re_enrollment_expired_token_clear') }}" />
-            <button type="submit" class="button is-danger">
-                <span>{{ 'back.registration.reEnrollment.clearToken.button'|trans }}</span>
-                <span class="icon"><i class="icon-cross"></i></span>
-            </button>
-        </form>
-    {% endif %}
+    <nav class="level">
+        <div class="level-left">
+            {% if reEnrollmentToNotifyCount > 0 and activeSeason is not null %}
+                <form
+                    class="level-item"
+                    data-confirm
+                    data-confirm-message="{{ 'back.registration.reEnrollment.notify.confirm'|trans }}"
+                    action="{{ path('bo_re_enrollment_notify') }}"
+                    method="POST"
+                >
+                    <input type="hidden" name="_token" value="{{ csrf_token('re_enrollment_notify') }}" />
+                    <button type="submit" class="button is-warning">
+                        <span>{{ 'back.registration.reEnrollment.notify.button'|trans }}</span>
+                        <span class="icon"><i class="icon-mail"></i></span>
+                    </button>
+                </form>
+            {% endif %}
+            {% if hasExpiredToken %}
+                <form
+                    class="level-item"
+                    data-confirm
+                    data-confirm-message="{{ 'global.confirmDelete'|trans }}"
+                    action="{{ path('bo_re_enrollment_expired_token_clear') }}"
+                    method="POST"
+                >
+                    <input type="hidden" name="_token" value="{{ csrf_token('re_enrollment_expired_token_clear') }}" />
+                    <button type="submit" class="button is-danger">
+                        <span>{{ 'back.registration.reEnrollment.clearToken.button'|trans }}</span>
+                        <span class="icon"><i class="icon-cross"></i></span>
+                    </button>
+                </form>
+            {% endif %}
+            {% if isAutomaticSendActive %}
+                <form
+                    class="level-item"
+                    data-confirm
+                    data-confirm-message="{{ 'global.confirmDisable'|trans }}"
+                    action="{{ path('bo_configuration_automatic_send_disable') }}"
+                    method="POST"
+                >
+                    <input type="hidden" name="_token" value="{{ csrf_token('disable_automatic_send_token') }}" />
+                    <button type="submit" class="button is-danger">
+                        <span>{{ 'back.registration.automaticSend.disableButton'|trans }}</span>
+                        <span class="icon"><i class="icon-cross"></i></span>
+                    </button>
+                </form>
+            {% else %}
+                <form
+                    class="level-item"
+                    data-confirm
+                    data-confirm-message="{{ 'global.confirmEnable'|trans }}"
+                    action="{{ path('bo_configuration_automatic_send_enable') }}"
+                    method="POST"
+                >
+                    <input type="hidden" name="_token" value="{{ csrf_token('enable_automatic_send_token') }}" />
+                    <button type="submit" class="button is-primary">
+                        <span>{{ 'back.registration.automaticSend.enableButton'|trans }}</span>
+                        <span class="icon"><i class="icon-checkmark"></i></span>
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+    </nav>
 
 {% endblock %}
