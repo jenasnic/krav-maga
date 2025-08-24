@@ -46,6 +46,9 @@ class Registration
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $passSportUrl = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $useCCAS = false;
+
     #[ORM\Column(type: 'datetime')]
     private \DateTime $registeredAt;
 
@@ -230,6 +233,18 @@ class Registration
     public function setPassSportUrl(?string $passSportUrl): self
     {
         $this->passSportUrl = $passSportUrl;
+
+        return $this;
+    }
+
+    public function isUseCCAS(): bool
+    {
+        return $this->useCCAS;
+    }
+
+    public function setUseCCAS(bool $useCCAS): self
+    {
+        $this->useCCAS = $useCCAS;
 
         return $this;
     }

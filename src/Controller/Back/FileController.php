@@ -28,7 +28,7 @@ class FileController extends AbstractController
             throw new \LogicException('invalid file');
         }
 
-        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'attestation');
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'certificat');
 
         return $this->getFileContent($filePath, $fileName);
     }
@@ -41,7 +41,7 @@ class FileController extends AbstractController
             throw new \LogicException('invalid file');
         }
 
-        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'formulaire_licence');
+        $fileName = $this->buildFileName($registration->getAdherent(), $filePath, 'licence');
 
         return $this->getFileContent($filePath, $fileName);
     }
@@ -93,7 +93,7 @@ class FileController extends AbstractController
         return $response;
     }
 
-    private function buildFileName(Adherent $adherent, string $filePath, string $prefix): string
+    private function buildFileName(Adherent $adherent, string $filePath, string $suffix): string
     {
         /** @var string $firstName */
         $firstName = $adherent->getFirstName();
@@ -102,9 +102,9 @@ class FileController extends AbstractController
 
         $fileName = strtolower(sprintf(
             '%s_%s_%s',
-            $prefix,
             $this->slugger->slug($firstName),
             $this->slugger->slug($lastName),
+            $suffix,
         ));
 
         $pathInfo = pathinfo($filePath);
