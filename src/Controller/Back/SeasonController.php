@@ -10,6 +10,7 @@ use App\Form\SeasonType;
 use App\Repository\AdherentRepository;
 use App\Repository\ReEnrollmentTokenRepository;
 use App\Repository\SeasonRepository;
+use App\Service\Configuration\ConfigurationManager;
 use App\Service\Factory\SeasonFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,7 @@ class SeasonController extends AbstractController
         protected SeasonRepository $seasonRepository,
         protected AdherentRepository $adherentRepository,
         protected ReEnrollmentTokenRepository $reEnrollmentTokenRepository,
+        protected ConfigurationManager $configurationManager,
     ) {
     }
 
@@ -35,6 +37,7 @@ class SeasonController extends AbstractController
             'hasExpiredToken' => $this->reEnrollmentTokenRepository->hasExpiredToken(),
             'reEnrollmentToNotifyCount' => $this->adherentRepository->countReEnrollmentToNotify(),
             'activeSeason' => $this->seasonRepository->getActiveSeason(),
+            'isAutomaticSendActive' => $this->configurationManager->isAutomaticSendEnable(),
         ]);
     }
 

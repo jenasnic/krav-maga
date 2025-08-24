@@ -6,6 +6,8 @@ global:
   cancel: Annuler
   confirmVerify: Confirmer la vérification ?
   confirmDelete: Confirmer la suppression ?
+  confirmEnable: Confirmer l'activation ?
+  confirmDisable: Confirmer la désactivation ?
   delete: Supprimer
   export: Exporter
   login: Se connecter
@@ -163,6 +165,11 @@ back:
         button: Envoyer les prochaines notifications
         confirm: Confirmer l'envoi des notifications
         message: Les mails de réinscription ont bien été envoyés (%count% mails)
+    automaticSend:
+      enableButton: Activer les envois automatiques
+      enableMessage: Les envois automatiques ont été activés (5 mails toutes les 30 minutes)
+      disableButton: Désactiver les envois automatiques
+      disableMessage: Les envois automatiques ont été désactivés
     verify:
       success: Inscription vérifiée
 
