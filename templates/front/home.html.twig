@@ -95,24 +95,10 @@
                 'addressStreet2': 'Rue du général De Gaulle',
                 'addressZipCode': '60140',
                 'planning': {
-                    'Lundi': ['19h00 - 20h00 : Krav Maga Ados', '19h00 - 20h30 : KMix-MMA', '20h00 - 21h30 : Krav Maga / Self Defense'],
-                    'Mardi': ['18h30 - 19h30 : Krav Maga enfants', '19h30 - 21h00 : Cours Élite'],
-                    'Mercredi': ['19h00 - 20h00 : Cardio Fit', '20h00 - 21h30 : Krav Maga / Self Defense'],
+                    'Lundi': ['19h00 - 20h00 : Krav Maga Ados', '19h00 - 21h00 : KMix-MMA', '20h00 - 21h30 : Krav Maga Adultes'],
+                    'Mercredi': ['19h00 - 20h00 : Cardio Fit', '20h00 - 22h00 : Cours Élite (KMix-MMA)'],
                 }
             } %}
-            {% include 'front/components/_home_location.html.twig' with {
-                'city': 'Villers-Sous-Saint-Leu',
-                'mapLink': 'https://www.google.com/maps/place/23+Rue+du+Castel,+60340+Villers-Sous-Saint-Leu/@49.2142549,2.396175,17z/data=!3m1!4b1!4m5!3m4!1s0x47e648d4a31f8c93:0x7abe632340c2a373!8m2!3d49.2142549!4d2.3983637',
-                'addressStreet1': '23 rue du Castel',
-                'addressStreet2': null,
-                'addressZipCode': '60340',
-                'planning': {
-                    'Vendredi': ['19h30 - 20h30 : Krav Maga Ados', '19h30 - 21h00 : KMix-MMA', '20h30 - 22h00 : Krav Maga / Self Defense'],
-                    'Samedi': ['14h00 - 17h00 : Stages thématiques<br/><i>(informations pratiques communiquées par mail)</i>'],
-                }
-            } %}
-        </div>
-        <div class="sessions sessions--center">
             {% include 'front/components/_home_location.html.twig' with {
                 'city': 'Précy-sur-Oise',
                 'mapLink': 'https://www.google.com/maps/place/34+Sente+Sorel,+60460+Pr%C3%A9cy-sur-Oise/@49.212344,2.3721153,17z/data=!3m1!4b1!4m6!3m5!1s0x47e64f23b2c84ab9:0x601a1dd1c86a36f4!8m2!3d49.2123406!4d2.3769862!16s%2Fg%2F11c4nbmb5q',
@@ -120,7 +106,19 @@
                 'addressStreet2': null,
                 'addressZipCode': '60460',
                 'planning': {
-                    'Jeudi': ['19h00 - 20h30 : Krav Maga / Self Defense'],
+                    'Jeudi': ['19h00 - 20h00 : Krav Maga Ados', '20h00 - 21h30 : Krav Maga Adultes'],
+                }
+            } %}
+        </div>
+        <div class="sessions sessions--center">
+            {% include 'front/components/_home_location.html.twig' with {
+                'city': 'Villers-Sous-Saint-Leu',
+                'mapLink': 'https://www.google.com/maps/place/23+Rue+du+Castel,+60340+Villers-Sous-Saint-Leu/@49.2142549,2.396175,17z/data=!3m1!4b1!4m5!3m4!1s0x47e648d4a31f8c93:0x7abe632340c2a373!8m2!3d49.2142549!4d2.3983637',
+                'addressStreet1': '23 rue du Castel',
+                'addressStreet2': null,
+                'addressZipCode': '60340',
+                'planning': {
+                    'Vendredi': ['19h30 - 21h30 : KMix-MMA'],
                 }
             } %}
         </div>
