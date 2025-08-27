@@ -357,21 +357,6 @@ front:
       club: Présentation
       practicalInfo: Infos pratiques
       sporting: Disciplines
-    sporting:
-      cardioTraining:
-        title: Cardio Fit
-      defenseWomen:
-        title: Defense Femmes
-      defenseTeenager:
-        title: Krav Maga Ados
-      kmDefense:
-        title: Self Defense
-      kmixMma:
-        title: KMix-MMA
-      kmTraining:
-        title: Krav Maga
-      kravChildren:
-        title: Krav Maga Enfants
 
   footer:
     link:

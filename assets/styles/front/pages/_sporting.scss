@@ -29,6 +29,17 @@
         padding-left: 30px;
         width: 500px;
 
+        ul {
+          font-size: 1.3em;
+          line-height: 1.8em;
+          margin: 0 0 20px 20px;
+
+          > li {
+            list-style: disc;
+
+          }
+        }
+
         @include media.below(md) {
           width: 50%;
         }

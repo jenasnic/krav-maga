@@ -24,23 +24,15 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.kmDefense.title'|trans,
+                        'title': 'Krav Maga Adultes',
                         'image': asset('build/images/km_defense.webp'),
-                        'content': 'Pour travailler toutes les composantes de la self-defense.',
-                        'link': path('app_sporting')~'#km-defense',
-                    } %}
-                </div>
-                <div class="swiper-slide">
-                    {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.kmTraining.title'|trans,
-                        'image': asset('build/images/km_training.webp'),
                         'content': 'Pour augmenter sa confiance en soi et parfaire son bagage technique.',
-                        'link': path('app_sporting')~'#km-training',
+                        'link': path('app_sporting')~'#defense-adulte',
                     } %}
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.kmixMma.title'|trans,
+                        'title': 'KMix-MMA',
                         'image': asset('build/images/kmix_mma.webp'),
                         'content': 'Pour augmenter ses aptitudes de défense.',
                         'link': path('app_sporting')~'#kmix-mma',
@@ -48,15 +40,7 @@
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.defenseWomen.title'|trans,
-                        'image': asset('build/images/defense_women.webp'),
-                        'content': 'Pour améliorer son assurance et ses réflexes.',
-                        'link': path('app_sporting')~'#defense-femme',
-                    } %}
-                </div>
-                <div class="swiper-slide">
-                    {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.defenseTeenager.title'|trans,
+                        'title': 'Krav Maga Ados',
                         'image': asset('build/images/defense_teenager.webp'),
                         'content': 'Pour améliorer sa condition physique et mentale.',
                         'link': path('app_sporting')~'#defense-ados',
@@ -64,18 +48,18 @@
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.cardioTraining.title'|trans,
-                        'image': asset('build/images/cardio_fit_krav.webp'),
-                        'content': 'Pour se doter de la condition physique souhaitée.',
-                        'link': path('app_sporting')~'#cardio-fit-krav',
+                        'title': 'Cours Élite',
+                        'image': asset('build/images/km_training.webp'),
+                        'content': 'Pour performer dans le combat et/ou la compétition.',
+                        'link': path('app_sporting')~'#elite',
                     } %}
                 </div>
                 <div class="swiper-slide">
                     {% include 'front/components/_home_slide.html.twig' with {
-                        'title': 'front.home.sporting.kravChildren.title'|trans,
-                        'image': asset('build/images/krav_children.webp'),
-                        'content': 'Pour se dépenser, améliorer sa motricité et s\'amuser.',
-                        'link': path('app_sporting')~'#krav-children',
+                        'title': 'Cardio Fit',
+                        'image': asset('build/images/cardio_fit_krav.webp'),
+                        'content': 'Pour se doter de la condition physique souhaitée.',
+                        'link': path('app_sporting')~'#cardio-fit-krav',
                     } %}
                 </div>
             </div>
@@ -119,6 +103,7 @@
                 'addressZipCode': '60340',
                 'planning': {
                     'Vendredi': ['19h30 - 21h30 : KMix-MMA'],
+                    'Samedi': ['14h00 - 17h00 : Stages thématiques<br/><i>(informations pratiques communiquées par mail)</i>'],
                 }
             } %}
         </div>
