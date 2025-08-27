@@ -75,6 +75,12 @@ assets:
 
 .PHONY: prod
 prod:
+	rm -rf public/build
+	$(DOCKER_USER) $(NPM_BIN) run build --prod
+	tar -cf build.tar public/build
+
+.PHONY: deploy
+deploy:
 	$(DOCKER_USER) $(COMPOSER_BIN) install --no-dev --optimize-autoloader --no-interaction
 	$(DOCKER_USER) $(NPM_BIN) install
 	$(DOCKER_USER) $(NPM_BIN) run build --prod

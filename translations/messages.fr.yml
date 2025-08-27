@@ -215,8 +215,8 @@ form:
     pictureFileHelp: Votre photo est déjà disponible, vous pouvez ainsi laisser ce champ vide ou si vous le souhaitez en charger une nouvelle.
     pseudonym: Pseudo Facebook
     pseudonymHelp: Pour intégrer le <a href="https://www.facebook.com/groups/807864253572677/" target="_blank">groupe Facebook</a> privé du club
-    reEnrollmentToNotify: Notification de désinscription
-    reEnrollmentToNotifyHelp: Cocher pour relancer le mail de résincription ou décocher pour ignorer la relance de désinscription.
+    reEnrollmentToNotify: Notification de réinscription
+    reEnrollmentToNotifyHelp: Cocher pour (re)lancer le mail de résincription ou décocher pour ignorer la relance de réinscription.
     street: Adresse
     zipCode: Code postal
 
