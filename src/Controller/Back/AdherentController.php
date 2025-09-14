@@ -88,7 +88,11 @@ class AdherentController extends AbstractController
     #[Route('/adherent/modifier/{adherent}', name: 'bo_adherent_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SaveAdherentHandler $saveAdherentHandler, Adherent $adherent): Response
     {
-        $form = $this->createForm(AdherentType::class, $adherent, ['kmis_version' => true]);
+        $form = $this->createForm(AdherentType::class, $adherent, [
+            'kmis_version' => true,
+            'manage_re_enrollment_notification' => true,
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

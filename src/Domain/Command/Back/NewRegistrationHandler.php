@@ -32,5 +32,19 @@ final class NewRegistrationHandler
         if (null !== $registration->getMedicalCertificateFile()) {
             $registration->setMedicalCertificateUrl($this->fileUploader->upload($registration->getMedicalCertificateFile()));
         }
+
+        if (null !== $registration->getLicenceFormFile()) {
+            $registration->setLicenceFormUrl($this->fileUploader->upload($registration->getLicenceFormFile()));
+        }
+
+        // @todo : check if usePassCitizen is true?
+        if (null !== $registration->getPassCitizenFile()) {
+            $registration->setPassCitizenUrl($this->fileUploader->upload($registration->getPassCitizenFile()));
+        }
+
+        // @todo : check if usePassSport is true?
+        if (null !== $registration->getPassSportFile()) {
+            $registration->setPassSportUrl($this->fileUploader->upload($registration->getPassSportFile()));
+        }
     }
 }
