@@ -23,7 +23,8 @@ class PassPaymentType extends AbstractPaymentType
                 'expanded' => true,
                 'choices' => [
                     'enum.passSport.PASS_CITIZEN' => 15,
-                    'enum.passSport.PASS_SPORT' => 50,
+                    'enum.passSport.PASS_SPORT' => 70,
+                    'enum.passSport.CCAS' => 10,
                 ],
             ])
             ->add('number', TextType::class)

@@ -240,6 +240,7 @@ class PaymentController extends AbstractController
             PaymentTypeEnum::ANCV => $this->createForm(AncvPaymentType::class, $payment, $options),
             PaymentTypeEnum::CASH => $this->createForm(CashPaymentType::class, $payment, $options),
             PaymentTypeEnum::CHECK => $this->createForm(CheckPaymentType::class, $payment, $options),
+            PaymentTypeEnum::DISCOUNT => $this->createForm(DiscountPaymentType::class, $payment, $options),
             PaymentTypeEnum::HELLO_ASSO => $this->createForm(HelloAssoPaymentType::class, $payment, $options),
             PaymentTypeEnum::PASS => $this->createForm(PassPaymentType::class, $payment, $options),
             PaymentTypeEnum::TRANSFER => $this->createForm(TransferPaymentType::class, $payment, $options),

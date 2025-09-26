@@ -30,9 +30,9 @@ enum:
     MALE: Homme
 
   passSport:
-    PASS_CITIZEN: Pass'sport (15€)
-    PASS_SPORT: Pass'sport (50€)
-    BOTH: Double pass (70€)
+    PASS_CITIZEN: Pass'Citoyen (15€)
+    PASS_SPORT: Pass'sport (70€)
+    CCAS: Aide du CCAS (10€)
 
   paymentType:
     ANCV: Chèque ANCV
@@ -41,7 +41,7 @@ enum:
     DISCOUNT: Remise
     HELLO_ASSO: HelloAsso
     TRANSFER: Virement
-    PASS: Pass'Sport
+    PASS: Pass/CCAS
 
   registrationType:
     ADULT: Adulte
@@ -309,7 +309,7 @@ form:
       date: Date
       amount: Montant
       comment: Commentaire
-      number: N° Pass'Sport
+      number: N° Pass'Sport (ou ref CCAS)
     transfer:
       date: Date
       amount: Montant

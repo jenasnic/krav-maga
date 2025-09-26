@@ -66,11 +66,14 @@ abstract class AbstractRegistrationType extends AbstractType
                     'enum.registrationType.COMPETITOR' => RegistrationTypeEnum::COMPETITOR,
                 ],
             ])
-            ->add('useCCAS', CheckboxType::class, [
-                'required' => false,
-                'help' => 'form.registration.useCCASHelp',
-            ])
         ;
+
+        $ccasOptions = ['required' => false];
+        if ($this->showPassSportHelp()) {
+            $ccasOptions['help'] = 'form.registration.useCCASHelp';
+        }
+
+        $builder->add('useCCAS', CheckboxType::class, $ccasOptions);
 
         $builder->get('withLegalRepresentative')->addEventListener(
             FormEvents::POST_SUBMIT,
